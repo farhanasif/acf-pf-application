@@ -280,7 +280,7 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="card">
+      <div class="card card-success card-outline">
         <div class="card-header">
           <h3 class="card-title">Employee Information</h3>
         </div>
