@@ -18,3 +18,6 @@ Route::get('/', function () {
 Route::get('/report', function () {
     return view('report');
 });
+
+Route::get('upload', 'TestController@importExport');
+Route::post('import', 'TestController@import');
