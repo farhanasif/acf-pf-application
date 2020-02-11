@@ -16,7 +16,7 @@
           <img src="{{ asset('theme/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Samun Chowdhury</a>
+          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -78,7 +78,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{url('/user-batch-upload')}}" class="nav-link">
+                <a href="{{url('/show-batch-upload')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Batch Upload</p>
                 </a>

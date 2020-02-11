@@ -29,7 +29,8 @@ Route::get('/logout','UserController@logout');
 
 // user add delete edit
 Route::get('/add-user','UserController@show_add_user');
-Route::post('/user-batch-upload','UserController@user_batch_upload');
+Route::get('/show-batch-upload','UserController@show_batch_upload');
+Route::post('/save-user-batch-upload','UserController@save_user_batch_upload');
 Route::post('/save-user','UserController@store_add_user');
 Route::get('/all-user','UserController@all_user');
 Route::get('/edit-user/{id}','UserController@edit_user');

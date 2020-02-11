@@ -51,17 +51,17 @@
               <img src="{{ asset('theme/dist/img/user1-128x128.jpg') }}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
-                  Md Khalil Ahmed
+                  {{ Auth::user()->name }}
                   <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
                 </h3>
-                <p class="text-sm">test@gmail.com</p>
+                <p class="text-sm">{{ Auth::user()->email }}</p>
                 <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> Administrator</p>
               </div>
             </div>
             <!-- Message End -->
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">LogOut</a>
+          <a href="{{ url('/logout') }}" class="dropdown-item dropdown-footer">LogOut</a>
         </div>
       </li>
     </ul>
@@ -125,16 +125,19 @@
 
 <script>
   $(function () {
-    $("#example1").DataTable();
-    // $('#example2').DataTable({
-    //   "paging": true,
-    //   "lengthChange": false,
-    //   "searching": false,
-    //   "ordering": true,
-    //   "info": true,
-    //   "autoWidth": false,
-    // });
+    // $("#example1").DataTable();
+    $('#example1').DataTable({
+      // "paging": true,
+      // "lengthChange": false,
+      // "searching": false,
+      // "ordering": true,
+      // "info": true,
+      // "autoWidth": false,
+      scrollX:'50vh',
+      // scrollCollapse: true,
+    });
   });
+
 </script>
 </body>
 </html>

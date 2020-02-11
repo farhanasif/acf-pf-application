@@ -12,7 +12,6 @@
       <table id="example1" class="table table-bordered table-striped">
         <thead>
         <tr>
-
           <th>SL NO</th>
           <th>Name</th>
           <th>Staff Code</th>
@@ -46,7 +45,7 @@
           <td>{{ $user->description}}</td>
           <td>{{ $user->verified}}</td>
           <td>{{ $user->user_type}}</td>
-          <td>
+          <td >
               <a href="{{url('/edit-user',$user->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
               <a href="{{url('/delete-user',$user->id)}}" onclick="ConfirmDelete()" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
           </td>

@@ -82,10 +82,15 @@ class UserController extends Controller
       $users->verified = $request->verified;
       $users->user_type = $request->user_type;
       $users->save();
-     return redirect('/add-user')->with('success','User Information Sucesfully Added!');
+     return redirect('/add-user')->with('success','User information successfully added!');
     }
 
-     public function user_batch_upload(Request $request)
+    public function show_batch_upload()
+    {
+      return view('user.user_batch_upload');
+    }
+
+     public function save_user_batch_upload(Request $request)
      {
 
        // $this->validate($request,[
@@ -97,12 +102,12 @@ class UserController extends Controller
                    // $fileName = time().'.'.$request->file->extension();
                    // $fileData  = $request->file->move(public_path('uploads/user'), $fileName);
            	    $array = Excel::toArray(new UsersImport, request()->file('file'));
-           	     dd($array);
+                echo '<pre>';
+           	     print_r($array[0]);
                   exit();
            	 }
-      return view('user.user_batch_upload');
-     }
 
+     }
 
     public function all_user()
     {
@@ -112,7 +117,8 @@ class UserController extends Controller
 
     public function edit_user($id)
     {
-       return view('user.edit_user',compact('id'));
+      $users = User::find($id);
+       return view('user.edit_user',compact('users'));
     }
 
     public function update_user(Request $request, $id)
@@ -128,12 +134,11 @@ class UserController extends Controller
          'address' => 'required',
          'department' => 'required',
          'description' => 'required',
-         'password' => 'required',
          'verified' => 'required',
          'user_type' => 'required',
-     ]);;
-        $id->update($request->all());
-
+     ]);
+        $users = User::find($id);
+        $users->update($request->all());
         return redirect()->back()
                         ->with('success','User updated successfully');
     }

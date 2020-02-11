@@ -6,7 +6,7 @@
           <h3 class="card-title">Upload Employee Information</h3>
         </div>
         <div class="card-body">
-             <form action="{{ url('/user-batch-upload') }}" method="POST" enctype="multipart/form-data">
+             <form action="{{ url('/save-user-batch-upload') }}" method="post" enctype="multipart/form-data">
               @csrf
           <div class="form-group row">
               <input type="file" name="file">
