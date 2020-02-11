@@ -88,7 +88,7 @@
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-users"></i>
+              <i class="nav-icon fa fa-book"></i>
               <p>
                 Provident Fund
                 <i class="right fas fa-angle-left"></i>
