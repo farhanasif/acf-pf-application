@@ -127,14 +127,14 @@
   $(function () {
     // $("#example1").DataTable();
     $('#example1').DataTable({
-      // "paging": true,
-      // "lengthChange": false,
+         // "paging": true,
+        // "lengthChange": false,
       // "searching": false,
-      // "ordering": true,
-      // "info": true,
-      // "autoWidth": false,
+        // "ordering": true,
+        "info": true,
+      "autoWidth": false,
       scrollX:'50vh',
-      // scrollCollapse: true,
+      scrollCollapse: true,
     });
   });
 

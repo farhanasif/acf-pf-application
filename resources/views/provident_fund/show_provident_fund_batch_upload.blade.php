@@ -6,12 +6,12 @@
           <h3 class="card-title">Upload User Information</h3>
         </div>
         <div class="card-body">
-             <form action="{{ url('/save-user-batch-upload') }}" method="post" enctype="multipart/form-data">
+             <form action="#" method="post" enctype="multipart/form-data">
               @csrf
           <div class="form-group row">
               <input type="file" name="file">
            <div class="col-md-6 col-sm-6 ">
-              <button class="btn btn-success col-md-4">Upload User Batch</button>
+              <button class="btn btn-success col-md-6">Upload Provident Fund Batch</button>
            </div>
          </div>
 

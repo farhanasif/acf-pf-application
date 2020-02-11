@@ -32,7 +32,7 @@
            	 <div class="form-group row">
 			    <label for="name" class="col-form-label col-md-2 col-sm-3 label-align">Name</label>
 			    <div class="col-md-6 col-sm-6 ">
-			    	 <input type="name" class="form-control" name="name" placeholder="Name">
+			    	 <input type="text" class="form-control" name="name" placeholder="Name">
 			    </div>
 			  </div>
 
@@ -129,8 +129,9 @@
           </select>
       </div>
     </div>
+    
     <div class="form-group row">
-    <label for="email" class="col-form-label col-md-2 col-sm-3 label-align"></label>
+    <label for="submit" class="col-form-label col-md-2 col-sm-3 label-align"></label>
     <div class="col-md-6 col-sm-6 text-center ">
       <button  type="submit" class="btn btn-success ">Create</button>
     </div>

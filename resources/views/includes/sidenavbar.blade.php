@@ -85,6 +85,37 @@
               </li>
             </ul>
           </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-users"></i>
+              <p>
+                Provident Fund
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('/all-provident-fund')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Provident</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{url('/add-provident-fund')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Provident Fund</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{url('/show-provident-fund-batch-upload')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Batch Upload</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tree"></i>
