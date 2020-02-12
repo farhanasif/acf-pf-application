@@ -29,9 +29,6 @@
             <!-- Horizontal Form -->
            <form class="form-horizontal form-label-left" action="{{url('/save-user')}}" method="post">
              @csrf
-
-
-
           <div class="form-group row">
              <label for="staff_code" class="col-form-label col-md-2 col-sm-3 label-align">Staff Code</label>
              	<div class="col-md-6 col-sm-6 ">
@@ -129,12 +126,6 @@
  </div>
 </div>
 
-<div class="form-group row">
- <label for="provident_percentage" class="col-form-label col-md-2 col-sm-3 label-align">Provident Percentage</label>
- <div class="col-md-6 col-sm-6 ">
-    <input type="number" class="form-control" name="pf_percentage" placeholder="Provident Percentage">
- </div>
-</div>
 
 <div class="form-group row">
  <label for="joining_date" class="col-form-label col-md-2 col-sm-3 label-align">Joining Date</label>
@@ -153,7 +144,7 @@
     <div class="form-group row">
     <label for="submit" class="col-form-label col-md-2 col-sm-3 label-align"></label>
     <div class="col-md-6 col-sm-6 text-center ">
-      <button  type="submit" class="btn btn-success ">Create</button>
+      <button  type="submit" class="btn btn-success ">Submit</button>
     </div>
     </div>
 

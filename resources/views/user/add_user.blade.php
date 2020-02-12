@@ -128,7 +128,7 @@
     <div class="form-group row">
     <label for="email" class="col-form-label col-md-2 col-sm-3 label-align"></label>
     <div class="col-md-6 col-sm-6 text-center ">
-      <button  type="submit" class="btn btn-success ">Add</button>
+      <button  type="submit" class="btn btn-success ">Submit</button>
     </div>
     </div>
 

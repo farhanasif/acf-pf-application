@@ -43,15 +43,21 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('all-employee')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All Employees</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('add-employee')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add New Employee</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('employee-batch-upload')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Batch Upload</p>
                 </a>
               </li>
             </ul>

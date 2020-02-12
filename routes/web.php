@@ -42,10 +42,23 @@ Route::get('/add-employee', [
 	'uses'		=> 'EmployeeController@add_employee',
 	'as'		=> 'add-employee'
 ]);
+
+Route::get('/all-employee', [
+	'uses'		=> 'EmployeeController@all_employee',
+	'as'		=> 'all-employee'
+]);
+
+Route::get('/employee-batch-upload', [
+	'uses'		=> 'EmployeeController@employee_batch_upload',
+	'as'		=> 'employee-batch-upload'
+]);
+
 Route::get('/save-employee', [
 	'uses'		=> 'EmployeeController@save_employee',
 	'as'		=> 'save-employee'
 ]);
+
+
 //provident fund insert update edit and  excel upload
 Route::get('/add-provident-fund', [
 	'uses'		=> 'ProvidentFundController@add_provident_fund',
