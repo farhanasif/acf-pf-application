@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// Route::get('/update',['as'=>'update','middleware'=>'auth','uses'=>'UpdateController@index']);
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -37,16 +37,37 @@ Route::get('/edit-user/{id}','UserController@edit_user');
 Route::post('/update-user/{id}','UserController@update_user');
 Route::get('/delete-user/{id}','UserController@delete_user');
 
+// Employee insert update edit delete and excel upload
+Route::get('/add-employee', [
+	'uses'		=> 'ProvidentFundController@add_employee',
+	'as'		=> 'add-employee'
+]);
 
 //provident fund insert update edit and  excel upload
-Route::get('/add-provident-fund','ProvidentFundController@add_provident_fund');
-Route::post('/save-provident-fund','ProvidentFundController@save_provident_fund');
-Route::get('/show-provident-fund-batch-upload','ProvidentFundController@show_provident_fund_batch_upload');
-Route::get('/all-provident-fund','ProvidentFundController@all_provident_fund');
-Route::get('/edit-provident-fund/{id}','ProvidentFundController@edit_provident_fund');
-Route::post('/update-provident-fund/{id}','ProvidentFundController@update_provident_fund');
-
-
+Route::get('/add-provident-fund', [
+	'uses'		=> 'ProvidentFundController@add_provident_fund',
+	'as'		=> 'add-provident-fund'
+]);
+Route::post('/save-provident-fund', [
+	'uses'		=> 'ProvidentFundController@save_provident_fund',
+	'as'		=> 'save-provident-fund'
+]);
+Route::get('/show-provident-fund-batch-upload', [
+	'uses'		=> 'ProvidentFundController@show_provident_fund_batch_upload',
+	'as'		=> 'show-provident-fund-batch-upload'
+]);
+Route::get('/edit-provident-fund/{id}', [
+	'uses'		=> 'ProvidentFundController@edit_provident_fund',
+	'as'		=> 'edit-provident-fund'
+]);
+Route::post('/update-provident-fund/{id}', [
+	'uses'		=> 'ProvidentFundController@update_provident_fund',
+	'as'		=> 'update-provident-fund'
+]);
+Route::get('/all-provident-fund', [
+	'uses'		=> 'ProvidentFundController@all_provident_fund',
+	'as'		=> 'all-provident-fund'
+]);
 
 // test excel upload
 Route::get('/excel','UserController@index');

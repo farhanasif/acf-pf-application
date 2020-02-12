@@ -96,7 +96,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{url('/all-provident-fund')}}" class="nav-link">
+                <a href="{{route('all-provident-fund')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All Provident</p>
                 </a>

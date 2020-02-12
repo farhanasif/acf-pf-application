@@ -29,12 +29,12 @@
             <!-- Horizontal Form -->
            <form class="form-horizontal form-label-left" action="{{url('/save-provident-fund')}}" method="post">
              @csrf
-          <div class="form-group row">
+          <!-- <div class="form-group row">
   			    <label for="deposit_date" class="col-form-label col-md-3 col-sm-3 label-align">Deposit Date</label>
   			       <div class="col-md-6 col-sm-6 ">
   			    	       <input type="date" class="form-control" name="deposit_date">
   			        </div>
-			     </div>
+			     </div> -->
 
 			  <div class="form-group row">
 			    <label for="staff_code" class="col-form-label col-md-3 col-sm-3 label-align">Staff Code</label>
@@ -50,13 +50,13 @@
 			   <div class="form-group row">
 			    <label for="own_pf" class="col-form-label col-md-3 col-sm-4 label-align">Own Provident</label>
 			    <div class="col-md-6 col-sm-6 ">
-			    	 <input type="text" class="form-control" name="own_pf" placeholder="Own Provident">
+			    	 <input type="number" class="form-control" name="own_pf" placeholder="Own Provident">
 			    </div>
 			  </div>
         <div class="form-group row">
          <label for="organization_pf" class="col-form-label col-md-3 col-sm-4 label-align">Organization Provident</label>
          <div class="col-md-6 col-sm-6 ">
-            <input type="text" class="form-control" name="organization_pf" placeholder="Organization Provident">
+            <input type="number" class="form-control" name="organization_pf" placeholder="Organization Provident">
          </div>
        </div>
 

@@ -1,3 +1,5 @@
+
+
 @extends('welcome')
 
 @section('content')
@@ -18,27 +20,24 @@
           <th>Own Provident Fund</th>
           <th>Organization Provident Fund</th>
           <th>Total Provident Fund</th>
-          <th>Created By</th>
-          <th>updated By</th>
           <th>Action</th>
         </tr>
         </thead>
         <tbody>
-
+          <?php $i=1;?>
+          @foreach($provident_funds as $provident_fund)
         <tr>
-          <td>d</td>
-          <td>d</td>
-          <td>d</td>
-          <td>riponahmed2201@gmail.com</td>
-          <td>riponahmed2201@gmail.com</td>
-          <td>d</td>
-          <td>d</td>
-          <td>s</td>
+          <td>{{$i++}}</td>
+          <td>{{$provident_fund->deposit_date}}</td>
+          <td>{{$provident_fund->staff_code}}</td>
+          <td>{{$provident_fund->own_pf}}</td>
+          <td>{{$provident_fund->organization_pf}}</td>
+          <td>{{$provident_fund->total_pf}}</td>
           <td>
-              <a href="" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+              <a href="{{route('edit-provident-fund',$provident_fund->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
           </td>
         </tr>
-
+        @endforeach
 
         </tfoot>
       </table>

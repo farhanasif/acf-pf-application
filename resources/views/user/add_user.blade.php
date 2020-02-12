@@ -21,7 +21,7 @@
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
-              </div>
+        </div>
           @endif
 
         <div class="card-body">

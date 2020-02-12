@@ -18,14 +18,14 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('staff_code');
             $table->string('email');
-            $table->string('role');
+            $table->integer('role');
             $table->string('rights_body');
             $table->string('mobile');
             $table->string('designation');
             $table->string('address');
             $table->string('department');
             $table->string('description');
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('verified')->nullable();
             $table->string('email_token')->nullable();
             $table->string('user_type');
