@@ -101,7 +101,7 @@
      <div class="form-group row">
       <label for="email" class="col-form-label col-md-2 col-sm-3 label-align">Description</label>
       <div class="col-md-6 col-sm-6 ">
-         <textarea name="description" rows="5" cols="70">value="{{$users->description}}"</textarea>
+         <textarea class="form-control" name="description" rows="5" cols="70">value="{{$users->description}}"</textarea>
       </div>
     </div>
      <div class="form-group row">

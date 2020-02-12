@@ -39,10 +39,13 @@ Route::get('/delete-user/{id}','UserController@delete_user');
 
 // Employee insert update edit delete and excel upload
 Route::get('/add-employee', [
-	'uses'		=> 'ProvidentFundController@add_employee',
+	'uses'		=> 'EmployeeController@add_employee',
 	'as'		=> 'add-employee'
 ]);
-
+Route::get('/save-employee', [
+	'uses'		=> 'EmployeeController@save_employee',
+	'as'		=> 'save-employee'
+]);
 //provident fund insert update edit and  excel upload
 Route::get('/add-provident-fund', [
 	'uses'		=> 'ProvidentFundController@add_provident_fund',
