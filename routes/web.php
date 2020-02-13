@@ -53,11 +53,23 @@ Route::get('/employee-batch-upload', [
 	'as'		=> 'employee-batch-upload'
 ]);
 
-Route::get('/save-employee', [
+Route::post('/save-employee', [
 	'uses'		=> 'EmployeeController@save_employee',
 	'as'		=> 'save-employee'
 ]);
+Route::get('/edit-employee/{id}', [
+	'uses'		=> 'EmployeeController@edit_employee',
+	'as'		=> 'edit-employee'
+]);
+Route::post('/update-employee/{id}', [
+	'uses'		=> 'EmployeeController@update_employee',
+	'as'		=> 'update-employee'
+]);
 
+Route::get('/delete-employee/{id}', [
+	'uses'		=> 'EmployeeController@delete_employee',
+	'as'		=> 'delete-employee'
+]);
 
 //provident fund insert update edit and  excel upload
 Route::get('/add-provident-fund', [

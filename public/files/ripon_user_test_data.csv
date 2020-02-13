@@ -1,0 +1,8 @@
+name,staff_code,email,role,rights_body,mobile,designation,address,department,description,password,verified,user_type
+Nikhil D'Costa,1123,Nikhil@email.com,1,trustee,8.80E+12,Liaison Manager,Dhaka,OPE,hello there,123,1,admin
+Monjura Begum,1123,Monjura@email.com,1,employee,8.80E+12,Office Cleaner,Cox's Bazar,HRE,description is generated,123,1,user
+Md. Moshiur Rahman,1123,Md.@email.com,1,employee,8.80E+12,Senior Project Officer Nutrition,Cox's Bazar,NUT,description wanted,123,1,user
+Sharmin Akter Rumi,1123,Sharmin@email.com,1,employee,8.80E+12,Assistant Project Officer MH,Cox's Bazar,MHC,description wanted,123,1,user
+Romena Ferdous Jahan Rome,1123,Romena@email.com,1,employee,8.80E+12,Assistant Project Officer MH,Cox's Bazar,MHC,description wanted,123,1,user
+Amena Begum,1123,Amena@email.com,1,employee,8.80E+12,Assistant Project Officer MH,Cox's Bazar,MHC,description is generated,123,1,user
+Ranuara Begum,1123,Ranuara@email.com,1,employee,8.80E+12,Assistant Project Officer MH,Cox's Bazar,MHC,hello there,123,1,user

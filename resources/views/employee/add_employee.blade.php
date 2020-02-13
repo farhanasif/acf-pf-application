@@ -27,7 +27,7 @@
         <div class="card-body">
           <!-- /.card -->
             <!-- Horizontal Form -->
-           <form class="form-horizontal form-label-left" action="{{url('/save-user')}}" method="post">
+           <form class="form-horizontal form-label-left" action="{{url('/save-employee')}}" method="post">
              @csrf
           <div class="form-group row">
              <label for="staff_code" class="col-form-label col-md-2 col-sm-3 label-align">Staff Code</label>

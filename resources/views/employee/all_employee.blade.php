@@ -11,6 +11,7 @@
     <div class="card-body">
       <table id="example1" class="table table-bordered table-striped">
         <thead>
+
         <tr>
           <th>SL NO</th>
           <th>Staff Code</th>
@@ -26,7 +27,6 @@
           <th>Basic Salary</th>
           <th>Gross Salary</th>
           <th>Provident Amount</th>
-          <th>Provident Percentage</th>
           <th>Joining Date</th>
           <th>Ending Date</th>
           <th>Status</th>
@@ -36,34 +36,34 @@
         </tr>
         </thead>
         <tbody>
-
+  <?php $i=1;?>
+      @foreach($employees as $employee)
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>{{ $i++ }}</td>
+          <td>{{$employee->staff_code}}</td>
+          <td>{{$employee->first_name}}</td>
+          <td>{{$employee->last_name}}</td>
+          <td>{{$employee->position}}</td>
+          <td>{{$employee->department_code}}</td>
+          <td>{{$employee->category}}</td>
+          <td>{{$employee->level}}</td>
+          <td>{{$employee->base}}</td>
+          <td>{{$employee->work_place}}</td>
+          <td>{{$employee->sub_location}}</td>
+          <td>{{$employee->basic_salary}}</td>
+          <td>{{$employee->gross_salary}}</td>
+          <td>{{$employee->pf_amount}}</td>
+          <td>{{$employee->joining_date}}</td>
+          <td>{{$employee->ending_date}}</td>
+          <td>{{$employee->status}}</td>
+          <td>{{$employee->created_by}}</td>
+          <td>{{$employee->updated_by}}</td>
           <td >
-              <a href="#" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-              <a href="#" onclick="ConfirmDelete()" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+              <a href="{{route('edit-employee',$employee->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+              <a href="{{route('delete-employee',$employee->id)}}" onclick="ConfirmDelete()" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
           </td>
         </tr>
-
+@endforeach
         </tfoot>
       </table>
     </div>

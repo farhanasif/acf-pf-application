@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use DB;
 
 class EmployeeController extends Controller
 {
@@ -13,7 +15,8 @@ class EmployeeController extends Controller
 
     public function all_employee()
     {
-      return view('employee.all_employee');
+      $employees = DB::table('employees')->get();
+      return view('employee.all_employee',compact('employees'));
     }
 
     public function employee_batch_upload()
@@ -21,9 +24,86 @@ class EmployeeController extends Controller
       return view('employee.employee_batch_upload');
     }
 
-    // public function save_employee(Request $request)
-    // {
-    //    $employees = new Employee;
-    //
-    // }
+    public function save_employee(Request $request)
+    {
+       // $employees = new Employee;
+       // $employees->staff_code = $request->staff_code;
+       // $employees->trimmed = $request->staff_code;
+       // $employees->first_name = $request->first_name;
+       // $employees->last_name = $request->last_name;
+       // $employees->position = $request->position;
+       // $employees->department_code = $request->department_code;
+       // $employees->category = $request->category;
+       // $employees->level = $request->level;
+       // $employees->base = $request->base;
+       // $employees->work_place = $request->work_place;
+       // $employees->sub_location = $request->sub_location;
+       // $employees->basic_salary = $request->basic_salary;
+       // $employees->gross_salary = $request->gross_salary;
+       // $employees->pf_amount = $request->pf_amount;
+       // $employees->pf_percentage = 10;
+       // $employees->joining_date = $request->joining_date;
+       // $employees->ending_date = $request->ending_date;
+       // $employees->status = 1;
+       // $employees->created_by = Auth::user()->id;
+       // $employees->updated_by = Auth::user()->id;
+       // $employees->save();
+       // return back();
+       $data = array();
+       $data['staff_code'] = $request->staff_code;
+       $data['first_name'] = $request->first_name;
+       $data['last_name'] = $request->last_name;
+       $data['position'] = $request->position;
+       $data['department_code'] = $request->department_code;
+       $data['category'] = $request->category;
+       $data['level'] = $request->level;
+       $data['base'] = $request->base;
+       $data['work_place'] = $request->work_place;
+       $data['sub_location'] = $request->sub_location;
+       $data['basic_salary'] = $request->basic_salary;
+       $data['gross_salary'] = $request->gross_salary;
+       $data['pf_amount'] = $request->pf_amount;
+       $data['joining_date'] = $request->joining_date;
+       $data['ending_date'] = $request->ending_date;
+       $data['created_by'] = Auth::user()->id;
+       $data['updated_by'] =  Auth::user()->id;
+       $provident_fund = DB::table('employees')->insert($data);
+       return back()->with('success', 'Employees Added Successfully.');
+    }
+
+    public function edit_employee($id)
+    {
+      $employee = DB::table('employees')->where('id',$id)->first();
+      return view('employee.edit_employee',compact('employee'));
+    }
+    public function update_employee(Request $request, $id)
+    {
+      $data = array();
+      $data['staff_code'] = $request->staff_code;
+      $data['first_name'] = $request->first_name;
+      $data['last_name'] = $request->last_name;
+      $data['position'] = $request->position;
+      $data['department_code'] = $request->department_code;
+      $data['category'] = $request->category;
+      $data['level'] = $request->level;
+      $data['base'] = $request->base;
+      $data['work_place'] = $request->work_place;
+      $data['sub_location'] = $request->sub_location;
+      $data['basic_salary'] = $request->basic_salary;
+      $data['gross_salary'] = $request->gross_salary;
+      $data['pf_amount'] = $request->pf_amount;
+      $data['joining_date'] = $request->joining_date;
+      $data['ending_date'] = $request->ending_date;
+      $data['created_by'] = Auth::user()->id;
+      $data['updated_by'] =  Auth::user()->id;
+
+      DB::table('employees')->where('id',$id)->update($data);
+      return back()->with('success', 'Employee Updated Successfully.');
+    }
+
+    public function delete_employee($id)
+    {
+      DB::table('employees')->where('id',$id)->delete();
+      return redirect()->back();
+    }
 }
