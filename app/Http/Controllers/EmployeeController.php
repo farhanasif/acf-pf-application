@@ -24,6 +24,29 @@ class EmployeeController extends Controller
       return view('employee.employee_batch_upload');
     }
 
+    public function save_employee_batch_upload(Request $request)
+    {
+        $upload = $request->file('file');
+        $filename = $_FILES['file']['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        $accept_files = ["csv", "txt", "xlsx"];
+        if(!in_array($ext, $accept_files)) {
+            return redirect()->back()
+            ->with('error', 'Invalid file extension. permitted file is .csv, .txt & .xlsx');
+        }
+        // get the file
+        $upload = $request->file('file');
+        $filePath = $upload->getRealPath();
+
+        if($ext == "xlsx" || $ext == "csv") {
+        $result = Excel::import(new EmployeesImport, $upload);
+        
+      }
+  
+     return back()->with('success','Employees batch import successfully');
+
+    }
+
     public function save_employee(Request $request)
     {
        // $employees = new Employee;

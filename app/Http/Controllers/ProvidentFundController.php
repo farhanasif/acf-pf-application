@@ -92,4 +92,27 @@ class ProvidentFundController extends Controller
     {
       return view('provident_fund.show_provident_fund_batch_upload');
     }
+
+
+    public function save_provident_fund_batch_upload(Request $request)
+    {
+        $upload = $request->file('file');
+        $filename = $_FILES['file']['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        $accept_files = ["csv", "txt", "xlsx"];
+        if(!in_array($ext, $accept_files)) {
+            return redirect()->back()
+            ->with('error', 'Invalid file extension. permitted file is .csv, .txt & .xlsx');
+        }
+        // get the file
+        $upload = $request->file('file');
+        $filePath = $upload->getRealPath();
+
+        if($ext == "xlsx" || $ext == "csv") {
+        $result = Excel::import(new ProvidentsImport, $upload);
+        
+      }
+  
+     return back()->with('success','Provident batch import successfully');
+    }
 }

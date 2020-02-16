@@ -53,6 +53,11 @@ Route::get('/employee-batch-upload', [
 	'as'		=> 'employee-batch-upload'
 ]);
 
+Route::post('/save-employee-batch-upload', [
+	'uses'		=> 'EmployeeController@save_employee_batch_upload',
+	'as'		=> 'save-employee-batch-upload'
+]);
+
 Route::post('/save-employee', [
 	'uses'		=> 'EmployeeController@save_employee',
 	'as'		=> 'save-employee'
@@ -83,6 +88,10 @@ Route::post('/save-provident-fund', [
 Route::get('/show-provident-fund-batch-upload', [
 	'uses'		=> 'ProvidentFundController@show_provident_fund_batch_upload',
 	'as'		=> 'show-provident-fund-batch-upload'
+]);
+Route::get('/save-provident-fund-batch-upload', [
+	'uses'		=> 'ProvidentFundController@save_provident_fund_batch_upload',
+	'as'		=> 'save-provident-fund-batch-upload'
 ]);
 Route::get('/edit-provident-fund/{id}', [
 	'uses'		=> 'ProvidentFundController@edit_provident_fund',
