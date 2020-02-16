@@ -27,12 +27,12 @@ class EmployeesImport implements ToModel, WithStartRow
             'base'                  => $row[8], 
             'work_place'            => $row[9], 
             'sub_location'          => $row[10],
-            'basic_salary'          => $row[11],
-            'gross_salary'          => $row[12],
-            'pf_amount'             => $row[13],
-            'pf_percentage'         => $row[14], 
-            'joining_date'          => $row[15],
-            'ending_date'           => $row[16], 
+            // 'basic_salary'          => $row[11],
+            // 'gross_salary'          => $row[12],
+            // 'pf_amount'             => $row[13],
+            // 'pf_percentage'         => $row[14], 
+            // 'joining_date'          => $row[15],
+            // 'ending_date'           => $row[16], 
         ]);
     }
 

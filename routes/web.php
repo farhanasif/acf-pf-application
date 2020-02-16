@@ -89,7 +89,7 @@ Route::get('/show-provident-fund-batch-upload', [
 	'uses'		=> 'ProvidentFundController@show_provident_fund_batch_upload',
 	'as'		=> 'show-provident-fund-batch-upload'
 ]);
-Route::get('/save-provident-fund-batch-upload', [
+Route::post('/save-provident-fund-batch-upload', [
 	'uses'		=> 'ProvidentFundController@save_provident_fund_batch_upload',
 	'as'		=> 'save-provident-fund-batch-upload'
 ]);

@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Provident;
+use App\Imports\ProvidentsImport;
+use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use App\User;
 use Auth;
 use DB;
-use App\Provident;
 
 class ProvidentFundController extends Controller
 {
