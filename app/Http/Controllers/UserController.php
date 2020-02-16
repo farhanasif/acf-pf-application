@@ -92,89 +92,73 @@ class UserController extends Controller
 
      public function save_user_batch_upload(Request $request)
      {
-       $upload = $request->file('file');
+       
+        $upload = $request->file('file');
         $filename = $_FILES['file']['name'];
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
-        echo $filename;
-        exit;
         $accept_files = ["csv", "txt", "xlsx"];
         if(!in_array($ext, $accept_files)) {
-            // return redirect()->route('upload_pop_db')
-            // ->with('flash_msg', 'Invalid file extension. permitted file is .csv, .txt & .xlsx');
-            echo 'no file';
-          //  return back();
+            return redirect()->back()
+            ->with('error', 'Invalid file extension. permitted file is .csv, .txt & .xlsx');
         }
         // get the file
         $upload = $request->file('file');
         $filePath = $upload->getRealPath();
-        // echo $filePath;
-        // exit;
+
         if($ext == "xlsx" || $ext == "csv") {
-            // $result = Excel::toArray($filePath, function($reader) {
-            //     $reader->all();
-            // })->get();
+        $result = Excel::import(new UsersImport, $upload);
+        
 
-        $result = Excel::toArray($filePath,function($reader){
-        $reader->all();
-    })->get();
-            foreach($result as $key => $val) {
-                $users = new User;
-                $users->name = $val->name;
-                $users->staff_code = $val->staff_code;
-                $users->email = $val->email;
-                $users->role = $val->role;
-                $users->rights_body = $val->rights_body;
-                $users->mobile = $val->mobile;
-                $users->designation = $val->designation;
-                $users->address = $val->address;
-                $users->department = $val->department;
-                $users->description = $val->description;
-                $users->password =  Hash::make($val->password);
-                $users->verified = $val->verified;
-                $users->user_type = $val->user_type;
-                $users->save();
-            }
-            // return redirect('manage-sw-name')->with('flash_msg', 'POP db inserted successfully');
-            echo 'not insert';
-          //  return back();
-        }
+   //  foreach ($result as $key => $value) {
+   //      array_shipt($value);
+   //      foreach ($value as $row) {
 
-    // return view('customer.switch.upload_pop_db');
+   //              $insert_data[] =array(
+   //              'name' =>$row[1],
+   //              'staff_code' =>$row[2],
+   //              'email' =>$row[3],
+   //              'role' =>$row[4],
+   //              'rights_body' =>$row[5],
+   //              'mobile' =>$row[6],
+   //              'designation' =>$row[7],
+   //              'address' =>$row[8],
+   //              'department' =>$row[9],
+   //              'description' =>$row[10],
+   //              'password' =>$row[11],
+   //              'verified' =>$row[12],
+   //              // 'user_type' =>$row[13],
+   //          );
 
-       // $this->validate($request,[
-       //   'file' => 'required|mimes:csv,xls,xlsx'
-       // ]);
+   //  //      // $users = new User;
+   // //   //            $users->name = $val[0];
+   // //   //            $users->staff_code = $val[1];
+   // //   //            $users->email = $val[2];
+   // //   //            $users->role = $val[3];
+   // //   //            $users->rights_body = $val[4];
+   // //   //            $users->mobile = $val[5];
+   // //   //            $users->designation = $val[6];
+   // //   //            $users->address = $val[7];
+   // //   //            $users->department = $val[8];
+   // //   //            $users->description = $val[9];
+   // //   //            $users->password =  $val[10];
+   // //   //            $users->verified = $val[11];
+   // //   //            $users->user_type = $val[12];
+   // //   //            $users->save();
+   //      }
+   //  }
 
-           	// if ($request->hasFile('file'))
-           	// {
-            //        // $fileName = time().'.'.$request->file->extension();
-            //        // $fileData  = $request->file->move(public_path('uploads/user'), $fileName);
-           	//     // $array = Excel::toArray(new UsersImport, request()->file('file'));
-            //     $array = Excel::import(new UsersImport, request()->file('file'));
-            //     // foreach($array->toArray() as $key => $value)
-            //     //       {
-            //     //        foreach($value as $row)
-            //     //        {
-            //     //         $insert_data[] = array(
-            //     //          'name'  => $row['name'],
-            //     //          'staff_code'   => $row['staff_code'],
-            //     //          'email'   => $row['email'],
-            //     //          'role'    => $row['role'],
-            //     //          'mobile'  => $row['mobile'],
-            //     //          'designation'   => $row['designation'],
-            //     //          'address'  => isset($row['address'])?$row['address']:'',
-            //     //          'password'   => $row['password'],
-            //     //          'user_type'   => $row['user_type']
-            //     //         );
-            //     //        }
-            //     //       }
-            //     //  if(!empty($insert_data))
-            //     //   {
-            //     //    DB::table('users')->insert($insert_data);
-            //     //   }
-           	//  }
+  // dd($insert_data);
+  // exit;
 
-     }
+    // if (!empty($insert_data)) {
+    //     DB::table('users')->insert($insert_data);
+    // }
+  }
+  
+    return back()->with('success','User batch import successfully');
+
+    // }
+}
 
     public function all_user()
     {

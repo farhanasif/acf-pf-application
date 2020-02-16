@@ -15,8 +15,8 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->ineteger('staff_code');
-            $table->ineteger('trimmed');
+            $table->integer('staff_code');
+            $table->integer('trimmed');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('position');
