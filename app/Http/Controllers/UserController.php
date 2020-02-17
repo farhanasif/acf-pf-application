@@ -52,19 +52,19 @@ class UserController extends Controller
     public function store_add_user(Request $request)
     {
       $request->validate([
-         'name' => 'required',
-         'staff_code' => 'required',
-         'email' => 'required',
-         'role' => 'required',
-         'rights_body' => 'required',
-         'mobile' => 'required',
-         'designation' => 'required',
-         'address' => 'required',
-         'department' => 'required',
-         'description' => 'required',
-         'password' => 'required',
-         'verified' => 'required',
-         'user_type' => 'required',
+        //  'name' => 'required',
+        //  'staff_code' => 'required',
+        //  'email' => 'required',
+        //  'role' => 'required',
+        //  'rights_body' => 'required',
+        //  'mobile' => 'required',
+        //  'designation' => 'required',
+        //  'address' => 'required',
+        //  'department' => 'required',
+        //  'description' => 'required',
+        // //  'password' => 'required',
+        //  'verified' => 'required',
+        //  'user_type' => 'required',
      ]);
 
       $users = new User;
@@ -78,7 +78,7 @@ class UserController extends Controller
       $users->address = $request->address;
       $users->department = $request->department;
       $users->description = $request->description;
-      $users->password =  Hash::make($request->password);
+      // $users->password =  Hash::make($request->password);
       $users->verified = $request->verified;
       $users->user_type = $request->user_type;
       $users->save();
