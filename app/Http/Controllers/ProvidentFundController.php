@@ -20,11 +20,11 @@ class ProvidentFundController extends Controller
 
     public function save_provident_fund(Request $request)
     {
-       $this->validate($request,[
-              'staff_code'      =>'required',
-              'own_pf'          =>'required',
-              'organization_pf' =>'required'
-       ]);
+      //  $this->validate($request,[
+      //         'staff_code'      =>'required',
+      //         'own_pf'          =>'required',
+      //         'organization_pf' =>'required'
+      //  ]);
 
     $data = array();
     $data['deposit_date'] = date("Y-m-d");
@@ -113,10 +113,28 @@ class ProvidentFundController extends Controller
         $filePath = $upload->getRealPath();
 
         if($ext == "xlsx" || $ext == "csv") {
-        $result = Excel::import(new ProvidentsImport, $upload);
-        
-      }
-  
-     return back()->with('success','Provident batch import successfully');
+        // $result = Excel::import(new ProvidentsImport, $upload);
+        $result = Excel::toArray(new ProvidentsImport, $upload);
+      foreach ($result as $key => $value) {
+        foreach ($value as $row) {
+
+                $insert_data[] =array(
+                'deposit_date' =>date("Y-m-d"),
+                'staff_code' =>$row[0],
+                'own_pf' =>$row[1],
+                'organization_pf' =>$row[2],
+                'total_pf' =>$row[3],
+            );
+        }
     }
+    if (!empty($insert_data)) {
+        DB::table('pf_deposit')->insert($insert_data);
+    }
+    return back()->with('success','Provident batch import successfully');
+  }
+  
+}
+  
+    //  return back()->with('success','Provident batch import successfully');
+    // }
 }

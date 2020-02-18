@@ -23,9 +23,23 @@ Route::get('/','AdminController@index');
 
 
 //login admin and user
-Route::get('/login','UserController@showLoginForm');
-Route::post('/checklogin','UserController@checklogin');
-Route::get('/logout','UserController@logout');
+// Route::get('/login','UserController@showLoginForm');
+// Route::post('/checklogin','UserController@checklogin');
+// Route::get('/logout','UserController@logout');
+Route::get('/login', [
+	'uses'		=> 'UserController@showLoginForm',
+	'as'		=> 'login'
+]);
+Route::get('/checklogin', [
+	'uses'		=> 'UserController@checklogin',
+	'as'		=> 'checklogin'
+]);
+
+Route::get('/logout', [
+	'uses'		=> 'UserController@logout',
+	'as'		=> 'logout'
+]);
+
 
 // user add delete edit update
 Route::get('/add-user','UserController@show_add_user');
@@ -106,6 +120,14 @@ Route::get('/all-provident-fund', [
 	'as'		=> 'all-provident-fund'
 ]);
 
+
+//report provident fund report and others report
+
+Route::get('/show-provident-fund-report', [
+	'uses'		=> 'ReportController@show_provident_fund_report',
+	'as'		=> 'show-provident-fund-report'
+]);
+
 // test excel upload
-Route::get('/excel','UserController@index');
-Route::post('/import','UserController@import');
+// Route::get('/excel','UserController@index');
+// Route::post('/import','UserController@import');

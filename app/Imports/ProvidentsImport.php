@@ -16,11 +16,11 @@ class ProvidentsImport implements ToModel, WithStartRow
     public function model(array $row)
     {
         return new Provident([
-            'deposite_code'     => $row[0],
-            'staff_code'        => $row[1], 
-            'own_pf'            => $row[2], 
-            'organization_pf'   => $row[3], 
-            'total_pf'          => $row[4], 
+            // 'deposite_code'     => $row[0],
+            // 'staff_code'        => $row[1], 
+            // 'own_pf'            => $row[2], 
+            // 'organization_pf'   => $row[3], 
+            // 'total_pf'          => $row[4], 
            
         ]);
     }

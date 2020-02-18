@@ -63,7 +63,7 @@ class UserController extends Controller
         //  'department' => 'required',
         //  'description' => 'required',
         // //  'password' => 'required',
-        //  'verified' => 'required',
+        //  'verified' => 'required', 
         //  'user_type' => 'required',
      ]);
 
@@ -78,7 +78,7 @@ class UserController extends Controller
       $users->address = $request->address;
       $users->department = $request->department;
       $users->description = $request->description;
-      // $users->password =  Hash::make($request->password);
+      $users->password =  Hash::make($request->password);
       $users->verified = $request->verified;
       $users->user_type = $request->user_type;
       $users->save();
@@ -106,28 +106,29 @@ class UserController extends Controller
         $filePath = $upload->getRealPath();
 
         if($ext == "xlsx" || $ext == "csv") {
-        $result = Excel::import(new UsersImport, $upload);
-        
+        // $result = Excel::import(new UsersImport, $upload);
+        $result = Excel::toArray(new UsersImport, $upload);
+        // dd($result);
+        // exit;
 
-   //  foreach ($result as $key => $value) {
-   //      array_shipt($value);
-   //      foreach ($value as $row) {
-
-   //              $insert_data[] =array(
-   //              'name' =>$row[1],
-   //              'staff_code' =>$row[2],
-   //              'email' =>$row[3],
-   //              'role' =>$row[4],
-   //              'rights_body' =>$row[5],
-   //              'mobile' =>$row[6],
-   //              'designation' =>$row[7],
-   //              'address' =>$row[8],
-   //              'department' =>$row[9],
-   //              'description' =>$row[10],
-   //              'password' =>$row[11],
-   //              'verified' =>$row[12],
-   //              // 'user_type' =>$row[13],
-   //          );
+    foreach ($result as $key => $value) {
+        array_shipt($value);
+        foreach ($value as $row) {
+                $insert_data[] =array(
+                'name' =>$row[1],
+                'staff_code' =>$row[2],
+                'email' =>$row[3],
+                'role' =>$row[4],
+                'rights_body' =>$row[5],
+                'mobile' =>$row[6],
+                'designation' =>$row[7],
+                'address' =>$row[8],
+                'department' =>$row[9],
+                'description' =>$row[10],
+                'password' =>$row[11],
+                'verified' =>$row[12],
+                // 'user_type' =>$row[13],
+            );
 
    //  //      // $users = new User;
    // //   //            $users->name = $val[0];
@@ -144,11 +145,11 @@ class UserController extends Controller
    // //   //            $users->verified = $val[11];
    // //   //            $users->user_type = $val[12];
    // //   //            $users->save();
-   //      }
-   //  }
+        }
+    }
 
-  // dd($insert_data);
-  // exit;
+  dd($insert_data);
+  exit;
 
     // if (!empty($insert_data)) {
     //     DB::table('users')->insert($insert_data);

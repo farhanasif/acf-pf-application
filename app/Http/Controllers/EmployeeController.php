@@ -43,11 +43,53 @@ class EmployeeController extends Controller
         $filePath = $upload->getRealPath();
 
         if($ext == "xlsx" || $ext == "csv") {
-        $result = Excel::import(new EmployeesImport, $upload);
+        $result = Excel::toArray(new EmployeesImport, $upload);
+
+        // dd($result );
+        // exit;
+        foreach ($result as $key => $value) {
+          foreach ($value as $row) {
+  
+                  $insert_data[] =array(
+                  'staff_code' =>$row[0],
+                  'trimmed' =>$row[0],
+                  'first_name' =>$row[1],
+                  'last_name' =>$row[2],
+                  'position' =>$row[3],
+                  // 'department_code' =>NULL,
+                  'category' =>$row[4],
+                  'level' =>$row[5],
+                  'base' =>$row[6],
+                  'work_place' =>$row[10],
+                  // 'sub_location' =>NULL,
+                  'basic_salary' =>$row[12],
+                  'gross_salary' =>$row[13],
+                  'pf_amount' =>$row[16],
+                  // 'pf_percentage' =>$NULL,
+                  // 'joining_date' =>$row[7],
+                  // 'ending_date' =>$row[9],
+                  'status' =>1,
+                  'created_by' =>Auth::user()->id,
+                  'updated_by' =>Auth::user()->id,
+              );
+          }
+      }
+
+        // dd($insert_data);
+        // exit;
+
+      if (!empty($insert_data)) {
+          DB::table('employees')->insert($insert_data);
+          return back()->with('success','Employees batch import successfully');
+      }
+      else{
+        return back()->with('error','Not Insert');
+      }
+
         
       }
   
-     return back()->with('success','Employees batch import successfully');
+    
 
     }
 

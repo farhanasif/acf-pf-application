@@ -131,9 +131,10 @@
         // "lengthChange": false,
       // "searching": false,
         // "ordering": true,
-        "info": true,
+      "info": true,
       "autoWidth": false,
       scrollX:'50vh',
+      scrollY:'50vh',
       scrollCollapse: true,
     });
   });
