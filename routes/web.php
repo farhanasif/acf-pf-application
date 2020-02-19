@@ -30,7 +30,7 @@ Route::get('/login', [
 	'uses'		=> 'UserController@showLoginForm',
 	'as'		=> 'login'
 ]);
-Route::get('/checklogin', [
+Route::post('/checklogin', [
 	'uses'		=> 'UserController@checklogin',
 	'as'		=> 'checklogin'
 ]);

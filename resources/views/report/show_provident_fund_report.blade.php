@@ -4,12 +4,72 @@
 
   <div class="card card-success card-outline">
    <div class="row">
-    <div class="card-header">
+    {{-- <div class="card-header">
         <h3 class="card-title">All Provident Fund Information</h3>
+      </div> --}}
+      <!-- /.card-header -->
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Months</label>
+              <select class="form-control select2" style="width: 100%;">
+                <option selected="selected">--select--</option>
+                <option>January</option>
+                <option>February</option>
+                <option>March</option>
+                <option>April</option>
+                <option>May</option>
+                <option>June</option>
+                <option>Julay</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Year</label>
+              <select class="form-control" style="width: 100%;">
+                <option selected="selected">--select--</option>
+                <option>2020</option>
+                <option>2019</option>
+                <option>2018</option>
+                <option>2017</option>
+                <option>2016</option>
+                <option>2015</option>
+                <option>2014</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <label>Search</label>
+            <div class="form-group">
+             <input type="submit" class="form-control btn btn-success">
+            </div>
+          </div>
+          <div class="col-md-1">
+            <label>Refresh</label>
+            <div class="form-group">
+             <input type="submit" class="form-control btn btn-default" value="Refresh">
+            </div>
+          </div>
+          <div class="col-md-1"></div>
+
+          <div class="col-md-3 float-right">
+            <div class="form-group ">
+              <label>Download</label>
+              <select class="form-control select2" style="width: 100%;">
+                <option selected="selected">--select--</option>
+                <option>CSV</option>
+                <option>XLSX</option>
+                <option>XLS</option>
+                <option>PDF</option>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-          <input type="date" class="form-control">
-      </div>
+      <!-- /.card-body -->
    </div>
     <!-- /.card-header -->
     <div class="card-body">

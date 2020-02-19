@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="{{ asset('theme/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Select2 -->
+<link rel="stylesheet" href="{{asset('theme/plugins/select2/css/select2.min.css')}}">
+<link rel="stylesheet" href="{{asset('theme/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -123,6 +126,9 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('theme/dist/js/demo.js') }}"></script>
 
+<!-- Select2 -->
+<script src="{{asset('theme/plugins/select2/js/select2.full.min.js')}}"></script>
+
 <script>
   $(function () {
     // $("#example1").DataTable();
@@ -137,8 +143,21 @@
       scrollY:'50vh',
       scrollCollapse: true,
     });
+
+
+  //Initialize Select2 Elements
+//   $('.select2').select2()
+
+// //Initialize Select2 Elements
+//   $('.select2bs4').select2({
+//     theme: 'bootstrap4'
+//   })
+
   });
 
+
+
 </script>
+
 </body>
 </html>
