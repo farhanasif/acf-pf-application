@@ -85,8 +85,17 @@
   </nav>
   <!-- /.navbar -->
 
+
+
+@if(Auth::guest())
+    @include('includes.sidenavbar_root') 
+@elseif(Auth::user()->role==0)
+    @include('includes.sidenavbar')
+@elseif(Auth::user()->role==1)
+    @include('includes.sidenavbar_user')     
+@endif
   <!-- Main Sidebar Container -->
-@include('includes.sidenavbar')
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
