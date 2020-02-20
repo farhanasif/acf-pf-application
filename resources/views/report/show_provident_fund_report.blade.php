@@ -1,4 +1,4 @@
-@extends('welcome')
+@extends('master')
 @section('content')
 <section class="content">
 
@@ -11,9 +11,9 @@
       <div class="card-body">
         <div class="row">
           <div class="col-md-3">
-            <div class="form-group">
-              <label>Months</label>
-              <select class="form-control select2" style="width: 100%;">
+            <div class="form-group input-daterange">
+              {{-- <label>Months</label> --}}
+              {{-- <select class="form-control select2" style="width: 100%;">
                 <option selected="selected">--select--</option>
                 <option>January</option>
                 <option>February</option>
@@ -22,13 +22,15 @@
                 <option>May</option>
                 <option>June</option>
                 <option>Julay</option>
-              </select>
+              </select> --}}
+
+              <input type="text" name="from_date" class="form-control" placeholder="From Date">
             </div>
           </div>
 
           <div class="col-md-3">
-            <div class="form-group">
-              <label>Year</label>
+            <div class="form-group input-daterange">
+              {{-- <label>Year</label>
               <select class="form-control" style="width: 100%;">
                 <option selected="selected">--select--</option>
                 <option>2020</option>
@@ -38,33 +40,34 @@
                 <option>2016</option>
                 <option>2015</option>
                 <option>2014</option>
-              </select>
+              </select> --}}
+              <input type="text" name="from_date" class="form-control"  placeholder="To Date">
             </div>
           </div>
           <div class="col-md-1">
-            <label>Search</label>
             <div class="form-group">
              <input type="submit" class="form-control btn btn-success">
             </div>
           </div>
           <div class="col-md-1">
-            <label>Refresh</label>
-            <div class="form-group">
+            {{-- <div class="form-group">
              <input type="submit" class="form-control btn btn-default" value="Refresh">
-            </div>
+            </div> --}}
           </div>
           <div class="col-md-1"></div>
 
           <div class="col-md-3 float-right">
             <div class="form-group ">
-              <label>Download</label>
+              {{-- <label>Download</label>
               <select class="form-control select2" style="width: 100%;">
                 <option selected="selected">--select--</option>
                 <option>CSV</option>
                 <option>XLSX</option>
                 <option>XLS</option>
                 <option>PDF</option>
-              </select>
+              </select> --}}
+
+
             </div>
           </div>
         </div>

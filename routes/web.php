@@ -11,21 +11,24 @@
 |
 */
 // Route::get('/update',['as'=>'update','middleware'=>'auth','uses'=>'UpdateController@index']);
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', ['uses'=>'UserController@showLoginForm']);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/report', function () {
     return view('report');
 });
 
-Route::get('/','AdminController@index');
+// Route::get('/','AdminController@index');
+
+// Route::get('/', [
+// 	'uses'		=> 'AdminController@index',
+// 	'as'		=> '/'
+// ]);
 
 
-//login admin and user
-// Route::get('/login','UserController@showLoginForm');
-// Route::post('/checklogin','UserController@checklogin');
-// Route::get('/logout','UserController@logout');
 Route::get('/login', [
 	'uses'		=> 'UserController@showLoginForm',
 	'as'		=> 'login'
@@ -128,6 +131,14 @@ Route::get('/show-provident-fund-report', [
 	'as'		=> 'show-provident-fund-report'
 ]);
 
-// test excel upload
-// Route::get('/excel','UserController@index');
-// Route::post('/import','UserController@import');
+Route::get('/admin-home',['middleware'=>'admin','uses'=>'AdminController@admin_home']);
+Route::get('/user-home',['middleware'=>'user','uses'=>'AdminController@user_home']);
+
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('config:clear');
+    $exitCode = Artisan::call('cache:clear');
+    $exitCode = Artisan::call('config:cache');
+    return 'DONE'; //Return anything
+});
+
+
