@@ -1,8 +1,26 @@
 @extends('master')
 
 @section('content')
-<section class="content">
 
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>All Employee </h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active"><a href="#">Employee</a></li>
+          <li class="breadcrumb-item active"><a href="#">All Employee</a></li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+
+<section class="content">
   <div class="card card-success card-outline">
     <div class="card-header">
       <h3 class="card-title">All Employees Information</h3>

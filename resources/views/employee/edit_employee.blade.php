@@ -1,9 +1,29 @@
 @extends('master')
 
 @section('content')
+
+<section class="content-header">
+   <div class="container-fluid">
+     <div class="row mb-2">
+       <div class="col-sm-6">
+         <h1>Edit Employee </h1>
+       </div>
+       <div class="col-sm-6">
+         <ol class="breadcrumb float-sm-right">
+           <li class="breadcrumb-item"><a href="#">Home</a></li>
+           <li class="breadcrumb-item active"><a href="#">Employee</a></li>
+           <li class="breadcrumb-item active"><a href="#">Edit Employee</a></li>
+         </ol>
+       </div>
+     </div>
+   </div><!-- /.container-fluid -->
+ </section>
+
+
+
    <div class="card card-success card-outline">
         <div class="card-header">
-          <h3 class="card-title">Add Employee Information</h3>
+          <h3 class="card-title">Edit Employee Information</h3>
         </div>
         @if ($message = Session::get('success'))
           <div class="alert alert-success alert-block">
@@ -32,12 +52,12 @@
           <div class="form-group row">
              <label for="staff_code" class="col-form-label col-md-2 col-sm-3 label-align">Staff Code</label>
              	<div class="col-md-6 col-sm-6 ">
-             			    	 <!-- <input type="email" class="form-control"  placeholder="Enter email"> -->
-             	   <select class="form-control" name="staff_code">
+             	<input type="text" class="form-control" name="staff_code" placeholder="Staff Code" value="{{$employee->staff_code}}"> 
+             	   {{-- <select class="form-control" name="staff_code">
              	     <option value="">--select--</option>
              	      <option value="1">1</option>
              	       <option value="2">2</option>
-             	   </select>
+             	   </select> --}}
              </div>
           </div>
 
