@@ -57,12 +57,12 @@
 			  <div class="form-group row">
 			    <label for="staff_code" class="col-form-label col-md-3 col-sm-3 label-align">Staff Code</label>
 			    <div class="col-md-6 col-sm-6 ">
-            <input type="text" class="form-control" name="staff_code" placeholder="Staff Code">
-	            {{-- <select class="form-control" name="staff_code">
+            {{-- <input type="text" class="form-control" name="staff_code" placeholder="Staff Code"> --}}
+	            <select class="form-control" name="staff_code">
 	                <option value="">--select--</option>
 	                <option value="1">1</option>
 	                <option value="2">2</option>
-	            </select> --}}
+	            </select>
 			    </div>
 			  </div>
 			   <div class="form-group row">

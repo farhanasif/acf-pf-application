@@ -17,9 +17,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/report', function () {
-    return view('report');
-});
+// Route::get('/report', function () {
+//     return view('report');
+// });
 
 // Route::get('/','AdminController@index');
 
@@ -29,21 +29,51 @@ Route::get('/report', function () {
 // ]);
 
 
-Route::get('/login', [
-	'uses'		=> 'UserController@showLoginForm',
-	'as'		=> 'login'
-]);
-Route::post('/checklogin', [
-	'uses'		=> 'UserController@checklogin',
-	'as'		=> 'checklogin'
+// Route::get('/login', [
+// 	'uses'		=> 'UserController@showLoginForm',
+// 	'as'		=> 'login'
+// ]);
+// Route::post('/checklogin', [
+// 	'uses'		=> 'UserController@checklogin',
+// 	'as'		=> 'checklogin'
+// ]);
+
+// Route::get('/logout', [
+// 	'uses'		=> 'UserController@logout',
+// 	'as'		=> 'logout'
+// ]);
+
+// Department add edit delete update 
+// Mater Data Department Category ............. 
+
+Route::get('/department', [
+	'uses'		=> 'AdminController@department',
+	'as'		=> 'department'
 ]);
 
-Route::get('/logout', [
-	'uses'		=> 'UserController@logout',
-	'as'		=> 'logout'
+// Route::get('/all-department', [
+// 	'uses'		=> 'AdminController@all_department',
+// 	'as'		=> 'all-department'
+// ]);
+Route::post('/save-department', [
+	'uses'		=> 'AdminController@save_department',
+	'as'		=> 'save-department'
 ]);
 
+// Route::get('/edit-department/{id}', [
+// 	'uses'		=> 'AdminController@edit_department',
+// 	'as'		=> 'edit-department'
+// ]);
 
+// Route::post('/update-department/{id}', [
+// 	'uses'		=> 'AdminController@update_department',
+// 	'as'		=> 'update-department'
+// ]);
+
+// Route::get('/delete-department/{id}', [
+// 	'uses'		=> 'AdminController@delete_department',
+// 	'as'		=> 'delete-department'
+// ]);
 // user add delete edit update
 Route::get('/add-user','UserController@show_add_user');
 Route::get('/show-batch-upload','UserController@show_batch_upload');

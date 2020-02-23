@@ -41,8 +41,6 @@
           <th>Address</th>
           <th>Department</th>
           <th>Description</th>
-          <th>Verified</th>
-          <th>User Type</th>
           <th>Action</th>
         </tr>
         </thead>
@@ -61,8 +59,6 @@
           <td>{{ $user->address}}</td>
           <td>{{ $user->department}}</td>
           <td>{{ $user->description}}</td>
-          <td>{{ $user->verified}}</td>
-          <td>{{ $user->user_type}}</td>
           <td >
               <a href="{{url('/edit-user',$user->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
               <a href="{{url('/delete-user',$user->id)}}" onclick="ConfirmDelete()" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>

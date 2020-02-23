@@ -17,11 +17,11 @@
   <link rel="stylesheet" href="{{ asset('theme/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <!-- Select2 -->
-  <link rel="stylesheet" href="{{asset('theme/plugins/select2/css/select2.min.css')}}">
-  <link rel="stylesheet" href="{{asset('theme/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" />
-
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{asset('/')}}theme/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="{{asset('/')}}theme/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
   <!-- daterange picker -->
 <link rel="stylesheet" href="{{asset('/')}}theme/plugins/daterangepicker/daterangepicker.css">
@@ -133,9 +133,12 @@
 <script src="{{ asset('theme/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('theme/dist/js/demo.js') }}"></script>
-
+<!-- ChartJS -->
+<script src="{{asset('/')}}theme/plugins/chart.js/Chart.min.js"></script>
 <!-- Select2 -->
-<script src="{{asset('theme/plugins/select2/js/select2.full.min.js')}}"></script>
+<script src="{{asset('/')}}theme/plugins/select2/js/select2.full.min.js"></script>
+<!-- PAGE SCRIPTS -->
+<script src="{{asset('/')}}theme/dist/js/pages/dashboard2.js"></script>
 
 <!-- date-range-picker -->
 <script src="{{asset('/')}}theme/plugins/daterangepicker/daterangepicker.js"></script>
@@ -159,13 +162,13 @@
 
     $('.input-daterange').datepicker({});
     
-  //Initialize Select2 Elements
-//   $('.select2').select2()
+    //Initialize Select2 Elements
+    $('.select2').select2()
 
-// //Initialize Select2 Elements
-//   $('.select2bs4').select2({
-//     theme: 'bootstrap4'
-//   })
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
 
   });
 
