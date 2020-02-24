@@ -21,3 +21,8 @@ Route::get('/report', function () {
 
 Route::get('upload', 'TestController@importExport');
 Route::post('import', 'TestController@import');
+
+Route::get('provident-fund-report', 'TestController@providentFund');
+Route::get('get-fund-data', 'TestController@getProvidentFund');
+
+
