@@ -51,19 +51,19 @@
             <div class="form-group row">
               <label for="staff_code" class="col-form-label col-md-2 col-sm-3 label-align">Staff Code</label>
                 <div class="col-md-3 col-sm-3 ">
-                   <input type="text" class="form-control" name="staff_code" placeholder="Staff Code" > 
+                   <input type="text" class="form-control" name="staff_code" placeholder="Staff Code" value="{{$employee->staff_code}}" > 
               </div>
               <div class="col-md-2 "></div>
               <label for="first_name" class="col-form-label col-md-2 col-sm-3 label-align">Fisrt Name</label>
               <div class="col-md-3 col-sm-3 ">
-                 <input type="text" class="form-control" name="first_name" placeholder="First Name">
+                 <input type="text" class="form-control" name="first_name" placeholder="First Name" value="{{$employee->first_name}}">
               </div>
             </div>
             
            <div class="form-group row">
            <label for="last_name" class="col-form-label col-md-2 col-sm-3 label-align">Last Name</label>
            <div class="col-md-3 col-sm-3 ">
-              <input type="text" class="form-control" name="last_name" placeholder="Last Name">
+              <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{$employee->last_name}}">
            </div>
            <div class="col-md-2 "></div>
            <label for="position" class="col-form-label col-md-2 col-sm-3 label-align">Position</label>
@@ -160,7 +160,6 @@
           <option value="Mohakhali">Mohakhali</option>
           <option value="Mirpur">Mirpur</option>
         </select>
-         {{-- <input type="text" class="form-control" name="sub_location" placeholder="Sub Location" value="{{$employee->staff_code}}"a> --}}
       </div>
     </div>
   
@@ -168,32 +167,32 @@
    <div class="form-group row">
     <label for="basic_salary" class="col-form-label col-md-2 col-sm-3 label-align">Basic Salary</label>
     <div class="col-md-3 col-sm-3 ">
-       <input type="number" class="form-control" name="basic_salary" placeholder="Basic Salary">
+       <input type="number" class="form-control" name="basic_salary" placeholder="Basic Salary"  value="{{$employee->basic_salary}}">
     </div>
     <div class="col-md-2 "></div>
     <label for="gross_salary" class="col-form-label col-md-2 col-sm-3 label-align">Gross Salary</label>
    <div class="col-md-3 col-sm-3 ">
-      <input type="number" class="form-control" name="gross_salary" placeholder="Gross Salary">
+      <input type="number" class="form-control" name="gross_salary" placeholder="Gross Salary" value="{{$employee->gross_salary}}">
    </div>
   </div>
   
   <div class="form-group row">
   <label for="provident_fund" class="col-form-label col-md-2 col-sm-3 label-align">Provident Amount</label>
   <div class="col-md-3 col-sm-3 ">
-     <input type="number" class="form-control" name="pf_fund" placeholder="Provident Fund">
+  <input type="number" class="form-control" name="pf_amount" placeholder="Provident Fund" value="{{$employee->pf_amount}}">
   </div>
   <div class="col-md-2 "></div>
   
   <label for="joining_date" class="col-form-label col-md-2 col-sm-3 label-align">Joining Date</label>
   <div class="col-md-3 col-sm-3 ">
-     <input type="date" class="form-control" name="joining_date" >
+     <input type="date" class="form-control" name="joining_date" value="{{$employee->joining_date}}">
   </div>
   </div>
   
   <div class="form-group row">
   <label for="ending_date" class="col-form-label col-md-2 col-sm-3 label-align">Ending Date</label>
   <div class="col-md-3 col-sm-3 ">
-     <input type="date" class="form-control" name="ending_date" >
+     <input type="date" class="form-control" name="ending_date" value="{{$employee->ending_date}}">
   </div>
   </div>
   
@@ -201,11 +200,17 @@
       <div class="col-md-2"></div>
       <div class="col-md-3 col-sm-3">
           <button  type="submit" class="btn btn-success ">Update</button>
-            <a type="submit" class="btn btn-danger float-right" href="{{route('delete-employee',$employee->id)}}" onclick="ConfirmDelete()">Deactive</a>
+            {{-- <a type="submit" class="btn btn-danger float-right" href="{{route('delete-employee',$employee->id)}}" onclick="ConfirmDelete()">Deactive</a> --}}
       </div>
    </div>
   
        </form>
+       <div class="form-group row">
+        <div class="col-md-2"></div>
+        <div class="col-md-3 col-sm-3">
+              <a type="submit" class="btn btn-danger float-right" href="{{route('delete-employee',$employee->id)}}" onclick="ConfirmDelete()">Deactive</a>
+        </div>
+     </div>
 
         </div>
       </div>

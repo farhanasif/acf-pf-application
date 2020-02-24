@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function showLoginForm()
     {
-     return view('login');
+     return view('auth.login');
     }
 
     public  function checklogin(Request $request)

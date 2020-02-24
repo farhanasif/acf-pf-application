@@ -34,7 +34,7 @@
           <th>Name</th>
           <th>Staff Code</th>
           <th>Email</th>
-          <th>Role</th>
+          <th>User Type</th>
           <th>Rights Body</th>
           <th>Mobile</th>
           <th>Designation</th>
@@ -50,9 +50,12 @@
         <tr>
           <td>{{$i++}}</td>
           <td>{{ $user->name}}</td>
-          <td>{{ $user->staff_code}}</td>
+          <td>
+            <a href="{{url('/edit-user',$user->id)}}">{{ $user->staff_code}}</a>
+            
+          </td>
           <td>{{ $user->email}}</td>
-          <td>{{ $user->role}}</td>
+          <td>{{ $user->user_type}}</td>
           <td>{{ $user->rights_body}}</td>
           <td>{{ $user->mobile}}</td>
           <td>{{ $user->designation}}</td>

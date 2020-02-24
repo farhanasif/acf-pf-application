@@ -74,6 +74,84 @@ Route::post('/save-department', [
 // 	'uses'		=> 'AdminController@delete_department',
 // 	'as'		=> 'delete-department'
 // ]);
+
+//master data duration add edit update delete......
+Route::get('/add-duration', [
+	'uses'		=> 'MasterController@add_duration',
+	'as'		=> 'add-duration'
+]);
+Route::post('/save-duration', [
+	'uses'		=> 'MasterController@save_duration',
+	'as'		=> 'save-duration'
+]);
+Route::get('/all-duration', [
+	'uses'		=> 'MasterController@all_duration',
+	'as'		=> 'all-duration'
+]);
+Route::get('/edit-duration/{id}', [
+	'uses'		=> 'MasterController@edit_duration',
+	'as'		=> 'edit-duration'
+]);
+Route::post('/update-duration/{id}', [
+	'uses'		=> 'MasterController@update_duration',
+	'as'		=> 'update-duration'
+]);
+Route::get('/delete-duration/{id}', [
+	'uses'		=> 'MasterController@delete_duration',
+	'as'		=> 'delete-duration'
+]);
+
+//master data alert add edit update delete......
+Route::get('/add-alert', [
+	'uses'		=> 'MasterController@add_alert',
+	'as'		=> 'add-alert'
+]);
+Route::post('/save-alert', [
+	'uses'		=> 'MasterController@save_alert',
+	'as'		=> 'save-alert'
+]);
+Route::get('/all-alert', [
+	'uses'		=> 'MasterController@all_alert',
+	'as'		=> 'all-alert'
+]);
+Route::get('/edit-alert/{id}', [
+	'uses'		=> 'MasterController@edit_alert',
+	'as'		=> 'edit-alert'
+]);
+Route::post('/update-alert/{id}', [
+	'uses'		=> 'MasterController@update_alert',
+	'as'		=> 'update-alert'
+]);
+Route::get('/delete-alert/{id}', [
+	'uses'		=> 'MasterController@delete_alert',
+	'as'		=> 'delete-alert'
+]);
+
+//master data pf_calculation add edit update delete......
+Route::get('/add-pf-calculation', [
+	'uses'		=> 'MasterController@add_pf_calculation',
+	'as'		=> 'add-pf-calculation'
+]);
+Route::post('/save-pf-calculation', [
+	'uses'		=> 'MasterController@save_pf_calculation',
+	'as'		=> 'save-pf-calculation'
+]);
+Route::get('/all-pf-calculation', [
+	'uses'		=> 'MasterController@all_pf_calculation',
+	'as'		=> 'all-pf-calculation'
+]);
+Route::get('/edit-pf-calculation/{id}', [
+	'uses'		=> 'MasterController@edit_pf_calculation',
+	'as'		=> 'edit-pf-calculation'
+]);
+Route::post('/update-pf-calculation/{id}', [
+	'uses'		=> 'MasterController@update_pf_calculation',
+	'as'		=> 'update-pf-calculation'
+]);
+Route::get('/delete-pf-calculation/{id}', [
+	'uses'		=> 'MasterController@delete_pf_calculation',
+	'as'		=> 'delete-pf-calculation'
+]);
 // user add delete edit update
 Route::get('/add-user','UserController@show_add_user');
 Route::get('/show-batch-upload','UserController@show_batch_upload');

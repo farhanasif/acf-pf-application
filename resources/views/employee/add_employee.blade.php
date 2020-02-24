@@ -48,25 +48,25 @@
            <form class="form-horizontal form-label-left" action="{{url('/save-employee')}}" method="post">
               @csrf
             <div class="form-group row">
-              <label for="staff_code" class="col-form-label col-md-2 col-sm-3 label-align">Staff Code</label>
-                <div class="col-md-3 col-sm-3 ">
+              <label for="staff_code" class="col-form-label col-md-2 col-sm-2 label-align">Staff Code</label>
+                <div class="col-md-4 col-sm-3 ">
                    <input type="text" class="form-control" name="staff_code" placeholder="Staff Code" > 
               </div>
-              <div class="col-md-2 "></div>
-              <label for="first_name" class="col-form-label col-md-2 col-sm-3 label-align">Fisrt Name</label>
-              <div class="col-md-3 col-sm-3 ">
+              {{-- <div class="col-md-1"></div> --}}
+              <label for="first_name" class="col-form-label col-md-2 col-sm-2 label-align ">Fisrt Name</label>
+              <div class="col-md-4 col-sm-3 ">
                  <input type="text" class="form-control" name="first_name" placeholder="First Name">
               </div>
             </div>
             
            <div class="form-group row">
            <label for="last_name" class="col-form-label col-md-2 col-sm-3 label-align">Last Name</label>
-           <div class="col-md-3 col-sm-3 ">
+           <div class="col-md-4 col-sm-3 ">
               <input type="text" class="form-control" name="last_name" placeholder="Last Name">
            </div>
-           <div class="col-md-2 "></div>
+           {{-- <div class="col-md-2 "></div> --}}
            <label for="position" class="col-form-label col-md-2 col-sm-3 label-align">Position</label>
-           <div class="col-md-3 col-sm-3 ">
+           <div class="col-md-4 col-sm-3 ">
               {{-- <input type="text" class="form-control" name="position" placeholder="Position" value="{{$employee->staff_code}}"> --}}
               <select name="position" id="" class="form-control select2bs4">
                 <option value="">--select--</option>
@@ -179,7 +179,7 @@
   <div class="form-group row">
   <label for="provident_fund" class="col-form-label col-md-2 col-sm-3 label-align">Provident Amount</label>
   <div class="col-md-3 col-sm-3 ">
-     <input type="number" class="form-control" name="pf_fund" placeholder="Provident Fund">
+     <input type="number" class="form-control" name="pf_amount" placeholder="Provident Fund">
   </div>
   <div class="col-md-2 "></div>
   

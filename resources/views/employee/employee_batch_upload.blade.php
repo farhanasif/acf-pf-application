@@ -45,7 +45,7 @@
           <div class="form-group row">
               <input type="file" name="file">
            <div class="col-md-6 col-sm-6 ">
-              <button class="btn btn-success col-md-3">Employee Batch Upload</button>
+              <button class="btn btn-success col-md-5 col-sm-5">Employee Batch Upload</button>
            </div>
          </div>
 

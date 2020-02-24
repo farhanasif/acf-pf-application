@@ -147,7 +147,7 @@
               </li>
 
               <li class="nav-item">
-                <a href="#" class="nav-link">
+              <a href="{{route('all-pf-calculation')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>PF Calculations</p>
                 </a>
@@ -159,13 +159,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+              <a href="{{route('all-duration')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Duration</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+              <a href="{{route('all-alert')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Alerts</p>
                 </a>

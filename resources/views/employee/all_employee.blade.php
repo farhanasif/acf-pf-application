@@ -46,7 +46,7 @@
           <th>Provident Amount</th>
           <th>Joining Date</th>
           <th>Ending Date</th>
-          <th>Action</th>
+          {{-- <th>Action</th> --}}
         </tr>
         </thead>
         <tbody>
@@ -54,7 +54,9 @@
       @foreach($employees as $employee)
         <tr>
           <td>{{ $i++ }}</td>
-          <td>{{$employee->staff_code}}</td>
+          <td>
+            <a href="{{route('edit-employee',$employee->id)}}">{{$employee->staff_code}}</a>
+          </td>
           <td>{{$employee->first_name}} {{$employee->last_name}}</td>
           <td>{{$employee->position}}</td>
           <td>{{$employee->department_code}}</td>
@@ -68,10 +70,10 @@
           <td>{{$employee->pf_amount}}</td>
           <td>{{$employee->joining_date}}</td>
           <td>{{$employee->ending_date}}</td>
-          <td >
+          {{-- <td >
               <a href="{{route('edit-employee',$employee->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-              {{-- <a href="{{route('delete-employee',$employee->id)}}" onclick="ConfirmDelete()" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a> --}}
-          </td>
+              <a href="{{route('delete-employee',$employee->id)}}" onclick="ConfirmDelete()" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+          </td> --}}
         </tr>
       @endforeach
       </tbody>

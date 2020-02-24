@@ -48,6 +48,7 @@ class LoginController extends Controller
             return redirect()->intended('/user-home');
            
         }
+ 
         /*elseif ($user->role=='2') {
             return redirect()->intended('/department-home');
            
