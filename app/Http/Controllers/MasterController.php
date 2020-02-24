@@ -63,8 +63,61 @@ class MasterController extends Controller
     return redirect()->back()->with('danger','Duration Deleted Successfully');
    }
 
-   // alert insert update delete..........
+   // office insert edit update delete..........
+   public function add_office()
+   {
+       return view('master_data.office.add_office');
+   }
+   public function save_office(Request $request)
+   {
+        $this->validate($request,[
+            'name'      =>'required',
+            'alert_details'  =>'required'
+        ]);
 
+        $durations           = new Office;
+        $durations->name     = $request->name;
+        $durations->alert_details = $request->alert_details;
+        $durations->save();
+
+        return redirect()->back()->with('success', 'Office Added Successfully');
+   }
+
+   public function all_office()
+   {
+        $offices = Office::all();
+        return view('master_data.office.all_office',compact('offices'));
+   }
+
+   public function edit_office($id)
+   {
+       $alert = Office::find($id);
+       return view('master_data.office.edit_office',compact('office'));
+   }
+
+   public function update_office(Request $request, $id){
+    $this->validate($request,[
+        'name'      =>'required',
+        'alert_details'  =>'required'
+    ]);
+
+    $alerts = Office::find($id);
+    $alerts->name     = $request->name;
+    $alerts->alert_details = $request->alert_details;
+    $alerts->save();
+    // $users->update($request->all());
+
+    return redirect()->route('all-duration')->with('success', 'Office updated Successfully');
+   }
+
+   public function delete_office($id)
+   {
+    $duration = Office::find($id);
+    $duration->delete();
+    return redirect()->back()->with('danger','Office Deleted Successfully');
+   }
+
+   // alert insert update delete..........
    public function add_alert()
    {
        return view('master_data.alert.add_alert');

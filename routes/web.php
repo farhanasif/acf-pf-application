@@ -75,6 +75,33 @@ Route::post('/save-department', [
 // 	'as'		=> 'delete-department'
 // ]);
 
+//master data alert add edit update delete......
+Route::get('/add-office', [
+	'uses'		=> 'MasterController@add_office',
+	'as'		=> 'add-office'
+]);
+Route::post('/save-office', [
+	'uses'		=> 'MasterController@save_office',
+	'as'		=> 'save-office'
+]);
+Route::get('/all-office', [
+	'uses'		=> 'MasterController@all_office',
+	'as'		=> 'all-office'
+]);
+Route::get('/edit-office/{id}', [
+	'uses'		=> 'MasterController@edit_office',
+	'as'		=> 'edit-office'
+]);
+Route::post('/update-office/{id}', [
+	'uses'		=> 'MasterController@update_office',
+	'as'		=> 'update-office'
+]);
+Route::get('/delete-office/{id}', [
+	'uses'		=> 'MasterController@delete_office',
+	'as'		=> 'delete-office'
+]);
+
+
 //master data duration add edit update delete......
 Route::get('/add-duration', [
 	'uses'		=> 'MasterController@add_duration',

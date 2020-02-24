@@ -82,7 +82,7 @@
   
          <div class="form-group row">
           <label for="department_code" class="col-form-label col-md-2 col-sm-3 label-align">Department Code</label>
-          <div class="col-md-3 col-sm-3 ">
+          <div class="col-md-4 col-sm-3 ">
             <select name="department_code" id="" class="form-control select2bs4">
               <option value="">--select--</option>
               <option value="OPE">OPE</option>
@@ -94,9 +94,9 @@
             </select>
             {{-- <input type="text" class="form-control" name="department_code" placeholder="Department Code" value="{{$employee->staff_code}}"> --}}
           </div>
-          <div class="col-md-2 "></div>
+         
           <label for="category" class="col-form-label col-md-2 col-sm-3 label-align">Category</label>
-          <div class="col-md-3 col-sm-3 ">
+          <div class="col-md-4 col-sm-3 ">
             <select name="category" id="" class="form-control select2bs4">
               <option value="">--select--</option>
               <option value="OPE">OPE</option>
@@ -111,7 +111,7 @@
   
        <div class="form-group row">
         <label for="level" class="col-form-label col-md-2 col-sm-3 label-align">Level</label>
-        <div class="col-md-3 col-sm-3 ">
+        <div class="col-md-4 col-sm-3 ">
           <select name="level" id="" class="form-control select2bs4">
             <option value="">--select--</option>
             <option value="X1L4">X1L4</option>
@@ -121,9 +121,9 @@
           </select>
            {{-- <input type="text" class="form-control" name="level" placeholder="Level" value="{{$employee->staff_code}}"> --}}
         </div>
-        <div class="col-md-2 "></div>
+      
         <label for="base" class="col-form-label col-md-2 col-sm-3 label-align">Base</label>
-       <div class="col-md-3 col-sm-3 ">
+       <div class="col-md-4 col-sm-3 ">
         <select name="base" id="" class="form-control select2bs4" style="width: 100%;">
           <option value="">--select--</option>
           <option value="base">base</option>
@@ -137,7 +137,7 @@
   
      <div class="form-group row">
       <label for="work_place" class="col-form-label col-md-2 col-sm-3 label-align">Work Place</label>
-      <div class="col-md-3 col-sm-3 ">
+      <div class="col-md-4 col-sm-3 ">
         <select name="work_place" id="" class="form-control select2bs4" style="width: 100%;" >
           <option value="">--select--</option>
           <option value="work_place">work_place</option>
@@ -148,10 +148,8 @@
          {{-- <input type="text" class="form-control" name="work_place" placeholder="Work Place" value="{{$employee->staff_code}}"> --}}
       </div>
   
-      <div class="col-md-2 "></div>
-  
       <label for="sub_location" class="col-form-label col-md-2 col-sm-3 label-align">Sub Location</label>
-      <div class="col-md-3 col-sm-3 ">
+      <div class="col-md-4 col-sm-3 ">
         <select name="work_place" id="" class="form-control select2bs4" style="width: 100%;">
           <option value="">--select--</option>
           <option value="sub_location">sub_location</option>
@@ -166,32 +164,32 @@
   
    <div class="form-group row">
     <label for="basic_salary" class="col-form-label col-md-2 col-sm-3 label-align">Basic Salary</label>
-    <div class="col-md-3 col-sm-3 ">
+    <div class="col-md-4 col-sm-3 ">
        <input type="number" class="form-control" name="basic_salary" placeholder="Basic Salary">
     </div>
-    <div class="col-md-2 "></div>
+    
     <label for="gross_salary" class="col-form-label col-md-2 col-sm-3 label-align">Gross Salary</label>
-   <div class="col-md-3 col-sm-3 ">
+   <div class="col-md-4 col-sm-3 ">
       <input type="number" class="form-control" name="gross_salary" placeholder="Gross Salary">
    </div>
   </div>
   
   <div class="form-group row">
   <label for="provident_fund" class="col-form-label col-md-2 col-sm-3 label-align">Provident Amount</label>
-  <div class="col-md-3 col-sm-3 ">
+  <div class="col-md-4 col-sm-3 ">
      <input type="number" class="form-control" name="pf_amount" placeholder="Provident Fund">
   </div>
-  <div class="col-md-2 "></div>
+ 
   
   <label for="joining_date" class="col-form-label col-md-2 col-sm-3 label-align">Joining Date</label>
-  <div class="col-md-3 col-sm-3 ">
+  <div class="col-md-4 col-sm-3 ">
      <input type="date" class="form-control" name="joining_date" >
   </div>
   </div>
   
   <div class="form-group row">
   <label for="ending_date" class="col-form-label col-md-2 col-sm-3 label-align">Ending Date</label>
-  <div class="col-md-3 col-sm-3 ">
+  <div class="col-md-4 col-sm-3 ">
      <input type="date" class="form-control" name="ending_date" >
   </div>
   </div>
