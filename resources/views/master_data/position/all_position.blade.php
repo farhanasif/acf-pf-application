@@ -23,7 +23,31 @@
 <section class="content">
   <div class="card card-success card-outline">
     <div class="card-header">
-      <h3 class="card-title">All Position Information</h3>
+      <div class="row">
+        <div class="col-sm-6">
+            <h3 class="card-title">All Position Information</h3>
+        </div>
+        <div class="col-md-6 ">
+            <a href="{{route('add-position')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add position</a>
+        </div>
+
+        <div class="col-md-6 offset-3 mt-2">
+          @if ($message = Session::get('success'))
+          <div class="alert alert-success alert-block">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          <strong>{{ $message }}</strong>
+          </div>
+          @endif
+
+          @if ($message = Session::get('danger'))
+          <div class="alert alert-danger alert-block">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          <strong>{{ $message }}</strong>
+          </div>
+          @endif
+        </div>
+
+      </div>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -32,47 +56,25 @@
 
         <tr>
           <th>SL NO</th>
-          <th>Staff Code</th>
-          <th>Name</th>
-          <th>Position</th>
-          <th>Department Code</th>
-          <th>Category</th>
-          <th>Level</th>
-          <th>Base</th>
-          <th>Work Place</th>
-          <th>Sub Location</th>
-          <th>Basic Salary</th>
-          <th>Gross Salary</th>
-          <th>Provident Amount</th>
-          <th>Joining Date</th>
-          <th>Ending Date</th>
-          {{-- <th>Action</th> --}}
+          <th>Position Name</th>
+          <th>Position Description</th>
+          <th>Action</th>
         </tr>
         </thead>
         <tbody>
-
+          <?php $i=1;?>
+          @foreach ($positions as $position)
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          {{-- <td >
-              <a href="{{route('edit-employee',$employee->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-              <a href="{{route('delete-employee',$employee->id)}}" onclick="ConfirmDelete()" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-          </td> --}}
+        <td>{{$i++}}</td>
+        <td>{{$position->position_name}}</td>
+        <td>{{$position->position_description}}</td>
+          <td class="row">
+          <a href="{{route('edit-position',$position->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+              <a href="{{route('delete-position',$position->id)}}" class="btn btn-danger ml-2"><i class="fas fa-trash-alt"></i></a>
+          </td>
         </tr>
-    
+        @endforeach
+
       </tbody>
       </table>
     </div>

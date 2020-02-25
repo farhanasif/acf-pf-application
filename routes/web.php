@@ -138,7 +138,7 @@ Route::get('/position/add-position', [
 	'uses'		=> 'MasterController@add_position',
 	'as'		=> 'add-position'
 ]);
-Route::post('/save-position', [
+Route::post('/position/save-position', [
 	'uses'		=> 'MasterController@save_position',
 	'as'		=> 'save-position'
 ]);
@@ -146,15 +146,15 @@ Route::get('/position/all-position', [
 	'uses'		=> 'MasterController@all_position',
 	'as'		=> 'all-position'
 ]);
-Route::get('/edit-position/{id}', [
+Route::get('/position/edit-position/{id}', [
 	'uses'		=> 'MasterController@edit_position',
 	'as'		=> 'edit-position'
 ]);
-Route::post('/update-position/{id}', [
+Route::post('/position/update-position/{id}', [
 	'uses'		=> 'MasterController@update_position',
 	'as'		=> 'update-position'
 ]);
-Route::get('/delete-position/{id}', [
+Route::get('/position/delete-position/{id}', [
 	'uses'		=> 'MasterController@delete_position',
 	'as'		=> 'delete-position'
 ]);
@@ -236,6 +236,33 @@ Route::get('/delete-pf-calculation/{id}', [
 	'uses'		=> 'MasterController@delete_pf_calculation',
 	'as'		=> 'delete-pf-calculation'
 ]);
+
+//time schedule add edit update delete......
+Route::get('/time-schedule/add-time-schedule', [
+	'uses'		=> 'MasterController@add_time_schedule',
+	'as'		=> 'add-time-schedule'
+]);
+Route::post('/time-schedule/save-time-schedule', [
+	'uses'		=> 'MasterController@save_time_schedule',
+	'as'		=> 'save-time-schedule'
+]);
+Route::get('/time-schedule/all-time-schedule', [
+	'uses'		=> 'MasterController@all_time_schedule',
+	'as'		=> 'all-time-schedule'
+]);
+Route::get('/time-schedule/edit-time-schedule/{id}', [
+	'uses'		=> 'MasterController@edit_time_schedule',
+	'as'		=> 'edit-time-schedule'
+]);
+Route::post('/time-schedule/update-time-schedule/{id}', [
+	'uses'		=> 'MasterController@update_time_schedule',
+	'as'		=> 'update-time-schedule'
+]);
+Route::get('/time-schedule/delete-time-schedule/{id}', [
+	'uses'		=> 'MasterController@delete_time_schedule',
+	'as'		=> 'delete-time-schedule'
+]);
+
 // user add delete edit update
 Route::get('/add-user','UserController@show_add_user');
 Route::get('/show-batch-upload','UserController@show_batch_upload');

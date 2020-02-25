@@ -8,6 +8,7 @@ use App\Alert;
 use App\Pf_calculation;
 use App\Office;
 use App\Department;
+use App\Position;
 
 class MasterController extends Controller
 {
@@ -70,46 +71,44 @@ class MasterController extends Controller
     public function save_position(Request $request)
     {
         $this->validate($request,[
-            'name' => 'required',
-            'position' => 'required',
+            'position_name' => 'required',
+            'position_description' => 'required',
         ]);
 
-        $department = new Position;
-        $department->name = $request->name;
-        $department->department_code = $request->department_code;
-        $department->created_by = Auth::user()->id;
-        $department->updated_by = Auth::user()->id;
-        $department->save(); 
-        return redirect()->back()->with('success','position Added Successfully!');
+        $positions = new Position;
+        $positions->position_name = $request->position_name;
+        $positions->position_description = $request->position_description;
+        $positions->save(); 
+        return redirect()->back()->with('success','Position Added Successfully!');
     }
     
     public function all_position()
     {   
-        $positions = Department::all();
+        $positions = Position::all();
         return view('master_data.position.all_position',compact('positions'));
     }
 
     public function edit_position($id)
     {
         $position = Position::find($id);
-         return view('master_data.position.edit_department', compact('position'));
+         return view('master_data.position.edit_position', compact('position'));
     }
 
     public function update_position(Request $request, $id)
     {
-        $department = Position::find($id);
-        $department->name = $request->name;
-        $department->department_code = $request->department_code;
-        $department->save(); 
+        $positions = Position::find($id);
+        $positions->position_name = $request->position_name;
+        $positions->position_description = $request->position_description;
+        $positions->save(); 
         return redirect()->route('all-position')->with('success','Position Updated Successfully!');
 
     }
 
     public function delete_position($id)
     {
-        $department = Position::find($id);
-        $department->delete();
-        return redirect()->back();
+        $position_name = Position::find($id);
+        $position_name->delete();
+        return redirect()->back()->with('danger','Position Deleted Successfully!');
     }
 
 
