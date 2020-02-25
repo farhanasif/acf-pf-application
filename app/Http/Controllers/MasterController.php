@@ -9,6 +9,7 @@ use App\Pf_calculation;
 use App\Office;
 use App\Department;
 use App\Position;
+use App\Time_schedule;
 
 class MasterController extends Controller
 {
@@ -343,10 +344,14 @@ class MasterController extends Controller
     }
     public function save_time_schedule(Request $request)
     {
-        
-         $time_schedules           = new Duration;
-         $time_schedules->start_date     = $request->name;
-         $time_schedules->ending_date = $request->duration;
+         $this->validate($request,[
+            'start_date'      =>'required',
+            'ending_date'  =>'required',
+        ]);
+
+         $time_schedules           = new Time_schedule;
+         $time_schedules->start_date     = $request->start_date;
+         $time_schedules->ending_date = $request->ending_date;
          $time_schedules->save();
  
          return redirect()->back()->with('success', 'Time Schedule Added Successfully');
@@ -360,21 +365,22 @@ class MasterController extends Controller
  
     public function edit_time_schedule($id)
     {
-        $time_schedules = Time_schedule::find($id);
-        return view('master_data.time_schedule.edit_time_schedule',compact('time_schedules'));
+        $time_schedule = Time_schedule::find($id);
+        return view('master_data.time_schedule.edit_time_schedule',compact('time_schedule'));
     }
  
     public function update_time_schedule(Request $request, $id){
-     $this->validate($request,[
-         'name'      =>'required',
-         'duration'  =>'required'
-     ]);
- 
-     $durations = Time_schedule::find($id);
-     $durations->name     = $request->name;
-     $durations->duration = $request->duration;
-     $durations->save();
-     return redirect()->route('all-duration')->with('success', 'Time Schedule updated Successfully');
+        $this->validate($request,[
+            'start_date'      =>'required',
+            'ending_date'  =>'required',
+        ]);
+
+         $time_schedules = Time_schedule::find($id);
+         $time_schedules->start_date     = $request->start_date;
+         $time_schedules->ending_date = $request->ending_date;
+         $time_schedules->save();
+
+         return redirect()->route('all-time-schedule')->with('success', 'Time Schedule updated Successfully');
     }
  
     public function delete_time_schedule($id)

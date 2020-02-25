@@ -69,7 +69,7 @@
         <td>{{$position->position_name}}</td>
         <td>{{$position->position_description}}</td>
           <td class="row">
-          <a href="{{route('edit-position',$position->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+              <a href="{{route('edit-position',$position->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
               <a href="{{route('delete-position',$position->id)}}" class="btn btn-danger ml-2"><i class="fas fa-trash-alt"></i></a>
           </td>
         </tr>
