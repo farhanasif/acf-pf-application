@@ -13,7 +13,7 @@
 <style>
 
 body{
-	background: #DD3247;
+	background: #e3e3e3;
 	padding-top: 10%;
 }
 
@@ -30,11 +30,11 @@ body{
 	margin-bottom: 50px;
 	border: none;
 	border-radius: 0;
-	border-bottom: 1px solid #DD3247;
+	border-bottom: 1px solid #52ae32;
 	-webkit-transition: all 0.5s;
 	transition: all 0.5s;
-	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #DD3247 4%);
-	background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #DD3247 4%);
+	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #52ae32 4%);
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #52ae32 4%);
 	background-position: -500px 0;
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
@@ -48,15 +48,15 @@ body{
 
 .btn-login{
 	border-radius: 0;
-	background: #DD3247;
+	background: #52ae32;
 	color: #fff;
 	-webkit-transition: all 0.8s;
 	transition: all 0.8s;
 }
 .btn-login:hover{
 	background: transparent;
-	border: 1px solid #DD3247;
-	color: #DD3247;
+	border: 1px solid #52ae32;
+	color: #52ae32;
 }
 </style>
 
@@ -66,7 +66,8 @@ body{
         <div class="container">
             <div class="row justify-content-md-center">
               <div class="col-md-4 col-md-auto login-box">
-                <h1 class="text-center wdi-red">Login</h1>
+                {{-- <h1 class="text-center wdi-red">Login</h1> --}}
+              <img class="text-center" style="width:100px; margin-left:80px;;" src="{{asset('images/logo/acf.png')}}" alt="">
                 <hr>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf

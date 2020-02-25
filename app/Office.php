@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Duration extends Model
+class Office extends Model
 {
     protected $fillable = [
-        'name', 'duration',
+        'name', 'duration','office_code'
     ];
 }

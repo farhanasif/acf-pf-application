@@ -22,9 +22,33 @@
 <section class="content">
 
   <div class="card card-success card-outline">
+
     <div class="card-header">
-      <h3 class="card-title">All Office Information</h3>
+    <div class="row">
+      <div class="col-sm-6">
+          <h3 class="card-title">All Pf Calculation Information</h3>
+      </div>
+      <div class="col-md-6 ">
+          <a href="{{route('add-office')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add Office</a>
+      </div>
     </div>
+
+    <div class="col-md-6 offset-3 mt-2">
+      @if ($message = Session::get('success'))
+      <div class="alert alert-success alert-block">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <strong>{{ $message }}</strong>
+      </div>
+      @endif
+
+      @if ($message = Session::get('danger'))
+      <div class="alert alert-danger alert-block">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <strong>{{ $message }}</strong>
+      </div>
+      @endif
+    </div>
+
     <!-- /.card-header -->
     <div class="card-body">
       <table id="example1" class="table table-bordered table-striped">
@@ -47,6 +71,8 @@
           <td>{{$office->office_code}}</td>
           <td>
               <a href="{{route('edit-office',$office->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+              <a href="{{route('delete-office',$office->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+
           </td>
         </tr>
         @endforeach

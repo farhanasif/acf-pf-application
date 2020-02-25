@@ -6,10 +6,11 @@ use Illuminate\Http\Request;
 use App\Duration;
 use App\Alert;
 use App\Pf_calculation;
+use App\Office;
 
 class MasterController extends Controller
 {
-   
+   // duration add update delete 
    public function add_duration()
    {
        return view('master_data.duration.add_duration');
@@ -72,12 +73,14 @@ class MasterController extends Controller
    {
         $this->validate($request,[
             'name'      =>'required',
-            'alert_details'  =>'required'
+            'duration'  =>'required',
+            'office_code'  =>'required',
         ]);
 
         $durations           = new Office;
         $durations->name     = $request->name;
-        $durations->alert_details = $request->alert_details;
+        $durations->duration = $request->duration;
+        $durations->office_code = $request->office_code;
         $durations->save();
 
         return redirect()->back()->with('success', 'Office Added Successfully');
@@ -91,29 +94,29 @@ class MasterController extends Controller
 
    public function edit_office($id)
    {
-       $alert = Office::find($id);
+       $office = Office::find($id);
        return view('master_data.office.edit_office',compact('office'));
    }
 
    public function update_office(Request $request, $id){
     $this->validate($request,[
         'name'      =>'required',
-        'alert_details'  =>'required'
+        'duration'  =>'required',
+        'office_code'  =>'required',
     ]);
 
-    $alerts = Office::find($id);
-    $alerts->name     = $request->name;
-    $alerts->alert_details = $request->alert_details;
-    $alerts->save();
-    // $users->update($request->all());
-
-    return redirect()->route('all-duration')->with('success', 'Office updated Successfully');
+        $offices                 = Office::find($id);
+        $offices->name        = $request->name;
+        $offices->duration    = $request->duration;
+        $offices->office_code = $request->office_code;
+        $offices->save();
+        return redirect()->route('all-office')->with('success', 'Office updated Successfully');
    }
 
    public function delete_office($id)
    {
-    $duration = Office::find($id);
-    $duration->delete();
+    $office = Office::find($id);
+    $office->delete();
     return redirect()->back()->with('danger','Office Deleted Successfully');
    }
 
@@ -230,4 +233,52 @@ class MasterController extends Controller
     $pf_calculation->delete();
     return redirect()->route('all-pf-calculation')->with('danger','Pf_calculation Deleted Successfully');
    }
+
+    // time schedule add update delete 
+    public function add_time_schedule()
+    {
+        return view('master_data.time_schedule.add_time_schedule');
+    }
+    public function save_time_schedule(Request $request)
+    {
+        
+         $time_schedules           = new Duration;
+         $time_schedules->start_date     = $request->name;
+         $time_schedules->ending_date = $request->duration;
+         $time_schedules->save();
+ 
+         return redirect()->back()->with('success', 'Time Schedule Added Successfully');
+    }
+ 
+    public function all_time_schedule()
+    {
+         $time_schedules = Time_schedule::all();
+         return view('master_data.time_schedule.all_time_schedule',compact('time_schedules'));
+    }
+ 
+    public function edit_time_schedule($id)
+    {
+        $time_schedules = Time_schedule::find($id);
+        return view('master_data.time_schedule.edit_time_schedule',compact('time_schedules'));
+    }
+ 
+    public function update_time_schedule(Request $request, $id){
+     $this->validate($request,[
+         'name'      =>'required',
+         'duration'  =>'required'
+     ]);
+ 
+     $durations = Time_schedule::find($id);
+     $durations->name     = $request->name;
+     $durations->duration = $request->duration;
+     $durations->save();
+     return redirect()->route('all-duration')->with('success', 'Time Schedule updated Successfully');
+    }
+ 
+    public function delete_time_schedule($id)
+    {
+     $duration = Time_schedule::find($id);
+     $duration->delete();
+     return redirect()->back()->with('danger','Time Schedule Deleted Successfully');
+    }
 }

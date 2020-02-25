@@ -30,7 +30,7 @@
         <div class="col-md-6 ">
             <a href="{{route('add-pf-calculation')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add Pf</a>
         </div>
-    </div>
+      </div>
 
     <div class="col-md-5 text-center offset-3 mt-2">
         @if ($message = Session::get('danger'))

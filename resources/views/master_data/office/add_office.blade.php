@@ -23,7 +23,7 @@
           <h3 class="card-title">Add Office Information</h3>
         </div>
 
-        <div class="col-md-5 offset-3 mt-2">
+        <div class="col-md-6 offset-3 mt-2">
             @if ($message = Session::get('success'))
             <div class="alert alert-success alert-block">
             <button type="button" class="close" data-dismiss="alert">×</button>
