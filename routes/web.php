@@ -45,8 +45,112 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 // Mater Data Department Category ............. 
-// Department add edit delete update 
 
+//category add edit update delete......
+Route::get('/category/add-category', [
+	'uses'		=> 'MasterController@add_category',
+	'as'		=> 'add-category'
+]);
+Route::post('/category/save-category', [
+	'uses'		=> 'MasterController@save_category',
+	'as'		=> 'save-category'
+]);
+Route::get('/category/all-category', [
+	'uses'		=> 'MasterController@all_category',
+	'as'		=> 'all-category'
+]);
+Route::get('/category/edit-category/{id}', [
+	'uses'		=> 'MasterController@edit_category',
+	'as'		=> 'edit-category'
+]);
+Route::post('/category/update-category/{id}', [
+	'uses'		=> 'MasterController@update_category',
+	'as'		=> 'update-category'
+]);
+Route::get('/category/delete-category/{id}', [
+	'uses'		=> 'MasterController@delete_category',
+	'as'		=> 'delete-category'
+]);
+
+//level add edit update delete......level
+Route::get('/level/add-level', [
+	'uses'		=> 'MasterController@add_level',
+	'as'		=> 'add-level'
+]);
+Route::post('/level/save-level', [
+	'uses'		=> 'MasterController@save_level',
+	'as'		=> 'save-level'
+]);
+Route::get('/level/all-level', [
+	'uses'		=> 'MasterController@all_level',
+	'as'		=> 'all-level'
+]);
+Route::get('/level/edit-level/{id}', [
+	'uses'		=> 'MasterController@edit_level',
+	'as'		=> 'edit-level'
+]);
+Route::post('/level/update-level/{id}', [
+	'uses'		=> 'MasterController@update_level',
+	'as'		=> 'update-level'
+]);
+Route::get('/level/delete-level/{id}', [
+	'uses'		=> 'MasterController@delete_level',
+	'as'		=> 'delete-level'
+]);
+
+//sub location add edit update delete......
+Route::get('/sub-location/add-sub-location', [
+	'uses'		=> 'MasterController@add_sub_location',
+	'as'		=> 'add-sub-location'
+]);
+Route::post('/sub-location/save-sub-location', [
+	'uses'		=> 'MasterController@save_sub_location',
+	'as'		=> 'save-sub-location'
+]);
+Route::get('/sub-location/all-sub-location', [
+	'uses'		=> 'MasterController@all_sub_location',
+	'as'		=> 'all-sub-location'
+]);
+Route::get('/sub-location/edit-sub-location/{id}', [
+	'uses'		=> 'MasterController@edit_sub_location',
+	'as'		=> 'edit-sub-location'
+]);
+Route::post('/sub-location/update-sub-location/{id}', [
+	'uses'		=> 'MasterController@update_sub_location',
+	'as'		=> 'update-sub-location'
+]);
+Route::get('/sub-location/delete-sub-location/{id}', [
+	'uses'		=> 'MasterController@delete_sub_location',
+	'as'		=> 'delete-sub-location'
+]);
+
+//Work Place add edit update delete......
+Route::get('/work-place/add-work-place', [
+	'uses'		=> 'MasterController@add_work_place',
+	'as'		=> 'add-work-place'
+]);
+Route::post('/work-place/save-work-place', [
+	'uses'		=> 'MasterController@save_work_place',
+	'as'		=> 'save-work-place'
+]);
+Route::get('/work-place/all-work-place', [
+	'uses'		=> 'MasterController@all_work_place',
+	'as'		=> 'all-work-place'
+]);
+Route::get('/work-place/edit-work-place/{id}', [
+	'uses'		=> 'MasterController@edit_work_place',
+	'as'		=> 'edit-work-place'
+]);
+Route::post('/work-place/update-work-place/{id}', [
+	'uses'		=> 'MasterController@update_work_place',
+	'as'		=> 'update-work-place'
+]);
+Route::get('/work-place/delete-work-place/{id}', [
+	'uses'		=> 'MasterController@delete_work_place',
+	'as'		=> 'delete-work-place'
+]);
+
+// Department add edit delete update 
 Route::get('/add-department', [
 	'uses'		=> 'MasterController@add_department',
 	'as'		=> 'add-department'
@@ -157,6 +261,33 @@ Route::post('/position/update-position/{id}', [
 Route::get('/position/delete-position/{id}', [
 	'uses'		=> 'MasterController@delete_position',
 	'as'		=> 'delete-position'
+]);
+
+
+//base add edit update delete......
+Route::get('/base/add-base', [
+	'uses'		=> 'MasterController@add_base',
+	'as'		=> 'add-base'
+]);
+Route::post('/base/save-base', [
+	'uses'		=> 'MasterController@save_base',
+	'as'		=> 'save-base'
+]);
+Route::get('/base/all-base', [
+	'uses'		=> 'MasterController@all_base',
+	'as'		=> 'all-base'
+]);
+Route::get('/base/edit-base/{id}', [
+	'uses'		=> 'MasterController@edit_base',
+	'as'		=> 'edit-base'
+]);
+Route::post('/base/update-base/{id}', [
+	'uses'		=> 'MasterController@update_base',
+	'as'		=> 'update-base'
+]);
+Route::get('/base/delete-base/{id}', [
+	'uses'		=> 'MasterController@delete_base',
+	'as'		=> 'delete-base'
 ]);
 
 //master data duration add edit update delete......

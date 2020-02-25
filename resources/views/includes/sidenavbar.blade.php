@@ -25,7 +25,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
+          <li class="nav-item {{ request()->is('admin-home') ? 'active' :''}}">
           <a href="{{url('/admin-home')}}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -123,8 +123,8 @@
             </ul>
           </li>
 
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+        <li class="nav-item has-treeview {{ request()->is('/*') ? 'active menu-open' :''}}">
+             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tree"></i>
               <p>
                 Master Data
@@ -132,8 +132,37 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-              <a href="{{route('all-office')}}" class="nav-link">
+
+              <li class="nav-item {{ request()->is('/all-office') ? 'active menu-open' :''}}">
+                  <a href="{{route('all-category')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Category</p>
+                  </a>
+              </li>
+
+              <li class="nav-item ">
+                  <a href="{{route('all-level')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Level</p>
+                  </a>
+              </li>
+
+              <li class="nav-item ">
+                  <a href="{{route('all-sub-location')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Sub Location</p>
+                  </a>
+              </li>
+
+              <li class="nav-item ">
+                <a href="{{route('all-work-place')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Work Place</p>
+                </a>
+              </li>
+
+              <li class="nav-item {{ request()->is('/all-office') ? 'active menu-open' :''}}">
+                <a href="{{route('all-office')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Offices</p>
                 </a>
@@ -150,6 +179,13 @@
                 <a href="{{route('all-position')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Position</p>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{route('all-base')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Base</p>
                   </a>
               </li>
 

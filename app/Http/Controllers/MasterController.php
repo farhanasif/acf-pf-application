@@ -10,10 +10,239 @@ use App\Office;
 use App\Department;
 use App\Position;
 use App\Time_schedule;
+use App\Category;
+use App\Base;
+use App\Level;
+use App\Sub_location;
+use App\Work_place;
+
 
 class MasterController extends Controller
 {
 
+
+    // Category add edit update delete
+    public function add_category()
+    {
+        return view('master_data.category.add_category');
+    }
+
+    public function save_category(Request $request)
+    {
+        $this->validate($request,[
+            'category_name' => 'required',
+
+        ]);
+
+        $categories = new Category;
+        $categories->category_name = $request->category_name;
+        $categories->save(); 
+        return redirect()->back()->with('success','Category Added Successfully!');
+    }
+    
+    public function all_category()
+    {   
+        $categories = Category::all();
+        return view('master_data.category.all_category',compact('categories'));
+    }
+
+    public function edit_category($id)
+    {
+        $category = Category::find($id);
+         return view('master_data.category.edit_category', compact('category'));
+    }
+
+    public function update_category(Request $request, $id)
+    {
+        $this->validate($request,[
+            'category_name' => 'required',
+
+        ]);
+
+        $categories = Category::find($id);
+        $categories->category_name = $request->category_name;
+        $categories->save(); 
+        return redirect()->route('all-category')->with('success','Category Updated Successfully!');
+
+    }
+
+    public function delete_category($id)
+    {
+        $base_name = Category::find($id);
+        $base_name->delete();
+        return redirect()->back()->with('danger','Category Deleted Successfully!');
+    }
+
+    // level add edit update delete
+    public function add_level()
+    {
+        return view('master_data.level.add_level');
+    }
+
+    public function save_level(Request $request)
+    {
+        $this->validate($request,[
+            'level_name' => 'required',
+            'level_description' => 'required',
+
+        ]);
+
+        $levels= new Level;
+        $levels->level_name = $request->level_name;
+        $levels->level_description = $request->level_description;
+        $levels->save(); 
+        return redirect()->back()->with('success','Level Added Successfully!');
+    }
+    
+    public function all_level()
+    {   
+        $levels = Level::all();
+        return view('master_data.level.all_level',compact('levels'));
+    }
+
+    public function edit_level($id)
+    {
+        $level = Level::find($id);
+         return view('master_data.level.edit_level', compact('level'));
+    }
+
+    public function update_level(Request $request, $id)
+    {
+        $this->validate($request,[
+            'level_name' => 'required',
+            'level_description' => 'required',
+
+        ]);
+
+        $levels = Level::find($id);
+        $levels->level_name = $request->level_name;
+        $levels->level_description = $request->level_description;
+        $levels->save(); 
+        return redirect()->route('all-level')->with('success','Level Updated Successfully!');
+
+    }
+
+    public function delete_level($id)
+    {
+        $level = Level::find($id);
+        $level->delete();
+        return redirect()->back()->with('danger','Level Deleted Successfully!');
+    }
+
+
+    // sub location add edit update delete
+    public function add_sub_location()
+    {
+        return view('master_data.sub_location.add_sub_location');
+    }
+
+    public function save_sub_location(Request $request)
+    {
+        $this->validate($request,[
+            'sub_location_name' => 'required',
+            'sub_location_description' => 'required',
+
+        ]);
+
+        $sub_locations= new Sub_location;
+        $sub_locations->sub_location_name = $request->sub_location_name;
+        $sub_locations->sub_location_description = $request->sub_location_description;
+        $sub_locations->save(); 
+        return redirect()->back()->with('success','Sub Location Added Successfully!');
+    }
+    
+    public function all_sub_location()
+    {   
+        $sub_locations = Sub_location::all();
+        return view('master_data.sub_location.all_sub_location',compact('sub_locations'));
+    }
+
+    public function edit_sub_location($id)
+    {
+        $sub_location = Sub_location::find($id);
+         return view('master_data.sub_location.edit_sub_location', compact('sub_location'));
+    }
+
+    public function update_sub_location(Request $request, $id)
+    {
+        $this->validate($request,[
+            'sub_location_name' => 'required',
+            'sub_location_description' => 'required',
+
+        ]);
+
+        $sub_locations = Sub_location::find($id);
+        $sub_locations->sub_location_name = $request->sub_location_name;
+        $sub_locations->sub_location_description = $request->sub_location_description;
+        $sub_locations->save(); 
+        return redirect()->route('all-sub-location')->with('success','Sub Location Updated Successfully!');
+
+    }
+
+    public function delete_sub_location($id)
+    {
+        $sub_location = Sub_location::find($id);
+        $sub_location->delete();
+        return redirect()->back()->with('danger','Sub Location Deleted Successfully!');
+    }
+
+    // work place add edit update delete
+    public function add_work_place()
+    {
+        return view('master_data.work_place.add_work_place');
+    }
+
+    public function save_work_place(Request $request)
+    {
+        $this->validate($request,[
+            'work_place_name' => 'required',
+            'work_place_description' => 'required',
+
+        ]);
+
+        $work_places= new Work_place;
+        $work_places->work_place_name = $request->work_place_name;
+        $work_places->work_place_description = $request->work_place_description;
+        $work_places->save(); 
+        return redirect()->back()->with('success','Work Place Added Successfully!');
+    }
+    
+    public function all_work_place()
+    {   
+        $work_places = Work_place::all();
+        return view('master_data.work_place.all_work_place',compact('work_places'));
+    }
+
+    public function edit_work_place($id)
+    {
+        $work_place = Work_place::find($id);
+         return view('master_data.work_place.edit_work_place', compact('work_place'));
+    }
+
+    public function update_work_place(Request $request, $id)
+    {
+        $this->validate($request,[
+            'work_place_name' => 'required',
+            'work_place_description' => 'required',
+
+        ]);
+
+        $work_places = Work_place::find($id);
+        $work_places->work_place_name = $request->work_place_name;
+        $work_places->work_place_description = $request->work_place_description;
+        $work_places->save(); 
+        return redirect()->route('all-work-place')->with('success','Work Place Updated Successfully!');
+
+    }
+
+    public function delete_work_place($id)
+    {
+        $work_place = Work_place::find($id);
+        $work_place->delete();
+        return redirect()->back()->with('danger','Work Place Deleted Successfully!');
+    }
+
+ // Department add edit update delete
     public function add_department()
     {
         return view('master_data.department.add_department');
@@ -63,6 +292,8 @@ class MasterController extends Controller
         $department->delete();
         return redirect()->back();
     }
+
+
     // Position add update delete
     public function add_position()
     {
@@ -111,6 +342,57 @@ class MasterController extends Controller
         $position_name->delete();
         return redirect()->back()->with('danger','Position Deleted Successfully!');
     }
+
+
+    // Base_name add update delete
+    public function add_base()
+    {
+        return view('master_data.base.add_base');
+    }
+
+    public function save_base(Request $request)
+    {
+        $this->validate($request,[
+            'base_name' => 'required',
+            'base_description' => 'required',
+        ]);
+
+        $bases = new Base;
+        $bases->base_name = $request->base_name;
+        $bases->base_description = $request->base_description;
+        $bases->save(); 
+        return redirect()->back()->with('success','Base Added Successfully!');
+    }
+    
+    public function all_base()
+    {   
+        $bases = Base::all();
+        return view('master_data.base.all_base',compact('bases'));
+    }
+
+    public function edit_base($id)
+    {
+        $base = Base::find($id);
+         return view('master_data.base.edit_base', compact('base'));
+    }
+
+    public function update_base(Request $request, $id)
+    {
+        $bases = Base::find($id);
+        $bases->base_name = $request->base_name;
+        $bases->base_description = $request->base_description;
+        $bases->save(); 
+        return redirect()->route('all-base')->with('success','Base Updated Successfully!');
+
+    }
+
+    public function delete_base($id)
+    {
+        $base_name = Base::find($id);
+        $base_name->delete();
+        return redirect()->back()->with('danger','Base Deleted Successfully!');
+    }
+
 
 
    // duration add update delete 

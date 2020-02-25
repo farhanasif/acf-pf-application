@@ -6,13 +6,13 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>All Base </h1>
+        <h1>All Sub Location Information</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active"><a href="#">Base</a></li>
-          <li class="breadcrumb-item active"><a href="#">All Base</a></li>
+          <li class="breadcrumb-item active"><a href="#">Sub Location</a></li>
+          <li class="breadcrumb-item active"><a href="#">All Sub Location Information</a></li>
         </ol>
       </div>
     </div>
@@ -25,10 +25,10 @@
     <div class="card-header">
       <div class="row">
         <div class="col-sm-6">
-          <h3 class="card-title">All Base Information</h3>
+          <h3 class="card-title">All Sub Location Information</h3>
         </div>
         <div class="col-md-6 ">
-            <a href="{{route('add-base')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add Base</a>
+            <a href="{{route('add-sub-location')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add Sub Location</a>
         </div>
       </div>
 
@@ -56,21 +56,21 @@
 
         <tr>
           <th>SL NO</th>
-          <th>Base Name</th>
-          <th>Base Description</th>
+          <th>Sub Location Name</th>
+          <th>Sub Location Description</th>
           <th>Action</th>
         </tr>
         </thead>
         <tbody>
           <?php $i=1;?>
-          @foreach ($bases as $base)
+          @foreach ($sub_locations as $sub_location)
         <tr>
           <td>{{ $i++}}</td>
-          <td>{{$base->base_name}}</td>
-          <td>{{$base->base_description}}</td>
+          <td>{{$sub_location->sub_location_name}}</td>
+          <td>{{$sub_location->sub_location_description}}</td>
           <td class="row">
-          <a href="{{route('edit-base',$base->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-              <a href="{{route('delete-base',$base->id)}}" class="btn btn-danger ml-2"><i class="fas fa-trash-alt"></i></a>
+               <a href="{{route('edit-sub-location',$sub_location->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+               <a href="{{route('delete-sub-location',$sub_location->id)}}" class="btn btn-danger ml-2"><i class="fas fa-trash-alt"></i></a>
           </td>
         </tr>
         @endforeach

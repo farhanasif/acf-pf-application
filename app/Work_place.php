@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Alert extends Model
+class Work_place extends Model
 {
-    
+    //
 }
