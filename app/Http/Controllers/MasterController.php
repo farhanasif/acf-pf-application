@@ -7,9 +7,112 @@ use App\Duration;
 use App\Alert;
 use App\Pf_calculation;
 use App\Office;
+use App\Department;
 
 class MasterController extends Controller
 {
+
+    public function add_department()
+    {
+        return view('master_data.department.add_department');
+    }
+
+    public function save_department(Request $request)
+    {
+        $this->validate($request,[
+            'name' => 'required',
+            'department_code' => 'required',
+        ]);
+
+        $department = new Department;
+        $department->name = $request->name;
+        $department->department_code = $request->department_code;
+        $department->created_by = Auth::user()->id;
+        $department->updated_by = Auth::user()->id;
+        $department->save(); 
+        return redirect()->back()->with('success','Department Added Successfully!');
+    }
+    
+    public function all_department()
+    {   
+        $departments = Department::all();
+        return view('master_data.department.all_department',compact('departments'));
+    }
+
+    public function edit_department($id)
+    {
+        $department = Department::find($id);
+         return view('master_data.department.edit_department', compact('department'));
+    }
+
+    public function update_department(Request $request, $id)
+    {
+        $department = Department::find($id);
+        $department->name = $request->name;
+        $department->department_code = $request->department_code;
+        $department->save(); 
+        return redirect()->route('all-department')->with('success','Department Updated Successfully!');
+
+    }
+
+    public function delete_department($id)
+    {
+        $department = Department::find($id);
+        $department->delete();
+        return redirect()->back();
+    }
+    // Position add update delete
+    public function add_position()
+    {
+        return view('master_data.position.add_position');
+    }
+
+    public function save_position(Request $request)
+    {
+        $this->validate($request,[
+            'name' => 'required',
+            'position' => 'required',
+        ]);
+
+        $department = new Position;
+        $department->name = $request->name;
+        $department->department_code = $request->department_code;
+        $department->created_by = Auth::user()->id;
+        $department->updated_by = Auth::user()->id;
+        $department->save(); 
+        return redirect()->back()->with('success','position Added Successfully!');
+    }
+    
+    public function all_position()
+    {   
+        $positions = Department::all();
+        return view('master_data.position.all_position',compact('positions'));
+    }
+
+    public function edit_position($id)
+    {
+        $position = Position::find($id);
+         return view('master_data.position.edit_department', compact('position'));
+    }
+
+    public function update_position(Request $request, $id)
+    {
+        $department = Position::find($id);
+        $department->name = $request->name;
+        $department->department_code = $request->department_code;
+        $department->save(); 
+        return redirect()->route('all-position')->with('success','Position Updated Successfully!');
+
+    }
+
+    public function delete_position($id)
+    {
+        $department = Position::find($id);
+        $department->delete();
+        return redirect()->back();
+    }
+
+
    // duration add update delete 
    public function add_duration()
    {

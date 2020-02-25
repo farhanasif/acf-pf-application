@@ -140,10 +140,17 @@
               </li>
 
               <li class="nav-item">
-              <a href="{{route('department')}}" class="nav-link">
+              <a href="{{route('all-department')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Department</p>
                 </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{route('all-position')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Position</p>
+                  </a>
               </li>
 
               <li class="nav-item">

@@ -7,7 +7,8 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Admin Dashboard</h1>
+            <?php $dt = new DateTime('now', new DateTimezone('Asia/Dhaka'))?>
+            <h1>{{$dt->format('F j, Y, g:i a')}}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -168,8 +169,8 @@
             <div class="row">
               <div class="col-sm-3 col-6">
                 <div class="description-block border-right">
-                  <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span>
-                  <h5 class="description-header">$35,210.43</h5>
+                  <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 40%</span>
+                  <h5 class="description-header">49,627.06</h5>
                   <span class="description-text">TOTAL PF AMOUNT</span>
                 </div>
                 <!-- /.description-block -->
@@ -177,8 +178,8 @@
               <!-- /.col -->
               <div class="col-sm-3 col-6">
                 <div class="description-block border-right">
-                  <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 0%</span>
-                  <h5 class="description-header">$10,390.90</h5>
+                  <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 20%</span>
+                  <h5 class="description-header">$24,813.53</h5>
                   <span class="description-text">TOTAL ORGANIZATION</span>
                 </div>
                 <!-- /.description-block -->

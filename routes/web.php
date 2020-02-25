@@ -43,37 +43,38 @@ Route::get('/home', 'HomeController@index')->name('home');
 // 	'as'		=> 'logout'
 // ]);
 
-// Department add edit delete update 
-// Mater Data Department Category ............. 
 
-Route::get('/department', [
-	'uses'		=> 'AdminController@department',
-	'as'		=> 'department'
+// Mater Data Department Category ............. 
+// Department add edit delete update 
+
+Route::get('/add-department', [
+	'uses'		=> 'MasterController@add_department',
+	'as'		=> 'add-department'
 ]);
 
-// Route::get('/all-department', [
-// 	'uses'		=> 'AdminController@all_department',
-// 	'as'		=> 'all-department'
-// ]);
+Route::get('/all-department', [
+	'uses'		=> 'MasterController@all_department',
+	'as'		=> 'all-department'
+]);
 Route::post('/save-department', [
-	'uses'		=> 'AdminController@save_department',
+	'uses'		=> 'MasterController@save_department',
 	'as'		=> 'save-department'
 ]);
 
-// Route::get('/edit-department/{id}', [
-// 	'uses'		=> 'AdminController@edit_department',
-// 	'as'		=> 'edit-department'
-// ]);
+Route::get('/edit-department/{id}', [
+	'uses'		=> 'MasterController@edit_department',
+	'as'		=> 'edit-department'
+]);
 
-// Route::post('/update-department/{id}', [
-// 	'uses'		=> 'AdminController@update_department',
-// 	'as'		=> 'update-department'
-// ]);
+Route::post('/update-department/{id}', [
+	'uses'		=> 'MasterController@update_department',
+	'as'		=> 'update-department'
+]);
 
-// Route::get('/delete-department/{id}', [
-// 	'uses'		=> 'AdminController@delete_department',
-// 	'as'		=> 'delete-department'
-// ]);
+Route::get('/delete-department/{id}', [
+	'uses'		=> 'MasterController@delete_department',
+	'as'		=> 'delete-department'
+]);
 
 //master data alert add edit update delete......
 Route::get('/add-office', [
@@ -101,6 +102,62 @@ Route::get('/delete-office/{id}', [
 	'as'		=> 'delete-office'
 ]);
 
+// Department add edit delete update 
+
+Route::get('/add-department', [
+	'uses'		=> 'MasterController@add_department',
+	'as'		=> 'add-department'
+]);
+
+Route::get('/all-department', [
+	'uses'		=> 'MasterController@all_department',
+	'as'		=> 'all-department'
+]);
+Route::post('/save-department', [
+	'uses'		=> 'MasterController@save_department',
+	'as'		=> 'save-department'
+]);
+
+Route::get('/edit-department/{id}', [
+	'uses'		=> 'MasterController@edit_department',
+	'as'		=> 'edit-department'
+]);
+
+Route::post('/update-department/{id}', [
+	'uses'		=> 'MasterController@update_department',
+	'as'		=> 'update-department'
+]);
+
+Route::get('/delete-department/{id}', [
+	'uses'		=> 'MasterController@delete_department',
+	'as'		=> 'delete-department'
+]);
+
+//position add edit update delete......
+Route::get('/position/add-position', [
+	'uses'		=> 'MasterController@add_position',
+	'as'		=> 'add-position'
+]);
+Route::post('/save-position', [
+	'uses'		=> 'MasterController@save_position',
+	'as'		=> 'save-position'
+]);
+Route::get('/position/all-position', [
+	'uses'		=> 'MasterController@all_position',
+	'as'		=> 'all-position'
+]);
+Route::get('/edit-position/{id}', [
+	'uses'		=> 'MasterController@edit_position',
+	'as'		=> 'edit-position'
+]);
+Route::post('/update-position/{id}', [
+	'uses'		=> 'MasterController@update_position',
+	'as'		=> 'update-position'
+]);
+Route::get('/delete-position/{id}', [
+	'uses'		=> 'MasterController@delete_position',
+	'as'		=> 'delete-position'
+]);
 
 //master data duration add edit update delete......
 Route::get('/add-duration', [

@@ -27,7 +27,7 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table id="example1" class="table table-bordered table-striped">
+      <table id="base" class="table table-bordered table-striped">
         <thead>
 
         <tr>
@@ -50,35 +50,29 @@
         </tr>
         </thead>
         <tbody>
-  <?php $i=1;?>
-      @foreach($employees as $employee)
+
         <tr>
-          <td>{{ $i++ }}</td>
-          <td>
-            <a href="{{route('edit-employee',$employee->id)}}">{{$employee->staff_code}}</a>
-          </td>
-          <td>
-            <a href="{{route('edit-employee',$employee->id)}}">
-            {{$employee->first_name}} {{$employee->last_name}}
-          </td>
-          <td>{{$employee->position}}</td>
-          <td>{{$employee->department_code}}</td>
-          <td>{{$employee->category}}</td>
-          <td>{{$employee->level}}</td>
-          <td>{{$employee->base}}</td>
-          <td>{{$employee->work_place}}</td>
-          <td>{{$employee->sub_location}}</td>
-          <td>{{$employee->basic_salary}}</td>
-          <td>{{$employee->gross_salary}}</td>
-          <td>{{$employee->pf_amount}}</td>
-          <td>{{$employee->joining_date}}</td>
-          <td>{{$employee->ending_date}}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
           {{-- <td >
               <a href="{{route('edit-employee',$employee->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
               <a href="{{route('delete-employee',$employee->id)}}" onclick="ConfirmDelete()" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
           </td> --}}
         </tr>
-      @endforeach
+    
       </tbody>
       </table>
     </div>
@@ -87,5 +81,24 @@
   <!-- /.card -->
 
 </section>
+
+
+<script>
+    $(function () {
+      // $("#example1").DataTable();
+      $('#base').DataTable({
+           // "paging": true,
+          // "lengthChange": false,
+        // "searching": false,
+          // "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        scrollX:'50vh',
+        scrollY:'50vh',
+        scrollCollapse: true,
+      });
+    });
+  </script>
+
 @endsection
 

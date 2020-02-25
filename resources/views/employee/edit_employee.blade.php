@@ -154,11 +154,11 @@
       <label for="sub_location" class="col-form-label col-md-2 col-sm-3 label-align">Sub Location</label>
       <div class="col-md-3 col-sm-3 ">
         <select name="work_place" id="" class="form-control select2bs4" style="width: 100%;">
-          <option value="">--select--</option>
-          <option value="sub_location">sub_location</option>
-          <option value="Gulshan">Gulshan</option>
-          <option value="Mohakhali">Mohakhali</option>
-          <option value="Mirpur">Mirpur</option>
+          {{-- <option value="">--select--</option> --}}
+          <option <?php echo ($employee=='sub_location') ? "selected" : ""; ?> value="sub_location">Sub Location</option>
+          <option <?php echo ($employee=='Gulshan') ? "selected" : ""; ?> value="Gulshan">Gulshan</option>
+          <option <?php echo ($employee=='Mohakhali') ? "selected" : ""; ?> value="Mohakhali">Mohakhali</option>
+          <option <?php echo ($employee=='Mirpur') ? "selected" : ""; ?> value="Mirpur">Mirpur</option>
         </select>
       </div>
     </div>

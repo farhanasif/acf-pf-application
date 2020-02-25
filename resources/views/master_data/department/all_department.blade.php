@@ -23,7 +23,31 @@
 
   <div class="card card-success card-outline">
     <div class="card-header">
-      <h3 class="card-title">All Department</h3>
+      {{-- <h3 class="card-title">All Department</h3> --}}
+      <div class="row">
+        <div class="col-sm-6">
+            <h3 class="card-title">All Department Information</h3>
+        </div>
+        <div class="col-md-6 ">
+            <a href="{{route('add-department')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add Department</a>
+        </div>
+      </div>
+  
+      <div class="col-md-6 offset-3 mt-2">
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-block">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>{{ $message }}</strong>
+        </div>
+        @endif
+  
+        @if ($message = Session::get('danger'))
+        <div class="alert alert-danger alert-block">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>{{ $message }}</strong>
+        </div>
+        @endif
+      </div>
     </div>
     <!-- /.card-header -->
     <div class="card-body">

@@ -65,6 +65,7 @@
                 <label for="email" class="col-form-label col-md-3 col-sm-4 label-align"></label>
                 <div class="col-md-6 col-sm-6">
                     <button  type="submit" class="btn btn-success ">Submit</button>
+                    <a href="{{route('all-department')}}" class="btn btn-info ml-2">Back</a>
                 </div>
             </div>
 
