@@ -50,7 +50,9 @@
            @foreach($users as $user)
         <tr>
           <td>{{$i++}}</td>
-          <td>{{ $user->name}}</td>
+          <td>
+            <a href="{{url('/edit-user',$user->id)}}">{{ $user->name}}</a>
+          </td>
           <td>
             <a href="{{url('/edit-user',$user->id)}}">{{ $user->staff_code}}</a>
             

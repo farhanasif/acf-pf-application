@@ -59,15 +59,16 @@ class EmployeeController extends Controller
                   // 'department_code' =>NULL,
                   'category' =>$row[4],
                   'level' =>$row[5],
-                  'base' =>$row[6],
+                  'joining_date' =>date($row[7]),
+                  // 'ending_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[9]),
+                  'ending_date' =>date($row[9]),
+                  'base' =>$row[10],
                   'work_place' =>$row[10],
                   // 'sub_location' =>NULL,
                   'basic_salary' =>$row[12],
                   'gross_salary' =>$row[13],
                   'pf_amount' =>$row[16],
                   // 'pf_percentage' =>$NULL,
-                  // 'joining_date' =>$row[7],
-                  // 'ending_date' =>$row[9],
                   'status' =>1,
                   'created_by' =>Auth::user()->id,
                   'updated_by' =>Auth::user()->id,
@@ -76,6 +77,8 @@ class EmployeeController extends Controller
       }
 
         // dd($insert_data);
+        // exit;
+        //         dd($insert_data[7]);
         // exit;
 
       if (!empty($insert_data)) {
