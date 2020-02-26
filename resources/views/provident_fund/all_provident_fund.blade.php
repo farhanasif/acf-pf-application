@@ -49,7 +49,7 @@
           <td>{{$provident_fund->own_pf}}</td>
           <td>{{$provident_fund->organization_pf}}</td>
           <td>{{$provident_fund->total_pf}}</td>
-          <td>
+          <td class="row">
               <a href="{{route('edit-provident-fund',$provident_fund->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
           </td>
         </tr>

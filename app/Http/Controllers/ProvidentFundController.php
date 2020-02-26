@@ -15,7 +15,9 @@ class ProvidentFundController extends Controller
 {
     public function add_provident_fund()
     {
-      return view('provident_fund.add_provident_fund');
+      
+      $provident_funds = DB::table('employees')->get();
+      return view('provident_fund.add_provident_fund',compact('provident_funds'));
     }
 
     public function save_provident_fund(Request $request)
@@ -27,7 +29,7 @@ class ProvidentFundController extends Controller
       //  ]);
 
     $data = array();
-    $data['deposit_date'] = date("Y-m-d");
+    $data['deposit_date'] = $request->deposit_date;
     $data['staff_code'] = $request->staff_code;
     $data['own_pf'] = $request->own_pf;
     $data['organization_pf'] = $request->organization_pf;
@@ -70,7 +72,7 @@ class ProvidentFundController extends Controller
       ]);
 
    $data = array();
-   $data['deposit_date'] = date("Y-m-d");
+   $data['deposit_date'] = $request->deposit_date;
    $data['staff_code'] = $request->staff_code;
    $data['own_pf'] = $request->own_pf;
    $data['organization_pf'] = $request->organization_pf;
@@ -97,6 +99,18 @@ class ProvidentFundController extends Controller
       return view('provident_fund.show_provident_fund_batch_upload');
     }
 
+    public function providentFund(){
+      return view('report.pfreport');
+     }
+
+     public function getProvidentFund(){
+      $results = DB::select('select pf.*,  e.`basic_salary`, e.`gross_salary`, date_format(pf.`created_at`, "%Y%m") as PaymentMonth, e.`first_name`, e.`last_name`, e.`category`, e.`level`, e.`joining_date`, e.`ending_date`, e.`work_place`
+      from `pf_deposit` as pf
+      inner join `employees` as e
+      on pf.`staff_code` = e.`staff_code`');
+
+      return json_encode($results);
+     }
 
     public function save_provident_fund_batch_upload(Request $request)
     {
@@ -119,11 +133,12 @@ class ProvidentFundController extends Controller
         foreach ($value as $row) {
 
                 $insert_data[] =array(
-                'deposit_date' =>date("Y-m-d"),
                 'staff_code' =>$row[0],
-                'own_pf' =>$row[1],
-                'organization_pf' =>$row[2],
-                'total_pf' =>$row[3],
+                // 'deposit_date' =>\Carbon\Carbon::createFromFormat('m/d/Y', $row['1']),
+                'deposit_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]),
+                'own_pf' =>$row[2],
+                'organization_pf' =>$row[3],
+                'total_pf' =>$row[4],
             );
         }
     }

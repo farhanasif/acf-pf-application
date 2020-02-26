@@ -15,6 +15,7 @@ use App\Base;
 use App\Level;
 use App\Sub_location;
 use App\Work_place;
+use Auth;
 
 
 class MasterController extends Controller

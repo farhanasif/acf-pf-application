@@ -1,7 +1,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../../index3.html" class="brand-link">
-      <img src="{{ asset('theme/dist/img/AdminLTELogo.png') }}"
+  <a href="{{url('/admin-home')}}" class="brand-link">
+      <img src="{{ asset('images/logo/acf.png')}}"
            alt="AdminLTE Logo"
            class="brand-image img-circle elevation-3"
            style="opacity: .8">
@@ -13,7 +13,7 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('theme/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset('theme/dist/img/user1-128x128.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name }}</a>
@@ -226,7 +226,7 @@
             <ul class="nav nav-treeview">
 
               <li class="nav-item">
-              <a href="{{route('show-provident-fund-report')}}" class="nav-link">
+              <a href="{{url('provident-fund-report')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Provident Fund</p>
                 </a>
@@ -292,7 +292,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../examples/invoice.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Loan Disburse</p>
                 </a>

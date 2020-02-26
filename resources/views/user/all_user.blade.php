@@ -1,6 +1,7 @@
 @extends('master')
 
 @section('content')
+ <!-- DataTables -->
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -9,9 +10,9 @@
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active"><a href="#">User</a></li>
-          <li class="breadcrumb-item active"><a href="#">All User Information</a></li>
+          <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
+          <li class="breadcrumb-item active"><a href="javascript:void(0);">User</a></li>
+          <li class="breadcrumb-item active"><a href="javascript:void(0);">All User Information</a></li>
         </ol>
       </div>
     </div>
@@ -74,17 +75,35 @@
     <!-- /.card-body -->
   </div>
   <!-- /.card -->
-
 </section>
+{{-- <!-- DataTables -->
+<script src="{{ asset('theme/plugins/datatables/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('theme/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script> --}}
+<script>
+  $(function () {
+    // $("#example1").DataTable();
+    $('#example1').DataTable({
+         // "paging": true,
+        // "lengthChange": false,
+      // "searching": false,
+        // "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      scrollX:'50vh',
+      scrollY:'50vh',
+      scrollCollapse: true,
+    });
+  });
+
+  function ConfirmDelete()
+  {
+    var user = confirm("Are you sure you want to delete?");
+    if (user)
+        return true;
+    else
+      return false;
+  }
+</script>
+
 @endsection
 
-<script>
-    function ConfirmDelete()
-    {
-      var user = confirm("Are you sure you want to delete?");
-      if (user)
-          return true;
-      else
-        return false;
-    }
-</script>

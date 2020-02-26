@@ -15,7 +15,7 @@ class CreateProvidentsTable extends Migration
     {
         Schema::create('providents', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('deposite_code');
+            $table->string('deposit_date');
             $table->integer('staff_code');
             $table->float('own_pf');
             $table->float('organization_pf');

@@ -9,9 +9,9 @@
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active"><a href="#">Provident</a></li>
-          <li class="breadcrumb-item active"><a href="#">Add Provident Fund</a></li>
+          <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
+          <li class="breadcrumb-item active"><a href="javascript:void(0);">Provident</a></li>
+          <li class="breadcrumb-item active"><a href="javascript:void(0);">Add Provident Fund</a></li>
         </ol>
       </div>
     </div>
@@ -47,23 +47,26 @@
             <!-- Horizontal Form -->
            <form class="form-horizontal form-label-left" action="{{url('/save-provident-fund')}}" method="post">
              @csrf
-          <!-- <div class="form-group row">
+          <div class="form-group row">
   			    <label for="deposit_date" class="col-form-label col-md-3 col-sm-3 label-align">Deposit Date</label>
   			       <div class="col-md-6 col-sm-6 ">
   			    	       <input type="date" class="form-control" name="deposit_date">
   			        </div>
-			     </div> -->
+			     </div> 
 
 			  <div class="form-group row">
 			    <label for="staff_code" class="col-form-label col-md-3 col-sm-3 label-align">Staff Code</label>
 			    <div class="col-md-6 col-sm-6 ">
             {{-- <input type="text" class="form-control" name="staff_code" placeholder="Staff Code"> --}}
-	            <select class="form-control" name="staff_code">
-	                <option value="">--select--</option>
-	                <option value="1">1</option>
-	                <option value="2">2</option>
+	            <select class="form-control select2bs4" name="staff_code">
+                <option value="">--select--</option>
+                @foreach ($provident_funds as $provident_fund)
+                <option <?php echo ($provident_fund== '--select--') ? "selected" : "--select--"; ?> value="{{$provident_fund->staff_code}}">{{$provident_fund->staff_code}}</option>
+                @endforeach
+
 	            </select>
-			    </div>
+          </div>
+          
 			  </div>
 			   <div class="form-group row">
 			    <label for="own_pf" class="col-form-label col-md-3 col-sm-4 label-align">Own Provident</label>

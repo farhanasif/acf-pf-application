@@ -46,7 +46,10 @@ class UserController extends Controller
 
     public function show_add_user()
     {
-     return view('user.add_user');
+      
+      $employees = DB::table('employees')->get();
+
+       return view('user.add_user',compact('employees'));
     }
 
     public function store_add_user(Request $request)
@@ -108,11 +111,9 @@ class UserController extends Controller
         if($ext == "xlsx" || $ext == "csv") {
         // $result = Excel::import(new UsersImport, $upload);
         $result = Excel::toArray(new UsersImport, $upload);
-        // dd($result);
-        // exit;
-
-    foreach ($result as $key => $value) {
-        array_shipt($value);
+ 
+     foreach ($result as $key => $value) {
+      
         foreach ($value as $row) {
                 $insert_data[] =array(
                 'name' =>$row[1],
@@ -148,12 +149,10 @@ class UserController extends Controller
         }
     }
 
-  dd($insert_data);
-  exit;
+    if (!empty($insert_data)) {
+        DB::table('users')->insert($insert_data);
+    }
 
-    // if (!empty($insert_data)) {
-    //     DB::table('users')->insert($insert_data);
-    // }
   }
   
     return back()->with('success','User batch import successfully');

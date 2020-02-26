@@ -167,7 +167,7 @@ class EmployeeController extends Controller
       $data['updated_by'] =  Auth::user()->id;
 
       DB::table('employees')->where('id',$id)->update($data);
-      return back()->with('success', 'Employee Updated Successfully.');
+      return redirect()->route('all-employee')->with('success', 'Employee Updated Successfully.');
     }
 
     public function delete_employee($id)

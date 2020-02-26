@@ -100,17 +100,18 @@
                     <div class="form-group row ">
                       <label for="staff_code" class="col-form-label col-md-3 col-sm-3 label-align offset-1">Staff Code</label>
                         <div class="col-md-8 col-sm-8 ">
-                          <select class="form-control" name="staff_code">
+                          <select class="form-control select2bs4" name="staff_code">
                                 <option value="">--select--</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
+                                @foreach ($employees as $employee)
+                                  <option value="{{$employee->staff_code}}">{{$employee->staff_code}}</option>
+                                @endforeach
                             </select>
                         </div>
                       </div>
                       <div class="form-group row ">
                         <label for="role" class="col-form-label col-md-3 col-sm-3 label-align offset-1">Role</label>
                         <div class="col-md-8 col-sm-3 ">
-                          <select class="form-control" name="role">
+                          <select class="form-control select2bs4" name="role">
                             <option value="">--select--</option>
                             <option value="0">0</option>
                             <option value="1">1</option>
@@ -136,7 +137,7 @@
                     <div class="form-group row">
                       <label for="role" class="col-form-label col-md-3 col-sm-3 label-align offset-1">Verified</label>
                       <div class="col-md-8 col-sm-8 ">
-                        <select class="form-control" name="verified">
+                        <select class="form-control select2bs4" name="verified">
                             <option value="">--select--</option>
                             <option value="0">0</option>
                             <option value="1">1</option>
@@ -147,7 +148,7 @@
                     </div> 
                     <div class="form-group">
                         <div class="">
-                          <button  type="submit" class="btn btn-success">Submit</button>
+                          <button style="margin-left:139px;" type="submit" class="btn btn-success">Submit</button>
                         </div>
                     </div>
 

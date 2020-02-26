@@ -491,4 +491,8 @@ Route::get('/clear-cache', function() {
     return 'DONE'; //Return anything
 });
 
+// report 
+Route::get('provident-fund-report', 'ProvidentFundController@providentFund');
+Route::get('get-fund-data', 'ProvidentFundController@getProvidentFund');
+
 

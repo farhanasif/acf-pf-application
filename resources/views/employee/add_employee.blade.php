@@ -53,47 +53,47 @@
                    <input type="text" class="form-control" name="staff_code" placeholder="Staff Code" > 
               </div>
               {{-- <div class="col-md-1"></div> --}}
-              <label for="first_name" class="col-form-label col-md-2 col-sm-2 label-align ">Fisrt Name</label>
+              {{-- <label for="first_name" class="col-form-label col-md-2 col-sm-2 label-align ">Fisrt Name</label>
               <div class="col-md-4 col-sm-3 ">
                  <input type="text" class="form-control" name="first_name" placeholder="First Name">
+              </div> --}}
+              <label for="level" class="col-form-label col-md-2 col-sm-3 label-align">Level</label>
+              <div class="col-md-4 col-sm-3 ">
+                <select name="level" id="" class="form-control select2bs4">
+                  <option value="">--select--</option>
+                  <option value="X1L4">X1L4</option>
+                  <option value="E1L4">E1L4</option>
+                  <option value="X3L2">X3L2</option>
+                  <option value="T3L3">T3L3</option>
+                </select>
               </div>
             </div>
             
            <div class="form-group row">
-           <label for="last_name" class="col-form-label col-md-2 col-sm-3 label-align">Last Name</label>
-           <div class="col-md-4 col-sm-3 ">
-              <input type="text" class="form-control" name="last_name" placeholder="Last Name">
-           </div>
+            <label for="first_name" class="col-form-label col-md-2 col-sm-2 label-align ">Fisrt Name</label>
+            <div class="col-md-4 col-sm-3 ">
+               <input type="text" class="form-control" name="first_name" placeholder="First Name">
+            </div>
            {{-- <div class="col-md-2 "></div> --}}
-           <label for="position" class="col-form-label col-md-2 col-sm-3 label-align">Position</label>
-           <div class="col-md-4 col-sm-3 ">
-              {{-- <input type="text" class="form-control" name="position" placeholder="Position" value="{{$employee->staff_code}}"> --}}
-              <select name="position" id="" class="form-control select2bs4">
-                <option value="">--select--</option>
-                <option value="liaison_manager">Liaison Manager</option>
-                <option value="office_cleaner">Office Cleaner</option>
-                <option value="senior_finance_officer">Senior Finance Officer</option>
-                <option value="guest_house&office_cleaner">Guest House & Office Cleaner</option>
-                <option value="driver">Driver</option>
-                <option value="FSL_&_DRR_HoD">FSL & DRR HoD</option>
-              </select>
-           </div>
+              <label for="department_code" class="col-form-label col-md-2 col-sm-3 label-align">Department Code</label>
+              <div class="col-md-4 col-sm-3 ">
+                <select name="department_code" id="" class="form-control select2bs4">
+                  <option value="">--select--</option>
+                  <option value="OPE">OPE</option>
+                  <option value="HRE">HRE</option>
+                  <option value="MHC">MHC</option>
+                  <option value="WAS">WAS</option>
+                  <option value="MHC">MHC</option>
+                  <option value="WAS">WAS</option>
+                </select>
+              </div>
          </div>
   
          <div class="form-group row">
-          <label for="department_code" class="col-form-label col-md-2 col-sm-3 label-align">Department Code</label>
-          <div class="col-md-4 col-sm-3 ">
-            <select name="department_code" id="" class="form-control select2bs4">
-              <option value="">--select--</option>
-              <option value="OPE">OPE</option>
-              <option value="HRE">HRE</option>
-              <option value="MHC">MHC</option>
-              <option value="WAS">WAS</option>
-              <option value="MHC">MHC</option>
-              <option value="WAS">WAS</option>
-            </select>
-            {{-- <input type="text" class="form-control" name="department_code" placeholder="Department Code" value="{{$employee->staff_code}}"> --}}
-          </div>
+              <label for="last_name" class="col-form-label col-md-2 col-sm-3 label-align">Last Name</label>
+              <div class="col-md-4 col-sm-3 ">
+                 <input type="text" class="form-control" name="last_name" placeholder="Last Name">
+              </div>
          
           <label for="category" class="col-form-label col-md-2 col-sm-3 label-align">Category</label>
           <div class="col-md-4 col-sm-3 ">
@@ -105,21 +105,22 @@
               <option value="LOG">LOG</option>
               <option value="FSL">FSL</option>
             </select>
-             {{-- <input type="text" class="form-control" name="category" placeholder="Category" value="{{$employee->staff_code}}"> --}}
           </div>
         </div>
   
        <div class="form-group row">
-        <label for="level" class="col-form-label col-md-2 col-sm-3 label-align">Level</label>
+        <label for="position" class="col-form-label col-md-2 col-sm-3 label-align">Position</label>
         <div class="col-md-4 col-sm-3 ">
-          <select name="level" id="" class="form-control select2bs4">
-            <option value="">--select--</option>
-            <option value="X1L4">X1L4</option>
-            <option value="E1L4">E1L4</option>
-            <option value="X3L2">X3L2</option>
-            <option value="T3L3">T3L3</option>
-          </select>
-           {{-- <input type="text" class="form-control" name="level" placeholder="Level" value="{{$employee->staff_code}}"> --}}
+           {{-- <input type="text" class="form-control" name="position" placeholder="Position" value="{{$employee->staff_code}}"> --}}
+           <select name="position" id="" class="form-control select2bs4">
+             <option value="">--select--</option>
+             <option value="liaison_manager">Liaison Manager</option>
+             <option value="office_cleaner">Office Cleaner</option>
+             <option value="senior_finance_officer">Senior Finance Officer</option>
+             <option value="guest_house&office_cleaner">Guest House & Office Cleaner</option>
+             <option value="driver">Driver</option>
+             <option value="FSL_&_DRR_HoD">FSL & DRR HoD</option>
+           </select>
         </div>
       
         <label for="base" class="col-form-label col-md-2 col-sm-3 label-align">Base</label>
