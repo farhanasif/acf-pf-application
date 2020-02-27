@@ -51,102 +51,90 @@
             <div class="form-group row">
               <label for="staff_code" class="col-form-label col-md-2 col-sm-3 label-align">Staff Code</label>
                 <div class="col-md-3 col-sm-3 ">
-                   <input type="text" class="form-control" name="staff_code" placeholder="Staff Code" value="{{$employee->staff_code}}" > 
+                   <input type="text" class="form-control" name="staff_code" placeholder="Staff Code" value="{{$employee->staff_code}}"> 
               </div>
               <div class="col-md-2 "></div>
-              <label for="first_name" class="col-form-label col-md-2 col-sm-3 label-align">Fisrt Name</label>
+
+              <label for="level" class="col-form-label col-md-2 col-sm-3 label-align">Level</label>
               <div class="col-md-3 col-sm-3 ">
-                 <input type="text" class="form-control" name="first_name" placeholder="First Name" value="{{$employee->first_name}}">
+                <select name="level" id="" class="form-control select2bs4">
+                  @foreach ($levels as $level)
+                  <option <?php echo ($level->level_name) ? "selected" : ""; ?> value="{{$level->level_name}}">{{$level->level_name}}</option>
+                  @endforeach
+                </select>
               </div>
             </div>
             
            <div class="form-group row">
+            <label for="first_name" class="col-form-label col-md-2 col-sm-3 label-align">Fisrt Name</label>
+              <div class="col-md-3 col-sm-3 ">
+                 <input type="text" class="form-control" name="first_name" placeholder="First Name" value="{{$employee->first_name}}">
+              </div>
+
+           <div class="col-md-2 "></div>
+           <label for="department_code" class="col-form-label col-md-2 col-sm-3 label-align">Department Code</label>
+           <div class="col-md-3 col-sm-3 ">
+             <select name="department_code" id="" class="form-control select2bs4">
+               @foreach ($departments as $department)
+               <option <?php echo ($department->department_code) ? "selected" : ""; ?> value="{{$department->department_code}}">{{$department->department_code}}</option>
+               @endforeach
+             </select>
+           </div>
+          </div>
+
+          <div class="form-group row">
            <label for="last_name" class="col-form-label col-md-2 col-sm-3 label-align">Last Name</label>
            <div class="col-md-3 col-sm-3 ">
               <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{$employee->last_name}}">
            </div>
-           <div class="col-md-2 "></div>
-           <label for="position" class="col-form-label col-md-2 col-sm-3 label-align">Position</label>
+            <div class="col-md-2 "></div>
+           <label for="category" class="col-form-label col-md-2 col-sm-3 label-align">Category</label>
            <div class="col-md-3 col-sm-3 ">
-              {{-- <input type="text" class="form-control" name="position" placeholder="Position" value="{{$employee->staff_code}}"> --}}
-              <select name="position" id="" class="form-control select2bs4">
-                <option value="">--select--</option>
-                <option value="liaison_manager">Liaison Manager</option>
-                <option value="office_cleaner">Office Cleaner</option>
-                <option value="senior_finance_officer">Senior Finance Officer</option>
-                <option value="guest_house&office_cleaner">Guest House & Office Cleaner</option>
-                <option value="driver">Driver</option>
-                <option value="FSL_&_DRR_HoD">FSL & DRR HoD</option>
-              </select>
+             <select name="category" id="" class="form-control select2bs4">
+               @foreach ($categories as $category)
+               <option <?php echo ($category->category_name) ? "selected" : ""; ?> value="{{$category->category_name}}">{{$category->category_name}}</option>
+               @endforeach
+             </select>
            </div>
-         </div>
+          </div>
+         
   
          <div class="form-group row">
-          <label for="department_code" class="col-form-label col-md-2 col-sm-3 label-align">Department Code</label>
+          <label for="position" class="col-form-label col-md-2 col-sm-3 label-align">Position</label>
           <div class="col-md-3 col-sm-3 ">
-            <select name="department_code" id="" class="form-control select2bs4">
-              <option value="">--select--</option>
-              <option value="OPE">OPE</option>
-              <option value="HRE">HRE</option>
-              <option value="MHC">MHC</option>
-              <option value="WAS">WAS</option>
-              <option value="MHC">MHC</option>
-              <option value="WAS">WAS</option>
-            </select>
-            {{-- <input type="text" class="form-control" name="department_code" placeholder="Department Code" value="{{$employee->staff_code}}"> --}}
-          </div>
+             <select name="position" id="" class="form-control select2bs4">
+               @foreach ($positions as $position)
+                 <option <?php echo ($position->position_name) ? "selected" : ""; ?>  value="{{$position->position_name}}">{{$position->position_name}}</option>
+                @endforeach
+             </select>
+          </div> 
+
           <div class="col-md-2 "></div>
-          <label for="category" class="col-form-label col-md-2 col-sm-3 label-align">Category</label>
+
+          <label for="base" class="col-form-label col-md-2 col-sm-3 label-align">Base</label>
           <div class="col-md-3 col-sm-3 ">
-            <select name="category" id="" class="form-control select2bs4">
-              <option value="">--select--</option>
-              <option value="OPE">OPE</option>
-              <option value="HRE">HRE</option>
-              <option value="FIN">FIN</option>
-              <option value="LOG">LOG</option>
-              <option value="FSL">FSL</option>
-            </select>
-             {{-- <input type="text" class="form-control" name="category" placeholder="Category" value="{{$employee->staff_code}}"> --}}
+           <select name="base" id="" class="form-control select2bs4" style="width: 100%;">
+             @foreach ($bases as $base)
+             <option <?php echo ($base->base_name) ? "selected" : ""; ?> value="{{$base->base_name}}">{{$base->base_name}}</option>
+             @endforeach
+           </select>
           </div>
+
         </div>
   
        <div class="form-group row">
-        <label for="level" class="col-form-label col-md-2 col-sm-3 label-align">Level</label>
-        <div class="col-md-3 col-sm-3 ">
-          <select name="level" id="" class="form-control select2bs4">
-            <option value="">--select--</option>
-            <option value="X1L4">X1L4</option>
-            <option value="E1L4">E1L4</option>
-            <option value="X3L2">X3L2</option>
-            <option value="T3L3">T3L3</option>
-          </select>
-           {{-- <input type="text" class="form-control" name="level" placeholder="Level" value="{{$employee->staff_code}}"> --}}
-        </div>
         <div class="col-md-2 "></div>
-        <label for="base" class="col-form-label col-md-2 col-sm-3 label-align">Base</label>
-       <div class="col-md-3 col-sm-3 ">
-        <select name="base" id="" class="form-control select2bs4" style="width: 100%;">
-          <option value="">--select--</option>
-          <option value="base">base</option>
-          <option value="Dhaka">Dhaka</option>
-          <option value="cox'Cox's Bazar">cox'Cox's Bazar</option>
-          <option value="Satkhira">Satkhira</option>
-        </select>
-          {{-- <input type="text" class="form-control" name="base" placeholder="Base" value="{{$employee->staff_code}}"> --}}
-       </div>
+
       </div>
   
      <div class="form-group row">
       <label for="work_place" class="col-form-label col-md-2 col-sm-3 label-align">Work Place</label>
       <div class="col-md-3 col-sm-3 ">
         <select name="work_place" id="" class="form-control select2bs4" style="width: 100%;" >
-          <option value="">--select--</option>
-          <option value="work_place">work_place</option>
-          <option value="Dhaka">Dhaka</option>
-          <option value="cox'Cox's Bazar">cox'Cox's Bazar</option>
-          <option value="Satkhira">Satkhira</option>
+          @foreach ($work_places as $work_place)
+          <option <?php echo ($work_place->work_place_name) ? "selected" : ""; ?> value="{{$work_place->work_place_name}}">{{$work_place->work_place_name}}</option>
+          @endforeach
         </select>
-         {{-- <input type="text" class="form-control" name="work_place" placeholder="Work Place" value="{{$employee->staff_code}}"> --}}
       </div>
   
       <div class="col-md-2 "></div>
@@ -154,11 +142,9 @@
       <label for="sub_location" class="col-form-label col-md-2 col-sm-3 label-align">Sub Location</label>
       <div class="col-md-3 col-sm-3 ">
         <select name="work_place" id="" class="form-control select2bs4" style="width: 100%;">
-          {{-- <option value="">--select--</option> --}}
-          <option <?php echo ($employee=='sub_location') ? "selected" : ""; ?> value="sub_location">Sub Location</option>
-          <option <?php echo ($employee=='Gulshan') ? "selected" : ""; ?> value="Gulshan">Gulshan</option>
-          <option <?php echo ($employee=='Mohakhali') ? "selected" : ""; ?> value="Mohakhali">Mohakhali</option>
-          <option <?php echo ($employee=='Mirpur') ? "selected" : ""; ?> value="Mirpur">Mirpur</option>
+          @foreach ($sub_locations as $sub_location)
+            <option <?php echo ($sub_location->sub_location_name) ? "selected" : ""; ?> value="{{$sub_location->sub_location_name}}">{{$sub_location->sub_location_name}}</option>
+          @endforeach
         </select>
       </div>
     </div>
@@ -200,17 +186,17 @@
       <div class="col-md-2"></div>
       <div class="col-md-3 col-sm-3">
           <button  type="submit" class="btn btn-success ">Update</button>
-            {{-- <a type="submit" class="btn btn-danger float-right" href="{{route('delete-employee',$employee->id)}}" onclick="ConfirmDelete()">Deactive</a> --}}
+          <a type="submit" class="btn btn-danger float-right" href="javascript:void(0)">Deactive</a>
       </div>
    </div>
   
        </form>
-       <div class="form-group row">
+       {{-- <div class="form-group row">
         <div class="col-md-2"></div>
         <div class="col-md-3 col-sm-3">
               <a type="submit" class="btn btn-danger float-right" href="{{route('delete-employee',$employee->id)}}" onclick="ConfirmDelete()">Deactive</a>
         </div>
-     </div>
+     </div> --}}
 
         </div>
       </div>

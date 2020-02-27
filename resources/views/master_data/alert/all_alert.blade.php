@@ -70,9 +70,9 @@
           <td>{{$i++}}</td>
           <td>{{$alert->name}}</td>
             <td>{{$alert->duration}}</td>
-            <td>
-            <a href="{{route('edit-duration',$alert->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-            <a href="{{route('delete-duration',$alert->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+            <td class="row">
+            <a href="{{route('edit-alert',$alert->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+            <a href="{{route('delete-alert',$alert->id)}}" class="btn btn-danger ml-2"><i class="fas fa-trash-alt "></i></a>
             </td>
         </tr>
         @endforeach

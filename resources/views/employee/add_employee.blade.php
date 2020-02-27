@@ -1,3 +1,4 @@
+
 @extends('master')
 
 @section('content')
@@ -52,19 +53,15 @@
                 <div class="col-md-4 col-sm-3 ">
                    <input type="text" class="form-control" name="staff_code" placeholder="Staff Code" > 
               </div>
-              {{-- <div class="col-md-1"></div> --}}
-              {{-- <label for="first_name" class="col-form-label col-md-2 col-sm-2 label-align ">Fisrt Name</label>
-              <div class="col-md-4 col-sm-3 ">
-                 <input type="text" class="form-control" name="first_name" placeholder="First Name">
-              </div> --}}
+
               <label for="level" class="col-form-label col-md-2 col-sm-3 label-align">Level</label>
               <div class="col-md-4 col-sm-3 ">
                 <select name="level" id="" class="form-control select2bs4">
                   <option value="">--select--</option>
-                  <option value="X1L4">X1L4</option>
-                  <option value="E1L4">E1L4</option>
-                  <option value="X3L2">X3L2</option>
-                  <option value="T3L3">T3L3</option>
+
+                  @foreach ($levels as $level)
+                    <option value="{{$level->level_name}}">{{$level->level_name}}</option>
+                  @endforeach
                 </select>
               </div>
             </div>
@@ -79,12 +76,16 @@
               <div class="col-md-4 col-sm-3 ">
                 <select name="department_code" id="" class="form-control select2bs4">
                   <option value="">--select--</option>
-                  <option value="OPE">OPE</option>
-                  <option value="HRE">HRE</option>
+
+                  @foreach ($departments as $department)
+                    <option value="{{$department->department_code}}">{{$department->department_code}}</option>
+                  @endforeach
+
+                  {{-- <option value="HRE">HRE</option>
                   <option value="MHC">MHC</option>
                   <option value="WAS">WAS</option>
                   <option value="MHC">MHC</option>
-                  <option value="WAS">WAS</option>
+                  <option value="WAS">WAS</option> --}}
                 </select>
               </div>
          </div>
@@ -99,11 +100,9 @@
           <div class="col-md-4 col-sm-3 ">
             <select name="category" id="" class="form-control select2bs4">
               <option value="">--select--</option>
-              <option value="OPE">OPE</option>
-              <option value="HRE">HRE</option>
-              <option value="FIN">FIN</option>
-              <option value="LOG">LOG</option>
-              <option value="FSL">FSL</option>
+                  @foreach ($categories as $category)
+                    <option value="{{$category->category_name}}">{{$category->category_name}}</option>
+                  @endforeach
             </select>
           </div>
         </div>
@@ -114,12 +113,9 @@
            {{-- <input type="text" class="form-control" name="position" placeholder="Position" value="{{$employee->staff_code}}"> --}}
            <select name="position" id="" class="form-control select2bs4">
              <option value="">--select--</option>
-             <option value="liaison_manager">Liaison Manager</option>
-             <option value="office_cleaner">Office Cleaner</option>
-             <option value="senior_finance_officer">Senior Finance Officer</option>
-             <option value="guest_house&office_cleaner">Guest House & Office Cleaner</option>
-             <option value="driver">Driver</option>
-             <option value="FSL_&_DRR_HoD">FSL & DRR HoD</option>
+             @foreach ($positions as $position)
+             <option value="{{$position->position_name}}">{{$position->position_name}}</option>
+            @endforeach
            </select>
         </div>
       
@@ -127,10 +123,9 @@
        <div class="col-md-4 col-sm-3 ">
         <select name="base" id="" class="form-control select2bs4" style="width: 100%;">
           <option value="">--select--</option>
-          <option value="base">base</option>
-          <option value="Dhaka">Dhaka</option>
-          <option value="cox'Cox's Bazar">cox'Cox's Bazar</option>
-          <option value="Satkhira">Satkhira</option>
+          @foreach ($bases as $base)
+          <option value="{{$base->base_name}}">{{$base->base_name}}</option>
+         @endforeach
         </select>
           {{-- <input type="text" class="form-control" name="base" placeholder="Base" value="{{$employee->staff_code}}"> --}}
        </div>
@@ -141,10 +136,9 @@
       <div class="col-md-4 col-sm-3 ">
         <select name="work_place" id="" class="form-control select2bs4" style="width: 100%;" >
           <option value="">--select--</option>
-          <option value="work_place">work_place</option>
-          <option value="Dhaka">Dhaka</option>
-          <option value="cox'Cox's Bazar">cox'Cox's Bazar</option>
-          <option value="Satkhira">Satkhira</option>
+          @foreach ($work_places as $work_place)
+          <option value="{{$work_place->work_place_name}}">{{$work_place->work_place_name}}</option>
+         @endforeach
         </select>
          {{-- <input type="text" class="form-control" name="work_place" placeholder="Work Place" value="{{$employee->staff_code}}"> --}}
       </div>
@@ -153,10 +147,9 @@
       <div class="col-md-4 col-sm-3 ">
         <select name="work_place" id="" class="form-control select2bs4" style="width: 100%;">
           <option value="">--select--</option>
-          <option value="sub_location">sub_location</option>
-          <option value="Gulshan">Gulshan</option>
-          <option value="Mohakhali">Mohakhali</option>
-          <option value="Mirpur">Mirpur</option>
+          @foreach ($sub_locations as $sub_location)
+          <option value="{{$sub_location->sub_location_name}}">{{$sub_location->sub_location_name}}</option>
+         @endforeach
         </select>
          {{-- <input type="text" class="form-control" name="sub_location" placeholder="Sub Location" value="{{$employee->staff_code}}"a> --}}
       </div>

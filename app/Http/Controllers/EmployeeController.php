@@ -9,12 +9,30 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\User;
 use Auth;
 use DB;
+use App\Level;
+use App\Position;
+use App\Category;
+use App\Base;
+use App\Sub_location;
+use App\Work_place;
+use App\Department;
 
 class EmployeeController extends Controller
 {
     public function add_employee()
     {
-      return view('employee.add_employee');
+        // $data = array();
+        $levels = Level::all();
+        $positions = Position::all();
+        $categories = Category::all();
+        $bases = Base::all();
+        $sub_locations = Sub_location::all();
+        $work_places = Work_place::all();
+        $departments = DB::table('departments')->get();
+        // print_r($data);
+        // exit;
+
+        return view('employee.add_employee',compact('departments','work_places','levels','positions','categories','bases','sub_locations'));
     }
 
     public function all_employee()
@@ -146,7 +164,15 @@ class EmployeeController extends Controller
     public function edit_employee($id)
     {
       $employee = DB::table('employees')->where('id',$id)->first();
-      return view('employee.edit_employee',compact('employee'));
+      $levels = Level::all();
+      $positions = Position::all();
+      $categories = Category::all();
+      $bases = Base::all();
+      $sub_locations = Sub_location::all();
+      $work_places = Work_place::all();
+      $departments = DB::table('departments')->get();
+      return view('employee.edit_employee',compact('employee','departments','work_places','levels','positions','categories','bases','sub_locations'));
+      // return view('employee.edit_employee',compact('employee'));
     }
     public function update_employee(Request $request, $id)
     {

@@ -1,4 +1,5 @@
 
+
 @extends('master')
 
 @section('content')
@@ -55,11 +56,10 @@
            <div class="col-md-2"></div>
           <label for="staff_code" class="col-form-label col-md-2 col-sm-3 label-align">Staff Code</label>
 			    <div class="col-md-3 col-sm-3 ">
-			    	{{-- <input type="text" class="form-control" name="staff_code" placeholder="Staff Code" value="{{$users->staff_code}}"> --}}
-	            <select class="form-control" name="staff_code">
-	                <option value="">--select--</option>
-	                <option value="1">1</option>
-	                <option value="2">2</option>
+	            <select class="form-control select2bs4" name="staff_code">
+                  @foreach ($alluserdata as $row)
+                  <option <?php echo ($row->staff_code) ? "selected" : ""; ?> value="{{$row->staff_code}}">{{$row->staff_code}}</option>
+                  @endforeach
 	            </select>
 			    </div>
 			  </div>
@@ -72,11 +72,10 @@
           <div class="col-md-2"></div>
           <label for="role" class="col-form-label col-md-2 col-sm-3 label-align">Role</label>
 			    <div class="col-md-3 col-sm-3 ">
-			    	 <!-- <input type="email" class="form-control"  placeholder="Enter email"> -->
-	            <select class="form-control" name="role">
-	                <option value="">--select--</option>
-	                <option value="0">0</option>
-	                <option value="1">1</option>
+	            <select class="form-control select2bs4" name="role">
+                  @foreach ($alluserdata as $row)
+                  <option <?php echo ($row->role) ? "selected" : ""; ?> value="{{$row->role}}">{{$row->role}}</option>
+                  @endforeach
 	            </select>
 			    </div>
 			  </div>
@@ -122,10 +121,9 @@
      <div class="form-group row">
       <label for="role" class="col-form-label col-md-2 col-sm-3 label-align">Verified</label>
       <div class="col-md-3 col-sm-3 ">
-          <select class="form-control" name="verified">
-              <option value="">--select--</option>
-              <option value="0">0</option>
-              <option value="1">1</option>
+          <select class="form-control select2bs4" name="verified">
+              <option <?php echo ($row == '0') ? "selected" : ""; ?> value="0">0</option>
+              <option <?php echo ($row == '1') ? "selected" : ""; ?> value="1">1</option>
           </select>
       </div>
 
@@ -133,10 +131,9 @@
 
       <label for="role" class="col-form-label col-md-2 col-sm-3 label-align">User Type</label>
       <div class="col-md-3 col-sm-3 ">
-          <select class="form-control" name="user_type">
-              <option value="">--select--</option>
-              <option value="Admin">Admin</option>
-              <option value="User">User</option>
+          <select class="form-control select2bs4" name="user_type">
+              <option <?php echo ($row == 'Admin') ? "selected" : ""; ?> value="Admin">Admin</option>
+              <option <?php echo ($row == 'User') ? "selected" : ""; ?> value="User">User</option>
           </select>
       </div>
     </div>

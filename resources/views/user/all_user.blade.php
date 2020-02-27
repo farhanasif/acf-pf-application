@@ -42,7 +42,6 @@
           <th>Address</th>
           <th>Department</th>
           <th>Description</th>
-          <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -65,10 +64,6 @@
           <td>{{ $user->address}}</td>
           <td>{{ $user->department}}</td>
           <td>{{ $user->description}}</td>
-          <td >
-              <a href="{{url('/edit-user',$user->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-              <a href="{{url('/delete-user',$user->id)}}" onclick="ConfirmDelete()" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-          </td>
         </tr>
     @endforeach
         </tfoot>

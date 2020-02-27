@@ -40,7 +40,7 @@ class UserController extends Controller
 
     public function logout()
     {
-     Auth::logout();
+       Auth::logout();
      return redirect('login');
     }
 
@@ -168,8 +168,11 @@ class UserController extends Controller
 
     public function edit_user($id)
     {
-      $users = User::find($id);
-       return view('user.edit_user',compact('users'));
+       $users = User::find($id);
+       $alluserdata = User::get();
+      //  print_r($alluserdata);
+      //  exit;
+       return view('user.edit_user',compact('users','alluserdata'));
     }
 
     public function update_user(Request $request, $id)
