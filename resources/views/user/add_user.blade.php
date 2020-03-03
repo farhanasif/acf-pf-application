@@ -7,13 +7,13 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Add User Information</h1>
+        <h1>Add Employeer Information</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active"><a href="#">User</a></li>
-          <li class="breadcrumb-item active"><a href="#">Add User Information</a></li>
+          <li class="breadcrumb-item active"><a href="javascript:void(0)">Employeer</a></li>
+          <li class="breadcrumb-item active"><a href="javascript:void(0)">Add Employeer Information</a></li>
         </ol>
       </div>
     </div>
@@ -21,7 +21,7 @@
 </section>
    <div class="card card-success card-outline">
         <div class="card-header">
-          <h3 class="card-title">Add User Information</h3>
+          <h3 class="card-title">Add Employeer Information</h3>
         </div>
 
 
@@ -149,6 +149,7 @@
                     <div class="form-group">
                         <div class="">
                           <button style="margin-left:139px;" type="submit" class="btn btn-success">Submit</button>
+                          <a href="{{url('/all-user')}}" class="btn btn-info ml-3">Back</a>
                         </div>
                     </div>
 

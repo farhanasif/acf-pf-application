@@ -15,7 +15,9 @@ use App\Base;
 use App\Level;
 use App\Sub_location;
 use App\Work_place;
+use App\Interest_source;
 use Auth;
+use DB;
 
 
 class MasterController extends Controller
@@ -671,5 +673,109 @@ class MasterController extends Controller
      $duration = Time_schedule::find($id);
      $duration->delete();
      return redirect()->back()->with('danger','Time Schedule Deleted Successfully');
+    }
+// Employee status information
+    public function add_employee_status()
+    {
+        return view('master_data.employee_status.add_employee_status');
+    }
+
+    public function save_employee_status(Request $request)
+    {
+        $this->validate($request,[
+            'status_name'      =>'required',
+            'description'  =>'required',
+        ]);
+        $data = array();
+        $data['status_name'] = $request->status_name;
+        $data['description'] = $request->description;
+        $employee_status = DB::table('employee_status')->insert($data);
+        return back()->with('success', 'Employee status added successfully.');
+    }
+
+    public function all_employee_status()
+    {
+        $all_employee_status = DB::table('employee_status')->get();
+        return view('master_data.employee_status.all_employee_status',compact('all_employee_status'));
+    }
+
+    public function edit_employee_status($id)
+    {   $employee_status = DB::table('employee_status')->where('id',$id)->first();
+        return view('master_data.employee_status.edit_employee_status',compact('employee_status'));
+    }
+
+    public function update_employee_status(Request $request,$id)
+    {
+      
+        $this->validate($request,[
+            'status_name'      =>'required',
+            'description'  =>'required',
+        ]);
+        $data = array();
+        $data['status_name'] = $request->status_name;
+        $data['description'] = $request->description;
+
+        DB::table('employee_status')->where('id',$id)->update($data);
+
+        return back()->with('success', 'Employee status updated successfully.');
+    }
+
+    public function delete_employee_status($id)
+    {
+        DB::table('employee_status')->where('id', $id)->delete();
+        return redirect()->route('all-employee-status')->with('danger','Employee status deleted successfully.');
+    }
+
+    // interest source add update delete 
+    public function add_interest_source()
+    {
+        return view('master_data.interest_source.add_interest_source');
+    }
+    public function save_interest_source(Request $request)
+    {
+         $this->validate($request,[
+            'name'      =>'required',
+            'description'      =>'required',
+        ]);
+
+         $interest_source         = new Interest_source;
+         $interest_source->name   = $request->name;
+         $interest_source->description   = $request->description;
+         $interest_source->save();
+ 
+         return redirect()->back()->with('success', 'Interest source added successfully');
+    }
+ 
+    public function all_interest_source()
+    {
+         $interest_sources = Interest_source::all();
+         return view('master_data.interest_source.all_interest_source',compact('interest_sources'));
+    }
+ 
+    public function edit_interest_source($id)
+    {
+        $interest_source = Interest_source::find($id);
+        return view('master_data.interest_source.edit_interest_source',compact('interest_source'));
+    }
+ 
+    public function update_interest_source(Request $request, $id){
+        $this->validate($request,[
+            'name'      =>'required',
+            'description'      =>'required',
+        ]);
+
+         $interest_source = Interest_source::find($id);
+         $interest_source->name   = $request->name;
+         $interest_source->description   = $request->description;
+         $interest_source->save();
+
+         return redirect()->route('all-interest-source')->with('success', 'Interest source updated successfully');
+    }
+ 
+    public function delete_interest_source($id)
+    {
+     $interest_source = Interest_source::find($id);
+     $interest_source->delete();
+     return redirect()->back()->with('danger','Interest source deleted successfully');
     }
 }

@@ -34,44 +34,44 @@
             </a>
           </li>
 
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item">
+            <a href="{{route('all-employee')}}" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Employee Setup
-                <i class="right fas fa-angle-left"></i>
+                {{-- <i class="right fas fa-angle-left"></i> --}}
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            {{-- <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('all-employee')}}" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All Employees</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('add-employee')}}" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add New Employee</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('employee-batch-upload')}}" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Batch Upload</p>
                 </a>
               </li>
-            </ul>
+            </ul> --}}
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item ">
+          <a href="{{url('/all-user')}}" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                User Setup
-                <i class="right fas fa-angle-left"></i>
+                Employeer Setup
+                {{-- <i class="right fas fa-angle-left"></i> --}}
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            {{-- <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{url('/all-user')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -90,7 +90,7 @@
                   <p>Batch Upload</p>
                 </a>
               </li>
-            </ul>
+            </ul> --}}
           </li>
 
           <li class="nav-item has-treeview">
@@ -105,21 +105,23 @@
               <li class="nav-item">
                 <a href="{{route('all-provident-fund')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>All Provident</p>
+                  <p>PF Deposit</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{url('/add-provident-fund')}}" class="nav-link">
+                <a href="{{route('all-pf-withdraw')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Add Provident Fund</p>
+                  <p>PF Withdraw</p>
                 </a>
               </li>
+   
               <li class="nav-item">
-                <a href="{{url('/show-provident-fund-batch-upload')}}" class="nav-link">
+                <a href="{{route('all-pf-interest')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Batch Upload</p>
+                  <p>PF Interest</p>
                 </a>
-              </li>
+            </li>
+
             </ul>
           </li>
 
@@ -138,6 +140,19 @@
                     <i class="far fa-circle nav-icon"></i>
                     <p>Category</p>
                   </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{route('all-employee-status')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Employee Status</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('all-interest-source')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Interest Source</p>
+                </a>
               </li>
 
               <li class="nav-item ">

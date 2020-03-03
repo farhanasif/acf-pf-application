@@ -193,12 +193,16 @@
         scrollX:'50vh',
         scrollY:'50vh',
         scrollCollapse: true,
+        fixedColumns:   {
+            leftColumns: 1,
+            // rightColumns: 1
+        }
     });
     
     $( "#generate" ).click(function() {
         from_date = $('#from_date').val();
         to_date = $('#to_date').val();
-        //
+        console.log("data");
         $.ajax({
             type: 'GET',
             url: './get-fund-data',

@@ -177,7 +177,7 @@
   
   <label for="joining_date" class="col-form-label col-md-2 col-sm-3 label-align">Joining Date</label>
   <div class="col-md-4 col-sm-3 ">
-     <input type="date" class="form-control" name="joining_date" >
+     <input type="date" class="form-control" name="joining_date">
   </div>
   </div>
   
@@ -191,7 +191,8 @@
      <div class="form-group row">
        <div class="col-md-2"></div>
        <div class="col-md-3 col-sm-3">
-           <button  type="submit" class="btn btn-success ">Submit</button>
+           <button  type="submit" class="btn btn-success">Submit</button>
+       <a type="submit" class="btn btn-info ml-3" href="{{route('all-employee')}}">Back</a>
        </div>
     </div>
   

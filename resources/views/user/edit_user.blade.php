@@ -58,7 +58,7 @@
 			    <div class="col-md-3 col-sm-3 ">
 	            <select class="form-control select2bs4" name="staff_code">
                   @foreach ($alluserdata as $row)
-                  <option <?php echo ($row->staff_code) ? "selected" : ""; ?> value="{{$row->staff_code}}">{{$row->staff_code}}</option>
+                   <option <?php echo ($row->staff_code) ? "selected" : ""; ?> value="{{$row->staff_code}}">{{$row->staff_code}}</option>
                   @endforeach
 	            </select>
 			    </div>

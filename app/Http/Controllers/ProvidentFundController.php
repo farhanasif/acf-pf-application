@@ -8,6 +8,8 @@ use App\Imports\ProvidentsImport;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use App\User;
+use App\Pf_withdraw;
+use App\Interest;
 use Auth;
 use DB;
 
@@ -22,11 +24,13 @@ class ProvidentFundController extends Controller
 
     public function save_provident_fund(Request $request)
     {
-      //  $this->validate($request,[
-      //         'staff_code'      =>'required',
-      //         'own_pf'          =>'required',
-      //         'organization_pf' =>'required'
-      //  ]);
+       $this->validate($request,[
+
+              'deposit_date'      =>'required',
+              'staff_code'      =>'required',
+              'own_pf'          =>'required',
+              'organization_pf' =>'required'
+       ]);
 
     $data = array();
     $data['deposit_date'] = $request->deposit_date;
@@ -103,7 +107,11 @@ class ProvidentFundController extends Controller
       return view('report.pfreport');
      }
 
-     public function getProvidentFund(){
+     public function getProvidentFund()
+     {
+        // $from = $request->from_date; 
+        // echo $from;
+        // exit;
       $results = DB::select('select pf.*,  e.`basic_salary`, e.`gross_salary`, date_format(pf.`created_at`, "%Y%m") as PaymentMonth, e.`first_name`, e.`last_name`, e.`category`, e.`level`, e.`joining_date`, e.`ending_date`, e.`work_place`
       from `pf_deposit` as pf
       inner join `employees` as e
@@ -142,14 +150,163 @@ class ProvidentFundController extends Controller
             );
         }
     }
-    if (!empty($insert_data)) {
-        DB::table('pf_deposit')->insert($insert_data);
-    }
+        if (!empty($insert_data)) {
+            DB::table('pf_deposit')->insert($insert_data);
+        }
     return back()->with('success','Provident batch import successfully');
-  }
+    }
   
-}
+    }
+
+    // PF add all update delete
+    public function add_pf_withdraw()
+    {
+      $employees = DB::table('employees')->get();
+      return view('pf_withdraw.add_pf_withdraw',compact('employees'));
+    }
+
+    public function all_pf_withdraw()
+    {
+      $all_pf_withdraws = Pf_withdraw::get();
+      return view('pf_withdraw.all_pf_withdraw',compact('all_pf_withdraws'));
+    }
+
+    public function save_pf_withdraw(Request $request)
+    {
+      $this->validate($request,[
+        'staff_code'      =>'required',
+        'received_amount' =>'required',
+        'received_date' =>'required',
+        'received_by' =>'required',
+        'received_in' =>'required',
+        'authorization_signatory' =>'required',
+        'description' =>'required',
+      ]);
+
+          $pf_withdraws = new Pf_withdraw;
+          $pf_withdraws->staff_code = $request->staff_code;
+          $pf_withdraws->received_amount = $request->received_amount;
+          $pf_withdraws->received_date = $request->received_date;
+          $pf_withdraws->received_by = $request->received_by;
+          $pf_withdraws->received_in = $request->received_in;
+          $pf_withdraws->authorization_signatory = $request->authorization_signatory;
+          $pf_withdraws->description = $request->description;
+          $pf_withdraws->created_by = Auth::user()->id;
+          $pf_withdraws->updated_by =  Auth::user()->id;
+          $pf_withdraws->save();
+
+          return redirect()->back()->with('success','PF withdraw added successfully.');
+    }
+
+    public function edit_pf_withdraw($id)
+    {
+      $employees = DB::table('employees')->get();
+      $pf_withdraw = Pf_withdraw::find($id);
+      return view('pf_withdraw.edit_pf_withdraw',compact('pf_withdraw','employees'));
+    }
+
+    public function update_pf_withdraw(Request $request,$id)
+    {
+      $this->validate($request,[
+        'staff_code'      =>'required',
+        'received_amount' =>'required',
+        'received_date' =>'required',
+        'received_by' =>'required',
+        'received_in' =>'required',
+        'authorization_signatory' =>'required',
+        'description' =>'required',
+      ]);
+
+          $pf_withdraws = Pf_withdraw::find($id);
+          $pf_withdraws->staff_code = $request->staff_code;
+          $pf_withdraws->received_amount = $request->received_amount;
+          $pf_withdraws->received_date = $request->received_date;
+          $pf_withdraws->received_by = $request->received_by;
+          $pf_withdraws->received_in = $request->received_in;
+          $pf_withdraws->authorization_signatory = $request->authorization_signatory;
+          $pf_withdraws->description = $request->description;
+          $pf_withdraws->created_by = Auth::user()->id;
+          $pf_withdraws->updated_by =  Auth::user()->id;
+          $pf_withdraws->save();
+
+          return redirect()->route('all-pf-withdraw')->with('success','PF withdraw updated successfully.');
+    }
+
+    public function delete_pf_withdraw($id)
+    {
+     $pf_withdraw = Pf_withdraw::find($id);
+     $pf_withdraw->delete();
+     return redirect()->back()->with('danger','PF withdraw deleted successfully');
+    }
   
-    //  return back()->with('success','Provident batch import successfully');
-    // }
+
+    // PF interest add all update delete
+    public function add_pf_interest()
+    {
+      $employees = DB::table('employees')->get();
+      return view('pf_interest.add_pf_interest',compact('employees'));
+    }
+
+    public function all_pf_interest()
+    {
+      $all_pf_interests = Interest::get();
+      return view('pf_interest.all_pf_interest',compact('all_pf_interests'));
+    }
+
+    public function save_pf_interest(Request $request)
+    {
+          $this->validate($request,[
+            'interest_date'   =>'required',
+            'interest_source' =>'required',
+            'staff_code'      =>'required',
+            'own' =>'required',
+            'organization' =>'required',
+          ]);
+
+          $pf_interests = new Interest;
+          $pf_interests->interest_date = $request->interest_date;
+          $pf_interests->interest_source = $request->interest_source;
+          $pf_interests->staff_code = $request->staff_code;
+          $pf_interests->own = $request->own;
+          $pf_interests->organization = $request->organization;
+          $pf_interests->save();
+
+          return redirect()->back()->with('success','PF interest added successfully.');
+    }
+
+    public function edit_pf_interest($id)
+    {
+      $employees = DB::table('employees')->get();
+      $pf_interest = Interest::find($id);
+      return view('pf_interest.edit_pf_interest',compact('pf_interest','employees'));
+    }
+
+    public function update_pf_interest(Request $request,$id)
+    {
+          $this->validate($request,[
+            'interest_date'   =>'required',
+            'interest_source' =>'required',
+            'staff_code'      =>'required',
+            'own' =>'required',
+            'organization' =>'required',
+          ]);
+
+          $pf_interests = Interest::find($id);
+          $pf_interests->interest_date = $request->interest_date;
+          $pf_interests->interest_source = $request->interest_source;
+          $pf_interests->staff_code = $request->staff_code;
+          $pf_interests->own = $request->own;
+          $pf_interests->organization = $request->organization;
+          $pf_interests->save();
+          $pf_interests->save();
+
+          return redirect()->route('all-pf-interest')->with('success','PF interest updated successfully.');
+    }
+
+    public function delete_pf_interest($id)
+    {
+     $pf_interest = Interest::find($id);
+     $pf_interest->delete();
+     return redirect()->back()->with('danger','PF interest deleted successfully');
+    }
 }

@@ -55,19 +55,19 @@ class UserController extends Controller
     public function store_add_user(Request $request)
     {
       $request->validate([
-        //  'name' => 'required',
-        //  'staff_code' => 'required',
-        //  'email' => 'required',
-        //  'role' => 'required',
-        //  'rights_body' => 'required',
-        //  'mobile' => 'required',
-        //  'designation' => 'required',
-        //  'address' => 'required',
-        //  'department' => 'required',
-        //  'description' => 'required',
-        // //  'password' => 'required',
-        //  'verified' => 'required', 
-        //  'user_type' => 'required',
+         'name' => 'required',
+         'staff_code' => 'required',
+         'email' => 'required',
+         'role' => 'required',
+         'rights_body' => 'required',
+         'mobile' => 'required',
+         'designation' => 'required',
+         'address' => 'required',
+         'department' => 'required',
+         'description' => 'required',
+         'password' => 'required',
+         'verified' => 'required', 
+         'user_type' => 'required',
      ]);
 
       $users = new User;
