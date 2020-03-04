@@ -16,6 +16,12 @@ use DB;
 
 class ProvidentFundController extends Controller
 {
+
+    public function __construct()
+      {
+          $this->middleware('auth');
+      }
+
     public function add_provident_fund()
     {
       
@@ -121,7 +127,7 @@ class ProvidentFundController extends Controller
       return json_encode($results);
      }
 
-    public function save_provident_fund_batch_upload(Request $request)
+    public function save_pf_deposit_batch(Request $request)
     {
         $upload = $request->file('file');
         $filename = $_FILES['file']['name'];

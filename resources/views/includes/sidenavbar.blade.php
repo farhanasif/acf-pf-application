@@ -108,13 +108,7 @@
                   <p>PF Deposit</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="{{route('all-pf-withdraw')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>PF Withdraw</p>
-                </a>
-              </li>
-   
+
               <li class="nav-item">
                 <a href="{{route('all-pf-interest')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -313,6 +307,14 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                <a href="{{route('all-pf-withdraw')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>PF Withdraw</p>
+                </a>
+              </li>
+
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>

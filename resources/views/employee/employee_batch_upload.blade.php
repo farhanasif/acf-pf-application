@@ -43,12 +43,12 @@
         <div class="card-body">
              <form action="{{route('save-employee-batch-upload')}}" method="post" enctype="multipart/form-data">
               @csrf
-          <div class="form-group row">
-              <input type="file" name="file">
-           <div class="col-md-6 col-sm-6 ">
-              <button class="btn btn-success col-md-5 col-sm-5">Employee Batch Upload</button>
-           </div>
-         </div>
+              <div class="form-group row">
+                <input type="file" name="file">
+                <div class="col-md-6 col-sm-6 ">
+                    <button class="btn btn-success col-md-5 col-sm-5">Employee Batch Upload</button>
+                </div>
+              </div>
 
              </form>
         </div>

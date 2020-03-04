@@ -30,7 +30,7 @@
 
         <div class="col-md-6">
             <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 
-            <a href="{{url('download_excel/October_2017.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
+            <a href="{{url('download_excel/employee/employee.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
             <a href="{{route('add-employee')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Employee</a>
         </div>
       </div>
@@ -110,7 +110,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="" method="" enctype="multipart/form-data">
+        <form action="{{route('save-employee-batch-upload')}}" method="post" enctype="multipart/form-data">
+          @csrf
           <input type="file" name="file" class="form-control">
           <div class="modal-footer justify-content-between">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

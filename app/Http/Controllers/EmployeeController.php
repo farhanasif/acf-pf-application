@@ -19,6 +19,11 @@ use App\Department;
 
 class EmployeeController extends Controller
 {
+
+    public function __construct()
+      {
+          $this->middleware('auth');
+      }
     public function add_employee()
     {
         // $data = array();
@@ -67,8 +72,36 @@ class EmployeeController extends Controller
         // exit;
         foreach ($result as $key => $value) {
           foreach ($value as $row) {
-  
-                  $insert_data[] =array(
+            $result = DB::table('employees')->where('staff_code',$row[0])->first();
+
+              if(!empty($result))
+              {
+                $update_data[] =array(
+                  'staff_code' =>$row[0],
+                  'trimmed' =>$row[0],
+                  'first_name' =>$row[1],
+                  'last_name' =>$row[2],
+                  'position' =>$row[3],
+                  // 'department_code' =>NULL,
+                  'category' =>$row[4],
+                  'level' =>$row[5],
+                  'joining_date' =>date($row[7]),
+                  // 'ending_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[9]),
+                  'ending_date' =>date($row[9]),
+                  'base' =>$row[10],
+                  'work_place' =>$row[10],
+                  // 'sub_location' =>NULL,
+                  'basic_salary' =>$row[12],
+                  'gross_salary' =>$row[13],
+                  'pf_amount' =>$row[16],
+                  // 'pf_percentage' =>$NULL,
+                  'status' =>1,
+                  'created_by' =>Auth::user()->id,
+                  'updated_by' =>Auth::user()->id,
+                  );
+              }
+              else{
+                $insert_data[] =array(
                   'staff_code' =>$row[0],
                   'trimmed' =>$row[0],
                   'first_name' =>$row[1],
@@ -91,6 +124,7 @@ class EmployeeController extends Controller
                   'created_by' =>Auth::user()->id,
                   'updated_by' =>Auth::user()->id,
               );
+              }
           }
       }
 
@@ -103,11 +137,11 @@ class EmployeeController extends Controller
           DB::table('employees')->insert($insert_data);
           return back()->with('success','Employees batch import successfully');
       }
-      else{
-        return back()->with('error','Not Insert');
-      }
-
-        
+ 
+      if (!empty($update_data)) {
+        DB::table('employees')->update($update_data);
+        return back()->with('success','Employees batch updated successfully');
+       }
       }
   
     

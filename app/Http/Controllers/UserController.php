@@ -11,6 +11,12 @@ use Auth;
 use DB;
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function showLoginForm()
     {
      return view('auth.login');
@@ -113,7 +119,6 @@ class UserController extends Controller
         $result = Excel::toArray(new UsersImport, $upload);
  
      foreach ($result as $key => $value) {
-      
         foreach ($value as $row) {
                 $insert_data[] =array(
                 'name' =>$row[1],

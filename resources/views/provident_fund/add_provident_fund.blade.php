@@ -83,13 +83,14 @@
 
     <div class="form-group row">
     <label for="email" class="col-form-label col-md-3 col-sm-4 label-align"></label>
-    <div class="col-md-6 col-sm-6 text-center ">
-      <button  type="submit" class="btn btn-success ">Submit</button>
+    <div class="col-md-6 col-sm-6">
+       <button  type="submit" class="btn btn-success ">Submit</button>
+       <a href="{{route('all-provident-fund')}}" class="btn btn-info ml-3">Back</a>
     </div>
     </div>
 
 			</form>
-			            <!-- /.card -->
+			<!-- /.card -->
         </div>
       </div>
 @endsection

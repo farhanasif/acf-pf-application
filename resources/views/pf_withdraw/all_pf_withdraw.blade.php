@@ -30,7 +30,7 @@
 
         <div class="col-md-6">
           <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 
-          <a href="" class="btn btn-success">Download Sample Excel</a> 
+          <a href="{{url('download_excel/pf_withdraw/pf-withdraw.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
           <a href="{{route('add-pf-withdraw')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Withdraw</a>
         </div>
         <div class="col-md-6 offset-3 mt-2">
@@ -106,31 +106,31 @@
   <!-- /.card -->
 </section>
 
-<!-- START EMPLOYEE BATCH UPLOAD MODAL -->
-<div class="modal fade" id="modal-default">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">PF Withdraw Bacth Upload</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+  <!-- START WITHDRAW BATCH UPLOAD MODAL -->
+  <div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">PF Withdraw Bacth Upload</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="{{route('save-pf-batch-upload')}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <input type="file" name="file" class="form-control">
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Upload</button>
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="modal-body">
-        <form action="{{route('save-pf-batch-upload')}}" method="post" enctype="multipart/form-data">
-          @csrf
-          <input type="file" name="file" class="form-control">
-          <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Upload</button>
-          </div>
-        </form>
-      </div>
+      <!-- /.modal-content -->
     </div>
-    <!-- /.modal-content -->
+    <!-- /.modal-dialog -->
   </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- END EMPLOYEE BATCH UPLOAD MODAL -->
+  <!-- END WITHDRAW BATCH UPLOAD MODAL -->
 @endsection
 

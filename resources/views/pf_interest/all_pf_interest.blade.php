@@ -30,7 +30,7 @@
 
         <div class="col-md-6">
           <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 
-          <a href="" class="btn btn-success">Download Sample Excel</a> 
+          <a href="#" class="btn btn-success">Download Sample Excel</a> 
           <a href="{{route('add-pf-interest')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Interest</a>
         </div>
         <div class="col-md-6 offset-3 mt-2">

@@ -529,7 +529,7 @@ Route::get('/delete-employee/{id}', [
 ]);
 
 
-//provident fund insert update edit and  excel upload
+//PF Deposit insert update edit and  excel upload
 Route::get('/add-provident-fund', [
 	'uses'		=> 'ProvidentFundController@add_provident_fund',
 	'as'		=> 'add-provident-fund'
@@ -538,13 +538,13 @@ Route::post('/save-provident-fund', [
 	'uses'		=> 'ProvidentFundController@save_provident_fund',
 	'as'		=> 'save-provident-fund'
 ]);
-Route::get('/show-provident-fund-batch-upload', [
-	'uses'		=> 'ProvidentFundController@show_provident_fund_batch_upload',
-	'as'		=> 'show-provident-fund-batch-upload'
-]);
-Route::post('/save-provident-fund-batch-upload', [
-	'uses'		=> 'ProvidentFundController@save_provident_fund_batch_upload',
-	'as'		=> 'save-provident-fund-batch-upload'
+// Route::get('/show-provident-fund-batch-upload', [
+// 	'uses'		=> 'ProvidentFundController@show_provident_fund_batch_upload',
+// 	'as'		=> 'show-provident-fund-batch-upload'
+// ]);
+Route::post('/save-pf-deposit-batch', [
+	'uses'		=> 'ProvidentFundController@save_pf_deposit_batch',
+	'as'		=> 'save-pf-deposit-batch'
 ]);
 Route::get('/edit-provident-fund/{id}', [
 	'uses'		=> 'ProvidentFundController@edit_provident_fund',
