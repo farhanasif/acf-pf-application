@@ -29,8 +29,8 @@
         </div>
 
         <div class="col-md-6">
-            <a href="" class="btn btn-success">Batch Upload</a> 
-            <a href="" class="btn btn-success">Download Sample Excel</a> 
+            <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 
+            <a href="{{url('download_excel/October_2017.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
             <a href="{{route('add-employee')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Employee</a>
         </div>
       </div>
@@ -98,29 +98,32 @@
 
 </section>
 
-<!-- START ADD EMPLOYEE -->
-<div class="modal fade" id="modal-xl">
-  <div class="modal-dialog modal-xl">
+
+<!-- START EMPLOYEE BATCH UPLOAD MODAL -->
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Extra Large Modal</h4>
+        <h4 class="modal-title">Employee Bacth Upload</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>One fine body&hellip;</p>
-      </div>
-      <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <form action="" method="" enctype="multipart/form-data">
+          <input type="file" name="file" class="form-control">
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Upload</button>
+          </div>
+        </form>
       </div>
     </div>
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
 </div>
-<!-- END ADD EMPLOYEE -->
+<!-- END EMPLOYEE BATCH UPLOAD MODAL -->
 
 @endsection
 

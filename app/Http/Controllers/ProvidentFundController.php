@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Provident;
 use App\Imports\ProvidentsImport;
+use App\Imports\Pf_withdrawsImport;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use App\User;
@@ -149,12 +150,12 @@ class ProvidentFundController extends Controller
                 'total_pf' =>$row[4],
             );
         }
-    }
+     }
         if (!empty($insert_data)) {
             DB::table('pf_deposit')->insert($insert_data);
         }
-    return back()->with('success','Provident batch import successfully');
-    }
+          return back()->with('success','Provident batch import successfully');
+      }
   
     }
 
@@ -196,6 +197,81 @@ class ProvidentFundController extends Controller
           $pf_withdraws->save();
 
           return redirect()->back()->with('success','PF withdraw added successfully.');
+    }
+
+    public function save_pf_batch_upload(Request $request)
+    {
+      $upload = $request->file('file');
+      $filename = $_FILES['file']['name'];
+      $ext = pathinfo($filename, PATHINFO_EXTENSION);
+      $accept_files = ["csv", "txt", "xlsx"];
+      if(!in_array($ext, $accept_files)) {
+          return redirect()->back()
+          ->with('error', 'Invalid file extension. permitted file is .csv, .txt & .xlsx');
+      }
+      // get the file
+      $upload = $request->file('file');
+      $filePath = $upload->getRealPath();
+
+      if($ext == "xlsx" || $ext == "csv") {
+      // $result = Excel::import(new ProvidentsImport, $upload);
+      $result = Excel::toArray(new Pf_withdrawsImport, $upload);
+      
+    foreach ($result as $key => $value) {
+      foreach ($value as $row) {
+          
+            $result = DB::table('pf_withdraws')->where('staff_code',$row[0])->first();
+              if(!empty($result))
+              {
+
+                $update_data[] =array(
+                  'staff_code' =>$row[0],
+                  'received_amount' =>$row[3],
+                  'received_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]),
+                  'received_by' =>Auth::user()->id,
+                  'received_in' =>$row[2],
+                  'authorization_signatory' =>Auth::user()->id,
+                  'description' =>Auth::user()->id,
+                  );
+              }
+              else{
+                $insert_data[] =array(
+                  'staff_code' =>$row[0],
+                  'received_amount' =>$row[3],
+                  'received_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]),
+                  'received_by' =>Auth::user()->id,
+                  'received_in' =>$row[2],
+                  'authorization_signatory' =>Auth::user()->id,
+                  'description' =>Auth::user()->id,
+                  );
+              }
+           
+          // $insert_data[] = [];
+          // $insert_data[] ['staff_code'] = $row[0];
+          // $insert_data ['received_amount'] = $row[3];
+          // $insert_data ['received_date'] = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]);
+          // $insert_data ['received_by'] = Auth::user()->id;
+          // $insert_data ['received_in'] = $row[2];
+          // $insert_data ['authorization_signatory'] = Auth::user()->id;
+          // $insert_data ['description'] = Auth::user()->id;
+      }
+   }
+
+   print_r($insert_data);
+   exit;
+
+      if (!empty($insert_data)) {
+          DB::table('pf_withdraws')->insert($insert_data);
+          return back()->with('success','PF Withdraws batch import successfully');
+      }
+
+      if (!empty($update_data)) {
+        DB::table('pf_withdraws')->update($update_data);
+        return back()->with('success','PF Withdraws batch updated successfully');
+      }
+        
+    }
+
     }
 
     public function edit_pf_withdraw($id)
@@ -298,7 +374,7 @@ class ProvidentFundController extends Controller
           $pf_interests->own = $request->own;
           $pf_interests->organization = $request->organization;
           $pf_interests->save();
-          $pf_interests->save();
+         
 
           return redirect()->route('all-pf-interest')->with('success','PF interest updated successfully.');
     }

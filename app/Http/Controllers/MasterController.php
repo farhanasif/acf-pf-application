@@ -16,6 +16,7 @@ use App\Level;
 use App\Sub_location;
 use App\Work_place;
 use App\Interest_source;
+use App\User_role;
 use Auth;
 use DB;
 
@@ -777,5 +778,62 @@ class MasterController extends Controller
      $interest_source = Interest_source::find($id);
      $interest_source->delete();
      return redirect()->back()->with('danger','Interest source deleted successfully');
+    }
+
+    
+    // interest source add update delete 
+    public function add_user_role()
+    {
+        return view('master_data.user_role.add_user_role');
+    }
+    public function save_user_role(Request $request)
+    {
+         $this->validate($request,[
+            'role_name'         =>'required',
+            'role_description'  =>'required',
+            'value'             =>'required',
+        ]);
+
+         $user_roles         = new User_role;
+         $user_roles->role_name   = $request->role_name;
+         $user_roles->role_description   = $request->role_description;
+         $user_roles->value   = $request->value;
+         $user_roles->save();
+ 
+         return redirect()->back()->with('success', 'User role added successfully');
+    }
+ 
+    public function all_user_role()
+    {
+         $user_roles = User_role::all();
+         return view('master_data.user_role.all_user_role',compact('user_roles'));
+    }
+ 
+    public function edit_user_role($id)
+    {
+        $user_role = User_role::find($id);
+        return view('master_data.user_role.edit_user_role',compact('user_role'));
+    }
+ 
+    public function update_user_role(Request $request, $id){
+        $this->validate($request,[
+            'role_name'         =>'required',
+            'role_description'  =>'required',
+            'value'             =>'required',
+        ]);
+
+         $user_roles = User_role::find($id);
+         $user_roles->role_name   = $request->role_name;
+         $user_roles->role_description   = $request->role_description;
+         $user_roles->value   = $request->value;
+         $user_roles->save();
+         return redirect()->route('all-user-role')->with('success', 'User role updated successfully');
+    }
+ 
+    public function delete_user_role($id)
+    {
+     $user_role = User_role::find($id);
+     $user_role->delete();
+     return redirect()->back()->with('danger','User role deleted successfully');
     }
 }

@@ -143,6 +143,13 @@
               </li>
 
               <li class="nav-item">
+                <a href="{{route('all-user-role')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>User Role</p>
+                </a>
+               </li>
+
+              <li class="nav-item">
                 <a href="{{route('all-employee-status')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Employee Status</p>

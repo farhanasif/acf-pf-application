@@ -316,6 +316,33 @@ Route::get('/delete-duration/{id}', [
 	'as'		=> 'delete-duration'
 ]);
 
+//master user role add edit update delete......
+Route::get('/add-user-role', [
+	'uses'		=> 'MasterController@add_user_role',
+	'as'		=> 'add-user-role'
+]);
+Route::post('/save-user-role', [
+	'uses'		=> 'MasterController@save_user_role',
+	'as'		=> 'save-user-role'
+]);
+Route::get('/all-user-role', [
+	'uses'		=> 'MasterController@all_user_role',
+	'as'		=> 'all-user-role'
+]);
+Route::get('/edit-user-role/{id}', [
+	'uses'		=> 'MasterController@edit_user_role',
+	'as'		=> 'edit-user-role'
+]);
+Route::post('/update-user-role/{id}', [
+	'uses'		=> 'MasterController@update_user_role',
+	'as'		=> 'update-user-role'
+]);
+Route::get('/delete-user-role/{id}', [
+	'uses'		=> 'MasterController@delete_user_role',
+	'as'		=> 'delete-user-role'
+]);
+
+
 //master data alert add edit update delete......
 Route::get('/add-alert', [
 	'uses'		=> 'MasterController@add_alert',
@@ -562,7 +589,7 @@ Route::get('/all-pf-withdraw', [
 	'uses'		=> 'ProvidentFundController@all_pf_withdraw',
 	'as'		=> 'all-pf-withdraw'
 ]);
-Route::get('/delete-pf-withdraw', [
+Route::get('/delete-pf-withdraw/{id}', [
 	'uses'		=> 'ProvidentFundController@delete_pf_withdraw',
 	'as'		=> 'delete-pf-withdraw'
 ]);

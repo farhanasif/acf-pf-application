@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Provident;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
+use Auth;
 
 class ProvidentsImport implements ToModel, WithStartRow
 {
