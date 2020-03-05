@@ -625,7 +625,7 @@ Route::post('/update-pf-interest/{id}', [
 	'as'		=> 'update-pf-interest'
 ]);
 
-Route::get('/delete-pf-interest', [
+Route::get('/delete-pf-interest/{id}', [
 	'uses'		=> 'PFInterestController@delete_pf_interest',
 	'as'		=> 'delete-pf-interest'
 ]);
