@@ -263,8 +263,8 @@ class ProvidentFundController extends Controller
       }
    }
 
-   print_r($insert_data);
-   exit;
+  //  print_r($insert_data);
+  //  exit;
 
       if (!empty($insert_data)) {
           DB::table('pf_withdraws')->insert($insert_data);

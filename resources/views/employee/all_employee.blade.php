@@ -98,7 +98,7 @@
           {
           ?>
           <td class="bg-danger text-bold">
-            <a href="{{route('edit-employee',$employee->id)}}">{{$employee->staff_code}}</a>
+            <a href="{{route('edit-employee',$employee->id)}}">{{ifnull($employee->staff_code)}}</a>
           </td>
       <?php 
           }
