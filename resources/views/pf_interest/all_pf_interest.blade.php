@@ -30,7 +30,7 @@
 
         <div class="col-md-6">
           <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 
-          <a href="#" class="btn btn-success">Download Sample Excel</a> 
+          <a href="{{url('download_excel/pf_interest/Interest.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
           <a href="{{route('add-pf-interest')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Interest</a>
         </div>
         <div class="col-md-6 offset-3 mt-2">
@@ -40,6 +40,13 @@
                 <strong>{{ $message }}</strong>
                 </div>
             @endif
+
+            @if ($message = Session::get('error'))
+            <div class="alert alert-danger alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ $message }}</strong>
+            </div>
+           @endif
 
             @if ($errors->any())
                 <div class="alert alert-warning">
@@ -109,7 +116,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="" method="" enctype="multipart/form-data">
+      <form action="{{route('save-pf-batch-upload')}}" method="post" enctype="multipart/form-data">
+        @csrf
           <input type="file" name="file" class="form-control">
           <div class="modal-footer justify-content-between">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

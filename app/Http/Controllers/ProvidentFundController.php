@@ -226,21 +226,21 @@ class ProvidentFundController extends Controller
     foreach ($result as $key => $value) {
       foreach ($value as $row) {
           
-            $result = DB::table('pf_withdraws')->where('staff_code',$row[0])->first();
-              if(!empty($result))
-              {
+            // $result = DB::table('pf_withdraws')->where('staff_code',$row[0])->first();
+            //   if(!empty($result))
+            //   {
 
-                $update_data[] =array(
-                  'staff_code' =>$row[0],
-                  'received_amount' =>$row[3],
-                  'received_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]),
-                  'received_by' =>Auth::user()->id,
-                  'received_in' =>$row[2],
-                  'authorization_signatory' =>Auth::user()->id,
-                  'description' =>Auth::user()->id,
-                  );
-              }
-              else{
+              //   $update_data[] =array(
+              //     'staff_code' =>$row[0],
+              //     'received_amount' =>$row[3],
+              //     'received_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]),
+              //     'received_by' =>Auth::user()->id,
+              //     'received_in' =>$row[2],
+              //     'authorization_signatory' =>Auth::user()->id,
+              //     'description' =>Auth::user()->id,
+              //     );
+              // }
+              // else{
                 $insert_data[] =array(
                   'staff_code' =>$row[0],
                   'received_amount' =>$row[3],
@@ -250,7 +250,7 @@ class ProvidentFundController extends Controller
                   'authorization_signatory' =>Auth::user()->id,
                   'description' =>Auth::user()->id,
                   );
-              }
+              // }
            
           // $insert_data[] = [];
           // $insert_data[] ['staff_code'] = $row[0];
@@ -271,10 +271,10 @@ class ProvidentFundController extends Controller
           return back()->with('success','PF Withdraws batch import successfully');
       }
 
-      if (!empty($update_data)) {
-        DB::table('pf_withdraws')->update($update_data);
-        return back()->with('success','PF Withdraws batch updated successfully');
-      }
+      // if (!empty($update_data)) {
+      //   DB::table('pf_withdraws')->update($update_data);
+      //   return back()->with('success','PF Withdraws batch updated successfully');
+      // }
         
     }
 

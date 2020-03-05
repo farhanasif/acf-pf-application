@@ -597,36 +597,36 @@ Route::get('/delete-pf-withdraw/{id}', [
 
 //provident fund  interest insert update edit and  excel upload
 Route::get('/add-pf-interest', [
-	'uses'		=> 'ProvidentFundController@add_pf_interest',
+	'uses'		=> 'PFInterestController@add_pf_interest',
 	'as'		=> 'add-pf-interest'
 ]);
 Route::post('/save-pf-interest', [
-	'uses'		=> 'ProvidentFundController@save_pf_interest',
+	'uses'		=> 'PFInterestController@save_pf_interest',
 	'as'		=> 'save-pf-interest'
 ]);
 Route::get('/all-pf-interest', [
-	'uses'		=> 'ProvidentFundController@all_pf_interest',
+	'uses'		=> 'PFInterestController@all_pf_interest',
 	'as'		=> 'all-pf-interest'
 ]);
 Route::get('/show-pf-batch-upload', [
-	'uses'		=> 'ProvidentFundController@show_pf_batch_upload',
+	'uses'		=> 'PFInterestController@show_pf_batch_upload',
 	'as'		=> 'show-provident-fund-batch-upload'
 ]);
 Route::post('/save-pf-batch-upload', [
-	'uses'		=> 'ProvidentFundController@save_pf_batch_upload',
+	'uses'		=> 'PFInterestController@save_pf_batch_upload',
 	'as'		=> 'save-pf-batch-upload'
 ]);
 Route::get('/edit-pf-interest/{id}', [
-	'uses'		=> 'ProvidentFundController@edit_pf_interest',
+	'uses'		=> 'PFInterestController@edit_pf_interest',
 	'as'		=> 'edit-pf-interest'
 ]);
 Route::post('/update-pf-interest/{id}', [
-	'uses'		=> 'ProvidentFundController@update_pf_interest',
+	'uses'		=> 'PFInterestController@update_pf_interest',
 	'as'		=> 'update-pf-interest'
 ]);
 
 Route::get('/delete-pf-interest', [
-	'uses'		=> 'ProvidentFundController@delete_pf_interest',
+	'uses'		=> 'PFInterestController@delete_pf_interest',
 	'as'		=> 'delete-pf-interest'
 ]);
 
