@@ -1,6 +1,5 @@
 @extends('master')
 @section('content')
- <!-- DataTables -->
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -84,18 +83,18 @@
         <?php $i = 1;?>
         @foreach ($all_pf_withdraws as $all_pf_withdraw)
         <tr>
-        <td>{{$i++}}</td>
-        <td>{{$all_pf_withdraw->staff_code}}</td>
+          <td>{{$i++}}</td>
+          <td>{{$all_pf_withdraw->staff_code}}</td>
           <td>{{$all_pf_withdraw->received_amount}}</td>
           <td>{{$all_pf_withdraw->received_date}}</td>
           <td>{{$all_pf_withdraw->received_by}}</td>
           <td>{{$all_pf_withdraw->received_in}}</td>
           <td>{{$all_pf_withdraw->authorization_signatory}}</td>
           <td>{{$all_pf_withdraw->description}}</td>
-          <td >
+          <td>
             <a href="{{route('edit-pf-withdraw',$all_pf_withdraw->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
             <a href="{{route('delete-pf-withdraw',$all_pf_withdraw->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-           </td>
+          </td>
         </tr>
         @endforeach
         </tfoot>
@@ -131,6 +130,6 @@
     </div>
     <!-- /.modal-dialog -->
   </div>
-  <!-- END WITHDRAW BATCH UPLOAD MODAL -->
+  <!--  /.END WITHDRAW BATCH UPLOAD MODAL -->
 @endsection
 

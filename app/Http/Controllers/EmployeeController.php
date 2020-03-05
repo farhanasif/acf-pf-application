@@ -74,8 +74,8 @@ class EmployeeController extends Controller
         // exit;
         foreach ($result as $key => $value) {
           foreach ($value as $row) {
+            
             $result = DB::table('employees')->where('staff_code',$row[0])->first();
-
               if(!empty($result))
               {
                 $update_data[] =array(
