@@ -561,36 +561,31 @@ Route::get('/all-provident-fund', [
 
 //provident fund  withdraw insert update edit and  excel upload
 Route::get('/add-pf-withdraw', [
-	'uses'		=> 'ProvidentFundController@add_pf_withdraw',
+	'uses'		=> 'PFWithdrawController@add_pf_withdraw',
 	'as'		=> 'add-pf-withdraw'
 ]);
 Route::post('/save-pf-withdraw', [
-	'uses'		=> 'ProvidentFundController@save_pf_withdraw',
+	'uses'		=> 'PFWithdrawController@save_pf_withdraw',
 	'as'		=> 'save-pf-withdraw'
 ]);
-
-Route::get('/show-pf-batch-upload', [
-	'uses'		=> 'ProvidentFundController@show_pf_batch_upload',
-	'as'		=> 'show-provident-fund-batch-upload'
-]);
-Route::post('/save-pf-batch-upload', [
-	'uses'		=> 'ProvidentFundController@save_pf_batch_upload',
-	'as'		=> 'save-pf-batch-upload'
+Route::post('/save-pf-withdraw-batch-upload', [
+	'uses'		=> 'PFWithdrawController@save_pf_withdraw_batch_upload',
+	'as'		=> 'save-pf-withdraw-batch-upload'
 ]);
 Route::get('/edit-pf-withdraw/{id}', [
-	'uses'		=> 'ProvidentFundController@edit_pf_withdraw',
+	'uses'		=> 'PFWithdrawController@edit_pf_withdraw',
 	'as'		=> 'edit-pf-withdraw'
 ]);
 Route::post('/update-pf-withdraw/{id}', [
-	'uses'		=> 'ProvidentFundController@update_pf_withdraw',
+	'uses'		=> 'PFWithdrawController@update_pf_withdraw',
 	'as'		=> 'update-pf-withdraw'
 ]);
 Route::get('/all-pf-withdraw', [
-	'uses'		=> 'ProvidentFundController@all_pf_withdraw',
+	'uses'		=> 'PFWithdrawController@all_pf_withdraw',
 	'as'		=> 'all-pf-withdraw'
 ]);
 Route::get('/delete-pf-withdraw/{id}', [
-	'uses'		=> 'ProvidentFundController@delete_pf_withdraw',
+	'uses'		=> 'PFWithdrawController@delete_pf_withdraw',
 	'as'		=> 'delete-pf-withdraw'
 ]);
 
@@ -608,13 +603,9 @@ Route::get('/all-pf-interest', [
 	'uses'		=> 'PFInterestController@all_pf_interest',
 	'as'		=> 'all-pf-interest'
 ]);
-Route::get('/show-pf-batch-upload', [
-	'uses'		=> 'PFInterestController@show_pf_batch_upload',
-	'as'		=> 'show-provident-fund-batch-upload'
-]);
-Route::post('/save-pf-batch-upload', [
-	'uses'		=> 'PFInterestController@save_pf_batch_upload',
-	'as'		=> 'save-pf-batch-upload'
+Route::post('/save-pf-interest-batch-upload', [
+	'uses'		=> 'PFInterestController@save_pf_interest_batch_upload',
+	'as'		=> 'save-pf-interest-batch-upload'
 ]);
 Route::get('/edit-pf-interest/{id}', [
 	'uses'		=> 'PFInterestController@edit_pf_interest',

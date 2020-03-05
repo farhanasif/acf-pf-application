@@ -11,9 +11,9 @@
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active"><a href="#">PF Interest</a></li>
-          <li class="breadcrumb-item active"><a href="#">All PF Interest Information</a></li>
+          <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+          <li class="breadcrumb-item active"><a href="javascript:void(0)">PF Interest</a></li>
+          <li class="breadcrumb-item active"><a href="javascript:void(0)">All PF Interest Information</a></li>
         </ol>
       </div>
     </div>
@@ -116,7 +116,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <form action="{{route('save-pf-batch-upload')}}" method="post" enctype="multipart/form-data">
+      <form action="{{route('save-pf-interest-batch-upload')}}" method="post" enctype="multipart/form-data">
         @csrf
           <input type="file" name="file" class="form-control">
           <div class="modal-footer justify-content-between">

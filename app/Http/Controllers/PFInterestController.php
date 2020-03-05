@@ -44,7 +44,7 @@ class PFInterestController extends Controller
            return redirect()->back()->with('success','PF interest added successfully.');
      }
 
-     public function save_pf_batch_upload(Request $request)
+     public function save_pf_interest_batch_upload(Request $request)
     {
       $upload = $request->file('file');
       $filename = $_FILES['file']['name'];
@@ -59,7 +59,7 @@ class PFInterestController extends Controller
       $filePath = $upload->getRealPath();
 
       if($ext == "xlsx" || $ext == "csv") {
-      // $result = Excel::import(new ProvidentsImport, $upload);
+      // $result = Excel::import(new Pf_interestsImport, $upload);
       $result = Excel::toArray(new Pf_interestsImport, $upload);
       
     foreach ($result as $key => $value) {
@@ -80,18 +80,10 @@ class PFInterestController extends Controller
       }
    }
 
-  //  print_r($insert_data);
-  //  exit;
-
       if (!empty($insert_data)) {
           DB::table('interests')->insert($insert_data);
           return back()->with('success','PF Interest batch import successfully');
       }
-
-      // if (!empty($update_data)) {
-      //   DB::table('pf_withdraws')->update($update_data);
-      //   return back()->with('success','PF Withdraws batch updated successfully');
-      // }
      }
     }
  

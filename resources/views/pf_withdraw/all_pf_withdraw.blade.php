@@ -117,7 +117,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="{{route('save-pf-batch-upload')}}" method="post" enctype="multipart/form-data">
+          <form action="{{route('save-pf-withdraw-batch-upload')}}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="file" name="file" class="form-control">
             <div class="modal-footer justify-content-between">

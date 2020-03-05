@@ -94,7 +94,7 @@
           </li>
 
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="javascript:void(0)" class="nav-link">
               <i class="nav-icon fa fa-book"></i>
               <p>
                 Provident Fund
@@ -119,8 +119,8 @@
             </ul>
           </li>
 
-        <li class="nav-item has-treeview {{ request()->is('/*') ? 'active menu-open' :''}}">
-             <a href="#" class="nav-link">
+        <li class="nav-item has-treeview ">
+             <a href="javascript:void(0)" class="nav-link">
               <i class="nav-icon fas fa-tree"></i>
               <p>
                 Master Data
@@ -129,7 +129,7 @@
             </a>
             <ul class="nav nav-treeview">
 
-              <li class="nav-item {{ request()->is('/all-office') ? 'active menu-open' :''}}">
+              <li class="nav-item ">
                   <a href="{{route('all-category')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Category</p>
@@ -256,19 +256,19 @@
               </li>
 
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="javascript:void(0)" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Balance Sheet</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="javascript:void(0)" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Loan Statement</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#  " class="nav-link">
+                <a href="javascript:void(0)" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>General Provident Fund</p>
                 </a>
@@ -277,7 +277,7 @@
           </li>
 
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="javascript:void(0)" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
               <p>
                 Loan Management
@@ -286,19 +286,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="javascript:void(0)" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All Loans</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="javascript:void(0)" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Loan</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="javascript:void(0)" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Adust Loan</p>
                 </a>
@@ -306,7 +306,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="javascript:void(0)" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Reconciliation
@@ -323,7 +323,7 @@
               </li>
 
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="javascript:void(0)" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Loan Disburse</p>
                 </a>
@@ -333,7 +333,7 @@
 
           <li class="nav-header">MISCELLANEOUS</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="javascript:void(0)" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Documentation</p>
             </a>
