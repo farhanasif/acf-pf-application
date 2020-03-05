@@ -8,10 +8,10 @@ use DB;
 class ReportController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     
     public function show_provident_fund_report()
     {     

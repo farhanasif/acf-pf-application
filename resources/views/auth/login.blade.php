@@ -67,7 +67,7 @@ body{
             <div class="row justify-content-md-center">
               <div class="col-md-4 col-md-auto login-box">
                 {{-- <h1 class="text-center wdi-red">Login</h1> --}}
-              <img class="text-center" style="width:100px; margin-left:80px;;" src="{{asset('images/logo/acf.png')}}" alt="">
+               <img class="text-center" style="width:100px; margin-left:80px;;" src="{{asset('images/logo/acf.png')}}" alt="">
                 <hr>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf

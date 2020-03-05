@@ -19,7 +19,6 @@
   </div><!-- /.container-fluid -->
 </section>
 
-
 <section class="content">
 
   <div class="card card-success card-outline">

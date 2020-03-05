@@ -20,10 +20,10 @@ use App\Department;
 class EmployeeController extends Controller
 {
 
-    public function __construct()
-      {
-          $this->middleware('auth');
-      }
+    // public function __construct()
+    //   {
+    //       $this->middleware('auth');
+    //   }
     public function add_employee()
     {
         // $data = array();
