@@ -24,5 +24,7 @@ Route::post('import', 'TestController@import');
 
 Route::get('provident-fund-report', 'TestController@providentFund');
 Route::get('get-fund-data', 'TestController@getProvidentFund');
+Route::get('ledger', 'TestController@view_ledger_report');
+Route::get('ledger-report','Testcontroller@ledger_report');
 
 
