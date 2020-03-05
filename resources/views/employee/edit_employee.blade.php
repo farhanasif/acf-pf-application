@@ -150,43 +150,50 @@
     </div>
   
   
-   <div class="form-group row">
-    <label for="basic_salary" class="col-form-label col-md-2 col-sm-3 label-align">Basic Salary</label>
+    <div class="form-group row">
+        <label for="basic_salary" class="col-form-label col-md-2 col-sm-3 label-align">Basic Salary</label>
+        <div class="col-md-3 col-sm-3 ">
+          <input type="number" class="form-control" name="basic_salary" placeholder="Basic Salary"  value="{{$employee->basic_salary}}">
+        </div>
+      <div class="col-md-2 "></div>
+        <label for="gross_salary" class="col-form-label col-md-2 col-sm-3 label-align">Gross Salary</label>
+        <div class="col-md-3 col-sm-3 ">
+            <input type="number" class="form-control" name="gross_salary" placeholder="Gross Salary" value="{{$employee->gross_salary}}">
+        </div>
+    </div>
+  
+    <div class="form-group row">
+      <label for="provident_fund" class="col-form-label col-md-2 col-sm-3 label-align">Provident Amount</label>
+        <div class="col-md-3 col-sm-3 ">
+          <input type="number" class="form-control" name="pf_amount" placeholder="Provident Fund" value="{{$employee->pf_amount}}">
+        </div>
+      <div class="col-md-2 "></div>
+      <label for="joining_date" class="col-form-label col-md-2 col-sm-3 label-align">Joining Date</label>
+        <div class="col-md-3 col-sm-3 ">
+          <input type="date" class="form-control" name="joining_date" value="{{$employee->joining_date}}">
+        </div>
+    </div>
+  
+  <div class="form-group row">
+    <label for="ending_date" class="col-form-label col-md-2 col-sm-3 label-align">Ending Date</label>
     <div class="col-md-3 col-sm-3 ">
-       <input type="number" class="form-control" name="basic_salary" placeholder="Basic Salary"  value="{{$employee->basic_salary}}">
+      <input type="date" class="form-control" name="ending_date" value="{{$employee->ending_date}}">
     </div>
     <div class="col-md-2 "></div>
-    <label for="gross_salary" class="col-form-label col-md-2 col-sm-3 label-align">Gross Salary</label>
-   <div class="col-md-3 col-sm-3 ">
-      <input type="number" class="form-control" name="gross_salary" placeholder="Gross Salary" value="{{$employee->gross_salary}}">
-   </div>
-  </div>
-  
-  <div class="form-group row">
-  <label for="provident_fund" class="col-form-label col-md-2 col-sm-3 label-align">Provident Amount</label>
-  <div class="col-md-3 col-sm-3 ">
-  <input type="number" class="form-control" name="pf_amount" placeholder="Provident Fund" value="{{$employee->pf_amount}}">
-  </div>
-  <div class="col-md-2 "></div>
-  
-  <label for="joining_date" class="col-form-label col-md-2 col-sm-3 label-align">Joining Date</label>
-  <div class="col-md-3 col-sm-3 ">
-     <input type="date" class="form-control" name="joining_date" value="{{$employee->joining_date}}">
-  </div>
-  </div>
-  
-  <div class="form-group row">
-  <label for="ending_date" class="col-form-label col-md-2 col-sm-3 label-align">Ending Date</label>
-  <div class="col-md-3 col-sm-3 ">
-     <input type="date" class="form-control" name="ending_date" value="{{$employee->ending_date}}">
-  </div>
+    <label for="ending_date" class="col-form-label col-md-2 col-sm-3 label-align">Status</label>
+    <div class="col-md-3 col-sm-3 ">
+      <select name="status" id="" class="form-control">
+        <option <?php echo ($employee->status == 1) ? "selected" : ""; ?> value="1">Active</option>
+        <option <?php echo ($employee->status == 0) ? "selected" : ""; ?> value="0">Deactive</option>
+      </select>
+    </div>
   </div>
   
     <div class="form-group row">
       <div class="col-md-2"></div>
       <div class="col-md-3 col-sm-3">
           <button  type="submit" class="btn btn-success ">Update</button>
-          <a type="submit" class="btn btn-danger float-right" href="javascript:void(0)">Deactive</a>
+          {{-- <a type="submit" class="btn btn-danger float-right" href="javascript:void(0)">Deactive</a> --}}
       </div>
    </div>
   

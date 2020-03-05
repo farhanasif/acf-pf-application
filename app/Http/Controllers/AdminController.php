@@ -21,4 +21,5 @@ class AdminController extends Controller
 
     	return view('user_home');
     }
+
 }

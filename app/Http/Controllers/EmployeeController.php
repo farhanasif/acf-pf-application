@@ -16,6 +16,7 @@ use App\Base;
 use App\Sub_location;
 use App\Work_place;
 use App\Department;
+use App\Employee;
 
 class EmployeeController extends Controller
 {
@@ -42,7 +43,8 @@ class EmployeeController extends Controller
 
     public function all_employee()
     {
-      $employees = DB::table('employees')->get();
+      // $employees = DB::table('employees')->get();
+      $employees = Employee::all();
       return view('employee.all_employee',compact('employees'));
     }
 
@@ -77,8 +79,8 @@ class EmployeeController extends Controller
               if(!empty($result))
               {
                 $update_data[] =array(
-                  'staff_code' =>$row[0],
-                  'trimmed' =>$row[0],
+                  // 'staff_code' =>$row[0],
+                  // 'trimmed' =>$row[0],
                   'first_name' =>$row[1],
                   'last_name' =>$row[2],
                   'position' =>$row[3],
@@ -102,8 +104,8 @@ class EmployeeController extends Controller
               }
               else{
                 $insert_data[] =array(
-                  'staff_code' =>$row[0],
-                  'trimmed' =>$row[0],
+                  // 'staff_code' =>$row[0],
+                  // 'trimmed' =>$row[0],
                   'first_name' =>$row[1],
                   'last_name' =>$row[2],
                   'position' =>$row[3],
@@ -226,6 +228,7 @@ class EmployeeController extends Controller
       $data['pf_amount'] = $request->pf_amount;
       $data['joining_date'] = $request->joining_date;
       $data['ending_date'] = $request->ending_date;
+      $data['status'] = $request->status;
       $data['created_by'] = Auth::user()->id;
       $data['updated_by'] =  Auth::user()->id;
 

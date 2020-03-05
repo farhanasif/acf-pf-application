@@ -652,4 +652,6 @@ Route::get('/clear-cache', function() {
 Route::get('provident-fund-report', 'ProvidentFundController@providentFund');
 Route::get('get-fund-data', 'ProvidentFundController@getProvidentFund');
 
+Route::get('ledger', 'LedgerReportController@view_ledger_report');
+Route::get('ledger-report','LedgerReportController@ledger_report');
 

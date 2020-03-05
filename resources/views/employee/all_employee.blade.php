@@ -33,7 +33,35 @@
             <a href="{{url('download_excel/employee/employee.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
             <a href="{{route('add-employee')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Employee</a>
         </div>
+        <div class="col-md-6 offset-3 mt-2">
+          @if ($message = Session::get('success'))
+              <div class="alert alert-success alert-block">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <strong>{{ $message }}</strong>
+              </div>
+          @endif
+
+          @if ($message = Session::get('danger'))
+            <div class="alert alert-danger alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ $message }}</strong>
+            </div>
+          @endif
+
+          @if ($errors->any())
+              <div class="alert alert-warning">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+                  <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
       </div>
+      </div>
+
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -64,9 +92,24 @@
       @foreach($employees as $employee)
         <tr>
           <td>{{ $i++ }}</td>
-          <td>
+
+          <?php 
+          if($employee->status == 0)
+          {
+          ?>
+          <td class="bg-danger text-bold">
             <a href="{{route('edit-employee',$employee->id)}}">{{$employee->staff_code}}</a>
           </td>
+      <?php 
+          }
+          else {
+              ?>
+            <td class="bg-success text-bold">
+              <a href="{{route('edit-employee',$employee->id)}}">{{$employee->staff_code}}</a>
+            </td>
+            <?php 
+          }
+       ?>
           <td>
             <a href="{{route('edit-employee',$employee->id)}}">
             {{$employee->first_name}} {{$employee->last_name}}
