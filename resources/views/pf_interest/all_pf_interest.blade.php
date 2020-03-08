@@ -1,6 +1,8 @@
 
 @extends('master')
-
+@section('customcss') 
+  
+@endsection
 @section('content')
 
 <section class="content-header">
@@ -65,7 +67,7 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table id="example1" class="table table-bordered table-striped">
+      <table id="pf_interest" class="table table-bordered table-striped">
         <thead>
         <tr>
           <th>SL NO</th>
@@ -131,4 +133,29 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- END EMPLOYEE BATCH UPLOAD MODAL -->
+@endsection
+
+@section('customjs')  
+    <script>
+
+   $(document).ready( function(){
+    $('#pf_interest').DataTable({
+      //    "paging": true,
+      //   // "lengthChange": false,
+      // // "searching": false,
+      //   "ordering": true,
+      // "info": true,
+      // "autoWidth": false,
+      // scrollX:'50vh',
+      // scrollY:'50vh',
+      // scrollCollapse: true,
+        "info": true,
+        "autoWidth": false,
+        scrollX:'50vh', 
+        scrollY:'50vh',
+        scrollCollapse: true,
+    });
+   });
+ 
+    </script>
 @endsection
