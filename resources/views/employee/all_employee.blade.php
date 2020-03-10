@@ -1,6 +1,6 @@
 @extends('master')
 @section('customcss') 
-  
+  <link rel="stylesheet" href="{{asset('/')}}theme/plugins/datatables-fixedcolumns/css/fixedColumns.bootstrap4.min.css">
 @endsection
 @section('content')
 
@@ -100,14 +100,14 @@
           {
           ?>
           <td class="bg-danger text-bold">
-            <a href="{{route('edit-employee',$employee->id)}}">{{$employee->staff_code}}</a>
+            <a href="{{route('edit-employee',$employee->id)}}">{{ sprintf("%04d", $employee->staff_code)}}</a>
           </td>
       <?php 
           }
           else {
               ?>
             <td class="bg-success text-bold">
-              <a href="{{route('edit-employee',$employee->id)}}">{{$employee->staff_code}}</a>
+              <a href="{{route('edit-employee',$employee->id)}}">{{sprintf("%04d", $employee->staff_code)}}</a>
             </td>
             <?php 
           }
@@ -189,13 +189,16 @@
           scrollX:'50vh', 
           scrollY:'50vh',
           scrollCollapse: true,
-          fixedColumns: {
-          leftColumns: 2
-      }
+          fixedColumns: true,
+          fixedColumns:   {
+            leftColumns: 2
+        }
       });
     });
   
     </script>
+    <script src="{{ asset('theme/plugins/datatables-fixedcolumns/js/dataTables.fixedColumns.min.js') }}"></script>
+
   @endsection
 
   @endsection
