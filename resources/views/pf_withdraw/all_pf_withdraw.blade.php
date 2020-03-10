@@ -1,4 +1,7 @@
 @extends('master')
+@section('customcss') 
+  
+@endsection
 @section('content')
 <section class="content-header">
   <div class="container-fluid">
@@ -64,7 +67,7 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table id="example1" class="table table-bordered table-striped">
+      <table id="all-pf-withdraw" class="table table-bordered table-striped">
         <thead>
         <tr>
           <th>SL NO</th>
@@ -131,5 +134,32 @@
     <!-- /.modal-dialog -->
   </div>
   <!--  /.END WITHDRAW BATCH UPLOAD MODAL -->
+  @section('customjs')  
+  <script>
+
+$(document).ready( function(){
+  $('#all-pf-withdraw').DataTable({
+    //    "paging": true,
+    //   // "lengthChange": false,
+    // // "searching": false,
+    //   "ordering": true,
+    // "info": true,
+    // "autoWidth": false,
+    // scrollX:'50vh',
+    // scrollY:'50vh',
+    // scrollCollapse: true,
+      "info": true,
+      "autoWidth": false,
+      scrollX:'50vh', 
+      scrollY:'50vh',
+      scrollCollapse: true,
+      fixedColumns: {
+      leftColumns: 2
+  }
+  });
+});
+
+</script>
+@endsection
 @endsection
 

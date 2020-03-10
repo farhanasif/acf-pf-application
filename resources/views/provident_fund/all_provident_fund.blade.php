@@ -1,6 +1,8 @@
 
 @extends('master')
-
+@section('customcss') 
+  
+@endsection
 @section('content')
 
 <section class="content-header">
@@ -65,7 +67,7 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table id="example1" class="table table-bordered table-striped">
+      <table id="all-pf-deposit" class="table table-bordered table-striped">
         <thead>
         <tr>
           <th>SL NO</th>
@@ -127,5 +129,33 @@
       <!-- /.modal-dialog -->
     </div>
     <!-- END PF DEPOSIT BATCH UPLOAD MODAL -->
+
+    @section('customjs')  
+    <script>
+
+  $(document).ready( function(){
+    $('#all-pf-deposit').DataTable({
+      //    "paging": true,
+      //   // "lengthChange": false,
+      // // "searching": false,
+      //   "ordering": true,
+      // "info": true,
+      // "autoWidth": false,
+      // scrollX:'50vh',
+      // scrollY:'50vh',
+      // scrollCollapse: true,
+        "info": true,
+        "autoWidth": false,
+        scrollX:'50vh', 
+        scrollY:'50vh',
+        scrollCollapse: true,
+        fixedColumns: {
+        leftColumns: 2
+    }
+    });
+  });
+
+  </script>
+@endsection
 
 @endsection
