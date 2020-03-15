@@ -8,19 +8,18 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>All Employee </h1>
+        <h1>All Employee Information</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active"><a href="#">Employee</a></li>
-          <li class="breadcrumb-item active"><a href="#">All Employee</a></li>
+          <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+          <li class="breadcrumb-item active"><a href="javascript:void(0)">Employee</a></li>
+          <li class="breadcrumb-item active"><a href="javascript:void(0)">All Employee Information</a></li>
         </ol>
       </div>
     </div>
   </div><!-- /.container-fluid -->
 </section>
-
 
 <section class="content">
   <div class="card card-success card-outline">
@@ -29,11 +28,10 @@
         <div class="col-sm-6">
           <h3 class="card-title">All Employees Information</h3>
         </div>
-
         <div class="col-md-6">
-            <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 
-            <a href="{{url('download_excel/employee/employee.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
-            <a href="{{route('add-employee')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Employee</a>
+          <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 
+          <a href="{{url('download_excel/employee/employee.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
+          <a href="{{route('add-employee')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Employee</a>
         </div>
         <div class="col-md-6 offset-3 mt-2">
           @if ($message = Session::get('success'))
