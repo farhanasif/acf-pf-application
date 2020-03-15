@@ -33,48 +33,47 @@
       </div>
 
       <div class="col-md-6 offset-3 mt-2">
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success alert-block">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>{{ $message }}</strong>
-        </div>
-        @endif
+          @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <strong>{{ $message }}</strong>
+            </div>
+          @endif
   
-        @if ($message = Session::get('danger'))
-        <div class="alert alert-danger alert-block">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>{{ $message }}</strong>
-        </div>
-        @endif
+          @if ($message = Session::get('danger'))
+            <div class="alert alert-danger alert-block">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <strong>{{ $message }}</strong>
+            </div>
+          @endif
       </div>
 
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table id="example1" class="table table-bordered table-striped">
-        <thead>
-
-        <tr>
-          <th>SL NO</th>
-          <th>Category Name</th>
-          <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-          <?php $i=1;?>
-          @foreach ($categories as $category)
-        <tr>
-          <td>{{ $i++}}</td>
-          <td>{{$category->category_name}}</td>
-          <td class="row">
-          <a href="{{route('edit-category',$category->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-              <a href="{{route('delete-category',$category->id)}}" class="btn btn-danger ml-2"><i class="fas fa-trash-alt"></i></a>
-          </td>
-        </tr>
-        @endforeach
-      </tbody>
-      </table>
-    </div>
+        <table id="all-category" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>SL NO</th>
+              <th>Category Name</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+              <?php $i=1;?>
+              @foreach ($categories as $category)
+              <tr>
+                <td>{{ $i++}}</td>
+                  <td>{{$category->category_name}}</td>
+                  <td>
+                      <a href="{{route('edit-category',$category->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                      <a href="{{route('delete-category',$category->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                  </td>
+              </tr>
+              @endforeach
+          </tbody>
+        </table>
+      </div>
     <!-- /.card-body -->
   </div>
   <!-- /.card -->
@@ -83,3 +82,12 @@
 
 @endsection
 
+@section('customjs')  
+<script>
+
+  $(document).ready( function(){
+    $('#all-category').DataTable();
+  });
+
+</script>
+@endsection

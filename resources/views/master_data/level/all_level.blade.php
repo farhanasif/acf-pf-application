@@ -19,7 +19,6 @@
   </div><!-- /.container-fluid -->
 </section>
 
-
 <section class="content">
   <div class="card card-success card-outline">
     <div class="card-header">
@@ -34,26 +33,25 @@
 
       <div class="col-md-6 offset-3 mt-2">
         @if ($message = Session::get('success'))
-        <div class="alert alert-success alert-block">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>{{ $message }}</strong>
-        </div>
+          <div class="alert alert-success alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ $message }}</strong>
+          </div>
         @endif
   
         @if ($message = Session::get('danger'))
-        <div class="alert alert-danger alert-block">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>{{ $message }}</strong>
-        </div>
+          <div class="alert alert-danger alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ $message }}</strong>
+          </div>
         @endif
       </div>
 
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table id="example1" class="table table-bordered table-striped">
+      <table id="all-level" class="table table-bordered table-striped">
         <thead>
-
         <tr>
           <th>SL NO</th>
           <th>level Name</th>
@@ -64,15 +62,15 @@
         <tbody>
           <?php $i=1;?>
           @foreach ($levels as $level)
-        <tr>
-          <td>{{ $i++}}</td>
-          <td>{{$level->level_name}}</td>
-          <td>{{$level->level_description}}</td>
-          <td class="row">
-          <a href="{{route('edit-level',$level->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-              <a href="{{route('delete-level',$level->id)}}" class="btn btn-danger ml-2"><i class="fas fa-trash-alt"></i></a>
-          </td>
-        </tr>
+          <tr>
+            <td>{{ $i++}}</td>
+            <td>{{$level->level_name}}</td>
+            <td>{{$level->level_description}}</td>
+            <td>
+                <a href="{{route('edit-level',$level->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                <a href="{{route('delete-level',$level->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+            </td>
+          </tr>
         @endforeach
       </tbody>
       </table>
@@ -85,3 +83,12 @@
 
 @endsection
 
+@section('customjs')  
+<script>
+
+  $(document).ready( function(){
+    $('#all-level').DataTable();
+  });
+
+</script>
+@endsection

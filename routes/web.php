@@ -480,14 +480,39 @@ Route::get('/delete-interest-source/{id}', [
 ]);
 
 // user add delete edit update
-Route::get('/add-user','UserController@show_add_user');
-Route::get('/show-batch-upload','UserController@show_batch_upload');
-Route::post('/save-user-batch-upload','UserController@save_user_batch_upload');
-Route::post('/save-user','UserController@store_add_user');
-Route::get('/all-user','UserController@all_user');
-Route::get('/edit-user/{id}','UserController@edit_user');
-Route::post('/update-user/{id}','UserController@update_user');
-Route::get('/delete-user/{id}','UserController@delete_user');
+Route::get('/add-user', [
+	'uses'		=> 'UserController@show_add_user',
+	'as'		=> 'add-user'
+]);
+Route::get('/show-batch-upload', [
+	'uses'		=> 'UserController@show_batch_upload',
+	'as'		=> 'show-batch-upload'
+]);
+
+Route::post('/save-user-batch-upload', [
+	'uses'		=> 'UserController@save_user_batch_upload',
+	'as'		=> 'save-user-batch-upload'
+]);
+Route::post('/save-user', [
+	'uses'		=> 'UserController@store_add_user',
+	'as'		=> 'save-user'
+]);
+Route::get('/all-user', [
+	'uses'		=> 'UserController@all_user',
+	'as'		=> 'all-user'
+]);
+Route::get('/edit-user/{id}', [
+	'uses'		=> 'UserController@edit_user',
+	'as'		=> 'edit-user'
+]);
+Route::post('/update-user/{id}', [
+	'uses'		=> 'UserController@update_user',
+	'as'		=> 'update-user'
+]);
+Route::get('/delete-userr/{id}', [
+	'uses'		=> 'UserController@delete_user',
+	'as'		=> 'delete-user'
+]);
 
 // Employee insert update edit delete and excel upload
 Route::get('/add-employee', [

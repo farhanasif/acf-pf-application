@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
 use Illuminate\Http\Request;
 use App\Provident;
 use App\Imports\ProvidentsImport;
@@ -70,8 +71,9 @@ class ProvidentFundController extends Controller
 
     public function edit_provident_fund($id)
     {
+      $all_employees = Employee::all();
       $provident_fund = DB::table('pf_deposit')->where('id',$id)->first();
-      return view('provident_fund.edit_provident_fund',compact('provident_fund'));
+      return view('provident_fund.edit_provident_fund',compact('provident_fund','all_employees'));
     }
 
     public function update_provident_fund(Request $request, $id)

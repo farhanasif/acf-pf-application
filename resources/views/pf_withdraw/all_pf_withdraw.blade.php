@@ -20,16 +20,13 @@
   </div><!-- /.container-fluid -->
 </section>
 
-
 <section class="content">
-
   <div class="card card-success card-outline">
     <div class="card-header">
       <div class="row">
         <div class="col-sm-6">
           <h3 class="card-title">All Withdraw Information</h3>
         </div>
-
         <div class="col-md-6">
           <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 
           <a href="{{url('download_excel/pf_withdraw/pf-withdraw.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
@@ -37,32 +34,31 @@
         </div>
         <div class="col-md-6 offset-3 mt-2">
             @if ($message = Session::get('success'))
-                <div class="alert alert-success alert-block">
+              <div class="alert alert-success alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>{{ $message }}</strong>
-                </div>
+              </div>
             @endif
 
             @if ($message = Session::get('danger'))
               <div class="alert alert-danger alert-block">
-              <button type="button" class="close" data-dismiss="alert">×</button>
-              <strong>{{ $message }}</strong>
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
               </div>
             @endif
 
             @if ($errors->any())
                 <div class="alert alert-warning">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  <strong>Whoops!</strong> There were some problems with your input.<br><br>
                     <ul>
                         @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
+                          <li>{{ $error }}</li>
                         @endforeach
                     </ul>
                 </div>
             @endif
         </div>
-
       </div>
     </div>
     <!-- /.card-header -->
@@ -134,32 +130,23 @@
     <!-- /.modal-dialog -->
   </div>
   <!--  /.END WITHDRAW BATCH UPLOAD MODAL -->
-  @section('customjs')  
-  <script>
+
+@endsection
+
+@section('customjs')  
+<script>
 
 $(document).ready( function(){
-  $('#all-pf-withdraw').DataTable({
-    //    "paging": true,
-    //   // "lengthChange": false,
-    // // "searching": false,
-    //   "ordering": true,
-    // "info": true,
-    // "autoWidth": false,
-    // scrollX:'50vh',
-    // scrollY:'50vh',
-    // scrollCollapse: true,
-      "info": true,
-      "autoWidth": false,
-      scrollX:'50vh', 
-      scrollY:'50vh',
-      scrollCollapse: true,
-      fixedColumns: {
-      leftColumns: 2
-  }
-  });
+$('#all-pf-withdraw').DataTable({
+    "info": true,
+    "autoWidth": false,
+    scrollX:'50vh', 
+    scrollY:'50vh',
+    scrollCollapse: true,
+    fixedColumns: {
+    leftColumns: 2
+}
 });
-
+});
 </script>
 @endsection
-@endsection
-

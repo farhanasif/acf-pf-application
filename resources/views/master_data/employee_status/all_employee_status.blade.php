@@ -19,7 +19,6 @@
   </div><!-- /.container-fluid -->
 </section>
 
-
 <section class="content">
   <div class="card card-success card-outline">
     <div class="card-header">
@@ -33,47 +32,47 @@
       </div>
 
       <div class="col-md-6 offset-3 mt-2">
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success alert-block">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>{{ $message }}</strong>
-        </div>
-        @endif
-  
-        @if ($message = Session::get('danger'))
-        <div class="alert alert-danger alert-block">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>{{ $message }}</strong>
-        </div>
-        @endif
+          @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <strong>{{ $message }}</strong>
+            </div>
+          @endif
+    
+          @if ($message = Session::get('danger'))
+            <div class="alert alert-danger alert-block">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <strong>{{ $message }}</strong>
+            </div>
+          @endif
       </div>
 
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table id="example1" class="table table-bordered table-striped">
+      <table id="all-employee-status" class="table table-bordered table-striped">
         <thead>
-        <tr>
-          <th>SL NO</th>
-          <th>Employee Status Name</th>
-          <th>Employee Status Description</th>
-          <th>Action</th>
-        </tr>
+          <tr>
+            <th>SL NO</th>
+            <th>Employee Status Name</th>
+            <th>Employee Status Description</th>
+            <th>Action</th>
+          </tr>
         </thead>
         <tbody>
 
-        <?php $i = 1; ?>
-        @foreach ($all_employee_status as $row)
-        <tr>
-        <td>{{$i++}}</td>
-          <td>{{$row->status_name}}</td>
-          <td>{{$row->description}}</td>
-          <td class="row">
-          <a href="{{route('edit-employee-status',$row->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-            <a href="{{route('delete-employee-status',$row->id)}}" class="btn btn-danger ml-2"><i class="fas fa-trash-alt"></i></a>
-          </td>
-        </tr>
-        @endforeach
+          <?php $i = 1; ?>
+          @foreach ($all_employee_status as $row)
+            <tr>
+              <td>{{$i++}}</td>
+              <td>{{$row->status_name}}</td>
+              <td>{{$row->description}}</td>
+              <td>
+                <a href="{{route('edit-employee-status',$row->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                <a href="{{route('delete-employee-status',$row->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+              </td>
+            </tr>
+          @endforeach
 
       </tbody>
       </table>
@@ -86,3 +85,10 @@
 
 @endsection
 
+@section('customjs')  
+<script>
+    $(document).ready( function(){
+      $('#all-employee-status').DataTable();
+    });
+</script>
+@endsection

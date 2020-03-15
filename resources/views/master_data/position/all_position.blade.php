@@ -19,7 +19,6 @@
   </div><!-- /.container-fluid -->
 </section>
 
-
 <section class="content">
   <div class="card card-success card-outline">
     <div class="card-header">
@@ -33,49 +32,46 @@
 
         <div class="col-md-6 offset-3 mt-2">
           @if ($message = Session::get('success'))
-          <div class="alert alert-success alert-block">
-          <button type="button" class="close" data-dismiss="alert">×</button>
-          <strong>{{ $message }}</strong>
-          </div>
+            <div class="alert alert-success alert-block">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <strong>{{ $message }}</strong>
+            </div>
           @endif
 
           @if ($message = Session::get('danger'))
-          <div class="alert alert-danger alert-block">
-          <button type="button" class="close" data-dismiss="alert">×</button>
-          <strong>{{ $message }}</strong>
-          </div>
+            <div class="alert alert-danger alert-block">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <strong>{{ $message }}</strong>
+            </div>
           @endif
         </div>
-
       </div>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table id="example1" class="table table-bordered table-striped">
+      <table id="all-position" class="table table-bordered table-striped">
         <thead>
-
-        <tr>
-          <th>SL NO</th>
-          <th>Position Name</th>
-          <th>Position Description</th>
-          <th>Action</th>
-        </tr>
+          <tr>
+            <th>SL NO</th>
+            <th>Position Name</th>
+            <th>Position Description</th>
+            <th>Action</th>
+          </tr>
         </thead>
         <tbody>
           <?php $i=1;?>
           @foreach ($positions as $position)
-        <tr>
-        <td>{{$i++}}</td>
-        <td>{{$position->position_name}}</td>
-        <td>{{$position->position_description}}</td>
-          <td class="row">
-              <a href="{{route('edit-position',$position->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-              <a href="{{route('delete-position',$position->id)}}" class="btn btn-danger ml-2"><i class="fas fa-trash-alt"></i></a>
-          </td>
-        </tr>
+          <tr>
+            <td>{{$i++}}</td>
+            <td>{{$position->position_name}}</td>
+            <td>{{$position->position_description}}</td>
+            <td>
+                <a href="{{route('edit-position',$position->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                <a href="{{route('delete-position',$position->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+            </td>
+          </tr>
         @endforeach
-
-      </tbody>
+        </tbody>
       </table>
     </div>
     <!-- /.card-body -->
@@ -83,24 +79,15 @@
   <!-- /.card -->
 
 </section>
+@endsection
 
-
+@section('customjs')  
 <script>
-    $(function () {
-      // $("#example1").DataTable();
-      $('#example1').DataTable({
-           // "paging": true,
-          // "lengthChange": false,
-        // "searching": false,
-          // "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        scrollX:'50vh',
-        scrollY:'50vh',
-        scrollCollapse: true,
-      });
-    });
-  </script>
 
+  $(document).ready( function(){
+    $('#all-position').DataTable();
+  });
+
+</script>
 @endsection
 

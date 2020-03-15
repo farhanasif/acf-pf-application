@@ -69,32 +69,31 @@
     <div class="card-body">
       <table id="all-pf-deposit" class="table table-bordered table-striped">
         <thead>
-        <tr>
-          <th>SL NO</th>
-          <th>Deposit Date</th>
-          <th>Staff Code</th>
-          <th>Own PF Deposit</th>
-          <th>Organization PF Deposit</th>
-          <th>Total PF Deposit</th>
-          <th>Action</th>
-        </tr>
+          <tr>
+            <th>SL NO</th>
+            <th>Deposit Date</th>
+            <th>Staff Code</th>
+            <th>Own PF Deposit</th>
+            <th>Organization PF Deposit</th>
+            <th>Total PF Deposit</th>
+            <th>Action</th>
+          </tr>
         </thead>
         <tbody>
           <?php $i=1;?>
           @foreach($provident_funds as $provident_fund)
-        <tr>
-          <td>{{$i++}}</td>
-          <td>{{$provident_fund->deposit_date}}</td>
-          <td>{{$provident_fund->staff_code}}</td>
-          <td>{{$provident_fund->own_pf}}</td>
-          <td>{{$provident_fund->organization_pf}}</td>
-          <td>{{$provident_fund->total_pf}}</td>
-          <td class="row">
-              <a href="{{route('edit-provident-fund',$provident_fund->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-          </td>
-        </tr>
+          <tr>
+            <td>{{$i++}}</td>
+            <td>{{$provident_fund->deposit_date}}</td>
+            <td>{{ sprintf("%04d", $provident_fund->staff_code)}}</td>
+            <td>{{$provident_fund->own_pf}}</td>
+            <td>{{$provident_fund->organization_pf}}</td>
+            <td>{{$provident_fund->total_pf}}</td>
+            <td>
+                <a href="{{route('edit-provident-fund',$provident_fund->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+            </td>
+          </tr>
         @endforeach
-
         </tbody>
       </table>
     </div>
@@ -135,15 +134,6 @@
 
   $(document).ready( function(){
     $('#all-pf-deposit').DataTable({
-      //    "paging": true,
-      //   // "lengthChange": false,
-      // // "searching": false,
-      //   "ordering": true,
-      // "info": true,
-      // "autoWidth": false,
-      // scrollX:'50vh',
-      // scrollY:'50vh',
-      // scrollCollapse: true,
         "info": true,
         "autoWidth": false,
         scrollX:'50vh', 

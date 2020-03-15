@@ -11,8 +11,8 @@
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active"><a href="#">Provident</a></li>
+          <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+          <li class="breadcrumb-item active"><a href="#">Pf Calculation</a></li>
           <li class="breadcrumb-item active"><a href="#">All Pf Calculation Information</a></li>
         </ol>
       </div>
@@ -32,27 +32,26 @@
         </div>
       </div>
 
-    <div class="col-md-5 text-center offset-3 mt-2">
-        @if ($message = Session::get('danger'))
-        <div class="alert alert-danger alert-block">
-         <button type="button" class="close" data-dismiss="alert">×</button>
-         <strong>{{ $message }}</strong>
-        </div>
-        @endif
+      <div class="col-md-5 text-center offset-3 mt-2">
+          @if ($message = Session::get('danger'))
+            <div class="alert alert-danger alert-block">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <strong>{{ $message }}</strong>
+            </div>
+          @endif
 
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success alert-block">
-         <button type="button" class="close" data-dismiss="alert">×</button>
-         <strong>{{ $message }}</strong>
-        </div>
-        @endif
-
-    </div>
+          @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <strong>{{ $message }}</strong>
+            </div>
+          @endif
+      </div>
 
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table id="example1" class="table table-bordered table-striped">
+      <table id="all-pf-calculation" class="table table-bordered table-striped">
         <thead>
         <tr>
             <th>SL NO</th>
@@ -64,20 +63,20 @@
         </tr>
         </thead>
         <tbody>
-            <?php $i=1;?>
-        @foreach ($pf_calculation as $row)
-        <tr>
-          <td>{{$i++}}</td>
-          <td>{{$row->name}}</td>
-          <td>{{$row->own_pf}}</td>
-          <td>{{$row->organization_pf}}</td>
-          <td>{{$row->total_pf}}</td>
-          <td>
-            <a href="{{route('edit-pf-calculation',$row->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-            <a href="{{route('delete-pf-calculation',$row->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-          </td>
-        </tr>
-        @endforeach
+          <?php $i=1;?>
+          @foreach ($pf_calculation as $row)
+          <tr>
+            <td>{{$i++}}</td>
+            <td>{{$row->name}}</td>
+            <td>{{$row->own_pf}}</td>
+            <td>{{$row->organization_pf}}</td>
+            <td>{{$row->total_pf}}</td>
+            <td>
+              <a href="{{route('edit-pf-calculation',$row->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+              <a href="{{route('delete-pf-calculation',$row->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+            </td>
+          </tr>
+          @endforeach
         </tbody>
       </table>
     </div>
@@ -86,4 +85,14 @@
   <!-- /.card -->
 
 </section>
+@endsection
+
+@section('customjs')  
+<script>
+
+  $(document).ready( function(){
+    $('#all-pf-calculation').DataTable();
+  });
+
+</script>
 @endsection

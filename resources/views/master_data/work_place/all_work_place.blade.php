@@ -19,7 +19,6 @@
   </div><!-- /.container-fluid -->
 </section>
 
-
 <section class="content">
   <div class="card card-success card-outline">
     <div class="card-header">
@@ -33,55 +32,61 @@
       </div>
 
       <div class="col-md-6 offset-3 mt-2">
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success alert-block">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>{{ $message }}</strong>
-        </div>
-        @endif
-  
-        @if ($message = Session::get('danger'))
-        <div class="alert alert-danger alert-block">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>{{ $message }}</strong>
-        </div>
-        @endif
+          @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <strong>{{ $message }}</strong>
+            </div>
+          @endif
+    
+          @if ($message = Session::get('danger'))
+            <div class="alert alert-danger alert-block">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <strong>{{ $message }}</strong>
+            </div>
+          @endif
       </div>
 
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table id="example1" class="table table-bordered table-striped">
+      <table id="all-work-place" class="table table-bordered table-striped">
         <thead>
-
-        <tr>
-          <th>SL NO</th>
-          <th>Work Place Name</th>
-          <th>Work Place Description</th>
-          <th>Action</th>
-        </tr>
+          <tr>
+            <th>SL NO</th>
+            <th>Work Place Name</th>
+            <th>Work Place Description</th>
+            <th>Action</th>
+          </tr>
         </thead>
         <tbody>
           <?php $i=1;?>
           @foreach ($work_places as $work_place)
-        <tr>
-          <td>{{ $i++}}</td>
-          <td>{{$work_place->work_place_name}}</td>
-          <td>{{$work_place->work_place_description}}</td>
-          <td class="row">
-               <a href="{{route('edit-work-place',$work_place->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-               <a href="{{route('delete-work-place',$work_place->id)}}" class="btn btn-danger ml-2"><i class="fas fa-trash-alt"></i></a>
-          </td>
-        </tr>
+          <tr>
+            <td>{{ $i++}}</td>
+            <td>{{$work_place->work_place_name}}</td>
+            <td>{{$work_place->work_place_description}}</td>
+            <td>
+              <a href="{{route('edit-work-place',$work_place->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+              <a href="{{route('delete-work-place',$work_place->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+            </td>
+          </tr>
         @endforeach
-      </tbody>
+       </tbody>
       </table>
     </div>
     <!-- /.card-body -->
   </div>
   <!-- /.card -->
-
 </section>
-
 @endsection
 
+@section('customjs')  
+<script>
+
+  $(document).ready( function(){
+    $('#all-work-place').DataTable();
+  });
+
+</script>
+@endsection

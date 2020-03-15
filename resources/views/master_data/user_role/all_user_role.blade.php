@@ -27,7 +27,6 @@
         <div class="col-sm-6">
             <h3 class="card-title">All User Role Information</h3>
         </div>
-
         <div class="col-md-6">
           <a href="" class="btn btn-success">Batch Upload</a> 
           <a href="" class="btn btn-success">Download Sample Excel</a> 
@@ -36,29 +35,29 @@
 
          <div class="col-md-6 offset-3 mt-2">
             @if ($message = Session::get('success'))
-                <div class="alert alert-success alert-block">
+              <div class="alert alert-success alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>{{ $message }}</strong>
-                </div>
+              </div>
             @endif
 
             @if ($message = Session::get('danger'))
-                <div class="alert alert-danger alert-block">
+              <div class="alert alert-danger alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>{{ $message }}</strong>
-                </div>
-           @endif
+              </div>
+            @endif
 
             @if ($errors->any())
-                <div class="alert alert-warning">
+              <div class="alert alert-warning">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
             @endif
         </div>
 
@@ -66,31 +65,31 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table id="example1" class="table table-bordered table-striped">
+      <table id="all-user-role" class="table table-bordered table-striped">
         <thead>
-        <tr>
-          <th>SL NO</th>
-          <th>Role Name</th>
-          <th>Role Description</th>
-          <th>Role Value</th>
-          <th>Action</th>
-        </tr>
+          <tr>
+            <th>SL NO</th>
+            <th>Role Name</th>
+            <th>Role Description</th>
+            <th>Role Value</th>
+            <th>Action</th>
+          </tr>
         </thead>
         <tbody>
 
-        <?php $i = 1;?>
-        @foreach ($user_roles as $user_role)
-        <tr>
+          <?php $i = 1;?>
+          @foreach ($user_roles as $user_role)
+          <tr>
             <td>{{$i++}}</td>
             <td>{{$user_role->role_name}}</td>
             <td>{{$user_role->role_description}}</td>
             <td>{{$user_role->value}}</td>
-            <td class="row">
+            <td>
               <a href="{{route('edit-user-role',$user_role->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-              <a href="{{route('delete-user-role',$user_role->id)}}" class="btn btn-danger ml-2"><i class="fas fa-trash-alt "></i></a>
+              <a href="{{route('delete-user-role',$user_role->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt "></i></a>
             </td>
-        </tr>
-        @endforeach
+          </tr>
+          @endforeach
         </tbody>
       </table>
     </div>
@@ -99,4 +98,14 @@
   <!-- /.card -->
 
 </section>
+@endsection
+
+@section('customjs')  
+<script>
+
+  $(document).ready( function(){
+    $('#all-user-role').DataTable();
+  });
+
+</script>
 @endsection

@@ -51,7 +51,7 @@
             <div class="form-group row">
               <label for="staff_code" class="col-form-label col-md-2 col-sm-3 label-align">Staff Code</label>
                 <div class="col-md-3 col-sm-3 ">
-                   <input type="text" class="form-control" name="staff_code" placeholder="Staff Code" value="{{$employee->staff_code}}"> 
+                   <input type="text" class="form-control" name="staff_code" placeholder="Staff Code" value="{{ sprintf("%04d", $employee->staff_code)}}"> 
               </div>
               <div class="col-md-2 "></div>
 

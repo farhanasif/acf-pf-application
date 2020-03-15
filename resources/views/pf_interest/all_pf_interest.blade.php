@@ -37,37 +37,36 @@
         </div>
         <div class="col-md-6 offset-3 mt-2">
             @if ($message = Session::get('success'))
-                <div class="alert alert-success alert-block">
+              <div class="alert alert-success alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>{{ $message }}</strong>
-                </div>
+              </div>
             @endif
 
             @if ($message = Session::get('error'))
-            <div class="alert alert-danger alert-block">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>{{ $message }}</strong>
-            </div>
+              <div class="alert alert-danger alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+              </div>
            @endif
 
             @if ($errors->any())
                 <div class="alert alert-warning">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
                 </div>
             @endif
         </div>
-
       </div>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table id="pf_interest" class="table table-bordered table-striped">
+      <table id="pf-interest" class="table table-bordered table-striped">
         <thead>
         <tr>
           <th>SL NO</th>
@@ -87,12 +86,12 @@
           <td> {{$i++}} </td>
           <td>{{$all_pf_interest->interest_date}}</td>
           <td>{{$all_pf_interest->interest_source}}</td>
-          <td>{{$all_pf_interest->staff_code}}</td>
+          <td>{{ sprintf("%04d", $all_pf_interest->staff_code)}}</td>
           <td>{{$all_pf_interest->own}}</td>
           <td>{{$all_pf_interest->organization}}</td>
-          <td class="row">
+          <td>
               <a href="{{route('edit-pf-interest',$all_pf_interest->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-              <a href="{{route('delete-pf-interest',$all_pf_interest->id)}}" class="btn btn-danger ml-2"><i class="fas fa-trash-alt "></i></a>
+              <a href="{{route('delete-pf-interest',$all_pf_interest->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt "></i></a>
           </td>
         </tr>
         @endforeach
@@ -105,7 +104,6 @@
   <!-- /.card -->
 
 </section>
-
 
 <!-- START EMPLOYEE BATCH UPLOAD MODAL -->
 <div class="modal fade" id="modal-default">
@@ -139,16 +137,7 @@
     <script>
 
    $(document).ready( function(){
-    $('#pf_interest').DataTable({
-      //    "paging": true,
-      //   // "lengthChange": false,
-      // // "searching": false,
-      //   "ordering": true,
-      // "info": true,
-      // "autoWidth": false,
-      // scrollX:'50vh',
-      // scrollY:'50vh',
-      // scrollCollapse: true,
+    $('#pf-interest').DataTable({
         "info": true,
         "autoWidth": false,
         scrollX:'50vh', 
