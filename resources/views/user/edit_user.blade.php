@@ -46,7 +46,7 @@
         <div class="card-body">
           <!-- /.card -->
             <!-- Horizontal Form -->
-           <form class="form-horizontal form-label-left" action="{{url('/update-user',$users->id)}}" method="post">
+           <form class="form-horizontal form-label-left" action="{{route('update-user',$users->id)}}" method="post">
             @csrf
            	 <div class="form-group row">
 			    <label  class="col-form-label col-md-2 col-sm-3 label-align">Name</label>

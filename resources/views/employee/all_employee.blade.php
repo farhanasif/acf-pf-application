@@ -11,7 +11,7 @@
         <h1>All Employee Information</h1>
       </div>
       <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-right">
+        <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
           <li class="breadcrumb-item active"><a href="javascript:void(0)">Employee</a></li>
           <li class="breadcrumb-item active"><a href="javascript:void(0)">All Employee Information</a></li>
@@ -25,24 +25,24 @@
   <div class="card card-success card-outline">
     <div class="card-header">
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-md-6 col-sm-2">
           <h3 class="card-title">All Employees Information</h3>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-10">
           <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 
           <a href="{{url('download_excel/employee/employee.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
           <a href="{{route('add-employee')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Employee</a>
         </div>
         <div class="col-md-6 offset-3 mt-2">
           @if ($message = Session::get('success'))
-              <div class="alert alert-success alert-block">
+              <div class="alert alert-success alert-block text-center">
               <button type="button" class="close" data-dismiss="alert">×</button>
               <strong>{{ $message }}</strong>
               </div>
           @endif
 
           @if ($message = Session::get('danger'))
-            <div class="alert alert-danger alert-block">
+            <div class="alert alert-danger alert-block text-center">
             <button type="button" class="close" data-dismiss="alert">×</button>
             <strong>{{ $message }}</strong>
             </div>
@@ -88,31 +88,33 @@
         </tr>
         </thead>
         <tbody>
-     <?php $i=1;?>
-      @foreach($employees as $employee)
-        <tr>
-          <td>{{ $i++ }}</td>
-
-          <?php 
-          if($employee->status == 0)
-          {
-          ?>
-          <td class="bg-danger text-bold">
-            <a href="{{route('edit-employee',$employee->id)}}">{{ sprintf("%04d", $employee->staff_code)}}</a>
-          </td>
-      <?php 
-          }
-          else {
-              ?>
-            <td class="bg-success text-bold">
-              <a href="{{route('edit-employee',$employee->id)}}">{{sprintf("%04d", $employee->staff_code)}}</a>
-            </td>
+      <?php $i=1;?>
+        @foreach($employees as $employee)
+          <tr>
+            <td>{{ $i++ }}</td>
             <?php 
-          }
-       ?>
+              if($employee->status == 0)
+              {
+            ?>
+            <td class="bg-danger text-bold">
+              <a href="{{route('edit-employee',$employee->id)}}">
+                {{ sprintf("%04d", $employee->staff_code)}}
+              </a>
+            </td>
+        <?php 
+            }
+            else { 
+        ?>
+              <td class="bg-success text-bold">
+                <a href="{{route('edit-employee',$employee->id)}}">
+                  {{sprintf("%04d", $employee->staff_code)}}
+                </a>
+              </td>
+        <?php } ?>
           <td>
             <a href="{{route('edit-employee',$employee->id)}}">
-            {{$employee->first_name}} {{$employee->last_name}}
+              {{$employee->first_name}} {{$employee->last_name}}
+            </a>
           </td>
           <td>{{$employee->position}}</td>
           <td>{{$employee->department_code}}</td>
@@ -131,8 +133,8 @@
               <a href="{{route('delete-employee',$employee->id)}}" onclick="ConfirmDelete()" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
           </td> --}}
         </tr>
-      @endforeach
-      </tbody>
+        @endforeach
+       </tbody>
       </table>
     </div>
     <!-- /.card-body -->

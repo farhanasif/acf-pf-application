@@ -26,7 +26,7 @@
 
 
         @if ($message = Session::get('success'))
-          <div class="alert alert-success alert-block">
+          <div class="alert alert-success alert-block text-center">
            <button type="button" class="close" data-dismiss="alert">×</button>
            <strong>{{ $message }}</strong>
           </div>
@@ -47,7 +47,7 @@
         <div class="card-body">
           <!-- /.card -->
             <!-- Horizontal Form -->
-           <form class="form-horizontal form-label-left" action="{{url('/save-user')}}" method="post">
+           <form class="form-horizontal form-label-left" action="{{route('save-user')}}" method="post">
              @csrf
    
                <div class="row">
@@ -149,7 +149,7 @@
                     <div class="form-group">
                         <div class="">
                           <button style="margin-left:139px;" type="submit" class="btn btn-success">Submit</button>
-                          <a href="{{url('/all-user')}}" class="btn btn-info ml-3">Back</a>
+                          <a href="{{route('all-user')}}" class="btn btn-info ml-3">Back</a>
                         </div>
                     </div>
 

@@ -23,22 +23,16 @@
 
   <div class="card card-success card-outline">
     <div class="card-header">
-      <div class="row">
-        <div class="col-sm-6">
           <h3 class="card-title">All Employeer Information</h3>
-        </div>
-
-        <div class="col-md-6">
+          <div class="float-sm-right">
           <a href="" class="btn btn-success">Batch Upload</a> 
           <a href="" class="btn btn-success">Download Sample Excel</a> 
-            <a href="{{url('/add-user')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Employeer</a>
-        </div>
-
-      </div>
+            <a href="{{route('add-user')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Employeer</a>
+          </div>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table id="example1" class="table table-bordered table-striped">
+      <table id="all-user" class="table table-bordered table-striped">
         <thead>
         <tr>
           <th>SL NO</th>
@@ -57,14 +51,15 @@
         <tbody>
           <?php $i=1;?>
            @foreach($users as $user)
-        <tr>
+         <tr>
           <td>{{$i++}}</td>
           <td>
             <a href="{{url('/edit-user',$user->id)}}">{{ $user->name}}</a>
           </td>
           <td>
-            <a href="{{url('/edit-user',$user->id)}}">{{ $user->staff_code}}</a>
-            
+            <a href="{{url('/edit-user',$user->id)}}">
+              {{sprintf("%04d", $user->staff_code)}}
+            </a>
           </td>
           <td>{{ $user->email}}</td>
           <td>{{ $user->user_type}}</td>
@@ -83,13 +78,14 @@
   </div>
   <!-- /.card -->
 </section>
-{{-- <!-- DataTables -->
-<script src="{{ asset('theme/plugins/datatables/jquery.dataTables.js') }}"></script>
-<script src="{{ asset('theme/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script> --}}
+
+@endsection
+
+@section('customjs')
 <script>
   $(function () {
     // $("#example1").DataTable();
-    $('#example1').DataTable({
+    $('#all-user').DataTable({
          // "paging": true,
         // "lengthChange": false,
       // "searching": false,
@@ -113,4 +109,3 @@
 </script>
 
 @endsection
-

@@ -64,7 +64,7 @@
             </ul> --}}
           </li>
           <li class="nav-item ">
-          <a href="{{url('/all-user')}}" class="nav-link">
+          <a href="{{route('all-user')}}" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Employeer Setup
