@@ -119,6 +119,25 @@
             </ul>
           </li>
 
+          <li class="nav-item has-treeview">
+            <a href="javascript:void(0)" class="nav-link">
+              <i class=" nav-icon fas fa-chart-bar"></i>
+              <p>
+               Chart Of Accounts
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('all-account-head')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Account Head</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
         <li class="nav-item has-treeview ">
              <a href="javascript:void(0)" class="nav-link">
               <i class="nav-icon fas fa-tree"></i>

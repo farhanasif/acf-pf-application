@@ -647,6 +647,40 @@ Route::get('/delete-pf-interest/{id}', [
 ]);
 
 
+/*
+|--------------------------------------------------------------------------
+| Charts Of Accounts all Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/account/add-account-head', [
+	'uses'		=> 'AccountHeadController@add_account_head',
+	'as'		=> 'add-account-head'
+]);
+Route::post('/account/add-account-head', [
+	'uses'		=> 'AccountHeadController@save_account_head',
+	'as'		=> 'save-account-head'
+]);
+Route::get('/account/all-account-head', [
+	'uses'		=> 'AccountHeadController@all_account_head',
+	'as'		=> 'all-account-head'
+]);
+
+Route::get('/account/edit-account-head/{id}', [
+	'uses'		=> 'AccountHeadController@edit_account_head',
+	'as'		=> 'edit-account-head'
+]);
+Route::post('/account/update-account-head/{id}', [
+	'uses'		=> 'AccountHeadController@update_account_head',
+	'as'		=> 'update-account-head'
+]);
+
+Route::get('/account/delete-account-head/{id}', [
+	'uses'		=> 'AccountHeadController@delete_account_head',
+	'as'		=> 'delete-account-head'
+]);
+
+
 //report provident fund report and others report
 
 Route::get('/show-provident-fund-report', [
