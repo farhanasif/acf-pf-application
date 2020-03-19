@@ -23,11 +23,8 @@
 <section class="content">
   <div class="card card-success card-outline">
     <div class="card-header">
-      <div class="row">
-        <div class="col-sm-6">
           <h3 class="card-title">All Withdraw Information</h3>
-        </div>
-        <div class="col-md-6">
+        <div class="float-sm-right">
           <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 
           <a href="{{url('download_excel/pf_withdraw/pf-withdraw.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
           <a href="{{route('add-pf-withdraw')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Withdraw</a>
@@ -59,7 +56,6 @@
                 </div>
             @endif
         </div>
-      </div>
     </div>
     <!-- /.card-header -->
     <div class="card-body">

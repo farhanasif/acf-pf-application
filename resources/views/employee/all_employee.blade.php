@@ -24,15 +24,15 @@
 <section class="content">
   <div class="card card-success card-outline">
     <div class="card-header">
-      <div class="row">
-        <div class="col-md-6 col-sm-2">
-          <h3 class="card-title">All Employees Information</h3>
-        </div>
-        <div class="col-md-6 col-sm-10">
+          <h3 class="card-title">All Employee Information</h3>
+
+        <div class="float-sm-right">
           <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 
           <a href="{{url('download_excel/employee/employee.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
           <a href="{{route('add-employee')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Employee</a>
         </div>
+
+
         <div class="col-md-6 offset-3 mt-2">
           @if ($message = Session::get('success'))
               <div class="alert alert-success alert-block text-center">
@@ -60,8 +60,6 @@
               </div>
           @endif
       </div>
-      </div>
-
     </div>
     <!-- /.card-header -->
     <div class="card-body">

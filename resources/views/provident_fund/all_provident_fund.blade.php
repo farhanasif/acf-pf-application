@@ -25,12 +25,8 @@
 
   <div class="card card-success card-outline">
     <div class="card-header">
-      <div class="row">
-        <div class="col-sm-6">
           <h3 class="card-title">All PF Deposit Information</h3>
-        </div>
-
-        <div class="col-md-6">
+        <div class="float-sm-right">
           <a href="" class="btn btn-success" data-toggle="modal" data-target="#pf-deposit">Batch Upload</a> 
           <a href="{{url('download_excel/pf_deposit/pf-deposit.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
           <a href="{{route('add-provident-fund')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add PF Deposit</a>
@@ -63,7 +59,6 @@
             @endif
         </div>
 
-      </div>
     </div>
     <!-- /.card-header -->
     <div class="card-body">

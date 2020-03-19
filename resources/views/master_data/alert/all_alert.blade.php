@@ -23,15 +23,11 @@
   <section class="content">
     <div class="card card-success card-outline">
       <div class="card-header">
-        <div class="row">
-          <div class="col-sm-6">
               <h3 class="card-title">All Alert Information</h3>
-          </div>
-          <div class="col-md-6 ">
+          <div class="float-sm-roght">
               <a href="{{route('add-alert')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add Alert</a>
           </div>
-        </div>
-
+      
         <div class="col-md-5 text-center offset-3 mt-2">
             @if ($message = Session::get('danger'))
               <div class="alert alert-danger alert-block">
