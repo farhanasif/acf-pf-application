@@ -27,4 +27,9 @@ Route::get('get-fund-data', 'TestController@getProvidentFund');
 Route::get('ledger', 'TestController@view_ledger_report');
 Route::get('ledger-report','Testcontroller@ledger_report');
 
+Route::get('/blank', 'BankController@view_blank');
+Route::get('/reconciliation', 'BankController@view_trancaction');
+Route::get('/monthy-bank-book', 'BankController@get_monthly_bank_book');
+Route::get('/save-monthly-bank-book', 'BankController@save_monthly_bank_book');
+
 
