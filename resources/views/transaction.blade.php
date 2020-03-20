@@ -344,12 +344,12 @@
                             <table id="example1" class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <tr>
-                                        <th>Date</th>
-                                        <th>Voucher No</th>
-                                        <th>Description</th>
-                                        <th>Cheque No</th>
-                                        <th>Amount</th>
-                                        <th>Account Head</th>
+                                        <th style="text-align: center;">Date</th>
+                                        <th style="text-align: center;">Voucher No</th>
+                                        <th style="text-align: center;">Description</th>
+                                        <th style="text-align: center;">Cheque No</th>
+                                        <th style="text-align: center;">Amount</th>
+                                        <th style="text-align: center;">Account Head</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -404,9 +404,12 @@
                         <label>Account head</label>
                         <select class="custom-select" id="account_head">
                           <option value="0">Select...</option>
-                          <option value="2">Cash In Bank</option>
+                          {{-- <option value="2">Cash In Bank</option>
                           <option value="3">PF Settlement</option>
-                          <option value="4">Deposit Amount</option>
+                          <option value="4">Deposit Amount</option> --}}
+                          @foreach ($account_heads as $account_head)
+                            <option value="{{ $account_head->id }}">{{ $account_head->account_head }}</option>
+                          @endforeach
                         </select>
                       </div>
                     </div>
@@ -491,7 +494,6 @@
     <script src="{{ asset('theme/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
     <!-- page script -->
     <script>
-        var table;
         
         $(function () {
             const Toast = Swal.mixin({
@@ -500,6 +502,9 @@
               showConfirmButton: false,
               timer: 4000
             });
+
+            $("#example1 thead").empty();
+            $("#example1 tbody").empty();
 
             $('#from_date').datepicker({
                 format: "yyyy-mm-dd",
@@ -550,8 +555,10 @@
                       amount: amount,
                       type: type
                   },
-                  dataType: 'json',
+                  dataType: 'text',
                   success: function (data) {
+                    console.log(data);
+                    generate_book();
                     $('#modal-default').modal('hide');
                 
                     Toast.fire({
@@ -599,11 +606,51 @@
               dataType: 'json',
               success: function (data) {
                 console.log(data);
+                
+                $("#example1 thead").empty();
+                $("#example1 tbody").empty();
+                $("#example1 thead").append('<tr>'+
+                    '<th style="text-align: center;">Date</th>'+
+                    '<th style="text-align: center;">Voucher No</th>'+
+                    '<th style="text-align: center;">Description</th>'+
+                    '<th style="text-align: center;">Cheque No</th>'+
+                    '<th style="text-align: center;">Amount</th>'+
+                    '<th style="text-align: center;">Account Head</th>'+
+                '</tr>');
+
+                $.each(data, function(index, element) {
+                  if(element.description == 'TOTAL'){
+                    $("#example1 tbody").append("<tr class=\"table-info\">"
+                      +"<td style=\"text-align: center;\">"+element.transaction_date+"</td>"
+                      +"<td style=\"text-align: center;\">"+element.voucher_no+"</td>"
+                      +"<td style=\"text-align: center;font-weight: bold;\">"+element.description+"</td>"
+                      +"<td style=\"text-align: center;\">"+element.cheque_no+"</td>"
+                      +"<td style=\"text-align: right;font-weight: bold;\">"+numberWithCommas(element.amount)+"</td>"
+                      +"<td style=\"text-align: center;\">"+element.account_head+"</td>"
+                      +"</tr>");
+                  }
+                  else{
+                    $("#example1 tbody").append("<tr>"
+                      +"<td style=\"text-align: center;\">"+element.transaction_date+"</td>"
+                      +"<td style=\"text-align: center;\">"+element.voucher_no+"</td>"
+                      +"<td style=\"text-align: center;\">"+element.description+"</td>"
+                      +"<td style=\"text-align: center;\">"+element.cheque_no+"</td>"
+                      +"<td class=\"table-danger\" style=\"text-align: right;\">"+numberWithCommas(element.amount)+"</td>"
+                      +"<td style=\"text-align: center;\">"+element.account_head+"</td>"
+                      +"</tr>");
+                  }
+                });
               }
             });
           }
         }
 
+
+        function numberWithCommas(number) {
+          //return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          const fixedNumber = Number.parseFloat(number).toFixed(2);
+          return String(fixedNumber).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
     </script>
 </body>
 
