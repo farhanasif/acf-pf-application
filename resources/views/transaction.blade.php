@@ -507,8 +507,11 @@
             $("#example1 tbody").empty();
 
             $('#from_date').datepicker({
-                format: "yyyy-mm-dd",
-                orientation: "bottom left"
+                //format: "yyyy-mm-dd",
+                orientation: "bottom left",
+                format: "yyyy-mm",
+                startView: "months", 
+                minViewMode: "months"
             });
 
             $('#transactionDate').datepicker({
@@ -647,9 +650,13 @@
 
 
         function numberWithCommas(number) {
-          //return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-          const fixedNumber = Number.parseFloat(number).toFixed(2);
-          return String(fixedNumber).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          if(number == 0 || number == undefined){
+            return '0.00';
+          }
+          else{
+            const fixedNumber = Number.parseFloat(number).toFixed(2);
+            return String(fixedNumber).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          }
         }
     </script>
 </body>

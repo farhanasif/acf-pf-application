@@ -27,8 +27,9 @@ class BankController extends Controller
 
     function get_monthly_bank_book(){
         $from_date = $_GET['from_date'];
+        $from_date = $from_date.'-01';
         $end_date = date("Y-m-t", strtotime($from_date));
-        $start_date = substr($from_date, 0, -2) . '01';
+        $start_date = $from_date;
 
         //dd($end_date);
 
