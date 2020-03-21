@@ -680,9 +680,14 @@ Route::group(['middleware' => 'admin'], function () {
 			'as'		=> 'delete-account-head'
 		]);
 
+		//-------------------RECONCILIATION ROUTES-------------------//
+		Route::get('/reconciliation', 'BankController@view_transaction');
+		Route::get('/monthy-bank-book', 'BankController@get_monthly_bank_book');
+		Route::get('/save-monthly-bank-book', 'BankController@save_monthly_bank_book');
+		//-------------------RECONCILIATION ROUTES-------------------//
+
 
 		//report provident fund report and others report
-
 		Route::get('/show-provident-fund-report', [
 			'uses'		=> 'ReportController@show_provident_fund_report',
 			'as'		=> 'show-provident-fund-report'
@@ -690,6 +695,11 @@ Route::group(['middleware' => 'admin'], function () {
 
 		Route::get('/admin-home',['middleware'=>'admin','uses'=>'AdminController@admin_home']);
 		Route::get('/user-home',['middleware'=>'user','uses'=>'AdminController@user_home']);
+
+
+
+
+
 
 		Route::get('/clear-cache', function() {
 			$exitCode = Artisan::call('config:clear');

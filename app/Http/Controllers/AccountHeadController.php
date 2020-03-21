@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Account_head;
+use App\AccountHead;
 use DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,7 +11,7 @@ class AccountHeadController extends Controller
 {
     public function all_account_head()
     {
-        $all_accounts = Account_head::all();
+        $all_accounts = AccountHead::all();
         return view('account_head.all_account_head',compact('all_accounts'));
     }
 
@@ -28,7 +28,7 @@ class AccountHeadController extends Controller
             'account_type' => 'required',
         ]);
 
-        $accounts = new Account_head();
+        $accounts = new AccountHead();
         $accounts->account_head = $request->account_head;
         $accounts->account_code = $request->account_code;
         $accounts->account_type = $request->account_type;
@@ -40,7 +40,7 @@ class AccountHeadController extends Controller
 
     public function edit_account_head($id)
     {
-        $account_head = Account_head::find($id);
+        $account_head = AccountHead::find($id);
         return view('account_head.edit_account_head',compact('account_head'));
     }
 
@@ -52,7 +52,7 @@ class AccountHeadController extends Controller
             'account_type' => 'required',
         ]);
 
-        $accounts = Account_head::find($id);
+        $accounts = AccountHead::find($id);
         $accounts->account_head = $request->account_head;
         $accounts->account_code = $request->account_code;
         $accounts->account_type = $request->account_type;
@@ -64,7 +64,7 @@ class AccountHeadController extends Controller
 
     public function delete_account_head($id)
     {
-        $delete_account_head = Account_head::find($id);
+        $delete_account_head = AccountHead::find($id);
         $delete_account_head->delete();
         return redirect()->back()->with('danger','Account head deleted successfully');
     }
