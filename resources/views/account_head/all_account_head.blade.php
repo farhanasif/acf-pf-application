@@ -25,7 +25,7 @@
       <div class="card-header">
         <h3 class="card-title">All Account Head Information</h3>
         <div class="float-right">
-            <a href="{{route('add-account-head')}}" class="btn btn-primary "><i class="fas fa-plus"></i> Add Account Head</a>
+            <a href="{{route('add-account-head')}}" class="btn btn-success "><i class="fas fa-plus"></i> Add Account Head</a>
         </div>
    
 
@@ -49,7 +49,7 @@
     <div class="card-body">
       <table id="all-account-head" class="table table-bordered table-striped">
         <thead>
-          <tr>
+          <tr class="bg-success">
             <th>SL NO</th>
             <th>Account Head</th>
             <th>Account Code</th>
@@ -85,7 +85,12 @@
 <script>
 
   $(document).ready( function(){
-    $('#all-account-head').DataTable();
+    $('#all-account-head').DataTable({
+          "info": true,
+          "autoWidth": false,
+          scrollX:'50vh', 
+          scrollY:'50vh',
+    });
   });
 
 </script>

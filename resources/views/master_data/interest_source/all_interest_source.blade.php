@@ -6,13 +6,13 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>All Interest Sourece Information</h1>
+        <h1>All Interest Source Information</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
           <li class="breadcrumb-item active"><a href="javascript:void(0)">Interest Sourece</a></li>
-          <li class="breadcrumb-item active"><a href="javascript:void(0)">All Interest Sourece Information</a></li>
+          <li class="breadcrumb-item active"><a href="javascript:void(0)">All Interest Source Information</a></li>
         </ol>
       </div>
     </div>
@@ -24,10 +24,10 @@
     <div class="card-header">
       <div class="row">
         <div class="col-sm-6">
-          <h3 class="card-title">All Interest Sourece Information</h3>
+          <h3 class="card-title">All Interest Source Information</h3>
         </div>
         <div class="col-md-6 ">
-            <a href="{{route('add-interest-source')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add Interest Source</a>
+            <a href="{{route('add-interest-source')}}" class="btn btn-success float-right"><i class="fas fa-plus"></i> Add Interest Source</a>
         </div>
       </div>
 
@@ -51,10 +51,10 @@
     <div class="card-body">
       <table id="all-interest-source" class="table table-bordered table-striped">
         <thead>
-          <tr>
+          <tr class="bg-success">
             <th>SL NO</th>
-            <th>Employee Status Name</th>
-            <th>Employee Status Description</th>
+            <th>Interest Source Name</th>
+            <th>Interest Source Description</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -88,7 +88,12 @@
 <script>
 
   $(document).ready( function(){
-    $('#all-interest-source').DataTable();
+    $('#all-interest-source').DataTable({
+          "info": true,
+          "autoWidth": false,
+          scrollX:'50vh', 
+          scrollY:'50vh',
+    });
   });
 
 </script>

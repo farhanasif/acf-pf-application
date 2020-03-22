@@ -27,7 +27,7 @@
           <h3 class="card-title">All Sub Location Information</h3>
         </div>
         <div class="col-md-6 ">
-            <a href="{{route('add-sub-location')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add Sub Location</a>
+            <a href="{{route('add-sub-location')}}" class="btn btn-success float-right"><i class="fas fa-plus"></i> Add Sub Location</a>
         </div>
       </div>
 
@@ -52,7 +52,7 @@
     <div class="card-body">
       <table id="all-sub-location" class="table table-bordered table-striped">
         <thead>
-          <tr>
+          <tr class="bg-success">
             <th>SL NO</th>
             <th>Sub Location Name</th>
             <th>Sub Location Description</th>
@@ -86,7 +86,12 @@
 <script>
 
   $(document).ready( function(){
-    $('#all-sub-location').DataTable();
+    $('#all-sub-location').DataTable({
+          "info": true,
+          "autoWidth": false,
+          scrollX:'50vh', 
+          scrollY:'50vh',
+    });
   });
 
 </script>

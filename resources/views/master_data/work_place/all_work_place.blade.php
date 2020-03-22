@@ -24,10 +24,10 @@
     <div class="card-header">
       <div class="row">
         <div class="col-sm-6">
-          <h3 class="card-title">All Work PlaceInformation</h3>
+          <h3 class="card-title">All Work Place Information</h3>
         </div>
         <div class="col-md-6 ">
-            <a href="{{route('add-work-place')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add Work Place</a>
+            <a href="{{route('add-work-place')}}" class="btn btn-success float-right"><i class="fas fa-plus"></i> Add Work Place</a>
         </div>
       </div>
 
@@ -52,7 +52,7 @@
     <div class="card-body">
       <table id="all-work-place" class="table table-bordered table-striped">
         <thead>
-          <tr>
+          <tr class="bg-success">
             <th>SL NO</th>
             <th>Work Place Name</th>
             <th>Work Place Description</th>
@@ -85,7 +85,12 @@
 <script>
 
   $(document).ready( function(){
-    $('#all-work-place').DataTable();
+    $('#all-work-place').DataTable({
+          "info": true,
+          "autoWidth": false,
+          scrollX:'50vh', 
+          scrollY:'50vh',
+    });
   });
 
 </script>

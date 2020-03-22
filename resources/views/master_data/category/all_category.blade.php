@@ -28,7 +28,7 @@
           <h3 class="card-title">All Category Information</h3>
         </div>
         <div class="col-md-6 ">
-            <a href="{{route('add-category')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add Category</a>
+            <a href="{{route('add-category')}}" class="btn btn-success float-right"><i class="fas fa-plus"></i> Add Category</a>
         </div>
       </div>
 
@@ -53,25 +53,25 @@
     <div class="card-body">
         <table id="all-category" class="table table-bordered table-striped">
           <thead>
-            <tr>
+            <tr class="bg-success">
               <th>SL NO</th>
               <th>Category Name</th>
               <th>Action</th>
             </tr>
-            </thead>
-            <tbody>
+          </thead>
+          <tbody>
               <?php $i=1;?>
               @foreach ($categories as $category)
               <tr>
                 <td>{{ $i++}}</td>
-                  <td>{{$category->category_name}}</td>
-                  <td>
+                <td>{{$category->category_name}}</td>
+                <td>
                       <a href="{{route('edit-category',$category->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                      <a href="{{route('delete-category',$category->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                  </td>
+                      <a href="{{route('delete-category',$category->id)}}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                </td>
               </tr>
               @endforeach
-          </tbody>
+        </tbody>
         </table>
       </div>
     <!-- /.card-body -->
@@ -86,7 +86,12 @@
 <script>
 
   $(document).ready( function(){
-    $('#all-category').DataTable();
+    $('#all-category').DataTable({
+          "info": true,
+          "autoWidth": false,
+          scrollX:'50vh', 
+          scrollY:'50vh',
+    });
   });
 
 </script>

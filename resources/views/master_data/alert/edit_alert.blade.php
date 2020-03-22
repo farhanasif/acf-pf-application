@@ -54,15 +54,14 @@
 			   <div class="form-group row">
 			    <label for="name" class="col-form-label col-md-3 col-sm-4 label-align">Name</label>
 			    <div class="col-md-6 col-sm-6 ">
-			    	 <input type="text" class="form-control" name="name" placeholder="Name">
+          <input type="text" class="form-control" name="name" placeholder="Name" value="{{$alert->name}}">
 			    </div>
               </div>
               
               <div class="form-group row">
 			    <label for="department_code" class="col-form-label col-md-3 col-sm-4 label-align">Alert Details</label>
 			    <div class="col-md-6 col-sm-6 ">
-                     {{-- <input type="text" class="form-control" name="duration" placeholder="Duration"> --}}
-                     <textarea name="alert_details" class="form-control" cols="71" rows="5"></textarea>
+          <textarea name="alert_details" class="form-control" cols="71" rows="5">{{$alert->alert_details}}</textarea>
 			    </div>
               </div>
 

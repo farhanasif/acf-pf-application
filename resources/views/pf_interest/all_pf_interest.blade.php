@@ -29,7 +29,7 @@
         <div class="float-sm-right">
           <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 
           <a href="{{url('download_excel/pf_interest/Interest.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
-          <a href="{{route('add-pf-interest')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Interest</a>
+          <a href="{{route('add-pf-interest')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add Interest</a>
         </div>
         <div class="col-md-6 offset-3 mt-2">
             @if ($message = Session::get('success'))
@@ -63,7 +63,7 @@
     <div class="card-body">
       <table id="pf-interest" class="table table-bordered table-striped">
         <thead>
-        <tr>
+          <tr class="bg-success">
           <th>SL NO</th>
           <th>Interest Date</th>
           <th>Interest Source</th>

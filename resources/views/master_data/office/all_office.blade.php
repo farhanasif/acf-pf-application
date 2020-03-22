@@ -28,7 +28,7 @@
           <h3 class="card-title">All Office Information</h3>
       </div>
       <div class="col-md-6 ">
-          <a href="{{route('add-office')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add Office</a>
+          <a href="{{route('add-office')}}" class="btn btn-success float-right"><i class="fas fa-plus"></i> Add Office</a>
       </div>
     </div>
 
@@ -52,7 +52,7 @@
     <div class="card-body">
       <table id="all-office" class="table table-bordered table-striped">
         <thead>
-        <tr>
+          <tr class="bg-success">
           <th>SL NO</th>
           <th>name</th>
           <th>Duration</th>
@@ -87,7 +87,12 @@
 <script>
 
   $(document).ready( function(){
-    $('#all-office').DataTable();
+    $('#all-office').DataTable({
+          "info": true,
+          "autoWidth": false,
+          scrollX:'50vh', 
+          scrollY:'50vh',
+    });
   });
 
 </script>

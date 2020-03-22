@@ -27,7 +27,7 @@
             <h3 class="card-title">All Time Schedule Information</h3>
         </div>
         <div class="col-md-6 ">
-            <a href="{{route('add-time-schedule')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add Time Schedule</a>
+            <a href="{{route('add-time-schedule')}}" class="btn btn-success float-right"><i class="fas fa-plus"></i> Add Time Schedule</a>
         </div>
 
         <div class="col-md-6 offset-3 mt-2">
@@ -52,7 +52,7 @@
     <div class="card-body">
       <table id="all-time-schedule" class="table table-bordered table-striped">
         <thead>
-          <tr>
+          <tr class="bg-success">
             <th>SL NO</th>
             <th>Start Date</th>
             <th>Ending Date</th>
@@ -85,7 +85,12 @@
 <script>
 
   $(document).ready( function(){
-    $('#all-time-schedule').DataTable();
+    $('#all-time-schedule').DataTable({
+          "info": true,
+          "autoWidth": false,
+          scrollX:'50vh', 
+          scrollY:'50vh',
+    });
   });
 
 </script>

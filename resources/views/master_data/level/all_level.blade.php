@@ -27,7 +27,7 @@
           <h3 class="card-title">All Level Information</h3>
         </div>
         <div class="col-md-6 ">
-            <a href="{{route('add-level')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add Level</a>
+            <a href="{{route('add-level')}}" class="btn btn-success float-right"><i class="fas fa-plus"></i> Add Level</a>
         </div>
       </div>
 
@@ -52,7 +52,7 @@
     <div class="card-body">
       <table id="all-level" class="table table-bordered table-striped">
         <thead>
-        <tr>
+          <tr class="bg-success">
           <th>SL NO</th>
           <th>level Name</th>
           <th>level Description</th>
@@ -87,7 +87,12 @@
 <script>
 
   $(document).ready( function(){
-    $('#all-level').DataTable();
+    $('#all-level').DataTable({
+          "info": true,
+          "autoWidth": false,
+          scrollX:'50vh', 
+          scrollY:'50vh',
+    });
   });
 
 </script>

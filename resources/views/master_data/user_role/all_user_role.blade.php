@@ -23,15 +23,8 @@
 
   <div class="card card-success card-outline">
     <div class="card-header">
-      <div class="row">
-        <div class="col-sm-6">
-            <h3 class="card-title">All User Role Information</h3>
-        </div>
-        <div class="col-md-6">
-          <a href="" class="btn btn-success">Batch Upload</a> 
-          <a href="" class="btn btn-success">Download Sample Excel</a> 
-          <a href="{{route('add-user-role')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add User Role</a>
-        </div>
+        <h3 class="card-title">All User Role Information</h3>
+        <a href="{{route('add-user-role')}}" class="btn btn-success float-sm-right"><i class="fas fa-plus"></i> Add User Role</a>
 
          <div class="col-md-6 offset-3 mt-2">
             @if ($message = Session::get('success'))
@@ -61,13 +54,12 @@
             @endif
         </div>
 
-      </div>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
       <table id="all-user-role" class="table table-bordered table-striped">
         <thead>
-          <tr>
+          <tr class="bg-success">
             <th>SL NO</th>
             <th>Role Name</th>
             <th>Role Description</th>
@@ -104,7 +96,12 @@
 <script>
 
   $(document).ready( function(){
-    $('#all-user-role').DataTable();
+    $('#all-user-role').DataTable({
+          "info": true,
+          "autoWidth": false,
+          scrollX:'50vh', 
+          scrollY:'50vh',
+    });
   });
 
 </script>

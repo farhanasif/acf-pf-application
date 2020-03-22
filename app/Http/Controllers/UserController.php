@@ -198,7 +198,7 @@ class UserController extends Controller
      ]);
         $users = User::find($id);
         $users->update($request->all());
-        return redirect()->back()
+        return redirect()->route('all-user')
                         ->with('success','User updated successfully');
     }
 

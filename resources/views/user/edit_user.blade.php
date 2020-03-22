@@ -24,6 +24,7 @@
         <div class="card-header">
           <h3 class="card-title">Edit User Information</h3>
         </div>
+        
         @if ($message = Session::get('success'))
           <div class="alert alert-success alert-block">
            <button type="button" class="close" data-dismiss="alert">×</button>
@@ -67,7 +68,7 @@
 			   <div class="form-group row">
 			    <label  class="col-form-label col-md-2 col-sm-3 label-align">Email</label>
 			    <div class="col-md-3 col-sm-3 ">
-			    	 <input type="email" class="form-control" name="email" placeholder="Enter email" value="{{$users->staff_code}}">
+			    	 <input type="email" class="form-control" name="email" placeholder="Enter email" value="{{$users->email}}">
           </div>
           <div class="col-md-2"></div>
           <label for="role" class="col-form-label col-md-2 col-sm-3 label-align">Role</label>
@@ -109,7 +110,7 @@
       <div class="form-group row">
        <label for="email" class="col-form-label col-md-2 col-sm-3 label-align">Department</label>
        <div class="col-md-3 col-sm-3 ">
-          <input type="text" class="form-control" name="department"  placeholder="Department" >
+          <input type="text" class="form-control" name="department"  placeholder="Department" value="{{$users->department}}">
        </div>
        <div class="col-md-2"></div>
        <label for="email" class="col-form-label col-md-2 col-sm-3 label-align">Description</label>

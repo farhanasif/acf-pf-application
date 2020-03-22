@@ -27,7 +27,7 @@
         <div class="float-sm-right">
           <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 
           <a href="{{url('download_excel/pf_withdraw/pf-withdraw.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
-          <a href="{{route('add-pf-withdraw')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Withdraw</a>
+          <a href="{{route('add-pf-withdraw')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add Withdraw</a>
         </div>
         <div class="col-md-6 offset-3 mt-2">
             @if ($message = Session::get('success'))
@@ -61,7 +61,7 @@
     <div class="card-body">
       <table id="all-pf-withdraw" class="table table-bordered table-striped">
         <thead>
-        <tr>
+          <tr class="bg-success">
           <th>SL NO</th>
           <th>Staff Code</th>
           <th>Received Amount</th>

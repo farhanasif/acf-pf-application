@@ -28,7 +28,7 @@
             <h3 class="card-title">All Pf Calculation Information</h3>
         </div>
         <div class="col-md-6 ">
-            <a href="{{route('add-pf-calculation')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add Pf</a>
+            <a href="{{route('add-pf-calculation')}}" class="btn btn-success float-right"><i class="fas fa-plus"></i> Add Pf</a>
         </div>
       </div>
 
@@ -53,7 +53,7 @@
     <div class="card-body">
       <table id="all-pf-calculation" class="table table-bordered table-striped">
         <thead>
-        <tr>
+          <tr class="bg-success">
             <th>SL NO</th>
             <th>Name</th>
             <th>Own Pf</th>
@@ -91,7 +91,12 @@
 <script>
 
   $(document).ready( function(){
-    $('#all-pf-calculation').DataTable();
+    $('#all-pf-calculation').DataTable({
+          "info": true,
+          "autoWidth": false,
+          scrollX:'50vh', 
+          scrollY:'50vh',
+    });
   });
 
 </script>

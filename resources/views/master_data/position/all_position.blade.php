@@ -27,7 +27,7 @@
             <h3 class="card-title">All Position Information</h3>
         </div>
         <div class="col-md-6 ">
-            <a href="{{route('add-position')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add position</a>
+            <a href="{{route('add-position')}}" class="btn btn-success float-right"><i class="fas fa-plus"></i> Add position</a>
         </div>
 
         <div class="col-md-6 offset-3 mt-2">
@@ -51,7 +51,7 @@
     <div class="card-body">
       <table id="all-position" class="table table-bordered table-striped">
         <thead>
-          <tr>
+          <tr class="bg-success">
             <th>SL NO</th>
             <th>Position Name</th>
             <th>Position Description</th>
@@ -85,7 +85,12 @@
 <script>
 
   $(document).ready( function(){
-    $('#all-position').DataTable();
+    $('#all-position').DataTable({
+          "info": true,
+          "autoWidth": false,
+          scrollX:'50vh', 
+          scrollY:'50vh',
+    });
   });
 
 </script>

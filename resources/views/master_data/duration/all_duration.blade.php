@@ -28,7 +28,7 @@
             <h3 class="card-title">All Duration Information</h3>
         </div>
         <div class="col-md-6 ">
-            <a href="{{route('add-duration')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add Duration</a>
+            <a href="{{route('add-duration')}}" class="btn btn-success float-right"><i class="fas fa-plus"></i> Add Duration</a>
         </div>
     </div>
 
@@ -54,7 +54,7 @@
     <div class="card-body">
       <table id="all-duration" class="table table-bordered table-striped">
         <thead>
-          <tr>
+          <tr class="bg-success">
             <th>SL NO</th>
             <th>Name</th>
             <th>Duration</th>
@@ -89,7 +89,12 @@
 <script>
 
   $(document).ready( function(){
-    $('#all-duration').DataTable();
+    $('#all-duration').DataTable({
+          "info": true,
+          "autoWidth": false,
+          scrollX:'50vh', 
+          scrollY:'50vh',
+    });
   });
 
 </script>

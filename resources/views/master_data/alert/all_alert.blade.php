@@ -25,7 +25,7 @@
       <div class="card-header">
               <h3 class="card-title">All Alert Information</h3>
           <div class="float-sm-roght">
-              <a href="{{route('add-alert')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add Alert</a>
+              <a href="{{route('add-alert')}}" class="btn btn-success float-right"><i class="fas fa-plus"></i> Add Alert</a>
           </div>
       
         <div class="col-md-5 text-center offset-3 mt-2">
@@ -48,7 +48,7 @@
     <div class="card-body">
       <table id="all-alert" class="table table-bordered table-striped">
         <thead>
-          <tr>
+          <tr class="bg-success">
             <th>SL NO</th>
             <th>Name</th>
             <th>Duration</th>
@@ -83,7 +83,12 @@
 <script>
 
   $(document).ready( function(){
-    $('#all-alert').DataTable();
+    $('#all-alert').DataTable({
+          "info": true,
+          "autoWidth": false,
+          scrollX:'50vh', 
+          scrollY:'50vh',
+    });
   });
 
 </script>

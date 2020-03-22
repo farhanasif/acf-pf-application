@@ -27,14 +27,43 @@
           <div class="float-sm-right">
           <a href="" class="btn btn-success">Batch Upload</a> 
           <a href="" class="btn btn-success">Download Sample Excel</a> 
-            <a href="{{route('add-user')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Employeer</a>
+            <a href="{{route('add-user')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add Employeer</a>
           </div>
+
+          <div class="col-md-6 offset-3 mt-2">
+            @if ($message = Session::get('success'))
+              <div class="alert alert-success alert-block text-center">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+              </div>
+            @endif
+
+            @if ($message = Session::get('error'))
+              <div class="alert alert-danger alert-block text-center">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+              </div>
+           @endif
+
+            @if ($errors->any())
+                <div class="alert alert-warning">
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+                </div>
+            @endif
+        </div>
+
     </div>
     <!-- /.card-header -->
     <div class="card-body">
       <table id="all-user" class="table table-bordered table-striped">
         <thead>
-        <tr>
+          <tr class="bg-success">
           <th>SL NO</th>
           <th>Name</th>
           <th>Staff Code</th>

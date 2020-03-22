@@ -45,7 +45,7 @@
         <div class="float-sm-right">
           <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 
           <a href="{{url('download_excel/employee/employee.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
-          <a href="{{route('add-employee')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Employee</a>
+          <a href="{{route('add-employee')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add Employee</a>
         </div>
 
 
@@ -207,7 +207,7 @@
       <table id="all-employee" class="table table-bordered table-striped">
         <thead>
 
-        <tr class="bg-primary">
+        <tr class="bg-success">
           <th>SL NO</th>
           <th>Staff Code</th>
           <th>Name</th>
@@ -338,7 +338,7 @@
 
    $(document).ready(function(){
 
-
+// ---------------------START TOP HEADING SEARCHING -------------------
     // $('#all-employee thead tr').clone(true).appendTo( '#all-employee thead' );
     // $('#all-employee thead tr:eq(1) th').each( function (i) {
     //     var title = $(this).text();
@@ -364,9 +364,11 @@
     //         leftColumns: 2
     //     }
     // } );
+// ---------------------END TOP HEADING SEARCHING -------------------
 
 
 
+// ---------------------START BOTTOM SEARCHING -------------------
     $('#all-employee tfoot th').each( function () {
         var title = $(this).text();
         $(this).html( '<input type="text"  class="form-control" placeholder="'+title+'" />' );
@@ -399,8 +401,48 @@
             }
         } );
     } );
-
+// ---------------------END BOTTOM SEARCHING -------------------
     
+
+// ---------------------START DROPDOWN SEARCHING -------------------
+
+    // $('#all-employee').DataTable( {
+
+    //             scrollX:'50vh', 
+    //       scrollY:'50vh',
+    //       scrollCollapse: true,
+    //       fixedColumns: true,
+    //       fixedColumns:   {
+    //         leftColumns: 2
+    //     },
+
+    //     initComplete: function () {
+    //         this.api().columns().every( function () {
+    //             var column = this;
+    //             var select = $('<select class="select2bs4" style="width:120px;" ><option value=""></option></select>')
+    //                 .appendTo( $(column.footer()).empty() )
+    //                 .on( 'change', function () {
+    //                     var val = $.fn.dataTable.util.escapeRegex(
+    //                         $(this).val()
+    //                     );
+ 
+    //                     column
+    //                         .search( val ? '^'+val+'$' : '', true, false )
+    //                         .draw();
+    //                 } );
+ 
+    //             column.data().unique().sort().each( function ( d, j ) {
+    //                 select.append( '<option value="'+d+'">'+d+'</option>' )
+    //             } );
+    //         } );
+    //     }
+    // } );
+
+// ---------------------END DROPDOWN SEARCHING -------------------
+
+
+
+
     //START CUSTOM SEARCH 
     // fill_datatable();
     

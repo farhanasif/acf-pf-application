@@ -28,7 +28,7 @@
             <h3 class="card-title">All Department Information</h3>
         </div>
         <div class="col-md-6 ">
-            <a href="{{route('add-department')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add Department</a>
+            <a href="{{route('add-department')}}" class="btn btn-success float-right"><i class="fas fa-plus"></i> Add Department</a>
         </div>
       </div>
   
@@ -52,7 +52,7 @@
     <div class="card-body">
       <table id="all-department" class="table table-bordered table-striped">
         <thead>
-          <tr>
+          <tr class="bg-success">
             <th>SL NO</th>
             <th>Department Name</th>
             <th>Department Code</th>
@@ -85,7 +85,12 @@
 <script>
 
   $(document).ready( function(){
-    $('#all-department').DataTable();
+    $('#all-department').DataTable({
+          "info": true,
+          "autoWidth": false,
+          scrollX:'50vh', 
+          scrollY:'50vh',
+    });
   });
 
 </script>

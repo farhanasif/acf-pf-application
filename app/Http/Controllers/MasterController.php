@@ -557,7 +557,7 @@ class MasterController extends Controller
     $alerts->save();
     // $users->update($request->all());
 
-    return redirect()->route('all-duration')->with('success', 'Alert updated Successfully');
+    return redirect()->route('all-alert')->with('success', 'Alert updated Successfully');
    }
 
    public function delete_alert($id)

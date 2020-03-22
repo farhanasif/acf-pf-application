@@ -50,7 +50,7 @@
         <form class="form-horizontal form-label-left" action="{{route('update-interest-source',$interest_source->id)}}" method="post">
              @csrf
             <div class="form-group row">
-              <label for="name" class="col-form-label col-md-3 col-sm-4 label-align">Name</label>
+              <label for="name" class="col-form-label col-md-3 col-sm-4 label-align"> Interest Source  Name</label>
               <div class="col-md-6 col-sm-6 ">
               <input type="text" class="form-control" name="name" placeholder="Name" value="{{$interest_source->name}}">
               </div>

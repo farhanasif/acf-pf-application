@@ -27,7 +27,7 @@
           <h3 class="card-title">All Employee Status Information</h3>
         </div>
         <div class="col-md-6 ">
-            <a href="{{route('add-employee-status')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add Employee Status</a>
+            <a href="{{route('add-employee-status')}}" class="btn btn-success float-right"><i class="fas fa-plus"></i> Add Employee Status</a>
         </div>
       </div>
 
@@ -52,7 +52,7 @@
     <div class="card-body">
       <table id="all-employee-status" class="table table-bordered table-striped">
         <thead>
-          <tr>
+          <tr class="bg-success">
             <th>SL NO</th>
             <th>Employee Status Name</th>
             <th>Employee Status Description</th>
@@ -88,7 +88,12 @@
 @section('customjs')  
 <script>
     $(document).ready( function(){
-      $('#all-employee-status').DataTable();
+      $('#all-employee-status').DataTable({
+        "info": true,
+          "autoWidth": false,
+          scrollX:'50vh', 
+          scrollY:'50vh',
+      });
     });
 </script>
 @endsection

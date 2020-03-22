@@ -61,7 +61,7 @@
 	            <select class="form-control select2bs4" name="staff_code">
                 <option value="">--select--</option>
                 @foreach ($provident_funds as $provident_fund)
-                <option <?php echo ($provident_fund== '--select--') ? "selected" : "--select--"; ?> value="{{$provident_fund->staff_code}}">{{$provident_fund->staff_code}}</option>
+                <option  value="{{$provident_fund->staff_code}}">{{ sprintf("%04d", $provident_fund->staff_code)}}</option>
                 @endforeach
 
 	            </select>
