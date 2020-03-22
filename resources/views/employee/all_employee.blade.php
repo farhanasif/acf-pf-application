@@ -1,5 +1,21 @@
 @extends('master')
 @section('customcss') 
+
+  <style>
+    tfoot input {
+        width: 100%;
+        /* padding: 6px; */
+        /* box-sizing: border-box; */
+    }
+     th input {
+        width: 90%;
+    }
+
+    /* tfoot{
+      display: table-header-group;
+    } */
+  </style>
+
   <link rel="stylesheet" href="{{asset('/')}}theme/plugins/datatables-fixedcolumns/css/fixedColumns.bootstrap4.min.css">
 @endsection
 @section('content')
@@ -11,7 +27,7 @@
         <h1>All Employee Information</h1>
       </div>
       <div class="col-sm-6">
-        <ol class="breadcrumb">
+        <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
           <li class="breadcrumb-item active"><a href="javascript:void(0)">Employee</a></li>
           <li class="breadcrumb-item active"><a href="javascript:void(0)">All Employee Information</a></li>
@@ -63,10 +79,135 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
+      {{-- <form role="form">
+        <div class="row">
+
+          <div class="col-sm-3">
+            <div class="form-group">
+            <label>Staff Code</label>
+            <select class="custom-select select2bs4 " id="staff_code" name="staff_code">
+                <option value="">--select--</option>
+
+                @foreach ($employees as $employee)
+                  <option value="{{ sprintf("%04d", $employee->staff_code)}}"> {{ sprintf("%04d", $employee->staff_code)}} </option>
+                @endforeach
+              
+            </select>
+            </div>
+          </div>
+
+            <div class="col-sm-3">
+                <!-- select -->
+                <div class="form-group">
+                <label>Name</label>
+                <select class="custom-select select2bs4" id="first_name" name="first_name">
+                    <option value="">--select--</option>
+                      @foreach ($employees as $employee)
+                        <option value="{{$employee->first_name}} {{$employee->last_name}}"> {{$employee->first_name}} {{$employee->last_name}} </option>
+                      @endforeach
+                    
+                </select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                <label>Position</label>
+                <select class="custom-select select2bs4" id="position" name="position">
+                    <option value="">--select--</option>
+
+                    @foreach ($employees as $employee)
+                       <option value="{{$employee->position}}"> {{$employee->position}} </option>
+                    @endforeach
+
+                </select>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <!-- select -->
+                <div class="form-group">
+                <label>Department Code</label>
+                <select class="custom-select select2bs4" id="department_code" name="department_code">
+                    <option value="">--select--</option>
+
+                    @foreach ($employees as $employee)
+                      <option value="{{$employee->department_code}}"> {{$employee->department_code}} </option>
+                    @endforeach
+
+                </select>
+                </div>
+            </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                    <label>Category</label>
+                    <select class="custom-select select2bs4" id="category" name="category">
+                        <option value="">--select--</option>
+
+                        @foreach ($employees as $employee)
+                          <option value="{{$employee->category}}"> {{$employee->category}} </option>
+                        @endforeach
+
+                    </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <!-- select -->
+                    <div class="form-group">
+                    <label>Level</label>
+                    <select class="custom-select select2bs4" id="level" name="level">
+                        <option value="">--select--</option>
+
+                        @foreach ($employees as $employee)
+                          <option value="{{$employee->level}}"> {{$employee->level}} </option>
+                        @endforeach
+
+                    </select>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                    <label>Base</label>
+                    <select class="custom-select select2bs4" id="base" name="base">
+                        <option value="">--select--</option>
+
+                        @foreach ($employees as $employee)
+                         <option value="{{$employee->base}}"> {{$employee->base}} </option>
+                        @endforeach
+
+                    </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <!-- select -->
+                    <div class="form-group">
+                    <label>Work Place</label>
+                    <select class="custom-select select2bs4" id="work_place" name="work_place">
+                        <option value="">--select--</option>
+
+                        @foreach ($employees as $employee)
+                          <option value="{{$employee->work_place}}"> {{$employee->work_place}}</option>
+                        @endforeach
+
+                    </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-5">
+              <button type="submit" id="search" class="btn btn-success">Search</button>
+              <button type="submit" id="reset" class="btn btn-info float-sm-right">Reset</button>
+            </div>
+     </form> --}}
+       
       <table id="all-employee" class="table table-bordered table-striped">
         <thead>
 
-        <tr>
+        <tr class="bg-primary">
           <th>SL NO</th>
           <th>Staff Code</th>
           <th>Name</th>
@@ -133,6 +274,27 @@
         </tr>
         @endforeach
        </tbody>
+
+        <tfoot>
+          <tr>
+            <th style="display:none;"></th>
+            <th>Staff Code</th>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Department Code</th>
+            <th>Category</th>
+            <th>Level</th>
+            <th>Base</th>
+            <th>Work Place</th>
+            <th>Sub Location</th>
+            <th style="display:none;"></th>
+            <th style="display:none;"></th>
+            <th style="display:none;"></th>
+            <th style="display:none;"></th>
+            <th style="display:none;"></th>
+          </tr>
+        </tfoot>
+
       </table>
     </div>
     <!-- /.card-body -->
@@ -171,17 +333,46 @@
   @section('customjs')  
       <script>
 
-    $(document).ready( function(){
-      $('#all-employee').DataTable({
-        //    "paging": true,
-        //   // "lengthChange": false,
-        // // "searching": false,
-        //   "ordering": true,
-        // "info": true,
-        // "autoWidth": false,
-        // scrollX:'50vh',
-        // scrollY:'50vh',
-        // scrollCollapse: true,
+   $(document).ready(function(){
+
+
+    // $('#all-employee thead tr').clone(true).appendTo( '#all-employee thead' );
+    // $('#all-employee thead tr:eq(1) th').each( function (i) {
+    //     var title = $(this).text();
+    //     $(this).html( '<input type="text" class="form-control" placeholder=" '+title+'" />' );
+ 
+    //     $( 'input', this ).on( 'keyup change', function () {
+    //         if ( table.column(i).search() !== this.value ) {
+    //             table
+    //                 .column(i)
+    //                 .search( this.value )
+    //                 .draw();
+    //         }
+    //     } );
+    // } );
+ 
+    // var table = $('#all-employee').DataTable( {
+    //     orderCellsTop: true,
+    //     fixedHeader: true,
+    //     scrollX:'50vh',
+    //     scrollY:'50vh',
+    //     fixedColumns: true,
+    //     fixedColumns:   {
+    //         leftColumns: 2
+    //     }
+    // } );
+
+
+
+    $('#all-employee tfoot th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" class="form-control" placeholder="Search '+title+'" />' );
+    } );
+ 
+    // DataTable
+    // var table = $('#all-employee').DataTable();
+    
+    var table = $('#all-employee').DataTable({
           "info": true,
           "autoWidth": false,
           scrollX:'50vh', 
@@ -192,6 +383,165 @@
             leftColumns: 2
         }
       });
+ 
+    // Apply the search
+    table.columns().every( function () {
+        var that = this;
+ 
+        $( 'input', this.footer() ).on( 'keyup change clear', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+
+    
+    //START CUSTOM SEARCH 
+    // fill_datatable();
+    
+    // function fill_datatable(staff_code = '', first_name = '', category = '', level = '', base ='',work_place = '',position = '',department_code = '')
+    // {
+    //     var dataTable = $('#all-employee').DataTable({
+    //         processing: true,
+    //         serverSide: true,
+    //         ajax:{
+    //             url: "{{ route('custom-search-employee') }}",
+    //             method:post,
+    //             data:{
+    //               staff_code:staff_code, 
+    //               first_name:first_name,
+    //               category:category, 
+    //               level:level,
+    //               base:base, 
+    //               work_place:work_place,
+    //               position:position, 
+    //               department_code:department_code
+    //               }
+    //         },
+    //         columns: [
+    //             {
+    //                 data:'staff_code',
+    //                 name:'staff_code'
+    //             },
+    //             {
+    //                 data:'first_name',
+    //                 name:'first_name'
+    //             },
+    //             {
+    //                 data:'category',
+    //                 name:'category'
+    //             },
+    //             {
+    //                 data:'level',
+    //                 name:'level'
+    //             },
+    //             {
+    //                 data:'base',
+    //                 name:'base'
+    //             },
+    //             {
+    //                 data:'position',
+    //                 name:'position'
+    //             },
+
+    //             {
+    //                 data:'department_code',
+    //                 name:'department_code'
+    //             }
+    //         ]
+    //     });
+    // }
+
+    // $('#search').click(function(){
+    //     var staff_code = $('#staff_code').val();
+    //     var first_name = $('#first_name').val();
+    //     var category = $('#category').val();
+    //     var level = $('#level').val();
+    //     var base = $('#base').val();
+    //     var position = $('#position').val();
+    //     var department_code = $('#department_code').val();
+
+    //     if(staff_code != '' &&  first_name != '' &&  category != '' &&  level != '' &&  base != '' &&  position != '' &&  department_code != '')
+    //     {
+    //         $('#all-employee').DataTable().destroy();
+    //         fill_datatable(staff_code, first_name,category,level,base,position,department_code);
+    //     }
+
+    //     else if(staff_code != '')
+    //     {
+    //       $('#all-employee').DataTable().destroy();
+    //         fill_datatable(staff_code);
+    //     }
+
+    //     else if(first_name != '')
+    //     {
+    //       $('#all-employee').DataTable().destroy();
+    //         fill_datatable(first_name);
+    //     }
+
+    //     else if(category != '')
+    //     {
+    //       $('#all-employee').DataTable().destroy();
+    //         fill_datatable(category);
+    //     }
+
+    //     else if(level != '')
+    //     {
+    //       $('#all-employee').DataTable().destroy();
+    //         fill_datatable(category);
+    //     }
+
+    //     else if(base != '')
+    //     {
+    //       $('#all-employee').DataTable().destroy();
+    //         fill_datatable(base);
+    //     }
+
+    //     else if(position != '')
+    //     {
+    //       $('#all-employee').DataTable().destroy();
+    //         fill_datatable(position);
+    //     }
+
+    //     else if(department_code != '')
+    //     {
+    //       $('#all-employee').DataTable().destroy();
+    //         fill_datatable(department_code);
+    //     }
+
+    //     else
+    //     {
+    //         alert('Select Both filter option');
+    //     }
+    // });
+
+    // $('#reset').click(function(){
+    //     $('#filter_gender').val('');
+    //     $('#filter_country').val('');
+    //     $('#all-employee').DataTable().destroy();
+    //     fill_datatable();
+    // });
+
+    //END CUSTOM SEARCH 
+
+      // $('#all-employee').DataTable({
+      //     "info": true,
+      //     "autoWidth": false,
+      //     scrollX:'50vh', 
+      //     scrollY:'50vh',
+      //     scrollCollapse: true,
+      //     fixedColumns: true,
+      //     fixedColumns:   {
+      //       leftColumns: 2
+      //   }
+      // });
+
+      $('.select2bs4').select2({
+        theme: 'bootstrap4',
+      })
+
     });
   
     </script>

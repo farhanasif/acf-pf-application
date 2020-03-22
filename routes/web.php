@@ -553,6 +553,12 @@ Route::group(['middleware' => 'admin'], function () {
 			'as'		=> 'delete-employee'
 		]);
 
+		Route::post('/custom-search-employee', [
+			'uses'		=> 'EmployeeController@customSearchEmployee',
+			'as'		=> 'custom-search-employee'
+		]);
+
+
 
 		//PF Deposit insert update edit and  excel upload
 		Route::get('/add-provident-fund', [

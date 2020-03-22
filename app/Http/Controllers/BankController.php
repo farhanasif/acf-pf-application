@@ -16,9 +16,9 @@ class BankController extends Controller
     * @return \Illuminate\Support\Collection
     */
 
-   public function view_blank(){
-        return view('blank');
-    }
+//    public function view_blank(){
+//         return view('blank');
+//     }
 
     public function view_transaction(){
         $accountHeads = AccountHead::all();

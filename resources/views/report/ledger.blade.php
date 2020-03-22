@@ -127,7 +127,7 @@
                 </div>
                 </div>
 
-                {{-- <div class="row">
+                <div class="row">
                     <div class="col-sm-3">
                         <!-- select -->
                         <div class="form-group">
@@ -203,7 +203,7 @@
                             </select>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
             </form>
             </div>
             <!-- /.card-body -->

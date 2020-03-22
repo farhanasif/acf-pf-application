@@ -172,6 +172,7 @@ class EmployeeController extends Controller
        // $employees->updated_by = Auth::user()->id;
        // $employees->save();
        // return back();
+
        $data = array();
        $data['staff_code'] = $request->staff_code;
        $data['first_name'] = $request->first_name;
@@ -190,6 +191,7 @@ class EmployeeController extends Controller
        $data['ending_date'] = $request->ending_date;
        $data['created_by'] = Auth::user()->id;
        $data['updated_by'] =  Auth::user()->id;
+
        $provident_fund = DB::table('employees')->insert($data);
        return back()->with('success', 'Employees Added Successfully.');
     }
@@ -237,5 +239,92 @@ class EmployeeController extends Controller
     {
       DB::table('employees')->where('id',$id)->delete();
       return redirect()->back();
+    }
+
+    public function customSearchEmployee(Request $request)
+    {
+        if(request()->ajax())
+          {
+            if($request->all())
+              {
+                $data = DB::table('employees')
+                ->select('staff_code','first_name', 'position', 'department_code', 'category', 'level', 'base','work_place')
+                ->where('staff_code', $request->staff_code)
+                ->where('first_name', $request->first_name)
+                ->where('position', $request->position)
+                ->where('department_code', $request->department_code)
+                ->where('category', $request->category)
+                ->where('level', $request->level)
+                ->where('base', $request->base)
+                ->where('work_place', $request->work_place)
+                ->get();
+                dd($data);
+                exit;
+              }
+          
+          else if($request->staff_code){
+            $data = DB::table('employees')
+                   ->select('staff_code')
+                   ->where('staff_code', $request->staff_code)
+                   ->first();
+          }
+
+          else if($request->first_name){
+            $data = DB::table('employees')
+                   ->select('first_name')
+                   ->where('first_name', $request->first_name)
+                   ->first();
+          }
+
+          else if($request->position){
+            $data = DB::table('employees')
+                   ->select('position')
+                   ->where('position', $request->position)
+                   ->first();
+          }
+
+          else if($request->department_code){
+            $data = DB::table('employees')
+                   ->select('department_code')
+                   ->where('department_code', $request->department_code)
+                   ->first();
+          }
+
+          else if($request->category){
+            $data = DB::table('employees')
+                   ->select('category')
+                   ->where('category', $request->category)
+                   ->first();
+          }
+
+          else if($request->base){
+            $data = DB::table('employees')
+                   ->select('base')
+                   ->where('base', $request->base)
+                   ->first();
+          }
+
+          else if($request->level){
+            $data = DB::table('employees')
+                   ->select('level')
+                   ->where('level', $request->level)
+                   ->first();
+          }
+
+          else if($request->work_place){
+            $data = DB::table('employees')
+                   ->select('work_place')
+                   ->where('work_place', $request->work_place)
+                   ->first();
+          }
+
+          else{
+            echo 'Not Found';
+          }
+
+          return datatables()->of($data)->make(true);
+
+        }
+
     }
 }

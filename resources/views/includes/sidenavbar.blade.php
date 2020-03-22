@@ -16,7 +16,7 @@
           <img src="{{ asset('theme/dist/img/user1-128x128.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+          <a href="javascript:void(0)" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -251,7 +251,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="javascript:void(0)" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Reports
