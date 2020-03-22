@@ -330,6 +330,9 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- END EMPLOYEE BATCH UPLOAD MODAL -->
+
+ @endsection
+ 
   @section('customjs')  
       <script>
 
@@ -366,7 +369,7 @@
 
     $('#all-employee tfoot th').each( function () {
         var title = $(this).text();
-        $(this).html( '<input type="text" class="form-control" placeholder="Search '+title+'" />' );
+        $(this).html( '<input type="text"  class="form-control" placeholder="'+title+'" />' );
     } );
  
     // DataTable
@@ -549,5 +552,5 @@
 
   @endsection
 
-  @endsection
+ 
 
