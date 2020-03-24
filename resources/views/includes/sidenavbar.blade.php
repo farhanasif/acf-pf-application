@@ -328,7 +328,7 @@
             <a href="javascript:void(0)" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-                Reconciliation
+                Bank Book
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>

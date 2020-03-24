@@ -128,7 +128,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-3">
+                    {{-- <div class="col-sm-3">
                         <!-- select -->
                         <div class="form-group">
                         <label>Name</label>
@@ -136,7 +136,7 @@
                             <option value="2019-01-01">--select--</option>
                         </select>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-sm-3">
                         <div class="form-group">
                         <label>Position</label>
@@ -185,14 +185,14 @@
                             </select>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        {{-- <div class="col-sm-3">
                             <div class="form-group">
                             <label>Base</label>
                             <select class="custom-select" id="to_date">
                                 <option value="2019-01-31">--select--</option>
                             </select>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="col-sm-3">
                             <!-- select -->

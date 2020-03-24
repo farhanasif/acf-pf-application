@@ -12,8 +12,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active"><a href="#">Admin Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+              <li class="breadcrumb-item active"><a href="javascript:void(0)">Admin Dashboard</a></li>
             </ol>
           </div>
         </div>
@@ -29,7 +29,7 @@
           <span class="info-box-icon bg-info elevation-1"><i class="fas fa-money-check"></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Provident Fund</span>
+            <span class="info-box-text">PF Ledger Amount</span>
             <span class="info-box-number">
               10
               <small>%</small>
@@ -45,7 +45,7 @@
           <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-money-check"></i></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Loans Amount</span>
+            <span class="info-box-text">Employee Contribution</span>
             <span class="info-box-number">41,410</span>
           </div>
           <!-- /.info-box-content -->
@@ -62,7 +62,7 @@
           <span class="info-box-icon bg-success elevation-1"><i class="fas fa-calendar-week"></i></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Months</span>
+            <span class="info-box-text">Employeer Contribution</span>
             <span class="info-box-number">760</span>
           </div>
           <!-- /.info-box-content -->
@@ -134,7 +134,7 @@
                 </p>
 
                 <div class="progress-group">
-                  Provident Fund Staff
+                  Employee Under PF
                   <span class="float-right"><b>1400</b>/2000</span>
                   <div class="progress progress-sm">
                     <div class="progress-bar bg-primary" style="width: 80%"></div>
@@ -152,7 +152,7 @@
 
                 <!-- /.progress-group -->
                 <div class="progress-group">
-                  <span class="progress-text">Months Execution</span>
+                  <span class="progress-text">Total Investment</span>
                   <span class="float-right"><b>38</b>/48</span>
                   <div class="progress progress-sm">
                     <div class="progress-bar bg-success" style="width: 60%"></div>
@@ -171,7 +171,7 @@
                 <div class="description-block border-right">
                   <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 40%</span>
                   <h5 class="description-header">49,627.06</h5>
-                  <span class="description-text">TOTAL PF AMOUNT</span>
+                  <span class="description-text">TOTAL BALANCE IN ACCOUNT</span>
                 </div>
                 <!-- /.description-block -->
               </div>
@@ -180,7 +180,7 @@
                 <div class="description-block border-right">
                   <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 20%</span>
                   <h5 class="description-header">$24,813.53</h5>
-                  <span class="description-text">TOTAL ORGANIZATION</span>
+                  <span class="description-text">TOTAL INVESTMENT</span>
                 </div>
                 <!-- /.description-block -->
               </div>
@@ -189,7 +189,7 @@
                 <div class="description-block border-right">
                   <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span>
                   <h5 class="description-header">$24,813.53</h5>
-                  <span class="description-text">TOTAL EMPLOYEE AMOUNT</span>
+                  <span class="description-text">TOTAL LOAN AMOUNT</span>
                 </div>
                 <!-- /.description-block -->
               </div>
