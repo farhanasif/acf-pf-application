@@ -236,7 +236,7 @@
               {
             ?>
             <td class="bg-danger text-bold">
-              <a href="{{route('edit-employee',$employee->id)}}">
+              <a href="{{route('employee-details',$employee->id)}}">
                 {{ sprintf("%04d", $employee->staff_code)}}
               </a>
             </td>
@@ -245,13 +245,13 @@
             else { 
         ?>
               <td class="bg-success text-bold">
-                <a href="{{route('edit-employee',$employee->id)}}">
+                <a href="{{route('employee-details',$employee->id)}}">
                   {{sprintf("%04d", $employee->staff_code)}}
                 </a>
               </td>
         <?php } ?>
           <td>
-            <a href="{{route('edit-employee',$employee->id)}}">
+            <a href="{{route('employee-details',$employee->id)}}">
               {{$employee->first_name}} {{$employee->last_name}}
             </a>
           </td>

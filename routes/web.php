@@ -553,6 +553,11 @@ Route::group(['middleware' => 'admin'], function () {
 			'as'		=> 'delete-employee'
 		]);
 
+		Route::get('/employee-details/{id}', [
+			'uses'		=> 'EmployeeController@employee_details',
+			'as'		=> 'employee-details'
+		]);
+
 		Route::post('/custom-search-employee', [
 			'uses'		=> 'EmployeeController@customSearchEmployee',
 			'as'		=> 'custom-search-employee'

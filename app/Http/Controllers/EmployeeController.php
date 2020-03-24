@@ -72,34 +72,34 @@ class EmployeeController extends Controller
         foreach ($result as $key => $value) {
           foreach ($value as $row) {
             
-            $result = DB::table('employees')->where('staff_code',$row[0])->first();
-              if(!empty($result))
-              {
-                $update_data[] =array(
-                  // 'staff_code' =>$row[0],
-                  // 'trimmed' =>$row[0],
-                  'first_name' =>$row[1],
-                  'last_name' =>$row[2],
-                  'position' =>$row[3],
-                  // 'department_code' =>NULL,
-                  'category' =>$row[4],
-                  'level' =>$row[5],
-                  'joining_date' =>date($row[7]),
-                  // 'ending_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[9]),
-                  'ending_date' =>date($row[9]),
-                  'base' =>$row[10],
-                  'work_place' =>$row[10],
-                  // 'sub_location' =>NULL,
-                  'basic_salary' =>$row[12],
-                  'gross_salary' =>$row[13],
-                  'pf_amount' =>$row[16],
-                  // 'pf_percentage' =>$NULL,
-                  'status' =>1,
-                  'created_by' =>Auth::user()->id,
-                  'updated_by' =>Auth::user()->id,
-                  );
-              }
-              else{
+            // $result = DB::table('employees')->where('staff_code',$row[0])->first();
+            //   if(!empty($result))
+            //   {
+            //     $update_data[] =array(
+            //       // 'staff_code' =>$row[0],
+            //       // 'trimmed' =>$row[0],
+            //       'first_name' =>$row[1],
+            //       'last_name' =>$row[2],
+            //       'position' =>$row[3],
+            //       // 'department_code' =>NULL,
+            //       'category' =>$row[4],
+            //       'level' =>$row[5],
+            //       'joining_date' =>date($row[7]),
+            //       // 'ending_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[9]),
+            //       'ending_date' =>date($row[9]),
+            //       'base' =>$row[10],
+            //       'work_place' =>$row[10],
+            //       // 'sub_location' =>NULL,
+            //       'basic_salary' =>$row[12],
+            //       'gross_salary' =>$row[13],
+            //       'pf_amount' =>$row[16],
+            //       // 'pf_percentage' =>$NULL,
+            //       'status' =>1,
+            //       'created_by' =>Auth::user()->id,
+            //       'updated_by' =>Auth::user()->id,
+            //       );
+            //   }
+            //   else{
                 $insert_data[] =array(
                   // 'staff_code' =>$row[0],
                   // 'trimmed' =>$row[0],
@@ -123,13 +123,13 @@ class EmployeeController extends Controller
                   'created_by' =>Auth::user()->id,
                   'updated_by' =>Auth::user()->id,
               );
-              }
+              // }
           }
       }
 
         // dd($insert_data);
         // exit;
-        //         dd($insert_data[7]);
+        // dd($insert_data[7]);
         // exit;
 
       if (!empty($insert_data)) {
@@ -137,10 +137,10 @@ class EmployeeController extends Controller
           return back()->with('success','Employees batch import successfully');
       }
  
-      if (!empty($update_data)) {
-        DB::table('employees')->update($update_data);
-        return back()->with('success','Employees batch updated successfully');
-       }
+      // if (!empty($update_data)) {
+      //   DB::table('employees')->update($update_data);
+      //   return back()->with('success','Employees batch updated successfully');
+      //  }
       }
   
     
@@ -194,6 +194,12 @@ class EmployeeController extends Controller
 
        $provident_fund = DB::table('employees')->insert($data);
        return back()->with('success', 'Employees Added Successfully.');
+    }
+
+    public function employee_details($id)
+    {
+      $employee_details = Employee::all();
+      return view('employee.employee_details',compact('employee_details'));
     }
 
     public function edit_employee($id)
