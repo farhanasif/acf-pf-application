@@ -35,3 +35,7 @@ Route::get('/monthy-bank-book', 'BankController@get_monthly_bank_book');
 Route::get('/save-monthly-bank-book', 'BankController@save_monthly_bank_book');
 //-------------------RECONCILIATION ROUTES-------------------//
 
+Route::get('/employeedetails', function () {
+    return view('employeedetails');
+});
+
