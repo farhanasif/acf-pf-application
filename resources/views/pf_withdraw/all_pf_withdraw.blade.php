@@ -133,6 +133,7 @@
 <script>
 
 $(document).ready( function(){
+
 $('#all-pf-withdraw').DataTable({
     "info": true,
     "autoWidth": false,
@@ -143,6 +144,7 @@ $('#all-pf-withdraw').DataTable({
     leftColumns: 2
 }
 });
+
 });
 </script>
 @endsection

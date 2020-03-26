@@ -196,10 +196,28 @@ class EmployeeController extends Controller
        return back()->with('success', 'Employees Added Successfully.');
     }
 
-    public function employee_details($id)
+    public function employee_details($staff_code)
     {
-      $employee_details = Employee::all();
-      return view('employee.employee_details',compact('employee_details'));
+      $employees = DB::table('employees')->where('staff_code', $staff_code)->first();
+
+      $total_pf_amounts = DB::table("pf_deposit")->SUM('total_pf');
+
+      $pf_deposits = DB::table('pf_deposit')
+                    ->orderBy('deposit_date', 'asc')
+                    ->where('staff_code', $staff_code)
+                    ->get();
+
+      $levels = Level::all();
+      $positions = Position::all();
+      $categories = Category::all();
+      $bases = Base::all();
+      $sub_locations = Sub_location::all();
+      $work_places = Work_place::all();
+      $departments = DB::table('departments')->get();
+
+      return view('employee.employee_details',compact('employees','pf_deposits','total_pf_amounts','departments','work_places','levels','positions','categories','bases','sub_locations'));       
+
+      // return view('employee.employee_details',compact('employees','pf_deposits','total_pf_amounts'));
     }
 
     public function edit_employee($id)
@@ -215,7 +233,7 @@ class EmployeeController extends Controller
       return view('employee.edit_employee',compact('employee','departments','work_places','levels','positions','categories','bases','sub_locations'));
       // return view('employee.edit_employee',compact('employee'));
     }
-    public function update_employee(Request $request, $id)
+    public function update_employee(Request $request, $staff_code)
     {
       $data = array();
       $data['staff_code'] = $request->staff_code;
@@ -237,7 +255,7 @@ class EmployeeController extends Controller
       $data['created_by'] = Auth::user()->id;
       $data['updated_by'] =  Auth::user()->id;
 
-      DB::table('employees')->where('id',$id)->update($data);
+      DB::table('employees')->where('staff_code',$staff_code)->update($data);
       return redirect()->route('all-employee')->with('success', 'Employee Updated Successfully.');
     }
 

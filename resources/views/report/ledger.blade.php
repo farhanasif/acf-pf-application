@@ -29,7 +29,7 @@
             <div class="card-body">
             <form role="form">
                 <div class="row">
-                <div class="col-sm-6">
+                <div class="col-md-3">
                     <!-- select -->
                     <div class="form-group">
                     <label>From Month</label>
@@ -78,7 +78,7 @@
                     </select>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-md-3">
                     <div class="form-group">
                     <label>To Month</label>
                     <select class="custom-select select2bs4" id="to_date">
@@ -125,38 +125,30 @@
                     </select>
                     </div>
                 </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                    <label>Position</label>
+                    <select class="custom-select" id="to_date">
+                        <option value="2019-01-31">--select--</option>
+                    </select>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <!-- select -->
+                    <div class="form-group">
+                    <label>Department Code</label>
+                    <select class="custom-select" id="from_date">
+                        <option value="2019-01-01">--select--</option>
+                    </select>
+                    </div>
+                </div>
+
                 </div>
 
                 <div class="row">
-                    {{-- <div class="col-sm-3">
-                        <!-- select -->
-                        <div class="form-group">
-                        <label>Name</label>
-                        <select class="custom-select" id="from_date" >
-                            <option value="2019-01-01">--select--</option>
-                        </select>
-                        </div>
-                    </div> --}}
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                        <label>Position</label>
-                        <select class="custom-select" id="to_date">
-                            <option value="2019-01-31">--select--</option>
-                        </select>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3">
-                        <!-- select -->
-                        <div class="form-group">
-                        <label>Department Code</label>
-                        <select class="custom-select" id="from_date">
-                            <option value="2019-01-01">--select--</option>
-                        </select>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3">
+                    <div class="col-md-3">
                         <div class="form-group">
                         <label>Sub Location</label>
                         <select class="custom-select" id="to_date">
@@ -164,46 +156,40 @@
                         </select>
                         </div>
                     </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                            <label>Category</label>
-                            <select class="custom-select" id="to_date">
-                                <option value="2019-01-31">--select--</option>
-                            </select>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <!-- select -->
-                            <div class="form-group">
-                            <label>Level</label>
-                            <select class="custom-select" id="from_date">
-                                <option value="2019-01-01">--select--</option>
-                            </select>
-                            </div>
-                        </div>
-                        {{-- <div class="col-sm-3">
-                            <div class="form-group">
-                            <label>Base</label>
-                            <select class="custom-select" id="to_date">
-                                <option value="2019-01-31">--select--</option>
-                            </select>
-                            </div>
-                        </div> --}}
-
-                        <div class="col-sm-3">
-                            <!-- select -->
-                            <div class="form-group">
-                            <label>Work Place</label>
-                            <select class="custom-select" id="from_date">
-                                <option value="2019-01-01">--select--</option>
-                            </select>
-                            </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                        <label>Category</label>
+                        <select class="custom-select" id="to_date">
+                            <option value="2019-01-31">--select--</option>
+                        </select>
                         </div>
                     </div>
+
+                    <div class="col-md-3">
+                        <!-- select -->
+                        <div class="form-group">
+                        <label>Level</label>
+                        <select class="custom-select" id="from_date">
+                            <option value="2019-01-01">--select--</option>
+                        </select>
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-md-3">
+                        <!-- select -->
+                        <div class="form-group">
+                        <label>Work Place</label>
+                        <select class="custom-select" id="from_date">
+                            <option value="2019-01-01">--select--</option>
+                        </select>
+                        </div>
+                    </div>
+
+                    </div>
+
+
             </form>
             </div>
             <!-- /.card-body -->

@@ -67,7 +67,7 @@
           <a href="{{route('all-user')}}" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                Employeer Setup
+                Employer Setup
                 {{-- <i class="right fas fa-angle-left"></i> --}}
               </p>
             </a>

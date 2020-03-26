@@ -543,7 +543,7 @@ Route::group(['middleware' => 'admin'], function () {
 			'uses'		=> 'EmployeeController@edit_employee',
 			'as'		=> 'edit-employee'
 		]);
-		Route::post('/update-employee/{id}', [
+		Route::post('/update-employee/{staff_code}', [
 			'uses'		=> 'EmployeeController@update_employee',
 			'as'		=> 'update-employee'
 		]);
@@ -553,7 +553,7 @@ Route::group(['middleware' => 'admin'], function () {
 			'as'		=> 'delete-employee'
 		]);
 
-		Route::get('/employee-details/{id}', [
+		Route::get('/employee-details/{staff_code}', [
 			'uses'		=> 'EmployeeController@employee_details',
 			'as'		=> 'employee-details'
 		]);

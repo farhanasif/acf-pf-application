@@ -260,6 +260,7 @@
                   dataType: 'text',
                   success: function (data) {
                     console.log(data);
+                    table.destroy();
                     generate_book();
                     $('#modal-default').modal('hide');
                 
@@ -273,6 +274,9 @@
 
               
             });
+
+
+                
 
             $('#closeTransaction').click(function() {
               generate_book();
