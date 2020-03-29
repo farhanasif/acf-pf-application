@@ -341,7 +341,7 @@
               <!-- /.tab-pane -->
 
               <div class="tab-pane" id="generalinformation">
-                <form class="form-horizontal" {{route('update-employee',$employees->staff_code)}} method="post">
+                <form class="form-horizontal" action="{{route('update-employee',$employees->staff_code)}}" method="post">
 
                   <div class="form-group row">
                     <label for="inputStaffCode" class="col-sm-2 col-form-label">Staff Code</label>
@@ -488,7 +488,7 @@
                         <option <?php echo ($employees->status == 0) ? "selected" : ""; ?> value="0">Deactive</option>
                       </select>
                     </div>
-                  </div>
+                  </div>   
 
                   <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">
@@ -499,8 +499,10 @@
                       </div>
                     </div>
                   </div>
+
                   <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">
+                      
                       <button type="submit" class="btn btn-success">Update</button>
                     </div>
                   </div>

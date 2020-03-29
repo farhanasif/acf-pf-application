@@ -235,6 +235,7 @@ class EmployeeController extends Controller
     }
     public function update_employee(Request $request, $staff_code)
     {
+      echo 'hi';
       $data = array();
       $data['staff_code'] = $request->staff_code;
       $data['first_name'] = $request->first_name;
