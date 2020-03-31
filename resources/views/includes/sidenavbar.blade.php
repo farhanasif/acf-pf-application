@@ -297,7 +297,7 @@
 
           <li class="nav-item has-treeview">
             <a href="javascript:void(0)" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
+              <i class="fas fa-hand-holding-usd nav-icon"></i>
               <p>
                 Loan Management
                 <i class="fas fa-angle-left right"></i>
@@ -311,7 +311,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="javascript:void(0)" class="nav-link">
+                <a href="{{url('/create-loan')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Loan</p>
                 </a>
