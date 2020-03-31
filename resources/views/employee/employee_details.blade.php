@@ -32,30 +32,42 @@
       </div>
       <div class="card-footer">
         <div class="row">
-          <div class="col-sm-4 border-right">
+          <div class="col-sm-3 border-right">
             <div class="description-block">
-              <h5 class="description-header">3,200 / Month</h5>
+              <h5 class="description-header">{{number_format($maximum_total_pf)}} / Month</h5>
               <span class="description-text">Provident Fund Amount</span>
             </div>
             <!-- /.description-block -->
           </div>
           <!-- /.col -->
-          <div class="col-sm-4 border-right">
+          <div class="col-sm-3 border-right">
             <div class="description-block">
-            <h5 class="description-header">{{$total_pf_amounts}}</h5>
+            <h5 class="description-header">{{number_format($total_pf_amounts)}}</h5>
               <span class="description-text">Total PF Amount</span>
             </div>
             <!-- /.description-block -->
           </div>
+
           <!-- /.col -->
-          <div class="col-sm-4">
+          <div class="col-sm-3 border-right">
             <div class="description-block">
-              <h5 class="description-header">35,000 (1)</h5>
+              <h5 class="description-header"><?php echo $loan_amount ? $loan_amount: '0000'?>(1)</h5>
               <span class="description-text">Loan Amount (Total)</span>
             </div>
             <!-- /.description-block -->
           </div>
           <!-- /.col -->
+
+          <!-- /.col -->
+          <div class="col-sm-3">
+            <div class="description-block">
+              <h5 class="description-header">{{number_format($total_pf_amounts * 80/100)}}</h5>
+              <span class="description-text">LOAN AMOUNT(MAXIMUM)</span>
+            </div>
+            <!-- /.description-block -->
+          </div>
+          <!-- /.col -->
+
         </div>
         <!-- /.row -->
       </div>
@@ -341,26 +353,26 @@
               <!-- /.tab-pane -->
 
               <div class="tab-pane" id="generalinformation">
-                <form class="form-horizontal" action="{{route('update-employee',$employees->staff_code)}}" method="post">
-
+                <form class="form-horizontal">
+                    @csrf
                   <div class="form-group row">
                     <label for="inputStaffCode" class="col-sm-2 col-form-label">Staff Code</label>
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputStaffCode" name="staff_code" placeholder="Staff Code" value="{{ sprintf("%04d", $employees->staff_code)}}">
+                      <input type="email" class="form-control" id="staff_code" name="staff_code" placeholder="Staff Code" value="{{ sprintf("%04d", $employees->staff_code)}}">
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label for="inputName" class="col-sm-2 col-form-label">First Name</label>
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputName" name="first_name" placeholder="First Name" value="{{$employees->first_name}}">
+                      <input type="email" class="form-control" id="first_name" name="first_name" placeholder="First Name" value="{{$employees->first_name}}">
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label for="inputName" class="col-sm-2 col-form-label">Last Name</label>
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputName" name="last_name" placeholder="Last Name" value="{{$employees->last_name}}">
+                      <input type="email" class="form-control" id="last_name" name="last_name" placeholder="Last Name" value="{{$employees->last_name}}">
                     </div>
                   </div>
 
@@ -368,7 +380,7 @@
                   <div class="form-group row">
                     <label for="inputPosition" class="col-sm-2 col-form-label">Position</label>
                     <div class="col-sm-10">
-                      <select name="position" id="" class="form-control select2bs4">
+                      <select name="position" id="position" class="form-control select2bs4">
                         @foreach ($positions as $position)
                           <option <?php echo ($position->position_name) ? "selected" : ""; ?>  value="{{$position->position_name}}">{{$position->position_name}}</option>
                          @endforeach
@@ -379,7 +391,7 @@
                   <div class="form-group row">
                     <label for="inputDepartment_code" class="col-sm-2 col-form-label">Department Code</label>
                     <div class="col-sm-10">
-                      <select name="department_code" id="" class="form-control select2bs4">
+                      <select name="department_code" id="department_code" class="form-control select2bs4">
                         @foreach ($departments as $department)
                           <option <?php echo ($department->department_code) ? "selected" : ""; ?> value="{{$department->department_code}}">{{$department->department_code}}</option>
                         @endforeach
@@ -390,7 +402,7 @@
                   <div class="form-group row">
                     <label for="inputCategory" class="col-sm-2 col-form-label">Category</label>
                     <div class="col-sm-10">
-                      <select name="category" id="" class="form-control select2bs4">
+                      <select name="category" id="category" class="form-control select2bs4">
                         @foreach ($categories as $category)
                           <option <?php echo ($category->category_name) ? "selected" : ""; ?> value="{{$category->category_name}}">{{$category->category_name}}</option>
                         @endforeach
@@ -402,7 +414,7 @@
                     <label for="inputLevel" class="col-sm-2 col-form-label">Level</label>
                     <div class="col-sm-10">
 
-                      <select name="level" id="" class="form-control select2bs4">
+                      <select name="level" id="level" class="form-control select2bs4">
                           @foreach ($levels as $level)
                            <option <?php echo ($level->level_name) ? "selected" : ""; ?> value="{{$level->level_name}}">{{$level->level_name}}</option>
                           @endforeach
@@ -414,7 +426,7 @@
                   <div class="form-group row">
                     <label for="inputBase" class="col-sm-2 col-form-label">Base</label>
                     <div class="col-sm-10">
-                      <select name="base" id="" class="form-control select2bs4">
+                      <select name="base" id="base" class="form-control select2bs4">
                         @foreach ($bases as $base)
                         <option <?php echo ($base->base_name) ? "selected" : ""; ?> value="{{$base->base_name}}">{{$base->base_name}}</option>
                         @endforeach
@@ -425,7 +437,7 @@
                   <div class="form-group row">
                     <label for="inputWorkPlace" class="col-sm-2 col-form-label">Work Place</label>
                     <div class="col-sm-10">
-                      <select name="work_place" id="" class="form-control select2bs4">
+                      <select name="work_place" id="work_place" class="form-control select2bs4">
                         @foreach ($work_places as $work_place)
                           <option <?php echo ($work_place->work_place_name) ? "selected" : ""; ?> value="{{$work_place->work_place_name}}">{{$work_place->work_place_name}}</option>
                         @endforeach
@@ -436,7 +448,7 @@
                   <div class="form-group row">
                     <label for="inputSubLocation" class="col-sm-2 col-form-label">Sub Location</label>
                     <div class="col-sm-10">
-                      <select name="work_place" id="" class="form-control select2bs4" style="width: 100%;">
+                      <select name="sub_location" id="sub_location" class="form-control select2bs4" style="width: 100%;">
                         @foreach ($sub_locations as $sub_location)
                           <option <?php echo ($sub_location->sub_location_name) ? "selected" : ""; ?> value="{{$sub_location->sub_location_name}}">{{$sub_location->sub_location_name}}</option>
                         @endforeach
@@ -446,23 +458,23 @@
 
                   
                   <div class="form-group row">
-                    <label for="inputBasicSalary" class="col-sm-2 col-form-label">Basic Salary</label>
+                    <label for="basic_salary" class="col-sm-2 col-form-label">Basic Salary</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputBasicSalary" name="basic_salary" placeholder="Basic Salary" value="{{$employees->basic_salary}}">
+                      <input type="text" class="form-control" id="basic_salary" name="basic_salary" placeholder="Basic Salary" value="{{$employees->basic_salary}}">
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label for="inputGrossSalary" class="col-sm-2 col-form-label">Gross Salary</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputGrossSalary" name="gross_salary" placeholder="Gross Salary" value="{{$employees->gross_salary}}">
+                      <input type="text" class="form-control" id="gross_salary" name="gross_salary" placeholder="Gross Salary" value="{{$employees->gross_salary}}">
                     </div>
                   </div>
 
                   <div class="form-group row">
-                    <label for="inputPFAmount" class="col-sm-2 col-form-label">PF Amount</label>
+                    <label for="pf_amount" class="col-sm-2 col-form-label">PF Amount</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputPFAmount" name="pf_amount" placeholder="PF Amount" value="{{$employees->pf_amount}}">
+                      <input type="text" class="form-control" id="pf_amount" name="pf_amount" placeholder="PF Amount" value="{{$employees->pf_amount}}">
                     </div>
                   </div>
 
@@ -476,14 +488,14 @@
                   <div class="form-group row">
                     <label for="ending_date" class="col-sm-2 col-form-label">Ending Date</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control employee_date" id="employee_date" name="ending_date" placeholder="Ending Date" value="{{$employees->ending_date}}">
+                      <input type="text" class="form-control employee_date" id="ending_date" name="ending_date" placeholder="Ending Date" value="{{$employees->ending_date}}">
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label for="ending_date" class="col-sm-2 col-form-label">Status</label>
                     <div class="col-sm-10">
-                      <select name="status" id="" class="form-control">
+                      <select name="status" id="status" class="form-control">
                         <option <?php echo ($employees->status == 1) ? "selected" : ""; ?> value="1">Active</option>
                         <option <?php echo ($employees->status == 0) ? "selected" : ""; ?> value="0">Deactive</option>
                       </select>
@@ -503,7 +515,7 @@
                   <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">
                       
-                      <button type="submit" class="btn btn-success">Update</button>
+                      <button type="submit" id="employee-update" class="btn btn-success">Update</button>
                     </div>
                   </div>
                 </form>
@@ -523,6 +535,73 @@
 
  @section('customjs')
   <script>
+
+
+  $( document ).ready(function() {
+       //get the data
+    $('#employee-update').click(function(){
+      var staff_code = $('#staff_code').val();
+       var first_name = $('#first_name').val();
+       var last_name = $('#last_name').val();
+       var position = $('#position').val();
+       var department_code = $('#department_code').val();
+       var category = $('#category').val();
+       var label = $('#label').val();
+       var base = $('#base').val();
+       var work_place = $('#work_place').val();
+       var sub_location = $('#sub_location').val();
+       var basic_salary = $('#basic_salary').val();
+       var gross_salary = $('#gross_salary').val();
+       var pf_amount = $('#pf_amount').val();
+       var joining_date = $('#joining_date').val();
+       var ending_date = $('#ending_date').val();
+
+        if(staff_code == '' || first_name == '' || last_name == '' || position == ''
+          || department_code == '' || category == '' ||  label == '' 
+          ||  base == '' ||  work_place == '' ||  sub_location == '' || basic_salary == ''
+          || gross_salary == '' || pf_amount == '' || joining_date == '' || ending_date == '')
+          {
+            Toast.fire({
+              type: 'error',
+              title: ' Please enter all fields to save the employee information'
+            });
+          }
+
+          else{
+                //save the transaction
+                $.ajax({
+                  type: 'POST',
+                  url: '{{url("/update-employee/{staff_code}")}}',
+                  data: {
+                      staff_code: staff_code,
+                      first_name: first_name,
+                      last_name: last_name,
+                      position: position,
+                      department_code: department_code,
+                      category: category,
+                      label: last_name,
+                      base: base,
+                      work_place: work_place,
+                      sub_location: sub_location,
+                      basic_salary: basic_salary,
+                      gross_salary: gross_salary,
+                      pf_amount: pf_amount,
+                      joining_date: joining_date,
+                      ending_date: ending_date
+                  },
+                  dataType: 'text',
+                  success: function (data) {
+                    console.log(data);
+                    Toast.fire({
+                      type: 'success',
+                      title: ' Employee information successfully update.'
+                    });
+                  }
+                });
+              }
+     });
+
+
     $('.select2bs4').select2({
       theme: 'bootstrap4'
     })
@@ -531,6 +610,10 @@
       format: "yyyy-mm-dd",
       orientation: "bottom left"
     });
+
+  });
+
+
 
 
   </script>

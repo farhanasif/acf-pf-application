@@ -24,13 +24,13 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>All Employee Information</h1>
+        <h1>All Employees Information</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
           <li class="breadcrumb-item active"><a href="javascript:void(0)">Employee</a></li>
-          <li class="breadcrumb-item active"><a href="javascript:void(0)">All Employee Information</a></li>
+          <li class="breadcrumb-item active"><a href="javascript:void(0)">All Employees Information</a></li>
         </ol>
       </div>
     </div>
@@ -40,7 +40,7 @@
 <section class="content">
   <div class="card card-success card-outline">
     <div class="card-header">
-          <h3 class="card-title">All Employee Information</h3>
+          <h3 class="card-title">All Employees Information</h3>
 
         <div class="float-sm-right">
           <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 

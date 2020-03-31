@@ -24,7 +24,8 @@
   <div class="card card-success card-outline">
     <div class="card-header">
           <h3 class="card-title">All Withdraw Information</h3>
-        <div class="float-sm-right">
+        <div class="float-right">
+          <a href="" class="btn btn-success" data-toggle="modal" data-target="#update-modal-default">Update Batch</a>
           <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 
           <a href="{{url('download_excel/pf_withdraw/pf-withdraw.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
           <a href="{{route('add-pf-withdraw')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add Withdraw</a>
@@ -127,24 +128,50 @@
   </div>
   <!--  /.END WITHDRAW BATCH UPLOAD MODAL -->
 
+
+    <!-- START WITHDRAW UPDATE BATCH UPLOAD MODAL -->
+    <div class="modal fade" id="update-modal-default">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">PF Withdraw Update Bacth</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="{{route('save-pf-withdraw-batch-upload')}}" method="post" enctype="multipart/form-data">
+              @csrf
+              <input type="file" name="file" class="form-control">
+              <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Upload</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!--  /.END WITHDRAW UPDATE BATCH UPLOAD MODAL -->
+
 @endsection
 
 @section('customjs')  
 <script>
 
-$(document).ready( function(){
+  $(document).ready( function(){
 
-$('#all-pf-withdraw').DataTable({
-    "info": true,
-    "autoWidth": false,
-    scrollX:'50vh', 
-    scrollY:'50vh',
-    scrollCollapse: true,
-    fixedColumns: {
-    leftColumns: 2
-}
-});
+  $('#all-pf-withdraw').DataTable({
+      "info": true,
+      "autoWidth": false,
+      scrollX:'50vh', 
+      scrollY:'50vh',
+      scrollCollapse: true,
+  });
 
-});
+  });
+
 </script>
 @endsection

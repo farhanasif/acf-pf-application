@@ -241,6 +241,7 @@
                   title: ' Please enter all fields to save the transaction'
                 });
               }
+              
               else{
                 
                 //save the transaction

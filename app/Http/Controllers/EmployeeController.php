@@ -100,29 +100,35 @@ class EmployeeController extends Controller
             //       );
             //   }
             //   else{
-                $insert_data[] =array(
-                  // 'staff_code' =>$row[0],
-                  // 'trimmed' =>$row[0],
-                  'first_name' =>$row[1],
-                  'last_name' =>$row[2],
-                  'position' =>$row[3],
-                  // 'department_code' =>NULL,
-                  'category' =>$row[4],
-                  'level' =>$row[5],
-                  'joining_date' =>date($row[7]),
-                  // 'ending_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[9]),
-                  'ending_date' =>date($row[9]),
-                  'base' =>$row[10],
-                  'work_place' =>$row[10],
-                  // 'sub_location' =>NULL,
-                  'basic_salary' =>$row[12],
-                  'gross_salary' =>$row[13],
-                  'pf_amount' =>$row[16],
-                  // 'pf_percentage' =>$NULL,
-                  'status' =>1,
-                  'created_by' =>Auth::user()->id,
-                  'updated_by' =>Auth::user()->id,
-              );
+                  try {
+                    $insert_data[] =array(
+                      'staff_code' =>$row[0],
+                      'trimmed' =>$row[0],
+                      'first_name' =>$row[1],
+                      'last_name' =>$row[2],
+                      'position' =>$row[3],
+                      // 'department_code' =>NULL,
+                      'category' =>$row[4],
+                      'level' =>$row[5],
+                      'joining_date' =>date($row[7]),
+                      // 'ending_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[9]),
+                      'ending_date' =>date($row[9]),
+                      'base' =>$row[10],
+                      'work_place' =>$row[10],
+                      // 'sub_location' =>NULL,
+                      'basic_salary' =>$row[12],
+                      'gross_salary' =>$row[13],
+                      'pf_amount' =>$row[16],
+                      // 'pf_percentage' =>$NULL,
+                      'status' =>1,
+                      'created_by' =>Auth::user()->id,
+                      'updated_by' =>Auth::user()->id,
+                  );
+                  }
+                  catch (\Exception $e) 
+                    {
+                      return redirect()->back()->with('error','Somthing went wrong!');
+                    } 
               // }
           }
       }
@@ -199,11 +205,11 @@ class EmployeeController extends Controller
     public function employee_details($staff_code)
     {
       $employees = DB::table('employees')->where('staff_code', $staff_code)->first();
-
-      $total_pf_amounts = DB::table("pf_deposit")->SUM('total_pf');
-
+      $total_pf_amounts = DB::table("pf_deposit")->where('staff_code',$staff_code)->sum('total_pf');
+      $loan_amount = DB::select('select loan_amount from loans where staff_code='."$staff_code");
+      $maximum_total_pf = DB::table("pf_deposit")->where('staff_code',$staff_code)->max('total_pf');
       $pf_deposits = DB::table('pf_deposit')
-                    ->orderBy('deposit_date', 'asc')
+                    ->orderBy('deposit_date', 'desc')
                     ->where('staff_code', $staff_code)
                     ->get();
 
@@ -215,7 +221,7 @@ class EmployeeController extends Controller
       $work_places = Work_place::all();
       $departments = DB::table('departments')->get();
 
-      return view('employee.employee_details',compact('employees','pf_deposits','total_pf_amounts','departments','work_places','levels','positions','categories','bases','sub_locations'));       
+      return view('employee.employee_details',compact('loan_amount','maximum_total_pf','employees','pf_deposits','total_pf_amounts','departments','work_places','levels','positions','categories','bases','sub_locations'));       
 
       // return view('employee.employee_details',compact('employees','pf_deposits','total_pf_amounts'));
     }
@@ -235,7 +241,7 @@ class EmployeeController extends Controller
     }
     public function update_employee(Request $request, $staff_code)
     {
-      echo 'hi';
+      // echo 'hi';
       $data = array();
       $data['staff_code'] = $request->staff_code;
       $data['first_name'] = $request->first_name;

@@ -72,23 +72,29 @@ class PFWithdrawController extends Controller
       
     foreach ($result as $key => $value) {
       foreach ($value as $row) {
-                $insert_data[] =array(
-                  'staff_code' =>$row[0],
-                  'received_amount' =>$row[3],
-                  'received_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]),
-                  'received_by' =>Auth::user()->id,
-                  'received_in' =>$row[2],
-                  'authorization_signatory' =>Auth::user()->id,
-                  'description' =>Auth::user()->id,
-                  );
+          try{
+            $insert_data[] =array(
+              'staff_code' =>$row[0],
+              'received_amount' =>$row[3],
+              'received_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]),
+              'received_by' =>Auth::user()->id,
+              'received_in' =>$row[2],
+              'authorization_signatory' =>Auth::user()->id,
+              'description' =>Auth::user()->id,
+              );
+          }
+
+          catch (\Exception $e) 
+            {
+              return redirect()->back()->with('error','Somthing went wrong!');
+            } 
+        }
       }
    }
       if (!empty($insert_data)) {
           DB::table('pf_withdraws')->insert($insert_data);
           return back()->with('success','PF Withdraws batch import successfully');
       }   
-    }
-
     }
 
     public function edit_pf_withdraw($id)

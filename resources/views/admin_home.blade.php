@@ -1,3 +1,7 @@
+
+
+
+
 @extends('master')
 
 @section('content')
@@ -46,7 +50,7 @@
 
           <div class="info-box-content">
             <span class="info-box-text">Employee Contribution</span>
-            <span class="info-box-number">41,410</span>
+            <span class="info-box-number">{{number_format($employee_contribution)}}</span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -59,11 +63,11 @@
 
       <div class="col-12 col-sm-6 col-md-3">
         <div class="info-box mb-3">
-          <span class="info-box-icon bg-success elevation-1"><i class="fas fa-calendar-week"></i></i></span>
+          <span class="info-box-icon bg-success elevation-1"><i class="fas fa-money-check"></i></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Employeer Contribution</span>
-            <span class="info-box-number">760</span>
+            <span class="info-box-text">Employer Contribution</span>
+          <span class="info-box-number">{{number_format($employer_contribution)}}</span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -76,7 +80,7 @@
 
           <div class="info-box-content">
             <span class="info-box-text">Employee</span>
-            <span class="info-box-number">2,000</span>
+          <span class="info-box-number">{{$total_employees}}</span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -92,7 +96,7 @@
           <div class="card-header">
             <h5 class="card-title">Monthly Recap Report</h5>
 
-            <div class="card-tools">
+            {{-- <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse">
                 <i class="fas fa-minus"></i>
               </button>
@@ -111,7 +115,7 @@
               <button type="button" class="btn btn-tool" data-card-widget="remove">
                 <i class="fas fa-times"></i>
               </button>
-            </div>
+            </div> --}}
           </div>
           <!-- /.card-header -->
           <div class="card-body">
