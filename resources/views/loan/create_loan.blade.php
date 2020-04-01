@@ -206,9 +206,14 @@
 @section('customjs')
 <script>
 $(document).ready(function() {
+
+    $('.select2bs4').select2({
+        theme: 'bootstrap4',
+    })
+
   var mxlaonAllow = 0;
   var description = "";
-  
+
   $(function() { 
      $( "#joining_date" ).datepicker();
      $( "#ending_date" ).datepicker();

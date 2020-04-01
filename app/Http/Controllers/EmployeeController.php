@@ -202,10 +202,36 @@ class EmployeeController extends Controller
 
     public function employee_details($staff_code)
     {
+
       $employees = DB::table('employees')->where('staff_code', $staff_code)->first();
-      $total_pf_amounts = DB::table("pf_deposit")->where('staff_code',$staff_code)->sum('total_pf');
-      $loan_amount = DB::select('select loan_amount from loans where staff_code='."$staff_code");
-      $maximum_total_pf = DB::table("pf_deposit")->where('staff_code',$staff_code)->max('total_pf');
+
+      // $total_pf_amounts = DB::table("pf_deposit")->where('staff_code',$staff_code)->sum('total_pf');
+      // $maximum_total_pf = DB::table("pf_deposit")->where('staff_code',$staff_code)->max('total_pf');
+
+      $loan_account_details = DB::select(
+              "SELECT
+              loans.loan_amount, loans.total_months, loans.interest, loans.issue_date, 
+              MIN(loan_installment.pay_date ) AS min_date, MAX(loan_installment.pay_date ) AS max_date,
+               COUNT( DISTINCT loans.loan_amount) AS total_loan,
+              employees.first_name, employees.last_name, employees.position
+              FROM loans
+              INNER JOIN loan_installment ON loan_installment.staff_code = loans.staff_code
+              INNER JOIN employees ON employees.staff_code = loans.staff_code
+              WHERE loans.staff_code ='".$staff_code."' LIMIT 1");
+                          
+ $total_and_maximum_pf = DB::select(
+                "SELECT SUM(total_pf) AS total_pf_amount, MAX(total_pf) AS maximum_total_pf , deposit_date
+                FROM pf_deposit WHERE staff_code ='".$staff_code."' ORDER BY deposit_date DESC");
+
+  // dd($loan_amount);
+  //             exit;
+
+// $loan_amount = DB::select(
+//   "SELECT SUM(total_pf) AS sum_total_pf, MAX(total_pf) AS max_total_pf
+//   FROM pf_deposit WHERE staff_code ='".$staff_code."' ");
+
+// dd($loan_amount);
+// exit;
 
       $pf_deposits = DB::table('pf_deposit')
                     ->orderBy('deposit_date', 'desc')
@@ -220,7 +246,9 @@ class EmployeeController extends Controller
       $work_places = Work_place::all();
       $departments = DB::table('departments')->get();
 
-      return view('employee.employee_details',compact('loan_amount','maximum_total_pf','employees','pf_deposits','total_pf_amounts','departments','work_places','levels','positions','categories','bases','sub_locations'));
+      return view('employee.employee_details',compact(
+       'loan_account_details','employees','pf_deposits','total_and_maximum_pf',
+        'departments','work_places','levels','positions','categories','bases','sub_locations'));
 
       // return view('employee.employee_details',compact('employees','pf_deposits','total_pf_amounts'));
     }

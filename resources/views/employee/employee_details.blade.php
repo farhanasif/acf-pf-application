@@ -1,5 +1,4 @@
 
-
 @extends('master')
 
 @section('content')
@@ -24,7 +23,7 @@
   <div class="card card-widget widget-user">
       <!-- Add the bg color to the header using any of the bg-* classes -->
       <div class="widget-user-header bg-success">
-      <h3 class="widget-user-username"> {{$employees->first_name}} {{$employees->last_name}}</h3>
+      <h3 class="widget-user-username"> {{$employees->first_name.' '.$employees->last_name}}</h3>
         <h5 class="widget-user-desc"> {{$employees->position}} </h5>
       </div>
       <div class="widget-user-image">
@@ -34,7 +33,12 @@
         <div class="row">
           <div class="col-sm-3 border-right">
             <div class="description-block">
-              <h5 class="description-header">{{number_format($maximum_total_pf)}} / Month</h5>
+              <h5 class="description-header">
+                @foreach ($total_and_maximum_pf as $item)
+                  {{number_format($item->maximum_total_pf)}} / Month
+                @endforeach
+                
+              </h5>
               <span class="description-text">Provident Fund Amount</span>
             </div>
             <!-- /.description-block -->
@@ -42,7 +46,11 @@
           <!-- /.col -->
           <div class="col-sm-3 border-right">
             <div class="description-block">
-            <h5 class="description-header">{{number_format($total_pf_amounts)}}</h5>
+            <h5 class="description-header">
+              @foreach ($total_and_maximum_pf as $item)
+                 {{number_format($item->total_pf_amount)}}
+              @endforeach
+            </h5>
               <span class="description-text">Total PF Amount</span>
             </div>
             <!-- /.description-block -->
@@ -51,7 +59,11 @@
           <!-- /.col -->
           <div class="col-sm-3 border-right">
             <div class="description-block">
-              <h5 class="description-header"><?php echo $loan_amount ? number_format($loan_amount): '0000'?>(1)</h5>
+              @foreach ($loan_account_details as $item)
+                <h5 class="description-header"> 
+                  {{$item->loan_amount ? number_format($item->loan_amount) : '0'}} ( {{$item->total_loan ? number_format($item->total_loan) : '0'}} )
+                </h5>
+              @endforeach
               <span class="description-text">Loan Amount (Total)</span>
             </div>
             <!-- /.description-block -->
@@ -61,7 +73,11 @@
           <!-- /.col -->
           <div class="col-sm-3">
             <div class="description-block">
-              <h5 class="description-header">{{number_format($total_pf_amounts * 80/100)}}</h5>
+              <h5 class="description-header">
+                @foreach ($total_and_maximum_pf as $item)
+                  {{number_format($item->total_pf_amount * 80/100)}}
+                @endforeach
+              </h5>
               <span class="description-text">LOAN AMOUNT(MAXIMUM)</span>
             </div>
             <!-- /.description-block -->
@@ -200,7 +216,7 @@
                         </div>
                       </div>
                       <!-- /.card-header -->
-                      <div class="card-body table-responsive p-0" style="height: 300px;">
+                      <div class="card-body table-responsive p-0" style="height: 200px;">
                         <table class="table table-striped table-head-fixed text-nowrap">
                           <thead>
                             <tr>
@@ -215,18 +231,19 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>183</td>
-                              <td>23 January, 2020</td>
-                              <td>Md Moshiur Rahman</td>
-                              <td><dt>50,000</dt></td>
-                              <td>2,000</td>
-                              <td>12</td>
-                              <td>1st March, 2020</td>
-                              <td>1st February, 2020</td>
-                            </tr>
-                           
-                            
+                      @foreach ($loan_account_details as $item)
+                        <tr>
+                          <td>01</td>
+                          <td> {{ date('j F, Y', strtotime($item->issue_date)) ? date('j F, Y', strtotime($item->issue_date)) : 'Nill' }}  </td>
+                          <td> {{ $item->first_name.' '.$item->last_name ? $item->first_name.' '.$item->last_name : 'Nill'}} </td>
+                          <td><dt> {{ $item->loan_amount ? number_format($item->loan_amount) : 'Nill' }} </dt></td>
+                          <td>{{$item->interest ? $item->interest :'Nill'}}</td>
+                          <td> {{$item->total_months ? $item->total_months : 'Nill' }} </td>
+                          <td> {{ date('j F, Y', strtotime($item->min_date)) ? date('j F, Y', strtotime($item->min_date)) : 'Nill' }}  </td>
+                          <td> {{ date('j F, Y', strtotime($item->max_date)) ? date('j F, Y', strtotime($item->max_date)) : 'Nill' }}  </td>
+                        </tr>
+                      @endforeach
+
                           </tbody>
                         </table>
                       </div>
@@ -540,7 +557,7 @@
   $( document ).ready(function() {
        //get the data
     $('#employee-update').click(function(){
-      var staff_code = $('#staff_code').val();
+       var staff_code = $('#staff_code').val();
        var first_name = $('#first_name').val();
        var last_name = $('#last_name').val();
        var position = $('#position').val();
