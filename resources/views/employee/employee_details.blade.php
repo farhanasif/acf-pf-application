@@ -12,7 +12,7 @@
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a href="javascript:void()">Home</a></li>
           <li class="breadcrumb-item active">Details</li>
         </ol>
       </div>
@@ -51,7 +51,7 @@
           <!-- /.col -->
           <div class="col-sm-3 border-right">
             <div class="description-block">
-              <h5 class="description-header"><?php echo $loan_amount ? $loan_amount: '0000'?>(1)</h5>
+              <h5 class="description-header"><?php echo $loan_amount ? number_format($loan_amount): '0000'?>(1)</h5>
               <span class="description-text">Loan Amount (Total)</span>
             </div>
             <!-- /.description-block -->

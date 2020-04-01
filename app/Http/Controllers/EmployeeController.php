@@ -21,7 +21,7 @@ use App\Employee;
 class EmployeeController extends Controller
 {
 
- 
+
     public function add_employee()
     {
         // $data = array();
@@ -67,11 +67,9 @@ class EmployeeController extends Controller
         if($ext == "xlsx" || $ext == "csv") {
         $result = Excel::toArray(new EmployeesImport, $upload);
 
-        // dd($result );
-        // exit;
         foreach ($result as $key => $value) {
           foreach ($value as $row) {
-            
+
             // $result = DB::table('employees')->where('staff_code',$row[0])->first();
             //   if(!empty($result))
             //   {
@@ -125,10 +123,10 @@ class EmployeeController extends Controller
                       'updated_by' =>Auth::user()->id,
                   );
                   }
-                  catch (\Exception $e) 
+                  catch (\Exception $e)
                     {
-                      return redirect()->back()->with('error','Somthing went wrong!');
-                    } 
+                      return redirect()->back()->with('error','Something went wrong!');
+                    }
               // }
           }
       }
@@ -142,14 +140,14 @@ class EmployeeController extends Controller
           DB::table('employees')->insert($insert_data);
           return back()->with('success','Employees batch import successfully');
       }
- 
+
       // if (!empty($update_data)) {
       //   DB::table('employees')->update($update_data);
       //   return back()->with('success','Employees batch updated successfully');
       //  }
       }
-  
-    
+
+
 
     }
 
@@ -208,6 +206,7 @@ class EmployeeController extends Controller
       $total_pf_amounts = DB::table("pf_deposit")->where('staff_code',$staff_code)->sum('total_pf');
       $loan_amount = DB::select('select loan_amount from loans where staff_code='."$staff_code");
       $maximum_total_pf = DB::table("pf_deposit")->where('staff_code',$staff_code)->max('total_pf');
+
       $pf_deposits = DB::table('pf_deposit')
                     ->orderBy('deposit_date', 'desc')
                     ->where('staff_code', $staff_code)
@@ -221,7 +220,7 @@ class EmployeeController extends Controller
       $work_places = Work_place::all();
       $departments = DB::table('departments')->get();
 
-      return view('employee.employee_details',compact('loan_amount','maximum_total_pf','employees','pf_deposits','total_pf_amounts','departments','work_places','levels','positions','categories','bases','sub_locations'));       
+      return view('employee.employee_details',compact('loan_amount','maximum_total_pf','employees','pf_deposits','total_pf_amounts','departments','work_places','levels','positions','categories','bases','sub_locations'));
 
       // return view('employee.employee_details',compact('employees','pf_deposits','total_pf_amounts'));
     }
@@ -292,7 +291,7 @@ class EmployeeController extends Controller
                 dd($data);
                 exit;
               }
-          
+
           else if($request->staff_code){
             $data = DB::table('employees')
                    ->select('staff_code')

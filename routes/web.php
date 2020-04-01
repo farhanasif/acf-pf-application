@@ -707,7 +707,12 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('/admin-home',['middleware'=>'admin','uses'=>'AdminController@admin_home']);
 		Route::get('/user-home',['middleware'=>'user','uses'=>'AdminController@user_home']);
 
-
+		// --------CHANGE PROFILE ROUTE---------------------
+		Route::get('change-profile', [
+			'uses'		=> 'AdminController@change_profile',
+			'as'		=> 'change-profile'
+		]);
+		// --------CHANGE PROFILE ROUTE---------------------
 
 
 
@@ -726,4 +731,21 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('ledger', 'LedgerReportController@view_ledger_report');
 		Route::get('ledger-report','LedgerReportController@ledger_report');
 
+
+		// ----------START LOAN ROUTE----------
+		Route::get('/create-loan', [
+			'uses'		=> 'LoanController@create_loan',
+			'as'		=> 'create-loan'
+		]);
+
+        Route::any('/loan-from-data', [
+			'uses'		=> 'LoanController@loanFromData',
+			'as'		=> 'loan-from-data'
+		]);
+
+        Route::any('/save-loan', [
+			'uses'		=> 'LoanController@saveLoan',
+			'as'		=> 'save-loan'
+		]);
+		// ----------END LOAN ROUTE----------
 });

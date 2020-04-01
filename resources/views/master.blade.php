@@ -36,7 +36,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-user"></i>
-          <span class="badge badge-danger navbar-badge">3</span>
+          <span class="badge badge-danger navbar-badge">2</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <a href="#" class="dropdown-item">
@@ -55,6 +55,7 @@
             <!-- Message End -->
           </a>
           <div class="dropdown-divider"></div>
+        <a href="{{route('change-profile')}}" class="dropdown-item">Change Profile</a>
           <!-- <a href="{{ url('/logout') }}" class="dropdown-item dropdown-footer">LogOut</a> -->
             <a class="dropdown-item" href="{{ route('logout') }}"
                onclick="event.preventDefault();

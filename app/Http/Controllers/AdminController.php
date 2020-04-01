@@ -18,14 +18,17 @@ class AdminController extends Controller
         
         $employer_contribution = DB::table('pf_deposit')->sum('own_pf');
         $employee_contribution = DB::table('pf_deposit')->sum('organization_pf');
-
-
     	return view('admin_home',compact('total_employees','employee_contribution','employer_contribution'));
     }
 
     public function user_home(){
 
     	return view('user_home');
+    }
+
+    public function change_profile()
+    {
+        return view('change_profile');
     }
 
 }
