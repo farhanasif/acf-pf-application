@@ -37,7 +37,6 @@
                 @foreach ($total_and_maximum_pf as $item)
                   {{number_format($item->maximum_total_pf)}} / Month
                 @endforeach
-                
               </h5>
               <span class="description-text">Provident Fund Amount</span>
             </div>
@@ -138,9 +137,9 @@
                             <tr>
                               <td> {{$i++}} </td>
                               <td> {{ date('j F, Y', strtotime($pf_deposit->deposit_date)) }} </td>
-                              <td> {{$pf_deposit->own_pf}} </td>
-                              <td> {{$pf_deposit->organization_pf}} </td>
-                              <td> {{$pf_deposit->total_pf}} </td>
+                              <td> {{number_format($pf_deposit->own_pf)}} </td>
+                              <td> {{ number_format($pf_deposit->organization_pf)}} </td>
+                              <td> {{ number_format($pf_deposit->total_pf)}} </td>
                             </tr>
 
                             @endforeach

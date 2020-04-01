@@ -205,9 +205,6 @@ class EmployeeController extends Controller
 
       $employees = DB::table('employees')->where('staff_code', $staff_code)->first();
 
-      // $total_pf_amounts = DB::table("pf_deposit")->where('staff_code',$staff_code)->sum('total_pf');
-      // $maximum_total_pf = DB::table("pf_deposit")->where('staff_code',$staff_code)->max('total_pf');
-
       $loan_account_details = DB::select(
               "SELECT
               loans.loan_amount, loans.total_months, loans.interest, loans.issue_date, 
@@ -223,15 +220,6 @@ class EmployeeController extends Controller
                 "SELECT SUM(total_pf) AS total_pf_amount, MAX(total_pf) AS maximum_total_pf , deposit_date
                 FROM pf_deposit WHERE staff_code ='".$staff_code."' ORDER BY deposit_date DESC");
 
-  // dd($loan_amount);
-  //             exit;
-
-// $loan_amount = DB::select(
-//   "SELECT SUM(total_pf) AS sum_total_pf, MAX(total_pf) AS max_total_pf
-//   FROM pf_deposit WHERE staff_code ='".$staff_code."' ");
-
-// dd($loan_amount);
-// exit;
 
       $pf_deposits = DB::table('pf_deposit')
                     ->orderBy('deposit_date', 'desc')
