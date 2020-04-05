@@ -121,27 +121,17 @@
                   <div class="card card-outline card-success">
                       <div class="card-header">
                         <h3 class="card-title">Provident Fund Deposits</h3>
-        
-                        <div class="card-tools">
-                          <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-        
-                            <div class="input-group-append">
-                              <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                            </div>
-                          </div>
-                        </div>
                       </div>
                       <!-- /.card-header -->
                       <div class="card-body table-responsive p-0" style="height: 300px;">
                         <table class="table table-striped table-head-fixed text-nowrap">
                           <thead>
                             <tr>
-                              <th>ID</th>
-                              <th>Date</th>
-                              <th>Employee Amount</th>
-                              <th>Employer Amount</th>
-                              <th>Total</th>
+                              <th  class="bg-success">ID</th>
+                              <th  class="bg-success">Date</th>
+                              <th  class="bg-success">Employee Amount</th>
+                              <th  class="bg-success">Employer Amount</th>
+                              <th  class="bg-success">Total</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -165,27 +155,17 @@
                     <div class="card card-outline card-warning">
                       <div class="card-header">
                         <h3 class="card-title">Provident Fund Interests</h3>
-        
-                        <div class="card-tools">
-                          <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-        
-                            <div class="input-group-append">
-                              <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                            </div>
-                          </div>
-                        </div>
                       </div>
                       <!-- /.card-header -->
                       <div class="card-body table-responsive p-0" style="height: 300px;">
                         <table class="table table-striped table-head-fixed text-nowrap">
                           <thead>
                             <tr>
-                              <th>ID</th>
-                              <th>Date</th>
-                              <th>Description</th>
-                              <th>Amount</th>
-                              <th>Comment</th>
+                              <th class="bg-success">ID</th>
+                              <th class="bg-success"Date</th>
+                              <th class="bg-success">Description</th>
+                              <th class="bg-success">Amount</th>
+                              <th class="bg-success">Comment</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -216,30 +196,20 @@
                   <div class="card card-outline card-danger">
                       <div class="card-header">
                         <h3 class="card-title">Your Loans Against Provident Fund</h3>
-        
-                        <div class="card-tools">
-                          <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-        
-                            <div class="input-group-append">
-                              <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                            </div>
-                          </div>
-                        </div>
                       </div>
                       <!-- /.card-header -->
                       <div class="card-body table-responsive p-0" style="height: 200px;">
                         <table class="table table-striped table-head-fixed text-nowrap">
                           <thead>
                             <tr>
-                              <th>ID</th>
-                              <th>Date</th>
-                              <th>Name</th>
-                              <th>Amount</th>
-                              <th>Interest</th>
-                              <th>Months</th>
-                              <th>Start Month</th>
-                              <th>End Month</th>
+                              <th  class="bg-success">ID</th>
+                              <th  class="bg-success">Date</th>
+                              <th  class="bg-success">Name</th>
+                              <th  class="bg-success">Amount</th>
+                              <th  class="bg-success">Interest</th>
+                              <th  class="bg-success">Months</th>
+                              <th  class="bg-success">Start Month</th>
+                              <th  class="bg-success">End Month</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -264,27 +234,16 @@
                   <div class="card card-outline card-success">
                       <div class="card-header">
                         <h3 class="card-title">Loan Adjustments</h3>
-        
-                        <div class="card-tools">
-                          <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-        
-                            <div class="input-group-append">
-                              <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                            </div>
-                          </div>
-                        </div>
                       </div>
                       <!-- /.card-header -->
                       <div class="card-body table-responsive p-0" style="height: 300px;">
                         <table class="table table-striped table-head-fixed text-nowrap">
                           <thead>
                             <tr>
-                              <th>ID</th>
-                              <th>Date</th>
-                              <th>Amount</th>
-                              <th>Status</th>
-                              <th>Remaining</th>
+                              <th class="bg-success">ID</th>
+                              <th class="bg-success">Date</th>
+                              <th class="bg-success">Amount</th>
+                              <th class="bg-success">Status</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -293,14 +252,14 @@
 
                             <tr>
                             <td>{{$i++}}</td>
-                              <td> {{$item->pay_date}} </td>
+                              <td> {{ date('j F, Y', strtotime($item->pay_date,3)) }}  </td>
                               <td><dt> {{$item->payment}}  </dt></td>
-                                  @if ($item->payment_type == 'Due')
-                                  <td class="text-danger"> {{$item->payment_type}} </td>
-                                  @elseif($item->payment_type == 'Paid')
-                                  <td class="text-success"> {{$item->payment_type}} </td>
+
+                                  @if ( strtoupper( $item->payment_type) == 'DUE')
+                                    <td class="text-danger"> {{strtoupper( $item->payment_type)}} </td>
+                                  @elseif(strtoupper( $item->payment_type) == 'PAID')
+                                    <td class="text-success"> {{$item->payment_type}} </td>
                                   @endif
-                              <td>47,666</td>
                             </tr>
                             @endforeach
                           </tbody>
@@ -491,6 +450,7 @@
        //get the data
     $('#employee-update').click(function(e){
 
+
           $.ajaxSetup({
             headers: {
                       'X-CSRF-TOKEN': '<?php echo csrf_token() ?>'
@@ -514,6 +474,8 @@
        var pf_amount = $('#pf_amount').val();
        var joining_date = $('#joining_date').val();
        var ending_date = $('#ending_date').val();
+       var status = $('#status').val();
+
 
         if(staff_code == '' || first_name == '' || last_name == '' || position == ''
           || department_code == '' || category == '' ||  label == '' 
@@ -524,6 +486,7 @@
             //   type: 'error',
             //   title: ' Please enter all fields to save the employee information'
             // });
+            alert('Please enter all fields to save the employee information');
             console.log('empty');
           }
 
@@ -531,7 +494,8 @@
                 
                 $.ajax({
                   type: 'POST',
-                  url: '{{url("/update-employee/{staff_code}")}}',
+                  url: '../update-employee/'+staff_code,
+                  //url: '{{url("/update-employee/staff_code")}}',
                   // url:'./update-employee',
 
                   data: {
@@ -549,14 +513,15 @@
                       gross_salary: gross_salary,
                       pf_amount: pf_amount,
                       joining_date: joining_date,
-                      ending_date: ending_date
+                      ending_date: ending_date,
+                      status:status
                   },
                   dataType: 'text',
                   success: function (data) {
-
-                    // echo 'Update';
+                    // alert(data);
+                      alert('Employee information successfully update.');
                     console.log(data);
-                    console.log('hi');
+                    //console.log('hi');
                     // Toast.fire({
                     //   type: 'success',
                     //   title: ' Employee information successfully update.'

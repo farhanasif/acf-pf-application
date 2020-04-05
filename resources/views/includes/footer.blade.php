@@ -16,7 +16,7 @@
 <!-- Select2 -->
 <script src="{{asset('/')}}theme/plugins/select2/js/select2.full.min.js"></script>
 <!-- PAGE SCRIPTS -->
-{{-- <script src="{{asset('/')}}theme/dist/js/pages/dashboard2.js"></script> --}}
+<!-- <script src="{{asset('/')}}theme/dist/js/pages/dashboard2.js"></script> -->
 
 <!-- date-range-picker -->
 <script src="{{asset('/')}}theme/plugins/daterangepicker/daterangepicker.js"></script>

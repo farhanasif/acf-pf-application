@@ -258,7 +258,9 @@ class EmployeeController extends Controller
       // return view('employee.edit_employee',compact('employee'));
     }
     public function update_employee(Request $request,$staff_code)
-    {
+    {   
+
+      //dd($request->status);
 
       // $staff_code = $_POST['staff_code'];
       // $first_name = $_POST['first_name'];
@@ -305,9 +307,9 @@ class EmployeeController extends Controller
       $data['department_code'] = $request->department_code;
       $data['category'] = $request->category;
       $data['level'] = $request->level;
-      $data['base'] = $request->base;
-      $data['work_place'] = $request->work_place;
-      $data['sub_location'] = $request->sub_location;
+      $data['base'] = addslashes($request->base);
+      $data['work_place'] = addslashes($request->work_place);
+      $data['sub_location'] = addslashes($request->sub_location);
       $data['basic_salary'] = $request->basic_salary;
       $data['gross_salary'] = $request->gross_salary;
       $data['pf_amount'] = $request->pf_amount;
@@ -318,7 +320,9 @@ class EmployeeController extends Controller
       $data['updated_by'] =  Auth::user()->id;
 
       DB::table('employees')->where('staff_code',$staff_code)->update($data);
-      return redirect()->route('employee-details')->with('success', 'Employee Updated Successfully.');
+      return json_encode("success");
+      //return back()->with('success', 'Employee Updated Successfully.');
+      //return redirect()->route('employee-details')->with('success', 'Employee Updated Successfully.');
     }
 
     public function delete_employee($id)
