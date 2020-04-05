@@ -294,43 +294,46 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-            <form role="form" method="POST" action="/allemployees">
+            <form role="form" method="POST" action="http://localhost/go/acf-pf-application/public/index.php/allemployees">
+                @csrf
                 <div class="row">
                 <div class="col-sm-6">
                     <!-- select -->
                     <div class="form-group">
                     <label>Position</label>
-                    <select class="custom-select" id="from_date">
-                        <option value="-1">Select....</option>
-                        <option value="Watchman">Watchman</option>
-                        <option value="Driver">Driver</option>
-                        <option value="Project Officer Wash">Project Officer Wash</option>
+                    <select name="position" id="position" class="form-control select2bs4">
+                        <option value="-1">--select--</option>
+                        @foreach ($positions as $position)
+                            <option value="{{$position->position_name}}">{{$position->position_name}}</option>
+                        @endforeach
                     </select>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                     <label>Category</label>
-                    <select class="custom-select" id="to_date">
-                        <option value="-1">Select....</option>
-                        <option value="NUT">NUT</option>
-                        <option value="WAS">WAS</option>
-                        <option value="LOG">LOG</option>
+                    <select name="category" id="category" class="form-control select2bs4">
+                        <option value="-1">--select--</option>
+                        @foreach ($categories as $category)
+                            <option value="{{$category->category_name}}">{{$category->category_name}}</option>
+                        @endforeach
                     </select>
                     </div>
                 </div>
                 </div>
-
+                <div class="card-footer">
+                    <button type="submit" id="generate" class="btn btn-success">Generate</button>
+                </div>
             </form>
             </div>
-            <!-- /.card-body -->
+            {{-- <!-- /.card-body -->
             <!-- /.card-body -->
             <div class="card-footer">
                 <button type="submit" id="generate" class="btn btn-success">Generate</button>
                 <button type="submit" id="download" class="btn btn-info">Download</button>
                 <button type="submit" class="btn btn-default float-right">Back</button>
             </div>
-            <!-- /.card-footer -->
+            <!-- /.card-footer --> --}}
         </div>
         <!-- /.card -->
         <!-- Default box -->

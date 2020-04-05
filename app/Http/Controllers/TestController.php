@@ -31,19 +31,39 @@ class TestController extends Controller
 
     public function getEmlpoyees(Request $request){
         
-        $query = "Select * from employees limit ";
-        
+        $query = "Select * from employees";
+        $positions = DB::table('positions')->get();
+        $categories = DB::table('categories')->get();
 
         if ($request->isMethod('post')) {
-            $query = $query."20";
+            $position = $request->position;
+            $category = $request->category;
+
+            if($category == '-1' && $position == '-1'){
+            }
+            else{
+                $query = $query. " where 1=1 ";
+                
+                if($position != '-1'){
+                    $query = $query . " AND position = '".$position."'";
+                }
+
+                if($category != '-1'){
+                    $query = $query . " AND category = '".$category."'";
+                }
+
+            }
+
+            $query = $query." limit 10";
+            //dd($query);
             $employees = DB::select($query);
-            return view('viewEmployees',compact('employees'));
+            return view('viewEmployees',compact('employees','positions','categories'));
         }
         else{
 
-            $query = $query."10";
+            $query = $query." limit 10";
             $employees = DB::select($query);
-            return view('viewEmployees',compact('employees'));
+            return view('viewEmployees',compact('employees','positions','categories'));
         }
 
         
