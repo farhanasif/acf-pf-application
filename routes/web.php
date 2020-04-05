@@ -39,3 +39,5 @@ Route::get('/employeedetails', function () {
     return view('employeedetails');
 });
 
+//Route::get('allemployees', 'TestController@getEmlpoyees');
+Route::match(['get', 'post'], '/allemployees', 'TestController@getEmlpoyees');

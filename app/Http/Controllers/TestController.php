@@ -29,6 +29,26 @@ class TestController extends Controller
         return back();
     }
 
+    public function getEmlpoyees(Request $request){
+        
+        $query = "Select * from employees limit ";
+        
+
+        if ($request->isMethod('post')) {
+            $query = $query."20";
+            $employees = DB::select($query);
+            return view('viewEmployees',compact('employees'));
+        }
+        else{
+
+            $query = $query."10";
+            $employees = DB::select($query);
+            return view('viewEmployees',compact('employees'));
+        }
+
+        
+    }
+
     public function providentFund(){
         return view('pfreport');
     }
