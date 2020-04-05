@@ -30,11 +30,11 @@ class LoanController extends Controller
 
     public function saveLoan(Request $request)
     {
-
+      
 	   	try{
         
 	       $loan = new Loan;
-	       $loan->$staff_code = $request->staff_code;
+	       $loan->staff_code = $request->staff_code;
 	       $loan->monthly_installment = $request->monthly_installment;
 	       $loan->loan_amount = $request->loan_amount;
 	       $loan->total_months =  12;
@@ -43,12 +43,14 @@ class LoanController extends Controller
 	       $loan->description  = $request->purpose;
 	       $loan->issue_date = date('Y-m-d', strtotime($request->date));
 	       $loan->save();
-
-
+           
+           // $loan_id = DB::select("select id from loans where staff_code='".$request->staff_code."' ORDER BY created_at DESC limit 1");
+           
 	       for($i = 1; $i <= 12; $i++){
    		       $loanInstallment = new LoanInstallment;
 		       $loanInstallment->staff_code = $request->staff_code;
 		       $loanInstallment->payment_type =  "Due";
+		       $loanInstallment->loan_id = $loan->id;
 		       $loanInstallment->payment = number_format(($request->monthly_installment + $request->monthly_interest),4);
 	       	   $loanInstallment->pay_date  = date ("Y-m-d", strtotime("+".$i." month", strtotime($request->date)));
 	       	   $loanInstallment->save();
@@ -70,5 +72,18 @@ class LoanController extends Controller
             return;
         }
 
+    }
+
+    public function allLoans()
+    {
+    	$data = DB::select("SELECT loans.loan_amount, loans.total_months, loans.interest, loans.issue_date, 
+              MIN(loan_installment.pay_date ) AS loan_start_date, MAX(loan_installment.pay_date ) AS loan_end_date,
+               COUNT( DISTINCT loans.loan_amount) AS total_loan,
+              employees.first_name, employees.last_name, employees.position, employees.staff_code
+              FROM loans
+              INNER JOIN loan_installment ON loan_installment.loan_id = loans.id
+              INNER JOIN employees ON employees.staff_code = loans.staff_code GROUP BY loans.id");
+    	// print_r($data);exit();
+    	return view('loan.all_loans', compact('data'));
     }
 }

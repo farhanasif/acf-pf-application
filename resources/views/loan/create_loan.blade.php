@@ -54,7 +54,7 @@
                 <select name="staff" id="staff" class="form-control select2bs4">
                    <option value="">--select--</option>
                     @foreach ($employees as $empolyee)
-                      <option value="{{ $empolyee->staff_code }}">{{ $empolyee->first_name }} {{ $empolyee->last_name }} </option>
+                      <option value="{{ $empolyee->staff_code }}">{{ $empolyee->staff_code }} &nbsp;&nbsp; {{ $empolyee->first_name }} {{ $empolyee->last_name }}  </option>
                     @endforeach
                 </select>
               </div>
@@ -88,10 +88,10 @@
         </div>
   
        <div class="form-group row">
-          <label for="loan_amount" class="col-form-label col-md-2 col-sm-3 label-align">Loan Amount</label>
-              <div class="col-md-4 col-sm-3 ">
-                  <input type="number" class="form-control" name="loan_amount" placeholder="Loan Amount" id="loan_amount">
-            </div>
+        <label for="loan_amount" class="col-form-label col-md-2 col-sm-3 label-align">Deposit Amount</label>
+            <div class="col-md-4 col-sm-3 ">
+                <input type="number" class="form-control" name="deposit_amount" placeholder="Deposit Amount" id="deposit_amount">
+          </div>
          <label for="acount_head" class="col-form-label col-md-2 col-sm-3 label-align">Account Head</label>
               <div class="col-md-4 col-sm-3">
                 <select name="account_head" id="account_head" class="form-control select2bs4">
@@ -102,6 +102,16 @@
                 </select>
               </div>
               </div>
+
+      <div class="form-group row">
+          <label for="loan_amount" class="col-form-label col-md-2 col-sm-3 label-align">Loan Amount</label>
+              <div class="col-md-4 col-sm-3 ">
+                  <input type="number" class="form-control" name="loan_amount" placeholder="Loan Amount" id="loan_amount">
+            </div>
+             <div class="col-md-4 col-sm-3 ">
+                  <p style="color: green;" id="mxl"></p>
+            </div>
+    </div>
      <div class="form-group row">
         <label for="loan_amount_in_word" class="col-form-label col-md-2 col-sm-3 label-align">Loan Amount in word</label>
               <div class="col-md10 col-sm-10 ">
@@ -172,10 +182,10 @@
        <p>Contribution Balance with interest as on : <strong></strong></p>
     </div>
     <div class="col-md-6 col-sm-6 ">
-       <p>PF Loan Balance(if any)as no : <strong></strong></p>
+       <p>PF Loan Balance(if any)as no : <strong><span id="preloan"></span></strong></p>
     </div>
     <div class="col-md-6 col-sm-6 ">
-       <p>Maximum Loan allow : <strong></strong></p>
+     <p > Maximum Loan allow : <span id="mxloan"><strong></strong></span></p>
     </div>
     </div>
  </div>
@@ -198,18 +208,23 @@
 $(document).ready(function() {
   var mxlaonAllow = 0;
   var description = "";
+
   $(function() { 
      $( "#joining_date" ).datepicker();
      $( "#ending_date" ).datepicker();
      $( "#date" ).datepicker();
   });
+  
+  $("#loan_amount").hover(function(){
+    $("#mxl").text("Maximum allowable loan amount is "+ mxlaonAllow + "Tk.");
+  });
+
   $("#staff").on("click", function() {
     // e.preventDefault();
     var staff_code = $("#staff").val();
     console.log(staff_code);
     var token = "{{ csrf_token() }}";
     var url_data = "{{ url('/loan-from-data') }}";
-
       $.ajax({
         method: "POST",
         url: url_data,
@@ -226,8 +241,9 @@ $(document).ready(function() {
           document.getElementById("ending_date").value = ending_date;
           document.getElementById("position").value = position;
           document.getElementById("base").value = base;
-
+          document.getElementById("deposit_amount").value = total_pf;
           mxlaonAllow = (total_pf*0.8).toFixed(4);
+          $('#mxloan').html(mxlaonAllow + "Tk.");
           description = staff_code+' '+ first_name +' '+last_name+' Loan Application';
         }
       });
@@ -235,10 +251,11 @@ $(document).ready(function() {
 
   $("#submitInfo").on("click", function(e) {
     e.preventDefault();
+
     var staff_code = $("#staff_code").val();
     var loan_amount = $("#loan_amount").val();
     var purpos = "";
-
+    console.log(staff_code);
     var check;
     $(':checkbox:checked').each(function(i){
           check = $(this).val();
@@ -262,8 +279,8 @@ $(document).ready(function() {
     // parseFloat(order_rate);
     var date = $("#date").val();
     var account_head = $("#account_head").val();
-    console.log(typeof(loan_amount));
-    console.log(typeof(mxlaonAllow));
+    // console.log(typeof(loan_amount));
+    // console.log(typeof(mxlaonAllow));
     if(!loan_amount) {
       alert("Loan Amount field is reuired!");
       return;

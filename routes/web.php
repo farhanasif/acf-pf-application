@@ -737,4 +737,9 @@ Route::group(['middleware' => 'admin'], function () {
 			'uses'		=> 'LoanController@saveLoan',
 			'as'		=> 'save-loan'
 		]);
+
+		Route::any('/all-loans', [
+			'uses'		=> 'LoanController@allLoans',
+			'as'		=> 'all-loans'
+		]);
 });
