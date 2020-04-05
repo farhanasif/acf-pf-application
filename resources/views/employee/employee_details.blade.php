@@ -495,7 +495,6 @@
                 $.ajax({
                   type: 'POST',
                   url: '../update-employee/'+staff_code,
-                  //url: '{{url("/update-employee/staff_code")}}',
                   // url:'./update-employee',
 
                   data: {
