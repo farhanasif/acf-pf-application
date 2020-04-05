@@ -1,5 +1,8 @@
 
 @extends('master')
+@section('customcss')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 
 @section('content')
 
@@ -31,7 +34,7 @@
       </div>
       <div class="card-footer">
         <div class="row">
-          <div class="col-sm-3 border-right">
+          <div class="col-sm-2 border-right">
             <div class="description-block">
               <h5 class="description-header">
                 @foreach ($total_and_maximum_pf as $item)
@@ -50,13 +53,23 @@
                  {{number_format($item->total_pf_amount)}}
               @endforeach
             </h5>
-              <span class="description-text">Total PF Amount</span>
+              <span class="description-text">Total PF Amount (without interest)</span>
+            </div>
+            <!-- /.description-block -->
+          </div>
+
+          <div class="col-sm-3 border-right">
+            <div class="description-block">
+            <h5 class="description-header">
+                0000
+            </h5>
+              <span class="description-text">Total PF Amount (with interest)</span>
             </div>
             <!-- /.description-block -->
           </div>
 
           <!-- /.col -->
-          <div class="col-sm-3 border-right">
+          <div class="col-sm-2 border-right">
             <div class="description-block">
               @foreach ($loan_account_details as $item)
                 <h5 class="description-header"> 
@@ -70,7 +83,7 @@
           <!-- /.col -->
 
           <!-- /.col -->
-          <div class="col-sm-3">
+          <div class="col-sm-2">
             <div class="description-block">
               <h5 class="description-header">
                 @foreach ($total_and_maximum_pf as $item)
@@ -275,90 +288,21 @@
                             </tr>
                           </thead>
                           <tbody>
+                            <?php $i=1;?>
+                            @foreach ($loan_adjustments as $item)
+
                             <tr>
-                              <td>1</td>
-                              <td>1 March, 2020</td>
-                              <td><dt>4,334</dt></td>
-                              <td class="text-success">PAID</td>
+                            <td>{{$i++}}</td>
+                              <td> {{$item->pay_date}} </td>
+                              <td><dt> {{$item->payment}}  </dt></td>
+                                  @if ($item->payment_type == 'Due')
+                                  <td class="text-danger"> {{$item->payment_type}} </td>
+                                  @elseif($item->payment_type == 'Paid')
+                                  <td class="text-success"> {{$item->payment_type}} </td>
+                                  @endif
                               <td>47,666</td>
                             </tr>
-                            <tr>
-                              <td>2</td>
-                              <td>1 April, 2020</td>
-                              <td><dt>4,334</dt></td>
-                              <td class="text-danger">DUE</td>
-                              <td>4,3332</td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td>1 May, 2020</td>
-                              <td><dt>4,334</dt></td>
-                              <td class="text-danger">DUE</td>
-                              <td>38,998</td>
-                            </tr>
-                            <tr>
-                              <td>4</td>
-                              <td>1 June, 2020</td>
-                              <td><dt>4,334</dt></td>
-                              <td class="text-danger">DUE</td>
-                              <td>47,666</td>
-                            </tr>
-                            <tr>
-                              <td>5</td>
-                              <td>1 July, 2020</td>
-                              <td><dt>4,334</dt></td>
-                              <td class="text-danger">DUE</td>
-                              <td>47,666</td>
-                            </tr>
-                            <tr>
-                              <td>6</td>
-                              <td>1 August, 2020</td>
-                              <td><dt>4,334</dt></td>
-                              <td class="text-danger">DUE</td>
-                              <td>47,666</td>
-                            </tr>
-                            <tr>
-                              <td>7</td>
-                              <td>1 September, 2020</td>
-                              <td><dt>4,334</dt></td>
-                              <td class="text-danger">DUE</td>
-                              <td>47,666</td>
-                            </tr>
-                            <tr>
-                              <td>8</td>
-                              <td>1 October, 2020</td>
-                              <td><dt>4,334</dt></td>
-                              <td class="text-danger">DUE</td>
-                              <td>47,666</td>
-                            </tr>
-                            <tr>
-                              <td>9</td>
-                              <td>23 November, 2020</td>
-                              <td><dt>4,334</dt></td>
-                              <td class="text-danger">DUE</td>
-                              <td>47,666</td>
-                            </tr>
-                            <tr>
-                              <td>10</td>
-                              <td>23 December, 2020</td>
-                              <td><dt>4,334</dt></td>
-                              <td class="text-danger">DUE</td>
-                              <td>47,666</td>
-                            </tr>
-                            <tr>
-                              <td>11</td>
-                              <td>23 January, 2020</td>
-                              <td><dt>4,334</dt></td>
-                              <td class="text-danger">DUE</td>
-                              <td>47,666</td>
-                            </tr>
-                            <tr>
-                              <td>12</td>
-                              <td>23 February, 2020</td>
-                              <td><dt>4,334</dt></td>
-                              <td class="text-danger">DUE</td>
-                              <td>0</td>
-                            </tr>
+                            @endforeach
                           </tbody>
                         </table>
                       </div>
@@ -369,26 +313,26 @@
               <!-- /.tab-pane -->
 
               <div class="tab-pane" id="generalinformation">
-                <form class="form-horizontal">
+              <form class="form-horizontal">
                     @csrf
                   <div class="form-group row">
                     <label for="inputStaffCode" class="col-sm-2 col-form-label">Staff Code</label>
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="staff_code" name="staff_code" placeholder="Staff Code" value="{{ sprintf("%04d", $employees->staff_code)}}">
+                      <input type="number" class="form-control" id="staff_code" name="staff_code" placeholder="Staff Code" value="{{ sprintf("%04d", $employees->staff_code)}}">
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label for="inputName" class="col-sm-2 col-form-label">First Name</label>
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="first_name" name="first_name" placeholder="First Name" value="{{$employees->first_name}}">
+                      <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" value="{{$employees->first_name}}">
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label for="inputName" class="col-sm-2 col-form-label">Last Name</label>
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="last_name" name="last_name" placeholder="Last Name" value="{{$employees->last_name}}">
+                      <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" value="{{$employees->last_name}}">
                     </div>
                   </div>
 
@@ -476,21 +420,21 @@
                   <div class="form-group row">
                     <label for="basic_salary" class="col-sm-2 col-form-label">Basic Salary</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="basic_salary" name="basic_salary" placeholder="Basic Salary" value="{{$employees->basic_salary}}">
+                      <input type="number" class="form-control" id="basic_salary" name="basic_salary" placeholder="Basic Salary" value="{{$employees->basic_salary}}">
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label for="inputGrossSalary" class="col-sm-2 col-form-label">Gross Salary</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="gross_salary" name="gross_salary" placeholder="Gross Salary" value="{{$employees->gross_salary}}">
+                      <input type="number" class="form-control" id="gross_salary" name="gross_salary" placeholder="Gross Salary" value="{{$employees->gross_salary}}">
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label for="pf_amount" class="col-sm-2 col-form-label">PF Amount</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="pf_amount" name="pf_amount" placeholder="PF Amount" value="{{$employees->pf_amount}}">
+                      <input type="number" class="form-control" id="pf_amount" name="pf_amount" placeholder="PF Amount" value="{{$employees->pf_amount}}">
                     </div>
                   </div>
 
@@ -520,16 +464,6 @@
 
                   <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-group row">
-                    <div class="offset-sm-2 col-sm-10">
                       
                       <button type="submit" id="employee-update" class="btn btn-success">Update</button>
                     </div>
@@ -555,8 +489,17 @@
 
   $( document ).ready(function() {
        //get the data
-    $('#employee-update').click(function(){
+    $('#employee-update').click(function(e){
+
+          $.ajaxSetup({
+            headers: {
+                      'X-CSRF-TOKEN': '<?php echo csrf_token() ?>'
+                }
+        });
+
+      // console.log('hi');
        var staff_code = $('#staff_code').val();
+      //  console.log(staff_code);
        var first_name = $('#first_name').val();
        var last_name = $('#last_name').val();
        var position = $('#position').val();
@@ -577,17 +520,20 @@
           ||  base == '' ||  work_place == '' ||  sub_location == '' || basic_salary == ''
           || gross_salary == '' || pf_amount == '' || joining_date == '' || ending_date == '')
           {
-            Toast.fire({
-              type: 'error',
-              title: ' Please enter all fields to save the employee information'
-            });
+            // Toast.fire({
+            //   type: 'error',
+            //   title: ' Please enter all fields to save the employee information'
+            // });
+            console.log('empty');
           }
 
           else{
-                //save the transaction
+                
                 $.ajax({
                   type: 'POST',
                   url: '{{url("/update-employee/{staff_code}")}}',
+                  // url:'./update-employee',
+
                   data: {
                       staff_code: staff_code,
                       first_name: first_name,
@@ -607,20 +553,25 @@
                   },
                   dataType: 'text',
                   success: function (data) {
+
+                    // echo 'Update';
                     console.log(data);
-                    Toast.fire({
-                      type: 'success',
-                      title: ' Employee information successfully update.'
-                    });
+                    console.log('hi');
+                    // Toast.fire({
+                    //   type: 'success',
+                    //   title: ' Employee information successfully update.'
+                    // });
                   }
                 });
               }
+
+        e.preventDefault();
      });
 
 
     $('.select2bs4').select2({
       theme: 'bootstrap4'
-    })
+    });
 
     $('.employee_date').datepicker({
       format: "yyyy-mm-dd",

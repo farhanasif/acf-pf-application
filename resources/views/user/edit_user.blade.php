@@ -52,7 +52,7 @@
            	 <div class="form-group row">
 			    <label  class="col-form-label col-md-2 col-sm-3 label-align">Name</label>
 			    <div class="col-md-3 col-sm-3 ">
-          <input type="name" class="form-control" name="name" placeholder="Name" value="{{$users->name}}">
+          <input type="text" class="form-control" name="name" placeholder="Name" value="{{$users->name}}">
           </div>
            <div class="col-md-2"></div>
           <label for="staff_code" class="col-form-label col-md-2 col-sm-3 label-align">Staff Code</label>
@@ -157,6 +157,6 @@
 <script>
   $('.select2bs4').select2({
     theme: 'bootstrap4'
-  })
+  });
 </script>
 @endsection

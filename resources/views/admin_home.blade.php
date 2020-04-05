@@ -35,8 +35,7 @@
           <div class="info-box-content">
             <span class="info-box-text">PF Ledger Amount</span>
             <span class="info-box-number">
-              10
-              <small>%</small>
+              {{number_format($employee_contribution + $employer_contribution)}}
             </span>
           </div>
           <!-- /.info-box-content -->
@@ -139,7 +138,15 @@
 
                 <div class="progress-group">
                   Employee Under PF
-                  <span class="float-right"><b>1400</b>/2000</span>
+                  <span class="float-right">
+                    <b>
+                     @foreach ($total_employee_under_loan as $item)
+                         {{$item->total_pf_staff}}
+                     @endforeach
+                    </b>
+                    /
+                    {{$total_employees}}
+                  </span>
                   <div class="progress progress-sm">
                     <div class="progress-bar bg-primary" style="width: 80%"></div>
                   </div>
@@ -148,7 +155,14 @@
 
                 <div class="progress-group">
                   Employee Under Loan
-                  <span class="float-right"><b>31</b>/2000</span>
+                <span class="float-right">
+                  <b> 
+                   @foreach ($total_loans as $item)
+                    {{$item->total_loan}}
+                   @endforeach
+                  </b>
+                   /{{$total_employees}}
+                </span>
                   <div class="progress progress-sm">
                     <div class="progress-bar bg-danger" style="width: 75%"></div>
                   </div>
@@ -173,8 +187,8 @@
             <div class="row">
               <div class="col-sm-3 col-6">
                 <div class="description-block border-right">
-                  <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 40%</span>
-                  <h5 class="description-header">49,627.06</h5>
+                  {{-- <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 40%</span> --}}
+                  <h5 class="description-header">{{number_format($employee_contribution + $employer_contribution)}}</h5>
                   <span class="description-text">TOTAL BALANCE IN ACCOUNT</span>
                 </div>
                 <!-- /.description-block -->
@@ -182,7 +196,7 @@
               <!-- /.col -->
               <div class="col-sm-3 col-6">
                 <div class="description-block border-right">
-                  <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 20%</span>
+                  {{-- <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 20%</span> --}}
                   <h5 class="description-header">$24,813.53</h5>
                   <span class="description-text">TOTAL INVESTMENT</span>
                 </div>
@@ -191,8 +205,13 @@
               <!-- /.col -->
               <div class="col-sm-3 col-6">
                 <div class="description-block border-right">
-                  <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span>
-                  <h5 class="description-header">$24,813.53</h5>
+                  {{-- <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span> --}}
+                  <h5 class="description-header">
+                    
+                    @foreach ($total_loans as $item)
+                        {{ number_format($item->total_loan_amount)}}
+                    @endforeach
+                  </h5>
                   <span class="description-text">TOTAL LOAN AMOUNT</span>
                 </div>
                 <!-- /.description-block -->
@@ -200,7 +219,7 @@
               <!-- /.col -->
               <div class="col-sm-3 col-6">
                 <div class="description-block">
-                  <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span>
+                  {{-- <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span> --}}
                   <h5 class="description-header">1200</h5>
                   <span class="description-text">TOTAL RECONCILIATION</span>
                 </div>

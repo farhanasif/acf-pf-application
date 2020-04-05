@@ -733,7 +733,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 
 		// ----------START LOAN ROUTE----------
-		Route::get('/create-loan', [
+        Route::get('/create-loan', [
 			'uses'		=> 'LoanController@create_loan',
 			'as'		=> 'create-loan'
 		]);
@@ -746,6 +746,11 @@ Route::group(['middleware' => 'admin'], function () {
         Route::any('/save-loan', [
 			'uses'		=> 'LoanController@saveLoan',
 			'as'		=> 'save-loan'
+		]);
+
+		Route::any('/all-loans', [
+			'uses'		=> 'LoanController@allLoans',
+			'as'		=> 'all-loans'
 		]);
 		// ----------END LOAN ROUTE----------
 });

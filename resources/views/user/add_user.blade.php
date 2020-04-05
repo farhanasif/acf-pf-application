@@ -64,7 +64,7 @@
                     <div class="form-group row">
                       <label  class="col-form-label col-md-3 col-sm-3 label-align">Name</label>
                       <div class="col-md-8 col-sm-3 ">
-                        <input type="name" class="form-control" name="name" placeholder="Name">
+                        <input type="text" class="form-control" name="name" placeholder="Name">
                       </div>
                     </div>
 

@@ -305,7 +305,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="javascript:void(0)" class="nav-link">
+                <a href="{{url('/all-loans')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All Loans</p>
                 </a>

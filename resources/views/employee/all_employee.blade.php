@@ -77,12 +77,15 @@
           @endif
       </div>
     </div>
-    <!-- /.card-header -->
-    <div class="card-body">
-      {{-- <form role="form">
+
+    <div class="card-header card-secondary">
+      <div class="card-header">
+        <h3 class="card-title">Filters</h3>
+        </div>
+      <form role="form">
         <div class="row">
 
-          <div class="col-sm-3">
+          <div class="col-md-3 col-sm-6">
             <div class="form-group">
             <label>Staff Code</label>
             <select class="custom-select select2bs4 " id="staff_code" name="staff_code">
@@ -96,7 +99,7 @@
             </div>
           </div>
 
-            <div class="col-sm-3">
+            <div class="col-md-3 col-sm-6">
                 <!-- select -->
                 <div class="form-group">
                 <label>Name</label>
@@ -109,7 +112,7 @@
                 </select>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-md-3 col-sm-6">
                 <div class="form-group">
                 <label>Position</label>
                 <select class="custom-select select2bs4" id="position" name="position">
@@ -123,7 +126,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-3">
+            <div class="col-md-3 col-sm-6">
                 <!-- select -->
                 <div class="form-group">
                 <label>Department Code</label>
@@ -140,7 +143,7 @@
             </div>
 
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-md-3 col-sm-6">
                     <div class="form-group">
                     <label>Category</label>
                     <select class="custom-select select2bs4" id="category" name="category">
@@ -154,7 +157,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-3">
+                <div class="col-md-3 col-sm-6">
                     <!-- select -->
                     <div class="form-group">
                     <label>Level</label>
@@ -168,7 +171,7 @@
                     </select>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-3 col-sm-6">
                     <div class="form-group">
                     <label>Base</label>
                     <select class="custom-select select2bs4" id="base" name="base">
@@ -182,7 +185,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-3">
+                <div class="col-md-3 col-sm-6">
                     <!-- select -->
                     <div class="form-group">
                     <label>Work Place</label>
@@ -199,30 +202,33 @@
             </div>
 
             <div class="mb-5">
-              <button type="submit" id="search" class="btn btn-success">Search</button>
+              <button type="submit" id="search" class="btn btn-success">Generate</button>
               <button type="submit" id="reset" class="btn btn-info float-sm-right">Reset</button>
             </div>
-     </form> --}}
-       
-      <table id="all-employee" class="table table-bordered table-striped">
+     </form>
+    </div>
+    <!-- /.card-header -->
+    
+    <div class="card-body table-responsive p-0" style="height: 300px;">
+      <table id="all-employee" class="table table-head-fixed text-nowrap">
         <thead>
 
-        <tr class="bg-success">
-          <th>SL NO</th>
-          <th>Staff Code</th>
-          <th>Name</th>
-          <th>Position</th>
-          <th>Department Code</th>
-          <th>Category</th>
-          <th>Level</th>
-          <th>Base</th>
-          <th>Work Place</th>
-          <th>Sub Location</th>
-          <th>Basic Salary</th>
-          <th>Gross Salary</th>
-          <th>Provident Amount</th>
-          <th>Joining Date</th>
-          <th>Ending Date</th>
+        <tr>
+          <th class="bg-success"> SL NO </th>
+          <th class="bg-success"> Staff Code </th>
+          <th class="bg-success"> Name </th>
+          <th class="bg-success"> Position </th>
+          <th class="bg-success"> Department Code </th>
+          <th class="bg-success"> Category </th>
+          <th class="bg-success"> Level </th>
+          <th class="bg-success"> Base </th>
+          <th class="bg-success"> Work Place </th>
+          <th class="bg-success"> Sub Location </th>
+          <th class="bg-success"> Basic Salary </th>
+          <th class="bg-success"> Gross Salary </th>
+          <th class="bg-success"> Provident Amount </th>
+          <th class="bg-success"> Joining Date </th>
+          <th class="bg-success"> Ending Date </th>
           {{-- <th>Action</th> --}}
         </tr>
         </thead>
@@ -250,7 +256,7 @@
                 </a>
               </td>
         <?php } ?>
-          <td>
+          <td class="text-bold">
             <a href="{{route('employee-details',$employee->staff_code)}}">
               {{$employee->first_name}} {{$employee->last_name}}
             </a>
@@ -275,7 +281,7 @@
         @endforeach
        </tbody>
 
-        <tfoot>
+        {{-- <tfoot>
           <tr>
             <th style="display:none;"></th>
             <th>Staff Code</th>
@@ -293,11 +299,18 @@
             <th style="display:none;"></th>
             <th style="display:none;"></th>
           </tr>
-        </tfoot>
-
+        </tfoot> --}}
+   
       </table>
     </div>
     <!-- /.card-body -->
+     
+
+    <div class="card-footer">
+      <div class="float-right">
+        {{-- {{ $employees->links() }} --}}
+       </div>
+    </div>
   </div>
   <!-- /.card -->
 
@@ -377,30 +390,30 @@
     // DataTable
     // var table = $('#all-employee').DataTable();
     
-    var table = $('#all-employee').DataTable({
-          "info": true,
-          "autoWidth": false,
-          scrollX:'50vh', 
-          scrollY:'50vh',
-          scrollCollapse: true,
-          fixedColumns: true,
-          fixedColumns:   {
-            leftColumns: 2
-        }
-      });
+    // var table = $('#all-employee').DataTable({
+    //       "info": true,
+    //       "autoWidth": false,
+    //       scrollX:'50vh', 
+    //       scrollY:'50vh',
+    //       scrollCollapse: true,
+    //       fixedColumns: true,
+    //       fixedColumns:   {
+    //         leftColumns: 2
+    //     }
+    //   });
  
     // Apply the search
-    table.columns().every( function () {
-        var that = this;
+    // table.columns().every( function () {
+    //     var that = this;
  
-        $( 'input', this.footer() ).on( 'keyup change clear', function () {
-            if ( that.search() !== this.value ) {
-                that
-                    .search( this.value )
-                    .draw();
-            }
-        } );
-    } );
+    //     $( 'input', this.footer() ).on( 'keyup change clear', function () {
+    //         if ( that.search() !== this.value ) {
+    //             that
+    //                 .search( this.value )
+    //                 .draw();
+    //         }
+    //     } );
+    // } );
 // ---------------------END BOTTOM SEARCHING -------------------
     
 
@@ -585,7 +598,7 @@
 
       $('.select2bs4').select2({
         theme: 'bootstrap4',
-      })
+      });
 
     });
   

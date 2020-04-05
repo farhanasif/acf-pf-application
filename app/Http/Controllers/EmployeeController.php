@@ -40,8 +40,8 @@ class EmployeeController extends Controller
 
     public function all_employee()
     {
-      // $employees = DB::table('employees')->get();
-      $employees = Employee::all();
+      $employees = DB::table('employees')->get();
+      // $employees = Employee::paginate(5);
       return view('employee.all_employee',compact('employees'));
     }
 
@@ -216,10 +216,13 @@ class EmployeeController extends Controller
               INNER JOIN employees ON employees.staff_code = loans.staff_code
               WHERE loans.staff_code ='".$staff_code."' LIMIT 1");
                           
- $total_and_maximum_pf = DB::select(
+    $total_and_maximum_pf = DB::select(
                 "SELECT SUM(total_pf) AS total_pf_amount, MAX(total_pf) AS maximum_total_pf , deposit_date
                 FROM pf_deposit WHERE staff_code ='".$staff_code."' ORDER BY deposit_date DESC");
 
+   $loan_adjustments = DB::select("SELECT  payment, pay_date, payment_type
+                                   FROM loan_installment 
+                                   WHERE staff_code ='".$staff_code."' ORDER BY pay_date ASC");
 
       $pf_deposits = DB::table('pf_deposit')
                     ->orderBy('deposit_date', 'desc')
@@ -236,7 +239,7 @@ class EmployeeController extends Controller
 
       return view('employee.employee_details',compact(
        'loan_account_details','employees','pf_deposits','total_and_maximum_pf',
-        'departments','work_places','levels','positions','categories','bases','sub_locations'));
+        'departments','work_places','levels','positions','categories','bases','sub_locations','loan_adjustments'));
 
       // return view('employee.employee_details',compact('employees','pf_deposits','total_pf_amounts'));
     }
@@ -254,9 +257,46 @@ class EmployeeController extends Controller
       return view('employee.edit_employee',compact('employee','departments','work_places','levels','positions','categories','bases','sub_locations'));
       // return view('employee.edit_employee',compact('employee'));
     }
-    public function update_employee(Request $request, $staff_code)
+    public function update_employee(Request $request,$staff_code)
     {
-      // echo 'hi';
+
+      // $staff_code = $_POST['staff_code'];
+      // $first_name = $_POST['first_name'];
+      // $last_name = $_POST['last_name'];
+      // $position = $_POST['position'];
+      // $department_code = $_POST['department_code'];
+      // $category = $_POST['category'];
+      // $level = $_POST['level'];
+      // $base = $_POST['base'];
+      // $work_place = $_POST['work_place'];
+      // $sub_location = $_POST['sub_location'];
+      // $basic_salary = $_POST['basic_salary'];
+      // $gross_salary = $_POST['gross_salary'];
+      // $pf_amount = $_POST['pf_amount'];
+      // $joining_date = $_POST['joining_date'];
+      // $ending_date = $_POST['ending_date'];
+      // $status = $_POST['status'];
+
+      // $data = array();
+      // $data['staff_code'] = $staff_code;
+      // $data['first_name'] = $first_name;
+      // $data['last_name'] = $last_name;
+      // $data['position'] = $position;
+      // $data['department_code'] = $department_code;
+      // $data['category'] = $category;
+      // $data['level'] = $level;
+      // $data['base'] = $base;
+      // $data['work_place'] = $work_place;
+      // $data['sub_location'] = $sub_location;
+      // $data['basic_salary'] = $basic_salary;
+      // $data['gross_salary'] = $gross_salary;
+      // $data['pf_amount'] = $pf_amount;
+      // $data['joining_date'] = $joining_date;
+      // $data['ending_date'] = $ending_date;
+      // $data['status'] = $status;
+      // $data['created_by'] = Auth::user()->id;
+      // $data['updated_by'] =  Auth::user()->id;
+
       $data = array();
       $data['staff_code'] = $request->staff_code;
       $data['first_name'] = $request->first_name;
@@ -278,7 +318,7 @@ class EmployeeController extends Controller
       $data['updated_by'] =  Auth::user()->id;
 
       DB::table('employees')->where('staff_code',$staff_code)->update($data);
-      return redirect()->route('all-employee')->with('success', 'Employee Updated Successfully.');
+      return redirect()->route('employee-details')->with('success', 'Employee Updated Successfully.');
     }
 
     public function delete_employee($id)
