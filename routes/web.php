@@ -691,6 +691,17 @@ Route::group(['middleware' => 'admin'], function () {
 			'as'		=> 'delete-account-head'
 		]);
 
+		// ---------- START CHANGE PROFILE ROUTE ------------
+		Route::get('/edit-change-profile/{id}', [
+			'uses'		=> 'ChangeProfileController@edit_change_profile',
+			'as'		=> 'edit-change-profile'
+		]);
+		Route::post('/update-change-profile/{id}', [
+			'uses'		=> 'ChangeProfileController@update_change_profile',
+			'as'		=> 'update-change-profile'
+		]);
+		// ---------- END CHANGE PROFILE ROUTE ------------
+
 		//-------------------RECONCILIATION ROUTES-------------------//
 		Route::get('/reconciliation', 'BankController@view_transaction');
 		Route::get('/monthy-bank-book', 'BankController@get_monthly_bank_book');
@@ -708,10 +719,10 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('/user-home',['middleware'=>'user','uses'=>'AdminController@user_home']);
 
 		// --------CHANGE PROFILE ROUTE---------------------
-		Route::get('change-profile', [
-			'uses'		=> 'AdminController@change_profile',
-			'as'		=> 'change-profile'
-		]);
+		// Route::get('change-profile', [
+		// 	'uses'		=> 'AdminController@change_profile',
+		// 	'as'		=> 'change-profile'
+		// ]);
 		// --------CHANGE PROFILE ROUTE---------------------
 
 

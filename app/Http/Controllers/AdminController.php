@@ -29,9 +29,9 @@ class AdminController extends Controller
     	return view('user_home');
     }
 
-    public function change_profile()
-    {
-        return view('change_profile');
-    }
+    // public function change_profile()
+    // {
+    //     return view('change_profile');
+    // }
 
 }

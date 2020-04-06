@@ -55,7 +55,7 @@
             <!-- Message End -->
           </a>
           <div class="dropdown-divider"></div>
-        <a href="{{route('change-profile')}}" class="dropdown-item">Change Profile</a>
+        <a href="{{route('edit-change-profile',Auth::user()->id)}}" class="dropdown-item">Change Profile</a>
           <!-- <a href="{{ url('/logout') }}" class="dropdown-item dropdown-footer">LogOut</a> -->
             <a class="dropdown-item" href="{{ route('logout') }}"
                onclick="event.preventDefault();
