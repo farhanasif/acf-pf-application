@@ -82,7 +82,8 @@
       <div class="card-header">
         <h3 class="card-title">Filters</h3>
         </div>
-      <form role="form">
+      <form role="form" action="{{route('all-employee')}}" method="POST">
+        @csrf
         <div class="row">
 
           <div class="col-md-3 col-sm-6">
@@ -116,11 +117,10 @@
                 <div class="form-group">
                 <label>Position</label>
                 <select class="custom-select select2bs4" id="position" name="position">
-                    <option value="">--select--</option>
-
-                    @foreach ($employees as $employee)
-                       <option value="{{$employee->position}}"> {{$employee->position}} </option>
-                    @endforeach
+                  <option value="-1">--select--</option>
+                  @foreach ($positions as $position)
+                      <option value="{{$position->position_name}}">{{$position->position_name}}</option>
+                  @endforeach
 
                 </select>
                 </div>
@@ -131,7 +131,7 @@
                 <div class="form-group">
                 <label>Department Code</label>
                 <select class="custom-select select2bs4" id="department_code" name="department_code">
-                    <option value="">--select--</option>
+                    <option value="-1">--select--</option>
 
                     @foreach ($employees as $employee)
                       <option value="{{$employee->department_code}}"> {{$employee->department_code}} </option>
@@ -147,11 +147,10 @@
                     <div class="form-group">
                     <label>Category</label>
                     <select class="custom-select select2bs4" id="category" name="category">
-                        <option value="">--select--</option>
-
-                        @foreach ($employees as $employee)
-                          <option value="{{$employee->category}}"> {{$employee->category}} </option>
-                        @endforeach
+                      <option value="-1">--select--</option>
+                      @foreach ($categories as $category)
+                          <option value="{{$category->category_name}}">{{$category->category_name}}</option>
+                      @endforeach
 
                     </select>
                     </div>
@@ -164,8 +163,8 @@
                     <select class="custom-select select2bs4" id="level" name="level">
                         <option value="">--select--</option>
 
-                        @foreach ($employees as $employee)
-                          <option value="{{$employee->level}}"> {{$employee->level}} </option>
+                        @foreach ($levels as $row)
+                          <option value="{{$row->level_name}}"> {{$row->level_name}} </option>
                         @endforeach
 
                     </select>
@@ -175,10 +174,10 @@
                     <div class="form-group">
                     <label>Base</label>
                     <select class="custom-select select2bs4" id="base" name="base">
-                        <option value="">--select--</option>
+                        <option value="-1">--select--</option>
 
-                        @foreach ($employees as $employee)
-                         <option value="{{$employee->base}}"> {{$employee->base}} </option>
+                        @foreach ($bases as $row)
+                         <option value="{{$row->base_name}}"> {{$row->base_name}} </option>
                         @endforeach
 
                     </select>
@@ -190,10 +189,10 @@
                     <div class="form-group">
                     <label>Work Place</label>
                     <select class="custom-select select2bs4" id="work_place" name="work_place">
-                        <option value="">--select--</option>
+                        <option value="-1">--select--</option>
 
-                        @foreach ($employees as $employee)
-                          <option value="{{$employee->work_place}}"> {{$employee->work_place}}</option>
+                        @foreach ($work_places as $row)
+                          <option value="{{$row->work_place_name}}"> {{$row->work_place_name}}</option>
                         @endforeach
 
                     </select>
@@ -209,7 +208,7 @@
     </div>
     <!-- /.card-header -->
     
-    <div class="card-body table-responsive p-0" style="height: 300px;">
+    <div class="card-body table-responsive p-0" style="height: 500px;">
       <table id="all-employee" class="table table-head-fixed text-nowrap">
         <thead>
 

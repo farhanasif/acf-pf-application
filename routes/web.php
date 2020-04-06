@@ -520,7 +520,7 @@ Route::group(['middleware' => 'admin'], function () {
 			'as'		=> 'add-employee'
 		]);
 
-		Route::get('/all-employee', [
+		Route::match(['get', 'post'],'/all-employee', [
 			'uses'		=> 'EmployeeController@all_employee',
 			'as'		=> 'all-employee'
 		]);
