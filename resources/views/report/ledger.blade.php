@@ -39,46 +39,6 @@
                             @foreach ($lreport as $data)
                                 <option value="{{$data->deposit_date}}"> {{$data->month_name}}</option>
                             @endforeach
-                                                
-
-                        {{-- <option value="2017-01-01">January'2017</option> --}}
-                        {{-- <option value="2017-02-01">February'2017</option>
-                        <option value="2017-03-01">March'2017</option>
-                        <option value="2017-04-01">April'2017</option>
-                        <option value="2017-05-01">May'2017</option>
-                        <option value="2017-06-01">June'2017</option>
-                        <option value="2017-07-01">July'2017</option>
-                        <option value="2017-08-01">August'2017</option>
-                        <option value="2017-09-01">September'2017</option>
-                        <option value="2017-10-01">October'2017</option>
-                        <option value="2017-11-01">November'2017</option>
-                        <option value="2017-12-01">December'2017</option>
-
-                        <option value="2018-01-01">January'2018</option>
-                        <option value="2018-02-01">February'2018</option>
-                        <option value="2018-03-01">March'2018</option>
-                        <option value="2018-04-01">April'2018</option>
-                        <option value="2018-05-01">May'2018</option>
-                        <option value="2018-06-01">June'2018</option>
-                        <option value="2018-07-01">July'2018</option>
-                        <option value="2018-08-01">August'2018</option>
-                        <option value="2018-09-01">September'2018</option>
-                        <option value="2018-10-01">October'2018</option>
-                        <option value="2018-11-01">November'2018</option>
-                        <option value="2018-12-01">December'2018</option>
-
-                        <option value="2019-01-01">January'2019</option>
-                        <option value="2019-02-01">February'2019</option>
-                        <option value="2019-03-01">March'2019</option>
-                        <option value="2019-04-01">April'2019</option>
-                        <option value="2019-05-01">May'2019</option>
-                        <option value="2019-06-01">June'2019</option>
-                        <option value="2019-07-01">July'2019</option>
-                        <option value="2019-08-01">August'2019</option>
-                        <option value="2019-09-01">September'2019</option>
-                        <option value="2019-10-01">October'2019</option>
-                        <option value="2019-11-01">November'2019</option>
-                        <option value="2019-12-01">December'2019</option> --}}
 
                     </select>
                     </div>
@@ -93,44 +53,6 @@
                             <option value="{{$data->deposit_date}}"> {{$data->month_name}}</option>
                         @endforeach
 
-                        {{-- <option value="2017-01-31">January'2017</option>
-                        <option value="2017-02-28">February'2017</option>
-                        <option value="2017-03-31">March'2017</option>
-                        <option value="2017-04-30">April'2017</option>
-                        <option value="2017-05-31">May'2017</option>
-                        <option value="2017-06-30">June'2017</option>
-                        <option value="2017-07-31">July'2017</option>
-                        <option value="2017-08-28">August'2017</option>
-                        <option value="2017-09-31">September'2017</option>
-                        <option value="2017-10-30">October'2017</option>
-                        <option value="2017-11-31">November'2017</option>
-                        <option value="2017-12-30">December'2017</option>
-
-                        <option value="2018-01-31">January'2018</option>
-                        <option value="2018-02-28">February'2018</option>
-                        <option value="2018-03-31">March'2018</option>
-                        <option value="2018-04-30">April'2018</option>
-                        <option value="2018-05-31">May'2018</option>
-                        <option value="2018-06-30">June'2018</option>
-                        <option value="2018-07-31">July'2018</option>
-                        <option value="2018-08-28">August'2018</option>
-                        <option value="2018-09-31">September'2018</option>
-                        <option value="2018-10-30">October'2018</option>
-                        <option value="2018-11-31">November'2018</option>
-                        <option value="2018-12-30">December'2018</option>
-
-                        <option value="2019-01-31">January'2019</option>
-                        <option value="2019-02-28">February'2019</option>
-                        <option value="2019-03-31">March'2019</option>
-                        <option value="2019-04-30">April'2019</option>
-                        <option value="2019-05-31">May'2019</option>
-                        <option value="2019-06-30">June'2019</option>
-                        <option value="2019-07-31">July'2019</option>
-                        <option value="2019-08-28">August'2019</option>
-                        <option value="2019-09-31">September'2019</option>
-                        <option value="2019-10-30">October'2019</option>
-                        <option value="2019-11-31">November'2019</option>
-                        <option value="2019-12-30">December'2019</option> --}}
                     </select>
                     </div>
                 </div>

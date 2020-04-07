@@ -27,7 +27,7 @@
     <div class="card-header">
         <h3 class="card-title">All PF Interest Information</h3>
         <div class="float-sm-right">
-          <a href="" class="btn btn-success" data-toggle="modal" data-target="#update-modal-default">Update Batch</a>
+          {{-- <a href="" class="btn btn-success" data-toggle="modal" data-target="#update-modal-default">Update Batch</a> --}}
           <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 
           <a href="{{url('download_excel/pf_interest/Interest.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
           <a href="{{route('add-pf-interest')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add Interest</a>
