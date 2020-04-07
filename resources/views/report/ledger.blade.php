@@ -2,6 +2,24 @@
 @extends('master')
 
 @section('content')
+
+    <style>
+        tr.selected td {
+            background-color:coral !important;
+        }
+
+        .selected {
+            background-color: coral;
+        }
+
+        .first-col {
+            text-align: center; background-color: #212529; color: #fff;
+        }
+
+        .general-col {
+            text-align: center; background-color: #bee5eb; color: #000;
+        }
+    </style>
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -209,8 +227,8 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            <div style="overflow-x: auto;">
-                <table id="example1" class="table table-bordered table-head-fixed table-sm" style="height: 600px !important;">
+            <div id='table-cont' style="max-height: 500px !important; overflow-y: auto; overflow-x: scroll; max-width: 100%;">
+                <table id="example1" class="table table-sm" style="height: 600px !important;">
                     <thead>
                     <tr>
                     <th>Third Part</th>
@@ -230,28 +248,10 @@
                     <th>Total</th>
                     </tr>
                     </thead>
+                    
                     <tbody>
 
                     </tbody>
-                    <!-- <tfoot>
-                    <tr>
-                    <th>Third Part</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Category</th>
-                    <th>Level</th>
-                    <th>Entry Date</th>
-                    <th>Contract<br />Start Date</th>
-                    <th>End Date</th>
-                    <th>Workplace</th>
-                    <th>Month of Payment</th>
-                    <th>Basic Salary</th>
-                    <th>Gross Salary</th>
-                    <th>Employee</th>
-                    <th>ACF</th>
-                    <th>Total</th>
-                    </tr>
-                    </tfoot> -->
                 </table>
             </div>
         </div>
@@ -263,14 +263,24 @@
 @section('customjs')
 <script>
     var table;
+    $("tr").click(function() {
+            console.log('clicked');
+            $(this).addClass('selected').siblings().removeClass("selected");
+    });
+
     $(function () {
-        // table = $("#example1").DataTable({
-        //     "info": true,
-        //     "autoWidth": false,
-        //     scrollX:'50vh',
-        //     scrollY:'50vh',
-        //     scrollCollapse: true,
-        // });
+        
+        var tableCont = document.querySelector('#table-cont');
+        function scrollHandle (e){
+            var scrollTop = this.scrollTop;
+            this.querySelector('thead').style.transform = 'translateY(' + scrollTop + 'px)';
+        }
+        
+        tableCont.addEventListener('scroll',scrollHandle);
+
+        
+
+
         $("#example1 thead").empty();
         $("#example1 tbody").empty();
         $( "#generate" ).click(function() {
@@ -328,10 +338,10 @@
                         else{
                             for(i = 0; i < column_length; i++){
                                 if(i < 1){
-                                    tbody = tbody+'<td class="table-dark" style="text-align: center;">'+element[columns[i]]+'</td>';
+                                    tbody = tbody+'<td class="first-col">'+element[columns[i]]+'</td>';
                                 }
                                 else if(i > 0 && i <5){
-                                    tbody = tbody+'<td class="table-info" style="text-align: center;">'+element[columns[i]]+'</td>';
+                                    tbody = tbody+'<td class="general-col">'+element[columns[i]]+'</td>';
                                 }
                                 else{
                                     tbody = tbody+'<td style="text-align: center;">'+numberWithCommas(element[columns[i]])+'</td>';
@@ -339,7 +349,7 @@
                             }
                             console.log(tbody);
                         }
-                        $("#example1 tbody").append("<tr>"
+                        $("#example1 tbody").append("<tr onclick=\"var s = this.parentNode.querySelector('tr.selected'); s && s.classList.remove('selected'); this.classList.add('selected');\">"
                             +tbody
                         +"</tr>");
                     });
