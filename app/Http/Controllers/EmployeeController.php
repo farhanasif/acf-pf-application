@@ -61,29 +61,52 @@ class EmployeeController extends Controller
           }
           else{
               $query = $query. " where 1=1 ";
-              
+
               if($position != '-1'){
                   $query = $query . " AND position = '".$position."'";
+                  // dd($query);
+                  // exit;
+                  $query = $query." limit 10";
+                  $employees = DB::select($query);
+                  return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
               }
 
               if($category != '-1'){
+
                   $query = $query . " AND category = '".$category."'";
+                  $query = $query." limit 10";
+                  $employees = DB::select($query);
+                  return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
               }
 
               if($base != '-1'){
                 $query = $query . " AND base = '".$base."'";
+
+                $query = $query." limit 10";
+                $employees = DB::select($query);
+                return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
+
               }
 
               if($level != '-1'){
                   $query = $query . " AND level = '".$level."'";
+                   $query = $query." limit 10";
+                  $employees = DB::select($query);
+                  return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
               }
 
               if($work_place != '-1'){
                 $query = $query . " AND work_place = '".$work_place."'";
+                $query = $query." limit 10";
+                $employees = DB::select($query);
+                return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
               }
 
               if($department_code != '-1'){
                   $query = $query . " AND department_code = '".$department_code."'";
+                  $query = $query." limit 10";
+                  $employees = DB::select($query);
+                  return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
               }
 
           }

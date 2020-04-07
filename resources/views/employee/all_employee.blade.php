@@ -133,8 +133,8 @@
                 <select class="custom-select select2bs4" id="department_code" name="department_code">
                     <option value="-1">--select--</option>
 
-                    @foreach ($employees as $employee)
-                      <option value="{{$employee->department_code}}"> {{$employee->department_code}} </option>
+                    @foreach ($departments as $department)
+                      <option value="{{$department->department_code}}"> {{$department->department_code}} </option>
                     @endforeach
 
                 </select>
