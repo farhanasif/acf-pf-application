@@ -25,15 +25,16 @@
           <div class="card-body table-responsive p-0" style="">
             <table class="table table-striped table-head-fixed text-nowrap" id="loanTable">
               <thead>
-                <tr >
-                  <th class="bg-success">ID</th>
-                  <th class="bg-success">Date</th>
-                  <th class="bg-success">Name</th>
-                  <th class="bg-success">Amount</th>
-                  <th class="bg-success">Interest</th>
-                  <th class="bg-success">Months</th>
-                  <th class="bg-success">Start Month</th>
-                  <th class="bg-success">End Month</th>
+                <tr>
+                  <th>ID</th>
+                  <th>Date</th>
+                  <th>Name</th>
+                  <th>Amount</th>
+                  <th>Interest</th>
+                  <th>Months</th>
+                  <th>Start Month</th>
+                  <th>End Month</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -51,6 +52,7 @@
                   <td class="center"> {{$item->total_months ? $item->total_months : 'Nill' }} </td>
                   <td> {{ date('j F, Y', strtotime($item->loan_start_date)) ? date('j F, Y', strtotime($item->loan_start_date)) : 'Nill' }}  </td>
                   <td> {{ date('j F, Y', strtotime($item->loan_end_date)) ? date('j F, Y', strtotime($item->loan_end_date)) : 'Nill' }}  </td>
+                  <td><a href="{{ url('/adjust-loan',$item->staff_code) }}"><button class="btn btn-warning" style="color: White;font-weight: 700;">Adjust Loan</button></a></td>
                 </tr>
                 @endforeach
               </tbody>

@@ -743,7 +743,8 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('ledger-report','LedgerReportController@ledger_report');
 
 
-		// ----------START LOAN ROUTE----------
+		/**************************** Loan Seaction route *****************************/
+
         Route::get('/create-loan', [
 			'uses'		=> 'LoanController@create_loan',
 			'as'		=> 'create-loan'
@@ -763,5 +764,16 @@ Route::group(['middleware' => 'admin'], function () {
 			'uses'		=> 'LoanController@allLoans',
 			'as'		=> 'all-loans'
 		]);
-		// ----------END LOAN ROUTE----------
+
+		Route::any('/adjust-loan/{staff_code}', [
+			'uses'		=> 'LoanController@adjustLoan',
+			'as'		=> 'adjust-loan'
+		]);
+
+		Route::any('/save-loan-insatllment', [
+			'uses'		=> 'LoanController@saveLoanInstallment',
+			'as'		=> 'save-loan-insatllment'
+		]);
+
+/**************************** Arif Khan **************************************/
 });

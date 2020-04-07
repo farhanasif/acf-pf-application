@@ -8,6 +8,19 @@ use App\Loan;
 use App\LoanInstallment;
 use App\Transaction;
 
+use App\Imports\EmployeesImport;
+use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use App\User;
+use Auth;
+use App\Level;
+use App\Position;
+use App\Category;
+use App\Base;
+use App\Sub_location;
+use App\Work_place;
+use App\Department;
+use App\Employee;
 
 class LoanController extends Controller
 {
@@ -86,4 +99,55 @@ class LoanController extends Controller
     	// print_r($data);exit();
     	return view('loan.all_loans', compact('data'));
     }
+
+    public function adjustLoan(Request $request, $staff_code)
+    {
+     $accounts = DB::table('account_heads')->get();
+     $loan_account_details = DB::select(
+                "SELECT loans.*, employees.*
+                 FROM loans
+                 INNER JOIN employees ON employees.staff_code = loans.staff_code
+                 WHERE loans.staff_code ='".$staff_code."' LIMIT 1");
+     // print_r($loan_account_details[0]->first_name);exit();
+                            
+      $total_and_maximum_pf = DB::select(
+                  "SELECT SUM(total_pf) AS total_pf_amount, MAX(total_pf) AS maximum_total_pf , deposit_date
+                  FROM pf_deposit WHERE staff_code ='".$staff_code."' ORDER BY deposit_date DESC");
+
+      $loan_adjustments = DB::select("SELECT  id, payment, pay_date, payment_type
+                                     FROM loan_installment 
+                                     WHERE staff_code ='".$staff_code."' ORDER BY pay_date ASC");
+
+      $pf_deposits = DB::table('pf_deposit')
+                      ->orderBy('deposit_date', 'desc')
+                      ->where('staff_code', $staff_code)
+                      ->get();
+
+        return view('loan.loan_details',compact('accounts',
+         'loan_account_details','pf_deposits','total_and_maximum_pf','loan_adjustments'));
+    }
+
+    public function saveLoanInstallment(Request $request)
+    {
+        $staff_code = $request->staff_code;
+        $employees = DB::table('employees')->where('staff_code',$staff_code)->get();
+        
+        // print_r($request->all());exit();
+        $transaction = new Transaction;
+        $transaction->account_head_id = $request->account_head_for_monthly_installment;
+        $transaction->description = $staff_code.' '.$employees[0]->first_name.' '.$employees[0]->last_name.' monthly loan installment without interest' ;
+        $transaction->amount = $request->monthly_installment;
+        $transaction->save();
+
+        $transaction = new Transaction;
+        $transaction->account_head_id = $request->account_head_for_monthly_interest;
+        $transaction->description = $staff_code.' '.$employees[0]->first_name.' '.$employees[0]->last_name.' monthly loan interest' ;
+        $transaction->amount = $request->monthly_interest;
+        $transaction->save();
+        
+        DB::select('update loan_installment set payment_type="paid" where id='.$request->installment_id);
+        
+        return back()->with('success','Your monthly loan installment is successfully paid!.');
+    }
+
 }
