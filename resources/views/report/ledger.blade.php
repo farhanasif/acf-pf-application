@@ -36,8 +36,13 @@
                     <select class="custom-select select2bs4" id="from_date">
                         <option value="">--select--</option>
 
-                        <option value="2017-01-01">January'2017</option>
-                        <option value="2017-02-01">February'2017</option>
+                            @foreach ($lreport as $data)
+                                <option value="{{$data->deposit_date}}"> {{$data->month_name}}</option>
+                            @endforeach
+                                                
+
+                        {{-- <option value="2017-01-01">January'2017</option> --}}
+                        {{-- <option value="2017-02-01">February'2017</option>
                         <option value="2017-03-01">March'2017</option>
                         <option value="2017-04-01">April'2017</option>
                         <option value="2017-05-01">May'2017</option>
@@ -73,7 +78,7 @@
                         <option value="2019-09-01">September'2019</option>
                         <option value="2019-10-01">October'2019</option>
                         <option value="2019-11-01">November'2019</option>
-                        <option value="2019-12-01">December'2019</option>
+                        <option value="2019-12-01">December'2019</option> --}}
 
                     </select>
                     </div>
@@ -84,7 +89,11 @@
                     <select class="custom-select select2bs4" id="to_date">
                         <option value="">--select--</option>
 
-                        <option value="2017-01-31">January'2017</option>
+                        @foreach ($lreport as $data)
+                            <option value="{{$data->deposit_date}}"> {{$data->month_name}}</option>
+                        @endforeach
+
+                        {{-- <option value="2017-01-31">January'2017</option>
                         <option value="2017-02-28">February'2017</option>
                         <option value="2017-03-31">March'2017</option>
                         <option value="2017-04-30">April'2017</option>
@@ -121,7 +130,7 @@
                         <option value="2019-09-31">September'2019</option>
                         <option value="2019-10-30">October'2019</option>
                         <option value="2019-11-31">November'2019</option>
-                        <option value="2019-12-30">December'2019</option>
+                        <option value="2019-12-30">December'2019</option> --}}
                     </select>
                     </div>
                 </div>
