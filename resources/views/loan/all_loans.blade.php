@@ -34,6 +34,7 @@
                   <th>Months</th>
                   <th>Start Month</th>
                   <th>End Month</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -51,6 +52,7 @@
                   <td class="center"> {{$item->total_months ? $item->total_months : 'Nill' }} </td>
                   <td> {{ date('j F, Y', strtotime($item->loan_start_date)) ? date('j F, Y', strtotime($item->loan_start_date)) : 'Nill' }}  </td>
                   <td> {{ date('j F, Y', strtotime($item->loan_end_date)) ? date('j F, Y', strtotime($item->loan_end_date)) : 'Nill' }}  </td>
+                  <td><a href="{{ url('/adjust-loan',$item->staff_code) }}"><button class="btn btn-warning" style="color: White;font-weight: 700;">Adjust Loan</button></a></td>
                 </tr>
                 @endforeach
               </tbody>
