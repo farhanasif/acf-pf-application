@@ -17,6 +17,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('ledger-test', 'LedgerReportController@view_ledger_report_test');
+
 // Route::get('/report', function () {
 //     return view('report');
 // });
@@ -729,6 +731,7 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('get-fund-data', 'ProvidentFundController@getProvidentFund');
 
 		Route::get('ledger', 'LedgerReportController@view_ledger_report');
+		
 		Route::get('ledger-report','LedgerReportController@ledger_report');
 
 

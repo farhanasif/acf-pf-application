@@ -77,13 +77,12 @@ class LedgerReportController extends Controller
 
    public function view_ledger_report()
    {
-        // $data = array();
-        // $data['all_data'] =   DB::select('select distinct(date_format(deposit_date, \'%b %Y\')) as depo_date  from pf_deposit ORDER BY deposit_date ASC');
-        // $data['to_data'] =    DB::select('select distinct(deposit_date) from pf_deposit ORDER BY deposit_date ASC');
-        // $data['from_data']  = DB::select('select distinct(deposit_date) from pf_deposit ORDER BY deposit_date DESC');
-        // dd( $data['to_data']);
-        // exit;
         return view('report.ledger');
+    }
+
+
+    public function view_ledger_report_test(){
+        return view('report.ledgeruitest');
     }
 
 

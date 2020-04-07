@@ -210,7 +210,7 @@
         <!-- /.card-header -->
         <div class="card-body">
             <div style="overflow-x: auto;">
-                <table id="example1" class="table table-bordered table-head-fixed table-sm" style="height: 600px;">
+                <table id="example1" class="table table-bordered table-head-fixed table-sm" style="height: 600px !important;">
                     <thead>
                     <tr>
                     <th>Third Part</th>
