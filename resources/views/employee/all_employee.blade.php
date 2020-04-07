@@ -161,7 +161,7 @@
                     <div class="form-group">
                     <label>Level</label>
                     <select class="custom-select select2bs4" id="level" name="level">
-                        <option value="">--select--</option>
+                        <option value="-1">--select--</option>
 
                         @foreach ($levels as $row)
                           <option value="{{$row->level_name}}"> {{$row->level_name}} </option>

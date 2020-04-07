@@ -97,6 +97,8 @@ class EmployeeController extends Controller
 
               if($work_place != '-1'){
                 $query = $query . " AND work_place = '".$work_place."'";
+                // dd($query);
+                // exit;
                 $query = $query." limit 10";
                 $employees = DB::select($query);
                 return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
@@ -104,6 +106,8 @@ class EmployeeController extends Controller
 
               if($department_code != '-1'){
                   $query = $query . " AND department_code = '".$department_code."'";
+                //    dd($query);
+                // exit;
                   $query = $query." limit 10";
                   $employees = DB::select($query);
                   return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
