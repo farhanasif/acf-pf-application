@@ -19,6 +19,8 @@ class LedgerReportController extends Controller
         //count months
         $total_months = count($months);
 
+        //dd($months);
+
         //if months > 0 , then proceed
         if($total_months > 0){
             //generte the master query
