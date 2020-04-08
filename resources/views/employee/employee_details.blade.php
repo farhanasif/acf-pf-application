@@ -301,7 +301,7 @@
                     <div class="col-sm-10">
                       <select name="position" id="position" class="form-control select2bs4">
                         @foreach ($positions as $position)
-                          <option <?php echo ($position->position_name) ? "selected" : ""; ?>  value="{{$position->position_name}}">{{$position->position_name}}</option>
+                          <option <?php echo ($employees->position == $position->position_name) ? "selected" : '' ?>  value="{{$position->position_name}}">{{$position->position_name}}</option>
                          @endforeach
                       </select>
                     </div>
@@ -312,7 +312,7 @@
                     <div class="col-sm-10">
                       <select name="department_code" id="department_code" class="form-control select2bs4">
                         @foreach ($departments as $department)
-                          <option <?php echo ($department->department_code) ? "selected" : ""; ?> value="{{$department->department_code}}">{{$department->department_code}}</option>
+                          <option <?php echo ($employees->department_code==$department->department_code) ? "selected" : '' ?> value="{{$department->department_code}}">{{$department->department_code}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -323,7 +323,7 @@
                     <div class="col-sm-10">
                       <select name="category" id="category" class="form-control select2bs4">
                         @foreach ($categories as $category)
-                          <option <?php echo ($category->category_name) ? "selected" : ""; ?> value="{{$category->category_name}}">{{$category->category_name}}</option>
+                          <option <?php echo ($employees->category == $category->category_name) ? "selected" : '' ?> value="{{$category->category_name}}">{{$category->category_name}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -335,7 +335,7 @@
 
                       <select name="level" id="level" class="form-control select2bs4">
                           @foreach ($levels as $level)
-                           <option <?php echo ($level->level_name) ? "selected" : ""; ?> value="{{$level->level_name}}">{{$level->level_name}}</option>
+                            <option <?php echo ($employees->level == $level->level_name ) ? "selected" : '' ?> value="{{$level->level_name}}">{{$level->level_name}}</option>
                           @endforeach
                       </select>
 
@@ -347,7 +347,7 @@
                     <div class="col-sm-10">
                       <select name="base" id="base" class="form-control select2bs4">
                         @foreach ($bases as $base)
-                        <option <?php echo ($base->base_name) ? "selected" : ""; ?> value="{{$base->base_name}}">{{$base->base_name}}</option>
+                          <option <?php echo ($employees->base == $base->base_name) ? "selected" : '' ?> value="{{$base->base_name}}">{{$base->base_name}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -358,10 +358,10 @@
                     <div class="col-sm-10">
                       <select name="work_place" id="work_place" class="form-control select2bs4">
                         @foreach ($work_places as $work_place)
-                          <option <?php echo ($work_place->work_place_name) ? "selected" : ""; ?> value="{{$work_place->work_place_name}}">{{$work_place->work_place_name}}</option>
+                          <option <?php echo ($employees->work_place == $work_place->work_place_name) ? "selected" : '' ?> value="{{$work_place->work_place_name}}">{{$work_place->work_place_name}}</option>
                         @endforeach
                       </select>
-                    </div>
+                    </div> 
                   </div>
 
                   <div class="form-group row">
@@ -369,7 +369,7 @@
                     <div class="col-sm-10">
                       <select name="sub_location" id="sub_location" class="form-control select2bs4" style="width: 100%;">
                         @foreach ($sub_locations as $sub_location)
-                          <option <?php echo ($sub_location->sub_location_name) ? "selected" : ""; ?> value="{{$sub_location->sub_location_name}}">{{$sub_location->sub_location_name}}</option>
+                          <option <?php echo ($employees->sub_location == $sub_location->sub_location_name) ? "selected" : '' ?> value="{{$sub_location->sub_location_name}}">{{$sub_location->sub_location_name}}</option>
                         @endforeach
                       </select>
                     </div>

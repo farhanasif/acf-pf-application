@@ -64,58 +64,32 @@ class EmployeeController extends Controller
 
               if($position != '-1'){
                   $query = $query . " AND position = '".$position."'";
-                  // dd($query);
-                  // exit;
-                  $query = $query." limit 10";
-                  $employees = DB::select($query);
-                  return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
               }
 
               if($category != '-1'){
-
                   $query = $query . " AND category = '".$category."'";
-                  $query = $query." limit 10";
-                  $employees = DB::select($query);
-                  return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
               }
 
               if($base != '-1'){
                 $query = $query . " AND base = '".$base."'";
-
-                $query = $query." limit 10";
-                $employees = DB::select($query);
-                return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
-
               }
 
               if($level != '-1'){
                   $query = $query . " AND level = '".$level."'";
-                   $query = $query." limit 10";
-                  $employees = DB::select($query);
-                  return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
+
               }
 
               if($work_place != '-1'){
                 $query = $query . " AND work_place = '".$work_place."'";
-                // dd($query);
-                // exit;
-                $query = $query." limit 10";
-                $employees = DB::select($query);
-                return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
               }
 
               if($department_code != '-1'){
                   $query = $query . " AND department_code = '".$department_code."'";
-                //    dd($query);
-                // exit;
-                  $query = $query." limit 10";
-                  $employees = DB::select($query);
-                  return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
               }
 
           }
 
-          $query = $query." limit 10";
+          // $query = $query." limit 10";
           $employees = DB::select($query);
           return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
       }
@@ -270,9 +244,9 @@ class EmployeeController extends Controller
        $data['department_code'] = $request->department_code;
        $data['category'] = $request->category;
        $data['level'] = $request->level;
-       $data['base'] = $request->base;
-       $data['work_place'] = $request->work_place;
-       $data['sub_location'] = $request->sub_location;
+       $data['base'] = addslashes($request->base);
+       $data['work_place'] = addslashes($request->work_place);
+       $data['sub_location'] = addslashes($request->sub_location);
        $data['basic_salary'] = $request->basic_salary;
        $data['gross_salary'] = $request->gross_salary;
        $data['pf_amount'] = $request->pf_amount;
@@ -289,6 +263,9 @@ class EmployeeController extends Controller
     {
 
       $employees = DB::table('employees')->where('staff_code', $staff_code)->first();
+
+      // dd($employees);
+      // exit;
 
       $loan_account_details = DB::select(
               "SELECT
@@ -347,43 +324,6 @@ class EmployeeController extends Controller
 
       //dd($request->status);
 
-      // $staff_code = $_POST['staff_code'];
-      // $first_name = $_POST['first_name'];
-      // $last_name = $_POST['last_name'];
-      // $position = $_POST['position'];
-      // $department_code = $_POST['department_code'];
-      // $category = $_POST['category'];
-      // $level = $_POST['level'];
-      // $base = $_POST['base'];
-      // $work_place = $_POST['work_place'];
-      // $sub_location = $_POST['sub_location'];
-      // $basic_salary = $_POST['basic_salary'];
-      // $gross_salary = $_POST['gross_salary'];
-      // $pf_amount = $_POST['pf_amount'];
-      // $joining_date = $_POST['joining_date'];
-      // $ending_date = $_POST['ending_date'];
-      // $status = $_POST['status'];
-
-      // $data = array();
-      // $data['staff_code'] = $staff_code;
-      // $data['first_name'] = $first_name;
-      // $data['last_name'] = $last_name;
-      // $data['position'] = $position;
-      // $data['department_code'] = $department_code;
-      // $data['category'] = $category;
-      // $data['level'] = $level;
-      // $data['base'] = $base;
-      // $data['work_place'] = $work_place;
-      // $data['sub_location'] = $sub_location;
-      // $data['basic_salary'] = $basic_salary;
-      // $data['gross_salary'] = $gross_salary;
-      // $data['pf_amount'] = $pf_amount;
-      // $data['joining_date'] = $joining_date;
-      // $data['ending_date'] = $ending_date;
-      // $data['status'] = $status;
-      // $data['created_by'] = Auth::user()->id;
-      // $data['updated_by'] =  Auth::user()->id;
-
       $data = array();
       $data['staff_code'] = $request->staff_code;
       $data['first_name'] = $request->first_name;
@@ -407,7 +347,6 @@ class EmployeeController extends Controller
       DB::table('employees')->where('staff_code',$staff_code)->update($data);
       return json_encode("success");
       //return back()->with('success', 'Employee Updated Successfully.');
-      //return redirect()->route('employee-details')->with('success', 'Employee Updated Successfully.');
     }
 
     public function delete_employee($id)
@@ -416,90 +355,90 @@ class EmployeeController extends Controller
       return redirect()->back();
     }
 
-    public function customSearchEmployee(Request $request)
-    {
-        if(request()->ajax())
-          {
-            if($request->all())
-              {
-                $data = DB::table('employees')
-                ->select('staff_code','first_name', 'position', 'department_code', 'category', 'level', 'base','work_place')
-                ->where('staff_code', $request->staff_code)
-                ->where('first_name', $request->first_name)
-                ->where('position', $request->position)
-                ->where('department_code', $request->department_code)
-                ->where('category', $request->category)
-                ->where('level', $request->level)
-                ->where('base', $request->base)
-                ->where('work_place', $request->work_place)
-                ->get();
-                dd($data);
-                exit;
-              }
+    // public function customSearchEmployee(Request $request)
+    // {
+    //     if(request()->ajax())
+    //       {
+    //         if($request->all())
+    //           {
+    //             $data = DB::table('employees')
+    //             ->select('staff_code','first_name', 'position', 'department_code', 'category', 'level', 'base','work_place')
+    //             ->where('staff_code', $request->staff_code)
+    //             ->where('first_name', $request->first_name)
+    //             ->where('position', $request->position)
+    //             ->where('department_code', $request->department_code)
+    //             ->where('category', $request->category)
+    //             ->where('level', $request->level)
+    //             ->where('base', $request->base)
+    //             ->where('work_place', $request->work_place)
+    //             ->get();
+    //             dd($data);
+    //             exit;
+    //           }
 
-          else if($request->staff_code){
-            $data = DB::table('employees')
-                   ->select('staff_code')
-                   ->where('staff_code', $request->staff_code)
-                   ->first();
-          }
+    //       else if($request->staff_code){
+    //         $data = DB::table('employees')
+    //                ->select('staff_code')
+    //                ->where('staff_code', $request->staff_code)
+    //                ->first();
+    //       }
 
-          else if($request->first_name){
-            $data = DB::table('employees')
-                   ->select('first_name')
-                   ->where('first_name', $request->first_name)
-                   ->first();
-          }
+    //       else if($request->first_name){
+    //         $data = DB::table('employees')
+    //                ->select('first_name')
+    //                ->where('first_name', $request->first_name)
+    //                ->first();
+    //       }
 
-          else if($request->position){
-            $data = DB::table('employees')
-                   ->select('position')
-                   ->where('position', $request->position)
-                   ->first();
-          }
+    //       else if($request->position){
+    //         $data = DB::table('employees')
+    //                ->select('position')
+    //                ->where('position', $request->position)
+    //                ->first();
+    //       }
 
-          else if($request->department_code){
-            $data = DB::table('employees')
-                   ->select('department_code')
-                   ->where('department_code', $request->department_code)
-                   ->first();
-          }
+    //       else if($request->department_code){
+    //         $data = DB::table('employees')
+    //                ->select('department_code')
+    //                ->where('department_code', $request->department_code)
+    //                ->first();
+    //       }
 
-          else if($request->category){
-            $data = DB::table('employees')
-                   ->select('category')
-                   ->where('category', $request->category)
-                   ->first();
-          }
+    //       else if($request->category){
+    //         $data = DB::table('employees')
+    //                ->select('category')
+    //                ->where('category', $request->category)
+    //                ->first();
+    //       }
 
-          else if($request->base){
-            $data = DB::table('employees')
-                   ->select('base')
-                   ->where('base', $request->base)
-                   ->first();
-          }
+    //       else if($request->base){
+    //         $data = DB::table('employees')
+    //                ->select('base')
+    //                ->where('base', $request->base)
+    //                ->first();
+    //       }
 
-          else if($request->level){
-            $data = DB::table('employees')
-                   ->select('level')
-                   ->where('level', $request->level)
-                   ->first();
-          }
+    //       else if($request->level){
+    //         $data = DB::table('employees')
+    //                ->select('level')
+    //                ->where('level', $request->level)
+    //                ->first();
+    //       }
 
-          else if($request->work_place){
-            $data = DB::table('employees')
-                   ->select('work_place')
-                   ->where('work_place', $request->work_place)
-                   ->first();
-          }
+    //       else if($request->work_place){
+    //         $data = DB::table('employees')
+    //                ->select('work_place')
+    //                ->where('work_place', $request->work_place)
+    //                ->first();
+    //       }
 
-          else{
-            echo 'Not Found';
-          }
+    //       else{
+    //         echo 'Not Found';
+    //       }
 
-          return datatables()->of($data)->make(true);
+    //       return datatables()->of($data)->make(true);
 
-        }
+    //     }
 
-    }
+    // }
 }
