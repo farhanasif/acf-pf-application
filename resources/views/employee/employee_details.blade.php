@@ -162,29 +162,26 @@
                           <thead>
                             <tr>
                               <th class="bg-success">ID</th>
-                              <th class="bg-success"Date</th>
-                              <th class="bg-success">Description</th>
-                              <th class="bg-success">Amount</th>
-                              <th class="bg-success">Comment</th>
+                              <th class="bg-success">Date</th>
+                              <th class="bg-success">Interest Source</th>
+                              <th class="bg-success">Own Interest</th>
+                              <th class="bg-success">Organization Interest</th>
+                              <th class="bg-success">Total Interest</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>183</td>
-                              <td>23 January, 2020</td>
-                              <td>Interest for XYZ</td>
-                              <td>3,200</td>
-                              <td>NA</td>
-                            </tr>
-                            <tr>
-                              <td>183</td>
-                              <td>23 January, 2019</td>
-                              <td>Interest for XYZ</td>
-                              <td>3,200</td>
-                              <td>NA</td>
-                            </tr>
-                            
-                            
+                                <?php $i=1;?>
+                              @foreach ($loan_account_details as $item)
+                              <tr>
+                              <td>{{$i++}}</td>
+                                <td>{{ date('j F, Y', strtotime($item->interest_date,3)) }}  </td>
+                                <td> {{$item->interest_source}} </td>
+                                <td> {{$item->own}} </td>
+                                <td> {{$item->organization}} </td>
+                                <td> {{$item->own + $item->organization }} </td>
+                              </tr>
+                              @endforeach
+
                           </tbody>
                         </table>
                       </div>

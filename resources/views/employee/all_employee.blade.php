@@ -90,7 +90,7 @@
             <div class="form-group">
             <label>Staff Code</label>
             <select class="custom-select select2bs4 " id="staff_code" name="staff_code">
-                <option value="">--select--</option>
+                <option value="-1">--select--</option>
 
                 @foreach ($employees as $employee)
                   <option value="{{ sprintf("%04d", $employee->staff_code)}}"> {{ sprintf("%04d", $employee->staff_code)}} </option>
@@ -104,10 +104,10 @@
                 <!-- select -->
                 <div class="form-group">
                 <label>Name</label>
-                <select class="custom-select select2bs4" id="first_name" name="first_name">
-                    <option value="">--select--</option>
+                <select class="custom-select select2bs4" id="staff_code" name="staff_code">
+                    <option value="-1">--select--</option>
                       @foreach ($employees as $employee)
-                        <option value="{{$employee->first_name}} {{$employee->last_name}}"> {{$employee->first_name}} {{$employee->last_name}} </option>
+                        <option value="{{ sprintf("%04d", $employee->staff_code)}}"> {{$employee->first_name}} {{$employee->last_name}} </option>
                       @endforeach
                     
                 </select>
@@ -202,7 +202,7 @@
 
             <div class="mb-5">
               <button type="submit" id="search" class="btn btn-success">Generate</button>
-              <button type="submit" id="reset" class="btn btn-info float-sm-right">Reset</button>
+              {{-- <button type="submit" id="reset" class="btn btn-info float-sm-right">Reset</button> --}}
             </div>
      </form>
     </div>

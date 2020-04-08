@@ -56,11 +56,16 @@ class EmployeeController extends Controller
           $level = $request->level;
           $work_place = $request->work_place;
           $department_code = $request->department_code;
+          $staff_code = $request->staff_code;
 
-          if($category == '-1' && $position == '-1' && $base == '-1' && $level == '-1' && $work_place == '-1' && $department_code == '-1' ){
+          if($category == '-1' && $position == '-1' && $base == '-1' && $level == '-1' && $work_place == '-1' && $department_code == '-1' && $staff_code == '-1'){
           }
           else{
               $query = $query. " where 1=1 ";
+
+              if($staff_code != '-1'){
+                $query = $query . " AND staff_code = '".$staff_code."'";
+              }
 
               if($position != '-1'){
                   $query = $query . " AND position = '".$position."'";
@@ -95,7 +100,7 @@ class EmployeeController extends Controller
       }
       else{
 
-          $query = $query." limit 10";
+          // $query = $query." limit 10";
           $employees = DB::select($query);
           return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
       }
@@ -264,19 +269,21 @@ class EmployeeController extends Controller
 
       $employees = DB::table('employees')->where('staff_code', $staff_code)->first();
 
-      // dd($employees);
-      // exit;
-
       $loan_account_details = DB::select(
-              "SELECT
-              loans.loan_amount, loans.total_months, loans.interest, loans.issue_date, 
-              MIN(loan_installment.pay_date ) AS min_date, MAX(loan_installment.pay_date ) AS max_date,
-               COUNT( DISTINCT loans.loan_amount) AS total_loan,
-              employees.first_name, employees.last_name, employees.position
-              FROM loans
-              INNER JOIN loan_installment ON loan_installment.staff_code = loans.staff_code
-              INNER JOIN employees ON employees.staff_code = loans.staff_code
-              WHERE loans.staff_code ='".$staff_code."' LIMIT 1");
+                "SELECT
+                  loans.loan_amount, loans.total_months, loans.interest, loans.issue_date, 
+                  MIN(loan_installment.pay_date ) AS min_date, MAX(loan_installment.pay_date ) AS max_date,
+                  COUNT( DISTINCT loans.loan_amount) AS total_loan,
+                  employees.first_name, employees.last_name, employees.position,
+                  interests.interest_date, interests.interest_source, interests.own, interests.organization
+                  FROM loans
+                  INNER JOIN loan_installment ON loan_installment.staff_code = loans.staff_code
+                  INNER JOIN employees ON employees.staff_code = loans.staff_code
+                  INNER JOIN interests ON interests.staff_code = employees.staff_code
+                  WHERE loans.staff_code ='".$staff_code."' LIMIT 1");
+
+        // dd($loan_account_details);
+        // exit;
                           
     $total_and_maximum_pf = DB::select(
                 "SELECT SUM(total_pf) AS total_pf_amount, MAX(total_pf) AS maximum_total_pf , deposit_date
