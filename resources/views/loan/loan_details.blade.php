@@ -144,7 +144,7 @@
                       @endif
                   
                   @if ( strtoupper( $item->payment_type) == 'DUE')
-                   <td><button  id ="{{$item->id}}" data-id="{{$item->id}}" class="btn btn-warning" data-toggle="modal" data-target="#modal-loan-installment" onclick="showId(this);" style="font-weight: 600;">Pay Loan Installment</button></td>
+                   <td><button  id ="{{$item->id}}" data-id="{{$item->id}}" class="btn btn-warning" data-toggle="modal" data-target="#modal-loan-installment" onclick="showId(this);" style="font-weight: 600;">Adjust Loan Installment</button></td>
                   @elseif(strtoupper( $item->payment_type) == 'PAID')
                     <td><button class="btn btn-info" style="font-weight: 600;">Already Paid</button></td>
                   @endif
@@ -170,10 +170,33 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+
+          <div class="card-footer">
+              <div class="row" style="box-shadow: 2px 3px 3px green;">
+                <div class="col-sm-6 border-right" style="background: #28a745;color: white;">
+                  <div class="description-block">
+                  <h5 class="description-header">
+                     {{ceil( $loan_account_details[0]->monthly_installment) }}Tk. / Per Month
+                  </h5>
+                    <span class="description-text">Loan Installment Amount (without interest)</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+
+                <div class="col-sm-6" style="background: #28a745;color: white;">
+                  <div class="description-block">
+                    <h5 class="description-header">
+                    {{ ceil($loan_account_details[0]->monthly_interest) }}Tk.
+                    </h5>
+                    <span class="description-text">Monthly Interest Amount</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+              </div>
+
           <div class="modal-body">
             <form action="{{route('save-loan-insatllment')}}" method="post" enctype="multipart/form-data">
               @csrf
-
               <input type="hidden" name="staff_code" class="form-control" value="{{ $loan_account_details[0]->staff_code }}">
               <input type="hidden" name="monthly_installment" class="form-control" value="{{ $loan_account_details[0]->monthly_installment }}">
               <input type="hidden" name="monthly_interest" class="form-control" value="{{ $loan_account_details[0]->monthly_interest }}">
@@ -203,7 +226,7 @@
               </div>
               <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Upload</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
               </div>
             </form>
           </div>

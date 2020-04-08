@@ -208,100 +208,102 @@
     </div>
     <!-- /.card-header -->
     
-    <div class="card-body table-responsive p-0" style="height: 500px;">
-      <table id="all-employee" class="table table-head-fixed text-nowrap">
-        <thead>
-
-        <tr>
-          <th class="bg-success"> SL NO </th>
-          <th class="bg-success"> Staff Code </th>
-          <th class="bg-success"> Name </th>
-          <th class="bg-success"> Position </th>
-          <th class="bg-success"> Department Code </th>
-          <th class="bg-success"> Category </th>
-          <th class="bg-success"> Level </th>
-          <th class="bg-success"> Base </th>
-          <th class="bg-success"> Work Place </th>
-          <th class="bg-success"> Sub Location </th>
-          <th class="bg-success"> Basic Salary </th>
-          <th class="bg-success"> Gross Salary </th>
-          <th class="bg-success"> Provident Amount </th>
-          <th class="bg-success"> Joining Date </th>
-          <th class="bg-success"> Ending Date </th>
-          {{-- <th>Action</th> --}}
-        </tr>
-        </thead>
-        <tbody>
-      <?php $i=1;?>
-        @foreach($employees as $employee)
+     <div class="card-header">
+      <div class="card-body table-responsive p-0" style="height: 500px;">
+        <table id="all-employee" class="table table-head-fixed text-nowrap">
+          <thead>
+  
           <tr>
-            <td>{{ $i++ }}</td>
-            <?php 
-              if($employee->status == 0)
-              {
-            ?>
-            <td class="bg-danger text-bold">
-              <a href="{{route('employee-details',$employee->staff_code)}}">
-                {{ sprintf("%04d", $employee->staff_code)}}
-              </a>
-            </td>
-        <?php 
-            }
-            else { 
-        ?>
-              <td class="bg-success text-bold">
+            <th class="bg-success"> SL NO </th>
+            <th class="bg-success"> Staff Code </th>
+            <th class="bg-success"> Name </th>
+            <th class="bg-success"> Position </th>
+            <th class="bg-success"> Department Code </th>
+            <th class="bg-success"> Category </th>
+            <th class="bg-success"> Level </th>
+            <th class="bg-success"> Base </th>
+            <th class="bg-success"> Work Place </th>
+            <th class="bg-success"> Sub Location </th>
+            <th class="bg-success"> Basic Salary </th>
+            <th class="bg-success"> Gross Salary </th>
+            <th class="bg-success"> Provident Amount </th>
+            <th class="bg-success"> Joining Date </th>
+            <th class="bg-success"> Ending Date </th>
+            {{-- <th>Action</th> --}}
+          </tr>
+          </thead>
+          <tbody>
+        <?php $i=1;?>
+          @foreach($employees as $employee)
+            <tr>
+              <td>{{ $i++ }}</td>
+              <?php 
+                if($employee->status == 0)
+                {
+              ?>
+              <td class="bg-danger text-bold">
                 <a href="{{route('employee-details',$employee->staff_code)}}">
-                  {{sprintf("%04d", $employee->staff_code)}}
+                  {{ sprintf("%04d", $employee->staff_code)}}
                 </a>
               </td>
-        <?php } ?>
-          <td class="text-bold">
-            <a href="{{route('employee-details',$employee->staff_code)}}">
-              {{$employee->first_name}} {{$employee->last_name}}
-            </a>
-          </td>
-          <td>{{$employee->position}}</td>
-          <td>{{$employee->department_code}}</td>
-          <td>{{$employee->category}}</td>
-          <td>{{$employee->level}}</td>
-          <td>{{$employee->base}}</td>
-          <td>{{$employee->work_place}}</td>
-          <td>{{$employee->sub_location}}</td>
-          <td>{{$employee->basic_salary}}</td>
-          <td>{{$employee->gross_salary}}</td>
-          <td>{{$employee->pf_amount}}</td>
-          <td>{{$employee->joining_date}}</td>
-          <td>{{$employee->ending_date}}</td>
-          {{-- <td >
-              <a href="{{route('edit-employee',$employee->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-              <a href="{{route('delete-employee',$employee->id)}}" onclick="ConfirmDelete()" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-          </td> --}}
-        </tr>
-        @endforeach
-       </tbody>
-
-        {{-- <tfoot>
-          <tr>
-            <th style="display:none;"></th>
-            <th>Staff Code</th>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Department Code</th>
-            <th>Category</th>
-            <th>Level</th>
-            <th>Base</th>
-            <th>Work Place</th>
-            <th>Sub Location</th>
-            <th style="display:none;"></th>
-            <th style="display:none;"></th>
-            <th style="display:none;"></th>
-            <th style="display:none;"></th>
-            <th style="display:none;"></th>
+          <?php 
+              }
+              else { 
+          ?>
+                <td class="bg-success text-bold">
+                  <a href="{{route('employee-details',$employee->staff_code)}}">
+                    {{sprintf("%04d", $employee->staff_code)}}
+                  </a>
+                </td>
+          <?php } ?>
+            <td class="text-bold">
+              <a href="{{route('employee-details',$employee->staff_code)}}">
+                {{$employee->first_name}} {{$employee->last_name}}
+              </a>
+            </td>
+            <td>{{$employee->position}}</td>
+            <td>{{$employee->department_code}}</td>
+            <td>{{$employee->category}}</td>
+            <td>{{$employee->level}}</td>
+            <td>{{$employee->base}}</td>
+            <td>{{$employee->work_place}}</td>
+            <td>{{$employee->sub_location}}</td>
+            <td>{{$employee->basic_salary}}</td>
+            <td>{{$employee->gross_salary}}</td>
+            <td>{{$employee->pf_amount}}</td>
+            <td>{{$employee->joining_date}}</td>
+            <td>{{$employee->ending_date}}</td>
+            {{-- <td >
+                <a href="{{route('edit-employee',$employee->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                <a href="{{route('delete-employee',$employee->id)}}" onclick="ConfirmDelete()" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+            </td> --}}
           </tr>
-        </tfoot> --}}
-   
-      </table>
-    </div>
+          @endforeach
+         </tbody>
+  
+          {{-- <tfoot>
+            <tr>
+              <th style="display:none;"></th>
+              <th>Staff Code</th>
+              <th>Name</th>
+              <th>Position</th>
+              <th>Department Code</th>
+              <th>Category</th>
+              <th>Level</th>
+              <th>Base</th>
+              <th>Work Place</th>
+              <th>Sub Location</th>
+              <th style="display:none;"></th>
+              <th style="display:none;"></th>
+              <th style="display:none;"></th>
+              <th style="display:none;"></th>
+              <th style="display:none;"></th>
+            </tr>
+          </tfoot> --}}
+     
+        </table>
+      </div>
+     </div>
     <!-- /.card-body -->
      
 

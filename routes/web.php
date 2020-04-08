@@ -696,9 +696,9 @@ Route::group(['middleware' => 'admin'], function () {
 			'uses'		=> 'ChangeProfileController@edit_change_profile',
 			'as'		=> 'edit-change-profile'
 		]);
-		Route::post('/update-change-profile/{id}', [
-			'uses'		=> 'ChangeProfileController@update_change_profile',
-			'as'		=> 'update-change-profile'
+		Route::post('/update-passsword/{id}', [
+			'uses'		=> 'ChangeProfileController@update_passsword',
+			'as'		=> 'update-passsword'
 		]);
 		// ---------- END CHANGE PROFILE ROUTE ------------
 
@@ -736,6 +736,9 @@ Route::group(['middleware' => 'admin'], function () {
 		});
 
 		// report 
+		Route::get('ledger-test', 'LedgerReportController@view_ledger_report_test');
+
+		
 		Route::get('provident-fund-report', 'ProvidentFundController@providentFund');
 		Route::get('get-fund-data', 'ProvidentFundController@getProvidentFund');
 

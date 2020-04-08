@@ -1,4 +1,3 @@
-
 @extends('master')
 @section('customcss')
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -73,7 +72,7 @@
             <div class="description-block">
               @foreach ($loan_account_details as $item)
                 <h5 class="description-header"> 
-                  {{$item->loan_amount ? number_format($item->loan_amount) : '0'}} ( {{$item->total_loan ? number_format($item->total_loan) : '0'}} )
+                  {{$item->loan_amount ? number_format($item->loan_amount) : '0'}}
                 </h5>
               @endforeach
               <span class="description-text">Loan Amount (Total)</span>
@@ -153,9 +152,14 @@
                       <!-- /.card-body -->
                     </div>
                     <div class="card card-outline card-warning">
+
                       <div class="card-header">
                         <h3 class="card-title">Provident Fund Interests</h3>
                       </div>
+
+                      <?php if(!empty($loan_account_details[0]->id)) { ?>
+
+
                       <!-- /.card-header -->
                       <div class="card-body table-responsive p-0" style="height: 300px;">
                         <table class="table table-striped table-head-fixed text-nowrap">
@@ -170,31 +174,44 @@
                             </tr>
                           </thead>
                           <tbody>
-                                <?php $i=1;?>
-                              @foreach ($loan_account_details as $item)
-                              <tr>
-                              <td>{{$i++}}</td>
-                                <td>{{ date('j F, Y', strtotime($item->interest_date,3)) }}  </td>
-                                <td> {{$item->interest_source}} </td>
-                                <td> {{$item->own}} </td>
-                                <td> {{$item->organization}} </td>
-                                <td> {{$item->own + $item->organization }} </td>
-                              </tr>
-                              @endforeach
-
+                            <?php $i=1;?>
+                            @foreach ($loan_account_details as $item)
+                            <tr>
+                            <td>{{$i++}}</td>
+                              <td>{{ date('j F, Y', strtotime($item->interest_date)) }}  </td>
+                              <td> {{$item->interest_source}} </td>
+                              <td> {{$item->own}} </td>
+                              <td> {{$item->organization}} </td>
+                              <td> {{$item->own + $item->organization }} </td>
+                            </tr>
+                            @endforeach
+                            
+                            
                           </tbody>
                         </table>
                       </div>
+
+                      <?php }else { ?>
+                        <div>
+                          <h3 class="text-center">No Data Found!</h3>
+                       </div>
+                    <?php } ?>
                       <!-- /.card-body -->
                     </div>
+
+
+
               </div>
               <!-- /.tab-pane -->
+
               <div class="tab-pane" id="loandetails">
+                           <?php if(!empty($loan_account_details[0]->id)) { ?>
                   <div class="card card-outline card-danger">
                       <div class="card-header">
                         <h3 class="card-title">Your Loans Against Provident Fund</h3>
                       </div>
-                      <!-- /.card-header -->
+                      <!-- /.card-header arif-->
+
                       <div class="card-body table-responsive p-0" style="height: 200px;">
                         <table class="table table-striped table-head-fixed text-nowrap">
                           <thead>
@@ -228,6 +245,7 @@
                       </div>
                       <!-- /.card-body -->
                     </div>
+
                   <div class="card card-outline card-success">
                       <div class="card-header">
                         <h3 class="card-title">Loan Adjustments</h3>
@@ -264,8 +282,14 @@
                       </div>
                       <!-- /.card-body -->
                     </div>
-                    
+
+              <?php }else { ?>
+                <div>
+                   <h3 class="text-center">No Data Found!</h3>
+                </div>
+             <?php } ?>
               </div>
+
               <!-- /.tab-pane -->
 
               <div class="tab-pane" id="generalinformation">
@@ -441,19 +465,14 @@
 
  @section('customjs')
   <script>
-
-
   $( document ).ready(function() {
        //get the data
     $('#employee-update').click(function(e){
-
-
           $.ajaxSetup({
             headers: {
                       'X-CSRF-TOKEN': '<?php echo csrf_token() ?>'
                 }
         });
-
       // console.log('hi');
        var staff_code = $('#staff_code').val();
       //  console.log(staff_code);
@@ -472,8 +491,6 @@
        var joining_date = $('#joining_date').val();
        var ending_date = $('#ending_date').val();
        var status = $('#status').val();
-
-
         if(staff_code == '' || first_name == '' || last_name == '' || position == ''
           || department_code == '' || category == '' ||  label == '' 
           ||  base == '' ||  work_place == '' ||  sub_location == '' || basic_salary == ''
@@ -486,14 +503,12 @@
             alert('Please enter all fields to save the employee information');
             console.log('empty');
           }
-
           else{
                 
                 $.ajax({
                   type: 'POST',
                   url: '../update-employee/'+staff_code,
                   // url:'./update-employee',
-
                   data: {
                       staff_code: staff_code,
                       first_name: first_name,
@@ -525,25 +540,15 @@
                   }
                 });
               }
-
         e.preventDefault();
      });
-
-
     $('.select2bs4').select2({
       theme: 'bootstrap4'
     });
-
     $('.employee_date').datepicker({
       format: "yyyy-mm-dd",
       orientation: "bottom left"
     });
-
   });
-
-
-
-
   </script>
  @endsection
-

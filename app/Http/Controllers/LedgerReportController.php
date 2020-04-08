@@ -19,6 +19,8 @@ class LedgerReportController extends Controller
         //count months
         $total_months = count($months);
 
+        //dd($months);
+
         //if months > 0 , then proceed
         if($total_months > 0){
             //generte the master query
@@ -75,22 +77,12 @@ class LedgerReportController extends Controller
 
    public function view_ledger_report()
    {
+        return view('report.ledger');
+    }
 
 
-       $lreport = DB::select("SELECT DISTINCT(DATE(deposit_date)) AS deposit_date, DATE_FORMAT(deposit_date, '%b %Y') AS month_name
-       FROM pf_deposit
-       ORDER BY deposit_date");
-
-    //    dd($lreport);
-    //    exit;
-
-        // $data = array();
-        // $data['all_data'] =   DB::select('select distinct(date_format(deposit_date, \'%b %Y\')) as depo_date  from pf_deposit ORDER BY deposit_date ASC');
-        // $data['to_data'] =    DB::select('select distinct(deposit_date) from pf_deposit ORDER BY deposit_date ASC');
-        // $data['from_data']  = DB::select('select distinct(deposit_date) from pf_deposit ORDER BY deposit_date DESC');
-        // dd( $data['to_data']);
-        // exit;
-        return view('report.ledger',compact('lreport'));
+    public function view_ledger_report_test(){
+        return view('report.ledgeruitest');
     }
 
 

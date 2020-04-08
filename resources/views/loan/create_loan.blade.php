@@ -53,7 +53,7 @@
                 <select name="staff" id="staff" class="form-control select2bs4">
                    <option value="">--select--</option>
                     @foreach ($employees as $empolyee)
-                      <option value="{{ $empolyee->staff_code }}">{{ $empolyee->staff_code }} &nbsp;&nbsp; {{ $empolyee->first_name }} {{ $empolyee->last_name }}  </option>
+                      <option value="{{ $empolyee->staff_code }}">{{ sprintf('%04d', $empolyee->staff_code) }} &nbsp;&nbsp; {{ $empolyee->first_name }} {{ $empolyee->last_name }}  </option>
                     @endforeach
                 </select>
               </div>
@@ -231,9 +231,17 @@ $(document).ready(function() {
         },
         success: function(data) {
           var info = JSON.parse(data);
+          
           // if(info != undefined){
           const { staff_code, first_name, last_name, joining_date, ending_date, position, base, total_pf } = info[0];
-          document.getElementById("staff_code").value = staff_code;
+          var newStaffCode = newStaffCode = staff_code.toString();
+          if(4 - newStaffCode.length == 1 ) 
+            newStaffCode = '0' + newStaffCode;
+          else if(4 - newStaffCode.length == 2) 
+            newStaffCode = '00' + newStaffCode;
+          else if(4 - newStaffCode.length == 2) 
+            newStaffCode = '000' + newStaffCode;
+          document.getElementById("staff_code").value = newStaffCode;
           document.getElementById("joining_date").value = joining_date;
           document.getElementById("ending_date").value = ending_date;
           document.getElementById("position").value = position;
@@ -250,7 +258,8 @@ $(document).ready(function() {
     var staff_code = $("#staff_code").val();
     var loan_amount = $("#loan_amount").val();
     var purpos = "";
-    console.log(staff_code);
+    console.log(typeof(staff_code));
+    // staff_code = parseInt(staff_code);
     var check;
     $(':checkbox:checked').each(function(i){
           check = $(this).val();
@@ -321,7 +330,7 @@ $(document).ready(function() {
         url: url_data,
         data: {
             _token: token,
-            staff_code: staff_code,
+            staff_code: parseInt(staff_code),
             loan_amount: loan_amount,
             purpose: purpose,
             bank_account: bank_account,
