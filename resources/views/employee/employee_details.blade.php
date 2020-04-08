@@ -73,7 +73,7 @@
             <div class="description-block">
               @foreach ($loan_account_details as $item)
                 <h5 class="description-header"> 
-                  {{$item->loan_amount ? number_format($item->loan_amount) : '0'}} ( {{$item->total_loan ? number_format($item->total_loan) : '0'}} )
+                  {{$item->loan_amount ? number_format($item->loan_amount) : '0'}}
                 </h5>
               @endforeach
               <span class="description-text">Loan Amount (Total)</span>
@@ -192,12 +192,15 @@
                     </div>
               </div>
               <!-- /.tab-pane -->
+
               <div class="tab-pane" id="loandetails">
+                           <?php if(!empty($loan_account_details[0]->id)) { ?>
                   <div class="card card-outline card-danger">
                       <div class="card-header">
                         <h3 class="card-title">Your Loans Against Provident Fund</h3>
                       </div>
-                      <!-- /.card-header -->
+                      <!-- /.card-header arif-->
+
                       <div class="card-body table-responsive p-0" style="height: 200px;">
                         <table class="table table-striped table-head-fixed text-nowrap">
                           <thead>
@@ -231,6 +234,7 @@
                       </div>
                       <!-- /.card-body -->
                     </div>
+
                   <div class="card card-outline card-success">
                       <div class="card-header">
                         <h3 class="card-title">Loan Adjustments</h3>
@@ -267,8 +271,14 @@
                       </div>
                       <!-- /.card-body -->
                     </div>
-                    
+
+                                  <?php }else { ?>
+                <div>
+                   <h3>No Data Found!</h3>
+                </div>
+             <?php } ?>
               </div>
+
               <!-- /.tab-pane -->
 
               <div class="tab-pane" id="generalinformation">

@@ -269,15 +269,14 @@ class EmployeeController extends Controller
 
       $loan_account_details = DB::select(
               "SELECT
-              loans.loan_amount, loans.total_months, loans.interest, loans.issue_date, 
+              loans.id,loans.loan_amount, loans.total_months, loans.interest, loans.issue_date, 
               MIN(loan_installment.pay_date ) AS min_date, MAX(loan_installment.pay_date ) AS max_date,
-               COUNT( DISTINCT loans.loan_amount) AS total_loan,
               employees.first_name, employees.last_name, employees.position
               FROM loans
               INNER JOIN loan_installment ON loan_installment.staff_code = loans.staff_code
               INNER JOIN employees ON employees.staff_code = loans.staff_code
-              WHERE loans.staff_code ='".$staff_code."' LIMIT 1");
-                          
+              WHERE loans.staff_code ='".$staff_code."'");
+                  
     $total_and_maximum_pf = DB::select(
                 "SELECT SUM(total_pf) AS total_pf_amount, MAX(total_pf) AS maximum_total_pf , deposit_date
                 FROM pf_deposit WHERE staff_code ='".$staff_code."' ORDER BY deposit_date DESC");
