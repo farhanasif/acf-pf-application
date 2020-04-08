@@ -241,6 +241,7 @@
                   title: ' Please enter all fields to save the transaction'
                 });
               }
+              
               else{
                 
                 //save the transaction
@@ -260,6 +261,7 @@
                   dataType: 'text',
                   success: function (data) {
                     console.log(data);
+                    table.destroy();
                     generate_book();
                     $('#modal-default').modal('hide');
                 
@@ -273,6 +275,9 @@
 
               
             });
+
+
+                
 
             $('#closeTransaction').click(function() {
               generate_book();

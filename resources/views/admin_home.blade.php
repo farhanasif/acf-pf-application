@@ -1,3 +1,7 @@
+
+
+
+
 @extends('master')
 
 @section('content')
@@ -12,8 +16,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active"><a href="#">Admin Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+              <li class="breadcrumb-item active"><a href="javascript:void(0)">Admin Dashboard</a></li>
             </ol>
           </div>
         </div>
@@ -29,10 +33,9 @@
           <span class="info-box-icon bg-info elevation-1"><i class="fas fa-money-check"></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Provident Fund</span>
+            <span class="info-box-text">PF Ledger Amount</span>
             <span class="info-box-number">
-              10
-              <small>%</small>
+              {{number_format($employee_contribution + $employer_contribution)}}
             </span>
           </div>
           <!-- /.info-box-content -->
@@ -45,8 +48,8 @@
           <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-money-check"></i></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Loans Amount</span>
-            <span class="info-box-number">41,410</span>
+            <span class="info-box-text">Employee Contribution</span>
+            <span class="info-box-number">{{number_format($employee_contribution)}}</span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -59,11 +62,11 @@
 
       <div class="col-12 col-sm-6 col-md-3">
         <div class="info-box mb-3">
-          <span class="info-box-icon bg-success elevation-1"><i class="fas fa-calendar-week"></i></i></span>
+          <span class="info-box-icon bg-success elevation-1"><i class="fas fa-money-check"></i></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Months</span>
-            <span class="info-box-number">760</span>
+            <span class="info-box-text">Employer Contribution</span>
+          <span class="info-box-number">{{number_format($employer_contribution)}}</span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -76,7 +79,7 @@
 
           <div class="info-box-content">
             <span class="info-box-text">Employee</span>
-            <span class="info-box-number">2,000</span>
+          <span class="info-box-number">{{$total_employees}}</span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -92,7 +95,7 @@
           <div class="card-header">
             <h5 class="card-title">Monthly Recap Report</h5>
 
-            <div class="card-tools">
+            {{-- <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse">
                 <i class="fas fa-minus"></i>
               </button>
@@ -111,7 +114,7 @@
               <button type="button" class="btn btn-tool" data-card-widget="remove">
                 <i class="fas fa-times"></i>
               </button>
-            </div>
+            </div> --}}
           </div>
           <!-- /.card-header -->
           <div class="card-body">
@@ -134,8 +137,16 @@
                 </p>
 
                 <div class="progress-group">
-                  Provident Fund Staff
-                  <span class="float-right"><b>1400</b>/2000</span>
+                  Employee Under PF
+                  <span class="float-right">
+                    <b>
+                     @foreach ($total_employee_under_loan as $item)
+                         {{$item->total_pf_staff}}
+                     @endforeach
+                    </b>
+                    /
+                    {{$total_employees}}
+                  </span>
                   <div class="progress progress-sm">
                     <div class="progress-bar bg-primary" style="width: 80%"></div>
                   </div>
@@ -144,7 +155,14 @@
 
                 <div class="progress-group">
                   Employee Under Loan
-                  <span class="float-right"><b>31</b>/2000</span>
+                <span class="float-right">
+                  <b> 
+                   @foreach ($total_loans as $item)
+                    {{$item->total_loan}}
+                   @endforeach
+                  </b>
+                   /{{$total_employees}}
+                </span>
                   <div class="progress progress-sm">
                     <div class="progress-bar bg-danger" style="width: 75%"></div>
                   </div>
@@ -152,7 +170,7 @@
 
                 <!-- /.progress-group -->
                 <div class="progress-group">
-                  <span class="progress-text">Months Execution</span>
+                  <span class="progress-text">Total Investment</span>
                   <span class="float-right"><b>38</b>/48</span>
                   <div class="progress progress-sm">
                     <div class="progress-bar bg-success" style="width: 60%"></div>
@@ -169,34 +187,39 @@
             <div class="row">
               <div class="col-sm-3 col-6">
                 <div class="description-block border-right">
-                  <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 40%</span>
-                  <h5 class="description-header">49,627.06</h5>
-                  <span class="description-text">TOTAL PF AMOUNT</span>
+                  {{-- <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 40%</span> --}}
+                  <h5 class="description-header">{{number_format($employee_contribution + $employer_contribution)}}</h5>
+                  <span class="description-text">TOTAL BALANCE IN ACCOUNT</span>
                 </div>
                 <!-- /.description-block -->
               </div>
               <!-- /.col -->
               <div class="col-sm-3 col-6">
                 <div class="description-block border-right">
-                  <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 20%</span>
+                  {{-- <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 20%</span> --}}
                   <h5 class="description-header">$24,813.53</h5>
-                  <span class="description-text">TOTAL ORGANIZATION</span>
+                  <span class="description-text">TOTAL INVESTMENT</span>
                 </div>
                 <!-- /.description-block -->
               </div>
               <!-- /.col -->
               <div class="col-sm-3 col-6">
                 <div class="description-block border-right">
-                  <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span>
-                  <h5 class="description-header">$24,813.53</h5>
-                  <span class="description-text">TOTAL EMPLOYEE AMOUNT</span>
+                  {{-- <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span> --}}
+                  <h5 class="description-header">
+                    
+                    @foreach ($total_loans as $item)
+                        {{ number_format($item->total_loan_amount)}}
+                    @endforeach
+                  </h5>
+                  <span class="description-text">TOTAL LOAN AMOUNT</span>
                 </div>
                 <!-- /.description-block -->
               </div>
               <!-- /.col -->
               <div class="col-sm-3 col-6">
                 <div class="description-block">
-                  <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span>
+                  {{-- <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span> --}}
                   <h5 class="description-header">1200</h5>
                   <span class="description-text">TOTAL RECONCILIATION</span>
                 </div>

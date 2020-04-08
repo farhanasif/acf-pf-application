@@ -1,4 +1,3 @@
-
 @extends('master')
 
 @section('content')
@@ -54,7 +53,7 @@
                 <select name="staff" id="staff" class="form-control select2bs4">
                    <option value="">--select--</option>
                     @foreach ($employees as $empolyee)
-                      <option value="{{ $empolyee->staff_code }}">{{ $empolyee->staff_code }} &nbsp;&nbsp; {{ $empolyee->first_name }} {{ $empolyee->last_name }}  </option>
+                      <option value="{{ $empolyee->staff_code }}">{{ sprintf('%04d', $empolyee->staff_code) }} &nbsp;&nbsp; {{ $empolyee->first_name }} {{ $empolyee->last_name }}  </option>
                     @endforeach
                 </select>
               </div>
@@ -208,7 +207,6 @@
 $(document).ready(function() {
   var mxlaonAllow = 0;
   var description = "";
-
   $(function() { 
      $( "#joining_date" ).datepicker();
      $( "#ending_date" ).datepicker();
@@ -218,7 +216,6 @@ $(document).ready(function() {
   $("#loan_amount").hover(function(){
     $("#mxl").text("Maximum allowable loan amount is "+ mxlaonAllow + "Tk.");
   });
-
   $("#staff").on("click", function() {
     // e.preventDefault();
     var staff_code = $("#staff").val();
@@ -234,9 +231,19 @@ $(document).ready(function() {
         },
         success: function(data) {
           var info = JSON.parse(data);
+          
           // if(info != undefined){
           const { staff_code, first_name, last_name, joining_date, ending_date, position, base, total_pf } = info[0];
-          document.getElementById("staff_code").value = staff_code;
+
+          var newStaffCode = newStaffCode = staff_code.toString();
+          if(4 - newStaffCode.length == 1 ) 
+            newStaffCode = '0' + newStaffCode;
+          else if(4 - newStaffCode.length == 2) 
+            newStaffCode = '00' + newStaffCode;
+          else if(4 - newStaffCode.length == 2) 
+            newStaffCode = '000' + newStaffCode;
+
+          document.getElementById("staff_code").value = newStaffCode;
           document.getElementById("joining_date").value = joining_date;
           document.getElementById("ending_date").value = ending_date;
           document.getElementById("position").value = position;
@@ -248,19 +255,17 @@ $(document).ready(function() {
         }
       });
   });
-
   $("#submitInfo").on("click", function(e) {
     e.preventDefault();
-
     var staff_code = $("#staff_code").val();
     var loan_amount = $("#loan_amount").val();
     var purpos = "";
-    console.log(staff_code);
+    console.log(typeof(staff_code));
+    // staff_code = parseInt(staff_code);
     var check;
     $(':checkbox:checked').each(function(i){
           check = $(this).val();
     });
-
     if(check == 1) {
       purpose = "Land&Building(RM&S)";
     }else if(check == 2){
@@ -271,7 +276,6 @@ $(document).ready(function() {
       purpose = "Others";
     }
     console.log(purpose);
-
     var bank_account = $("#bank_account").val();
     var bank_name = $("#bank_name").val();
     var branch_name = $("#branch_name").val();
@@ -285,61 +289,50 @@ $(document).ready(function() {
       alert("Loan Amount field is reuired!");
       return;
     }
-
     if(!purpose) {
       alert("Purpose field is reuired!");
       return;
     }
-
     if(Number(mxlaonAllow) < Number(loan_amount)) {
       alert("Sorry! this amount is not acceptable. Maximun "+ mxlaonAllow +" Tk is acceptable.");
       return;
     }
-
     if(!bank_name) {
       alert("Bank Name field is reuired!");
       return;
     }
-
     if(!bank_account) {
       alert("Bank Account Number field is reuired!");
       return;
     }
-
     if(!branch_name) {
       alert("Branch Name field is reuired!");
       return;
     }
-
     if(!district) {
       alert("District Name field is reuired!");
       return;
     }
-
     if(!date) {
       alert("Date field is reuired!");
       return;
     }
-
     if(!account_head) {
       alert("Account Heaad field is reuired!");
       return;
     }
-
     var monthly_installment = (loan_amount/12).toFixed(4);
     var interest = (loan_amount*0.004).toFixed(4);
     var monthly_interest = (interest/12).toFixed(4);
     // var toyal_paymet = (monthly_installment+monthly_interest).toFixed(4);
-
     var token = "{{ csrf_token() }}";
     var url_data = "{{ url('/save-loan') }}";
-
       $.ajax({
         method: "POST",
         url: url_data,
         data: {
             _token: token,
-            staff_code: staff_code,
+            staff_code: parseInt(staff_code),
             loan_amount: loan_amount,
             purpose: purpose,
             bank_account: bank_account,
@@ -358,8 +351,6 @@ $(document).ready(function() {
           alert(data);
         }
       });
-
-
   });
 });
 </script>

@@ -12,14 +12,14 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('theme/dist/js/demo.js') }}"></script>
 <!-- ChartJS -->
-<script src="{{asset('/')}}theme/plugins/chart.js/Chart.min.js"></script>
+<script src="{{asset('theme/plugins/chart.js/Chart.min.js')}}"></script>
 <!-- Select2 -->
-<script src="{{asset('/')}}theme/plugins/select2/js/select2.full.min.js"></script>
+<script src="{{asset('theme/plugins/select2/js/select2.full.min.js')}}"></script>
 <!-- PAGE SCRIPTS -->
-<script src="{{asset('/')}}theme/dist/js/pages/dashboard2.js"></script>
+ <script src="{{asset('theme/dist/js/pages/dashboard2.js')}}"></script> 
 
 <!-- date-range-picker -->
-<script src="{{asset('/')}}theme/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="{{asset('theme/plugins/daterangepicker/daterangepicker.js')}}"></script>
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script> --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 

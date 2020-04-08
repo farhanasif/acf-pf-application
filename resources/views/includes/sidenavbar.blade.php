@@ -38,7 +38,7 @@
             <a href="{{route('all-employee')}}" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                Employee Setup
+                All Employees
                 {{-- <i class="right fas fa-angle-left"></i> --}}
               </p>
             </a>
@@ -67,7 +67,7 @@
           <a href="{{route('all-user')}}" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                Employeer Setup
+                System Accounts
                 {{-- <i class="right fas fa-angle-left"></i> --}}
               </p>
             </a>
@@ -328,7 +328,7 @@
             <a href="javascript:void(0)" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-                Reconciliation
+                Bank Book
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>

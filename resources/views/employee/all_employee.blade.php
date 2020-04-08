@@ -24,13 +24,13 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>All Employee Information</h1>
+        <h1>All Employees Information</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
           <li class="breadcrumb-item active"><a href="javascript:void(0)">Employee</a></li>
-          <li class="breadcrumb-item active"><a href="javascript:void(0)">All Employee Information</a></li>
+          <li class="breadcrumb-item active"><a href="javascript:void(0)">All Employees Information</a></li>
         </ol>
       </div>
     </div>
@@ -40,7 +40,7 @@
 <section class="content">
   <div class="card card-success card-outline">
     <div class="card-header">
-          <h3 class="card-title">All Employee Information</h3>
+          <h3 class="card-title">All Employees Information</h3>
 
         <div class="float-sm-right">
           <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 
@@ -77,12 +77,16 @@
           @endif
       </div>
     </div>
-    <!-- /.card-header -->
-    <div class="card-body">
-      {{-- <form role="form">
+
+    <div class="card-header card-secondary">
+      <div class="card-header">
+        <h3 class="card-title">Filters</h3>
+        </div>
+      <form role="form" action="{{route('all-employee')}}" method="POST">
+        @csrf
         <div class="row">
 
-          <div class="col-sm-3">
+          <div class="col-md-3 col-sm-6">
             <div class="form-group">
             <label>Staff Code</label>
             <select class="custom-select select2bs4 " id="staff_code" name="staff_code">
@@ -96,7 +100,7 @@
             </div>
           </div>
 
-            <div class="col-sm-3">
+            <div class="col-md-3 col-sm-6">
                 <!-- select -->
                 <div class="form-group">
                 <label>Name</label>
@@ -109,29 +113,28 @@
                 </select>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-md-3 col-sm-6">
                 <div class="form-group">
                 <label>Position</label>
                 <select class="custom-select select2bs4" id="position" name="position">
-                    <option value="">--select--</option>
-
-                    @foreach ($employees as $employee)
-                       <option value="{{$employee->position}}"> {{$employee->position}} </option>
-                    @endforeach
+                  <option value="-1">--select--</option>
+                  @foreach ($positions as $position)
+                      <option value="{{$position->position_name}}">{{$position->position_name}}</option>
+                  @endforeach
 
                 </select>
                 </div>
             </div>
 
-            <div class="col-sm-3">
+            <div class="col-md-3 col-sm-6">
                 <!-- select -->
                 <div class="form-group">
                 <label>Department Code</label>
                 <select class="custom-select select2bs4" id="department_code" name="department_code">
-                    <option value="">--select--</option>
+                    <option value="-1">--select--</option>
 
-                    @foreach ($employees as $employee)
-                      <option value="{{$employee->department_code}}"> {{$employee->department_code}} </option>
+                    @foreach ($departments as $department)
+                      <option value="{{$department->department_code}}"> {{$department->department_code}} </option>
                     @endforeach
 
                 </select>
@@ -140,57 +143,56 @@
             </div>
 
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-md-3 col-sm-6">
                     <div class="form-group">
                     <label>Category</label>
                     <select class="custom-select select2bs4" id="category" name="category">
-                        <option value="">--select--</option>
-
-                        @foreach ($employees as $employee)
-                          <option value="{{$employee->category}}"> {{$employee->category}} </option>
-                        @endforeach
+                      <option value="-1">--select--</option>
+                      @foreach ($categories as $category)
+                          <option value="{{$category->category_name}}">{{$category->category_name}}</option>
+                      @endforeach
 
                     </select>
                     </div>
                 </div>
 
-                <div class="col-sm-3">
+                <div class="col-md-3 col-sm-6">
                     <!-- select -->
                     <div class="form-group">
                     <label>Level</label>
                     <select class="custom-select select2bs4" id="level" name="level">
-                        <option value="">--select--</option>
+                        <option value="-1">--select--</option>
 
-                        @foreach ($employees as $employee)
-                          <option value="{{$employee->level}}"> {{$employee->level}} </option>
+                        @foreach ($levels as $row)
+                          <option value="{{$row->level_name}}"> {{$row->level_name}} </option>
                         @endforeach
 
                     </select>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-3 col-sm-6">
                     <div class="form-group">
                     <label>Base</label>
                     <select class="custom-select select2bs4" id="base" name="base">
-                        <option value="">--select--</option>
+                        <option value="-1">--select--</option>
 
-                        @foreach ($employees as $employee)
-                         <option value="{{$employee->base}}"> {{$employee->base}} </option>
+                        @foreach ($bases as $row)
+                         <option value="{{$row->base_name}}"> {{$row->base_name}} </option>
                         @endforeach
 
                     </select>
                     </div>
                 </div>
 
-                <div class="col-sm-3">
+                <div class="col-md-3 col-sm-6">
                     <!-- select -->
                     <div class="form-group">
                     <label>Work Place</label>
                     <select class="custom-select select2bs4" id="work_place" name="work_place">
-                        <option value="">--select--</option>
+                        <option value="-1">--select--</option>
 
-                        @foreach ($employees as $employee)
-                          <option value="{{$employee->work_place}}"> {{$employee->work_place}}</option>
+                        @foreach ($work_places as $row)
+                          <option value="{{$row->work_place_name}}"> {{$row->work_place_name}}</option>
                         @endforeach
 
                     </select>
@@ -199,30 +201,33 @@
             </div>
 
             <div class="mb-5">
-              <button type="submit" id="search" class="btn btn-success">Search</button>
+              <button type="submit" id="search" class="btn btn-success">Generate</button>
               <button type="submit" id="reset" class="btn btn-info float-sm-right">Reset</button>
             </div>
-     </form> --}}
-       
-      <table id="all-employee" class="table table-bordered table-striped">
+     </form>
+    </div>
+    <!-- /.card-header -->
+    
+    <div class="card-body table-responsive p-0" style="height: 500px;">
+      <table id="all-employee" class="table table-head-fixed text-nowrap">
         <thead>
 
-        <tr class="bg-success">
-          <th>SL NO</th>
-          <th>Staff Code</th>
-          <th>Name</th>
-          <th>Position</th>
-          <th>Department Code</th>
-          <th>Category</th>
-          <th>Level</th>
-          <th>Base</th>
-          <th>Work Place</th>
-          <th>Sub Location</th>
-          <th>Basic Salary</th>
-          <th>Gross Salary</th>
-          <th>Provident Amount</th>
-          <th>Joining Date</th>
-          <th>Ending Date</th>
+        <tr>
+          <th class="bg-success"> SL NO </th>
+          <th class="bg-success"> Staff Code </th>
+          <th class="bg-success"> Name </th>
+          <th class="bg-success"> Position </th>
+          <th class="bg-success"> Department Code </th>
+          <th class="bg-success"> Category </th>
+          <th class="bg-success"> Level </th>
+          <th class="bg-success"> Base </th>
+          <th class="bg-success"> Work Place </th>
+          <th class="bg-success"> Sub Location </th>
+          <th class="bg-success"> Basic Salary </th>
+          <th class="bg-success"> Gross Salary </th>
+          <th class="bg-success"> Provident Amount </th>
+          <th class="bg-success"> Joining Date </th>
+          <th class="bg-success"> Ending Date </th>
           {{-- <th>Action</th> --}}
         </tr>
         </thead>
@@ -236,7 +241,7 @@
               {
             ?>
             <td class="bg-danger text-bold">
-              <a href="{{route('edit-employee',$employee->id)}}">
+              <a href="{{route('employee-details',$employee->staff_code)}}">
                 {{ sprintf("%04d", $employee->staff_code)}}
               </a>
             </td>
@@ -245,13 +250,13 @@
             else { 
         ?>
               <td class="bg-success text-bold">
-                <a href="{{route('edit-employee',$employee->id)}}">
+                <a href="{{route('employee-details',$employee->staff_code)}}">
                   {{sprintf("%04d", $employee->staff_code)}}
                 </a>
               </td>
         <?php } ?>
-          <td>
-            <a href="{{route('edit-employee',$employee->id)}}">
+          <td class="text-bold">
+            <a href="{{route('employee-details',$employee->staff_code)}}">
               {{$employee->first_name}} {{$employee->last_name}}
             </a>
           </td>
@@ -275,7 +280,7 @@
         @endforeach
        </tbody>
 
-        <tfoot>
+        {{-- <tfoot>
           <tr>
             <th style="display:none;"></th>
             <th>Staff Code</th>
@@ -293,11 +298,18 @@
             <th style="display:none;"></th>
             <th style="display:none;"></th>
           </tr>
-        </tfoot>
-
+        </tfoot> --}}
+   
       </table>
     </div>
     <!-- /.card-body -->
+     
+
+    <div class="card-footer">
+      <div class="float-right">
+        {{-- {{ $employees->links() }} --}}
+       </div>
+    </div>
   </div>
   <!-- /.card -->
 
@@ -377,30 +389,30 @@
     // DataTable
     // var table = $('#all-employee').DataTable();
     
-    var table = $('#all-employee').DataTable({
-          "info": true,
-          "autoWidth": false,
-          scrollX:'50vh', 
-          scrollY:'50vh',
-          scrollCollapse: true,
-          fixedColumns: true,
-          fixedColumns:   {
-            leftColumns: 2
-        }
-      });
+    // var table = $('#all-employee').DataTable({
+    //       "info": true,
+    //       "autoWidth": false,
+    //       scrollX:'50vh', 
+    //       scrollY:'50vh',
+    //       scrollCollapse: true,
+    //       fixedColumns: true,
+    //       fixedColumns:   {
+    //         leftColumns: 2
+    //     }
+    //   });
  
     // Apply the search
-    table.columns().every( function () {
-        var that = this;
+    // table.columns().every( function () {
+    //     var that = this;
  
-        $( 'input', this.footer() ).on( 'keyup change clear', function () {
-            if ( that.search() !== this.value ) {
-                that
-                    .search( this.value )
-                    .draw();
-            }
-        } );
-    } );
+    //     $( 'input', this.footer() ).on( 'keyup change clear', function () {
+    //         if ( that.search() !== this.value ) {
+    //             that
+    //                 .search( this.value )
+    //                 .draw();
+    //         }
+    //     } );
+    // } );
 // ---------------------END BOTTOM SEARCHING -------------------
     
 
@@ -585,7 +597,7 @@
 
       $('.select2bs4').select2({
         theme: 'bootstrap4',
-      })
+      });
 
     });
   

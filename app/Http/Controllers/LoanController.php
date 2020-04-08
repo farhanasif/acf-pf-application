@@ -43,47 +43,53 @@ class LoanController extends Controller
 
     public function saveLoan(Request $request)
     {
-      
-	   	try{
-        
-	       $loan = new Loan;
-	       $loan->staff_code = $request->staff_code;
-	       $loan->monthly_installment = $request->monthly_installment;
-	       $loan->loan_amount = $request->loan_amount;
-	       $loan->total_months =  12;
-	       $loan->monthly_interest = $request->monthly_interest;
-	       $loan->interest  = $request->interest;
-	       $loan->description  = $request->purpose;
-	       $loan->issue_date = date('Y-m-d', strtotime($request->date));
-	       $loan->save();
-           
-           // $loan_id = DB::select("select id from loans where staff_code='".$request->staff_code."' ORDER BY created_at DESC limit 1");
-           
-	       for($i = 1; $i <= 12; $i++){
-   		       $loanInstallment = new LoanInstallment;
-		       $loanInstallment->staff_code = $request->staff_code;
-		       $loanInstallment->payment_type =  "Due";
-		       $loanInstallment->loan_id = $loan->id;
-		       $loanInstallment->payment = number_format(($request->monthly_installment + $request->monthly_interest),4);
-	       	   $loanInstallment->pay_date  = date ("Y-m-d", strtotime("+".$i." month", strtotime($request->date)));
-	       	   $loanInstallment->save();
-	       	   // echo json_encode($loanInstallment);
-	       }
-   
-	       $transaction = new Transaction;
-	       $transaction->account_head_id = $request->account_head;
-	       $transaction->description = $request->description;
-	       $transaction->amount = $request->loan_amount*-1;
-	       $transaction->save();
+      $loan_info = DB::table('loans')->where('staff_code',$request->staff_code)->get();
+      if(empty($loan_info)) {
+    	   	try{
+
+    	       $loan = new Loan;
+    	       $loan->staff_code = $request->staff_code;
+    	       $loan->monthly_installment = $request->monthly_installment;
+    	       $loan->loan_amount = $request->loan_amount;
+    	       $loan->total_months =  12;
+    	       $loan->monthly_interest = $request->monthly_interest;
+    	       $loan->interest  = $request->interest;
+    	       $loan->description  = $request->purpose;
+    	       $loan->issue_date = date('Y-m-d', strtotime($request->date));
+    	       $loan->save();
+               
+               // $loan_id = DB::select("select id from loans where staff_code='".$request->staff_code."' ORDER BY created_at DESC limit 1");
+               
+    	       for($i = 1; $i <= 12; $i++){
+       		       $loanInstallment = new LoanInstallment;
+    		       $loanInstallment->staff_code = $request->staff_code;
+    		       $loanInstallment->payment_type =  "Due";
+    		       $loanInstallment->loan_id = $loan->id;
+    		       $loanInstallment->payment = number_format(($request->monthly_installment + $request->monthly_interest),4);
+    	       	   $loanInstallment->pay_date  = date ("Y-m-d", strtotime("+".$i." month", strtotime($request->date)));
+    	       	   $loanInstallment->save();
+    	       	   // echo json_encode($loanInstallment);
+    	       }
+       
+    	       $transaction = new Transaction;
+    	       $transaction->account_head_id = $request->account_head;
+    	       $transaction->description = $request->description;
+    	       $transaction->amount = $request->loan_amount*-1;
+    	       $transaction->save();
 
 
-	       echo("Loan application submitted successfully!");
-	       return;
-	   }catch(Exception $e){
-            DB::rollback();
-            echo $e;
+    	       echo("Loan application submitted successfully!");
+    	       return;
+    	   }catch(Exception $e){
+                DB::rollback();
+                echo $e;
+                return;
+            }
+
+          }else {
+            echo("Already you get a loan!");
             return;
-        }
+          }
 
     }
 

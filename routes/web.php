@@ -520,7 +520,7 @@ Route::group(['middleware' => 'admin'], function () {
 			'as'		=> 'add-employee'
 		]);
 
-		Route::get('/all-employee', [
+		Route::match(['get', 'post'],'/all-employee', [
 			'uses'		=> 'EmployeeController@all_employee',
 			'as'		=> 'all-employee'
 		]);
@@ -543,7 +543,7 @@ Route::group(['middleware' => 'admin'], function () {
 			'uses'		=> 'EmployeeController@edit_employee',
 			'as'		=> 'edit-employee'
 		]);
-		Route::post('/update-employee/{id}', [
+		Route::post('/update-employee/{staff_code}', [
 			'uses'		=> 'EmployeeController@update_employee',
 			'as'		=> 'update-employee'
 		]);
@@ -551,6 +551,11 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('/delete-employee/{id}', [
 			'uses'		=> 'EmployeeController@delete_employee',
 			'as'		=> 'delete-employee'
+		]);
+
+		Route::get('/employee-details/{staff_code}', [
+			'uses'		=> 'EmployeeController@employee_details',
+			'as'		=> 'employee-details'
 		]);
 
 		Route::post('/custom-search-employee', [
@@ -686,6 +691,17 @@ Route::group(['middleware' => 'admin'], function () {
 			'as'		=> 'delete-account-head'
 		]);
 
+		// ---------- START CHANGE PROFILE ROUTE ------------
+		Route::get('/edit-change-profile/{id}', [
+			'uses'		=> 'ChangeProfileController@edit_change_profile',
+			'as'		=> 'edit-change-profile'
+		]);
+		Route::post('/update-change-profile/{id}', [
+			'uses'		=> 'ChangeProfileController@update_change_profile',
+			'as'		=> 'update-change-profile'
+		]);
+		// ---------- END CHANGE PROFILE ROUTE ------------
+
 		//-------------------RECONCILIATION ROUTES-------------------//
 		Route::get('/reconciliation', 'BankController@view_transaction');
 		Route::get('/monthy-bank-book', 'BankController@get_monthly_bank_book');
@@ -702,7 +718,12 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('/admin-home',['middleware'=>'admin','uses'=>'AdminController@admin_home']);
 		Route::get('/user-home',['middleware'=>'user','uses'=>'AdminController@user_home']);
 
-
+		// --------CHANGE PROFILE ROUTE---------------------
+		// Route::get('change-profile', [
+		// 	'uses'		=> 'AdminController@change_profile',
+		// 	'as'		=> 'change-profile'
+		// ]);
+		// --------CHANGE PROFILE ROUTE---------------------
 
 
 
@@ -721,7 +742,8 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('ledger', 'LedgerReportController@view_ledger_report');
 		Route::get('ledger-report','LedgerReportController@ledger_report');
 
-/**************************** Loan Seaction route *****************************/
+
+		/**************************** Loan Seaction route *****************************/
 
         Route::get('/create-loan', [
 			'uses'		=> 'LoanController@create_loan',

@@ -16,12 +16,12 @@ class Pf_withdrawsImport implements ToModel, WithStartRow
     public function model(array $row)
     {
         return new Pf_withdraw([
-            'staff_code' => 1,
-            'received_amount' => $row[3],
-            'received_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]),
-            'received_by' => Auth::user()->id,
-            'received_in' => $row[2],
-            'authorization_signatory' => Auth::user()->id,
+            // 'staff_code' => 1,
+            // 'received_amount' => $row[3],
+            // 'received_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]),
+            // 'received_by' => Auth::user()->id,
+            // 'received_in' => $row[2],
+            // 'authorization_signatory' => Auth::user()->id,
             // 'description' => 1,
         ]);
     }
