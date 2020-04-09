@@ -61,14 +61,19 @@ class EmployeeController extends Controller
           $work_place = $request->work_place;
           $department_code = $request->department_code;
           $staff_code = $request->staff_code;
+          $name = $request->name;
 
-          if($category == '-1' && $position == '-1' && $base == '-1' && $level == '-1' && $work_place == '-1' && $department_code == '-1' && $staff_code == '-1'){
+          if($category == '-1' && $position == '-1' && $base == '-1' && $level == '-1' && $work_place == '-1' && $department_code == '-1' && $staff_code == '-1' && $name == '-1'){
           }
           else{
               $query = $query. " where 1=1 ";
 
               if($staff_code != '-1'){
                 $query = $query . " AND staff_code = '".$staff_code."'";
+              }
+
+              if($name != '-1'){
+                $query = $query . " AND staff_code= '".$name."'";
 
                 // dd($query);
                 // exit;

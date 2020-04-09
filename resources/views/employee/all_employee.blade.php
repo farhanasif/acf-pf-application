@@ -123,7 +123,7 @@ color:white;
                 <!-- select -->
                 <div class="form-group">
                 <label>Name</label>
-                <select class="custom-select select2bs4" id="name" name="staff_code">
+                <select class="custom-select select2bs4" id="name" name="name">
                     <option value="-1">--select--</option>
                       @foreach ($employees as $employee)
                         <option value="{{ sprintf("%04d", $employee->staff_code)}}"> {{$employee->first_name}} {{$employee->last_name}} </option>
