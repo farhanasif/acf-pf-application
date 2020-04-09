@@ -96,7 +96,7 @@ class EmployeeController extends Controller
 
           }
 
-          $query = $query." limit 10";
+          // $query = $query." limit 10";
           $employees = DB::select($query);
           return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
       }
@@ -135,36 +135,7 @@ class EmployeeController extends Controller
 
         foreach ($result as $key => $value) {
           foreach ($value as $row) {
-
-            // $result = DB::table('employees')->where('staff_code',$row[0])->first();
-            //   if(!empty($result))
-            //   {
-            //     $update_data[] =array(
-            //       // 'staff_code' =>$row[0],
-            //       // 'trimmed' =>$row[0],
-            //       'first_name' =>$row[1],
-            //       'last_name' =>$row[2],
-            //       'position' =>$row[3],
-            //       // 'department_code' =>NULL,
-            //       'category' =>$row[4],
-            //       'level' =>$row[5],
-            //       'joining_date' =>date($row[7]),
-            //       // 'ending_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[9]),
-            //       'ending_date' =>date($row[9]),
-            //       'base' =>$row[10],
-            //       'work_place' =>$row[10],
-            //       // 'sub_location' =>NULL,
-            //       'basic_salary' =>$row[12],
-            //       'gross_salary' =>$row[13],
-            //       'pf_amount' =>$row[16],
-            //       // 'pf_percentage' =>$NULL,
-            //       'status' =>1,
-            //       'created_by' =>Auth::user()->id,
-            //       'updated_by' =>Auth::user()->id,
-            //       );
-            //   }
-            //   else{
-                  try {
+                  // try {
                     $insert_data[] =array(
                       'staff_code' =>$row[0],
                       'trimmed' =>$row[0],
@@ -176,7 +147,8 @@ class EmployeeController extends Controller
                       'level' =>$row[5],
                       'joining_date' =>date($row[7]),
                       // 'ending_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[9]),
-                      'ending_date' =>date($row[9]),
+                      'ending_date' =>formatDates($row[9]),
+                      // 'ending_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d'),
                       'base' =>$row[10],
                       'work_place' =>$row[10],
                       // 'sub_location' =>NULL,
@@ -188,24 +160,22 @@ class EmployeeController extends Controller
                       'created_by' =>Auth::user()->id,
                       'updated_by' =>Auth::user()->id,
                   );
-                  }
-                  catch (\Exception $e)
-                    {
-                      return redirect()->back()->with('error','Something went wrong!');
-                    }
+                  // }
+                  // catch (\Exception $e)
+                  //   {
+                  //     return redirect()->back()->with('error','Something went wrong!');
+                  //   }
               // }
           }
       }
 
-        // dd($insert_data);
-        // exit;
-        // dd($insert_data[7]);
-        // exit;
+        dd($insert_data);
+        exit;
 
-      if (!empty($insert_data)) {
-          DB::table('employees')->insert($insert_data);
-          return back()->with('success','Employees batch import successfully');
-      }
+      // if (!empty($insert_data)) {
+      //     DB::table('employees')->insert($insert_data);
+      //     return back()->with('success','Employees batch import successfully');
+      // }
 
       // if (!empty($update_data)) {
       //   DB::table('employees')->update($update_data);
@@ -278,13 +248,18 @@ class EmployeeController extends Controller
               "SELECT
               loans.id, loans.loan_amount, loans.total_months, loans.interest, loans.issue_date, 
               MIN(loan_installment.pay_date ) AS min_date, MAX(loan_installment.pay_date ) AS max_date,
-              employees.first_name, employees.last_name, employees.position,
-              interests.id, interests.interest_date, interests.interest_source, interests.own, interests.organization
+              employees.first_name, employees.last_name, employees.position
               FROM loans
               INNER JOIN loan_installment ON loan_installment.staff_code = loans.staff_code
               INNER JOIN employees ON employees.staff_code = loans.staff_code
-              INNER JOIN interests ON interests.staff_code = employees.staff_code
               WHERE loans.staff_code ='".$staff_code."'");
+
+              // dd($loan_account_details);
+              // exit;
+              $interests = DB::select("SELECT * FROM interests WHERE staff_code='".$staff_code."'");
+
+              //   dd($interest);
+              // exit;
                   
     $total_and_maximum_pf = DB::select(
                 "SELECT SUM(total_pf) AS total_pf_amount, MAX(total_pf) AS maximum_total_pf , deposit_date
@@ -307,7 +282,7 @@ class EmployeeController extends Controller
       $work_places = Work_place::all();
       $departments = DB::table('departments')->get();
 
-      return view('employee.employee_details',compact(
+      return view('employee.employee_details',compact('interests',
        'loan_account_details','employees','pf_deposits','total_and_maximum_pf',
         'departments','work_places','levels','positions','categories','bases','sub_locations','loan_adjustments'));
 

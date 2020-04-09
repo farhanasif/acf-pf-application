@@ -156,10 +156,6 @@
                       <div class="card-header">
                         <h3 class="card-title">Provident Fund Interests</h3>
                       </div>
-
-                      <?php if(!empty($loan_account_details[0]->id)) { ?>
-
-
                       <!-- /.card-header -->
                       <div class="card-body table-responsive p-0" style="height: 300px;">
                         <table class="table table-striped table-head-fixed text-nowrap">
@@ -175,7 +171,7 @@
                           </thead>
                           <tbody>
                             <?php $i=1;?>
-                            @foreach ($loan_account_details as $item)
+                            @foreach ($interests as $item)
                             <tr>
                             <td>{{$i++}}</td>
                               <td>{{ date('j F, Y', strtotime($item->interest_date)) }}  </td>
@@ -190,17 +186,8 @@
                           </tbody>
                         </table>
                       </div>
-
-                      <?php }else { ?>
-                        <div>
-                          <h3 class="text-center">No Data Found!</h3>
-                       </div>
-                    <?php } ?>
                       <!-- /.card-body -->
                     </div>
-
-
-
               </div>
               <!-- /.tab-pane -->
 

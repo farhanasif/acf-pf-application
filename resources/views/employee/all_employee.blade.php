@@ -202,7 +202,6 @@
 
             <div class="mb-5">
               <button type="submit" id="search" class="btn btn-success">Generate</button>
-              {{-- <button type="submit" id="reset" class="btn btn-info float-sm-right">Reset</button> --}}
             </div>
      </form>
     </div>
@@ -273,40 +272,14 @@
             <td>{{$employee->pf_amount}}</td>
             <td>{{$employee->joining_date}}</td>
             <td>{{$employee->ending_date}}</td>
-            {{-- <td >
-                <a href="{{route('edit-employee',$employee->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                <a href="{{route('delete-employee',$employee->id)}}" onclick="ConfirmDelete()" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-            </td> --}}
           </tr>
           @endforeach
-         </tbody>
-  
-          {{-- <tfoot>
-            <tr>
-              <th style="display:none;"></th>
-              <th>Staff Code</th>
-              <th>Name</th>
-              <th>Position</th>
-              <th>Department Code</th>
-              <th>Category</th>
-              <th>Level</th>
-              <th>Base</th>
-              <th>Work Place</th>
-              <th>Sub Location</th>
-              <th style="display:none;"></th>
-              <th style="display:none;"></th>
-              <th style="display:none;"></th>
-              <th style="display:none;"></th>
-              <th style="display:none;"></th>
-            </tr>
-          </tfoot> --}}
-     
+         </tbody>   
         </table>
       </div>
      </div>
     <!-- /.card-body -->
      
-
     <div class="card-footer">
       <div class="float-right">
         {{-- {{ $employees->links() }} --}}
@@ -351,256 +324,9 @@
       <script>
 
    $(document).ready(function(){
-
-// ---------------------START TOP HEADING SEARCHING -------------------
-    // $('#all-employee thead tr').clone(true).appendTo( '#all-employee thead' );
-    // $('#all-employee thead tr:eq(1) th').each( function (i) {
-    //     var title = $(this).text();
-    //     $(this).html( '<input type="text" class="form-control" placeholder=" '+title+'" />' );
- 
-    //     $( 'input', this ).on( 'keyup change', function () {
-    //         if ( table.column(i).search() !== this.value ) {
-    //             table
-    //                 .column(i)
-    //                 .search( this.value )
-    //                 .draw();
-    //         }
-    //     } );
-    // } );
- 
-    // var table = $('#all-employee').DataTable( {
-    //     orderCellsTop: true,
-    //     fixedHeader: true,
-    //     scrollX:'50vh',
-    //     scrollY:'50vh',
-    //     fixedColumns: true,
-    //     fixedColumns:   {
-    //         leftColumns: 2
-    //     }
-    // } );
-// ---------------------END TOP HEADING SEARCHING -------------------
-
-
-
-// ---------------------START BOTTOM SEARCHING -------------------
-    $('#all-employee tfoot th').each( function () {
-        var title = $(this).text();
-        $(this).html( '<input type="text"  class="form-control" placeholder="'+title+'" />' );
-    } );
- 
-    // DataTable
-    // var table = $('#all-employee').DataTable();
-    
-    // var table = $('#all-employee').DataTable({
-    //       "info": true,
-    //       "autoWidth": false,
-    //       scrollX:'50vh', 
-    //       scrollY:'50vh',
-    //       scrollCollapse: true,
-    //       fixedColumns: true,
-    //       fixedColumns:   {
-    //         leftColumns: 2
-    //     }
-    //   });
- 
-    // Apply the search
-    // table.columns().every( function () {
-    //     var that = this;
- 
-    //     $( 'input', this.footer() ).on( 'keyup change clear', function () {
-    //         if ( that.search() !== this.value ) {
-    //             that
-    //                 .search( this.value )
-    //                 .draw();
-    //         }
-    //     } );
-    // } );
-// ---------------------END BOTTOM SEARCHING -------------------
-    
-
-// ---------------------START DROPDOWN SEARCHING -------------------
-
-    // $('#all-employee').DataTable( {
-
-    //             scrollX:'50vh', 
-    //       scrollY:'50vh',
-    //       scrollCollapse: true,
-    //       fixedColumns: true,
-    //       fixedColumns:   {
-    //         leftColumns: 2
-    //     },
-
-    //     initComplete: function () {
-    //         this.api().columns().every( function () {
-    //             var column = this;
-    //             var select = $('<select class="select2bs4" style="width:120px;" ><option value=""></option></select>')
-    //                 .appendTo( $(column.footer()).empty() )
-    //                 .on( 'change', function () {
-    //                     var val = $.fn.dataTable.util.escapeRegex(
-    //                         $(this).val()
-    //                     );
- 
-    //                     column
-    //                         .search( val ? '^'+val+'$' : '', true, false )
-    //                         .draw();
-    //                 } );
- 
-    //             column.data().unique().sort().each( function ( d, j ) {
-    //                 select.append( '<option value="'+d+'">'+d+'</option>' )
-    //             } );
-    //         } );
-    //     }
-    // } );
-
-// ---------------------END DROPDOWN SEARCHING -------------------
-
-
-
-
-    //START CUSTOM SEARCH 
-    // fill_datatable();
-    
-    // function fill_datatable(staff_code = '', first_name = '', category = '', level = '', base ='',work_place = '',position = '',department_code = '')
-    // {
-    //     var dataTable = $('#all-employee').DataTable({
-    //         processing: true,
-    //         serverSide: true,
-    //         ajax:{
-    //             url: "{{ route('custom-search-employee') }}",
-    //             method:post,
-    //             data:{
-    //               staff_code:staff_code, 
-    //               first_name:first_name,
-    //               category:category, 
-    //               level:level,
-    //               base:base, 
-    //               work_place:work_place,
-    //               position:position, 
-    //               department_code:department_code
-    //               }
-    //         },
-    //         columns: [
-    //             {
-    //                 data:'staff_code',
-    //                 name:'staff_code'
-    //             },
-    //             {
-    //                 data:'first_name',
-    //                 name:'first_name'
-    //             },
-    //             {
-    //                 data:'category',
-    //                 name:'category'
-    //             },
-    //             {
-    //                 data:'level',
-    //                 name:'level'
-    //             },
-    //             {
-    //                 data:'base',
-    //                 name:'base'
-    //             },
-    //             {
-    //                 data:'position',
-    //                 name:'position'
-    //             },
-
-    //             {
-    //                 data:'department_code',
-    //                 name:'department_code'
-    //             }
-    //         ]
-    //     });
-    // }
-
-    // $('#search').click(function(){
-    //     var staff_code = $('#staff_code').val();
-    //     var first_name = $('#first_name').val();
-    //     var category = $('#category').val();
-    //     var level = $('#level').val();
-    //     var base = $('#base').val();
-    //     var position = $('#position').val();
-    //     var department_code = $('#department_code').val();
-
-    //     if(staff_code != '' &&  first_name != '' &&  category != '' &&  level != '' &&  base != '' &&  position != '' &&  department_code != '')
-    //     {
-    //         $('#all-employee').DataTable().destroy();
-    //         fill_datatable(staff_code, first_name,category,level,base,position,department_code);
-    //     }
-
-    //     else if(staff_code != '')
-    //     {
-    //       $('#all-employee').DataTable().destroy();
-    //         fill_datatable(staff_code);
-    //     }
-
-    //     else if(first_name != '')
-    //     {
-    //       $('#all-employee').DataTable().destroy();
-    //         fill_datatable(first_name);
-    //     }
-
-    //     else if(category != '')
-    //     {
-    //       $('#all-employee').DataTable().destroy();
-    //         fill_datatable(category);
-    //     }
-
-    //     else if(level != '')
-    //     {
-    //       $('#all-employee').DataTable().destroy();
-    //         fill_datatable(category);
-    //     }
-
-    //     else if(base != '')
-    //     {
-    //       $('#all-employee').DataTable().destroy();
-    //         fill_datatable(base);
-    //     }
-
-    //     else if(position != '')
-    //     {
-    //       $('#all-employee').DataTable().destroy();
-    //         fill_datatable(position);
-    //     }
-
-    //     else if(department_code != '')
-    //     {
-    //       $('#all-employee').DataTable().destroy();
-    //         fill_datatable(department_code);
-    //     }
-
-    //     else
-    //     {
-    //         alert('Select Both filter option');
-    //     }
-    // });
-
-    // $('#reset').click(function(){
-    //     $('#filter_gender').val('');
-    //     $('#filter_country').val('');
-    //     $('#all-employee').DataTable().destroy();
-    //     fill_datatable();
-    // });
-
-    //END CUSTOM SEARCH 
-
-      // $('#all-employee').DataTable({
-      //     "info": true,
-      //     "autoWidth": false,
-      //     scrollX:'50vh', 
-      //     scrollY:'50vh',
-      //     scrollCollapse: true,
-      //     fixedColumns: true,
-      //     fixedColumns:   {
-      //       leftColumns: 2
-      //   }
-      // });
-
       $('.select2bs4').select2({
         theme: 'bootstrap4',
       });
-
     });
   
     </script>

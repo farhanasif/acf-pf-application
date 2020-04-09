@@ -1,3 +1,5 @@
+   
+   <link rel="shortcut icon" href="https://www.actionagainsthunger.org/sites/all/themes/acf2014zen/favicon.ico" type="image/vnd.microsoft.icon" />
    <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('theme/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Ionicons -->

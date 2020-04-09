@@ -77,7 +77,13 @@ class LedgerReportController extends Controller
 
    public function view_ledger_report()
    {
-        return view('report.ledger');
+    $lreport = DB::select("SELECT DISTINCT(DATE(deposit_date)) AS deposit_date, DATE_FORMAT(deposit_date, '%b %Y') AS month_name
+                            FROM pf_deposit
+                            ORDER BY deposit_date");
+
+        //    dd($lreport);
+        //    exit;
+        return view('report.ledger',compact('lreport'));
     }
 
 
