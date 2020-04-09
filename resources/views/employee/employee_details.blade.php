@@ -36,8 +36,8 @@
           <div class="col-sm-2 border-right">
             <div class="description-block">
               <h5 class="description-header">
-                @foreach ($total_and_maximum_pf as $item)
-                  {{number_format($item->maximum_total_pf)}} / Month
+                @foreach ($interests_and_pf_deposit as $item)
+                  {{number_format($item->maximum_total_pf)}} Tk / Month
                 @endforeach
               </h5>
               <span class="description-text">Provident Fund Amount</span>
@@ -48,9 +48,10 @@
           <div class="col-sm-3 border-right">
             <div class="description-block">
             <h5 class="description-header">
-              @foreach ($total_and_maximum_pf as $item)
-                 {{number_format($item->total_pf_amount)}}
+              @foreach ($interests_and_pf_deposit as $item)
+                 {{number_format($item->total_pf_amount)}} Tk
               @endforeach
+              
             </h5>
               <span class="description-text">Total PF Amount (without interest)</span>
             </div>
@@ -60,7 +61,14 @@
           <div class="col-sm-3 border-right">
             <div class="description-block">
             <h5 class="description-header">
-                0000
+                @if ($interests_and_pf_deposit)
+                @foreach ($interests_and_pf_deposit as $item)
+                {{ number_format($item->own + $item->organization+ $item->total_pf_amount) }} Tk
+                @endforeach
+                
+                @else
+                    0 Tk
+                @endif
             </h5>
               <span class="description-text">Total PF Amount (with interest)</span>
             </div>
@@ -72,9 +80,10 @@
             <div class="description-block">
               @foreach ($loan_account_details as $item)
                 <h5 class="description-header"> 
-                  {{$item->loan_amount ? number_format($item->loan_amount) : '0'}}
+                  {{$item->loan_amount ? number_format($item->loan_amount) : '0'}} Tk
                 </h5>
               @endforeach
+              
               <span class="description-text">Loan Amount (Total)</span>
             </div>
             <!-- /.description-block -->
@@ -85,8 +94,8 @@
           <div class="col-sm-2">
             <div class="description-block">
               <h5 class="description-header">
-                @foreach ($total_and_maximum_pf as $item)
-                  {{number_format($item->total_pf_amount * 80/100)}}
+                @foreach ($interests_and_pf_deposit as $item)
+                  {{number_format($item->total_pf_amount * 80/100)}} Tk
                 @endforeach
               </h5>
               <span class="description-text">LOAN AMOUNT(MAXIMUM)</span>
@@ -171,7 +180,7 @@
                           </thead>
                           <tbody>
                             <?php $i=1;?>
-                            @foreach ($interests as $item)
+                            @foreach ($interests_and_pf_deposit as $item)
                             <tr>
                             <td>{{$i++}}</td>
                               <td>{{ date('j F, Y', strtotime($item->interest_date)) }}  </td>

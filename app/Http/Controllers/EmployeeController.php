@@ -42,9 +42,6 @@ class EmployeeController extends Controller
     {
 
       $query = "select * from employees";
-      // $query = DB::table('employees')->paginate(10);
-      // dd($query);
-      // exit;
 
       $positions = DB::table('positions')->get();
       $categories = DB::table('categories')->get();
@@ -74,9 +71,6 @@ class EmployeeController extends Controller
 
               if($name != '-1'){
                 $query = $query . " AND staff_code= '".$name."'";
-
-                // dd($query);
-                // exit;
               }
 
               if($position != '-1'){
@@ -88,17 +82,14 @@ class EmployeeController extends Controller
               }
 
               if($base != '-1'){
-                // $query = $query . " AND base = '".$base."'";
                 $query = $query . ' AND base = "'.$base.'"';
               }
 
               if($level != '-1'){
                   $query = $query . " AND level = '".$level."'";
-
               }
 
               if($work_place != '-1'){
-                // $query = $query . " AND work_place = '".$work_place."'";
                 $query = $query . ' AND work_place = "'.$work_place.'"';
               }
 
@@ -107,17 +98,12 @@ class EmployeeController extends Controller
               }
 
           }
-
-          // $query = $query.paginate(10);
           $employees = DB::select($query);
           return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
       }
       else{
-          // $query = $query." limit 10";
-          //  $query = $query.''.paginate(10);    
+
           $employees = DB::select($query);
-          // dd($employees);
-          // exit;
           return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
       }
     }
@@ -265,16 +251,11 @@ class EmployeeController extends Controller
               INNER JOIN employees ON employees.staff_code = loans.staff_code
               WHERE loans.staff_code ='".$staff_code."'");
 
-              // dd($loan_account_details);
-              // exit;
-              $interests = DB::select("SELECT * FROM interests WHERE staff_code='".$staff_code."'");
-
-              //   dd($interest);
-              // exit;
-                  
-    $total_and_maximum_pf = DB::select(
-                "SELECT SUM(total_pf) AS total_pf_amount, MAX(total_pf) AS maximum_total_pf , deposit_date
-                FROM pf_deposit WHERE staff_code ='".$staff_code."' ORDER BY deposit_date DESC");
+       $interests_and_pf_deposit = DB::select("SELECT SUM(pf_deposit.total_pf) AS total_pf_amount, MAX(pf_deposit.total_pf) AS maximum_total_pf, pf_deposit.deposit_date, 
+          interests.id AS interests, interests.own, interests.organization, interests.interest_date, interests.interest_source
+                              FROM pf_deposit 
+                              INNER JOIN interests ON interests.staff_code = pf_deposit.staff_code
+                              WHERE pf_deposit.staff_code='".$staff_code."' ORDER BY deposit_date DESC");
 
    $loan_adjustments = DB::select("SELECT  payment, pay_date, payment_type
                                    FROM loan_installment 
@@ -293,8 +274,8 @@ class EmployeeController extends Controller
       $work_places = Work_place::all();
       $departments = DB::table('departments')->get();
 
-      return view('employee.employee_details',compact('interests',
-       'loan_account_details','employees','pf_deposits','total_and_maximum_pf',
+      return view('employee.employee_details',compact('interests_and_pf_deposit',
+       'loan_account_details','employees','pf_deposits',
         'departments','work_places','levels','positions','categories','bases','sub_locations','loan_adjustments'));
 
       // return view('employee.employee_details',compact('employees','pf_deposits','total_pf_amounts'));

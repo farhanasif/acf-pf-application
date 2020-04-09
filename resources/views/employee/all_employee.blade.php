@@ -301,7 +301,6 @@ color:white;
      
     <div class="card-footer">
       <div class="float-right">
-        {{-- {{ $employees->links() }} --}}
        </div>
     </div>
   </div>
