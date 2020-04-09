@@ -42,6 +42,10 @@ class EmployeeController extends Controller
     {
 
       $query = "select * from employees";
+      // $query = DB::table('employees')->paginate(10);
+      // dd($query);
+      // exit;
+
       $positions = DB::table('positions')->get();
       $categories = DB::table('categories')->get();
       $bases = DB::table('bases')->get();
@@ -65,6 +69,9 @@ class EmployeeController extends Controller
 
               if($staff_code != '-1'){
                 $query = $query . " AND staff_code = '".$staff_code."'";
+
+                // dd($query);
+                // exit;
               }
 
               if($position != '-1'){
@@ -96,19 +103,18 @@ class EmployeeController extends Controller
 
           }
 
-          // $query = $query." limit 10";
+          // $query = $query.paginate(10);
           $employees = DB::select($query);
           return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
       }
       else{
-
           // $query = $query." limit 10";
+          //  $query = $query.''.paginate(10);    
           $employees = DB::select($query);
+          // dd($employees);
+          // exit;
           return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
       }
-      // $employees = DB::table('employees')->get();
-      // $employees = Employee::paginate(5);
-      // return view('employee.all_employee',compact('employees'));
     }
 
     public function employee_batch_upload()

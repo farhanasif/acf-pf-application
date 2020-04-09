@@ -42,55 +42,7 @@
                 {{-- <i class="right fas fa-angle-left"></i> --}}
               </p>
             </a>
-            {{-- <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>All Employees</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Add New Employee</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Batch Upload</p>
-                </a>
-              </li>
-            </ul> --}}
-          </li>
-          <li class="nav-item ">
-          <a href="{{route('all-user')}}" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                System Accounts
-                {{-- <i class="right fas fa-angle-left"></i> --}}
-              </p>
-            </a>
-            {{-- <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{url('/all-user')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>All User</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{url('/add-user')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Add New User</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{url('/show-batch-upload')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Batch Upload</p>
-                </a>
-              </li>
-            </ul> --}}
+
           </li>
 
           <li class="nav-item has-treeview">
@@ -347,16 +299,18 @@
                   <p>Bank Transaction</p>
                 </a>
               </li>
-
-              <li class="nav-item">
-                <a href="javascript:void(0)" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Loan Disburse</p>
-                </a>
-              </li>
             </ul>
           </li>
 
+          <li class="nav-item ">
+            <a href="{{route('all-user')}}" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                  System Accounts
+                </p>
+              </a>
+            </li>
+            
           <li class="nav-header">MISCELLANEOUS</li>
           <li class="nav-item">
             <a href="javascript:void(0)" class="nav-link">

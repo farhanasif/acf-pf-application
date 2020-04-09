@@ -2,18 +2,37 @@
 @section('customcss') 
 
   <style>
-    tfoot input {
-        width: 100%;
-        /* padding: 6px; */
-        /* box-sizing: border-box; */
-    }
-     th input {
-        width: 90%;
-    }
+/* table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+} */
 
-    /* tfoot{
-      display: table-header-group;
-    } */
+td, th {
+    /* border: 1px solid #dddddd; */
+    text-align: left;
+    padding: 8px;
+}
+/* th
+{
+background-color:black;
+color:white;
+} */
+/* th:first-child, td:first-child
+{
+  position:sticky;
+  left:0px;
+ 
+} */
+
+.fixed-column{
+  position:sticky;
+  left:0px;
+}
+ /* td:first-child
+ {
+  background-color:#28A745;
+ } */
   </style>
 
   <link rel="stylesheet" href="{{asset('/')}}theme/plugins/datatables-fixedcolumns/css/fixedColumns.bootstrap4.min.css">
@@ -104,7 +123,7 @@
                 <!-- select -->
                 <div class="form-group">
                 <label>Name</label>
-                <select class="custom-select select2bs4" id="staff_code" name="staff_code">
+                <select class="custom-select select2bs4" id="name" name="staff_code">
                     <option value="-1">--select--</option>
                       @foreach ($employees as $employee)
                         <option value="{{ sprintf("%04d", $employee->staff_code)}}"> {{$employee->first_name}} {{$employee->last_name}} </option>
@@ -213,8 +232,8 @@
           <thead>
   
           <tr>
-            <th class="bg-success"> SL NO </th>
-            <th class="bg-success"> Staff Code </th>
+            <th class="bg-success "> SL NO </th>
+            <th class="bg-success fixed-column"> Staff Code </th>
             <th class="bg-success"> Name </th>
             <th class="bg-success"> Position </th>
             <th class="bg-success"> Department Code </th>
@@ -240,7 +259,7 @@
                 if($employee->status == 0)
                 {
               ?>
-              <td class="bg-danger text-bold">
+              <td class="bg-danger text-bold fixed-column">
                 <a href="{{route('employee-details',$employee->staff_code)}}">
                   {{ sprintf("%04d", $employee->staff_code)}}
                 </a>
@@ -249,7 +268,7 @@
               }
               else { 
           ?>
-                <td class="bg-success text-bold">
+                <td class="bg-success text-bold fixed-column">
                   <a href="{{route('employee-details',$employee->staff_code)}}">
                     {{sprintf("%04d", $employee->staff_code)}}
                   </a>
