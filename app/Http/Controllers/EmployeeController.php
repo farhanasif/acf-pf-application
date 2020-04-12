@@ -89,8 +89,9 @@ class EmployeeController extends Controller
 
           }
 
-          // $query = $query." limit 10";
-          $employees = DB::select($query);
+          // $query = $query." ORDER BY id OFFSET 10 ROWS FETCH NEXT 10 ROWS ONLY";
+          $employees = DB::SELECT($query);
+          
           return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
       }
       else{

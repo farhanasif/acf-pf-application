@@ -224,6 +224,13 @@
                 </select>
               </div>
               </div>
+
+             <div class="form-group row">
+              <label for="acount_head" class="col-form-label col-md-12 col-sm-12">Date of Adjustment</label>
+              <div class="col-md-12 col-sm-12">
+                 <input type="text" name="date_of_adjusment" id="adjustment_date" class="form-control">
+              </div>
+              </div>
               <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -246,6 +253,12 @@ function showId(button) {
   console.log(id);
   document.getElementById("installment_id").value = id;
 }
+
+$(document).ready(function() {
+    $(function() { 
+       $( "#adjustment_date" ).datepicker();
+    });
+  });
 </script>
 
 @endsection
