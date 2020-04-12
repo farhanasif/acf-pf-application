@@ -25,10 +25,10 @@ color:white;
  
 } */
 
-.fixed-column{
+/* .fixed-column{
   position:sticky;
   left:0px;
-}
+} */
  /* td:first-child
  {
   background-color:#28A745;
