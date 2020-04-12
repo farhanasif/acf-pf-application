@@ -160,7 +160,7 @@
     
     <label for="date" class="col-form-label col-md-2 col-sm-3 label-align">Date</label>
    <div class="col-md-4 col-sm-3 ">
-      <input type="text" class="form-control" name="date" placeholder="Branch Name" id="date">
+      <input type="text" class="form-control" name="date" placeholder="Issue Date" id="date">
    </div>
   </div>
   <div class="form-group row" style="border: 1px solid gray; box-shadow: 5px 8px gray; ">

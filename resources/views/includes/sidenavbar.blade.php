@@ -226,12 +226,20 @@
                 </a>
               </li>
 
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="javascript:void(0)" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Balance Sheet</p>
                 </a>
+              </li> --}}
+
+              <li class="nav-item">
+                <a href="generate-pf-balance-sheet" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>PF Balance Sheet</p>
+                </a>
               </li>
+
               <li class="nav-item">
                 <a href="javascript:void(0)" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>

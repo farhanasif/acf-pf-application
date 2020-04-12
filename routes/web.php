@@ -779,4 +779,13 @@ Route::group(['middleware' => 'admin'], function () {
 		]);
 
 /**************************** Arif Khan **************************************/
+		Route::any('/generate-pf-balance-sheet', [
+			'uses'		=> 'ReportController@generatePFBalanceSheet',
+			'as'		=> 'generate-pf-balance-sheet'
+		]);
+
+		Route::any('/print-pf-balance-sheet', [
+			'uses'		=> 'ReportController@printPFBalanceSheet',
+			'as'		=> 'print-pf-balance-sheet'
+		]);
 });
