@@ -2,40 +2,8 @@
 @section('customcss') 
 
   <style>
-/* table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-} */
 
-td, th {
-    /* border: 1px solid #dddddd; */
-    text-align: left;
-    padding: 8px;
-}
-/* th
-{
-background-color:black;
-color:white;
-} */
-/* th:first-child, td:first-child
-{
-  position:sticky;
-  left:0px;
- 
-} */
-
-/* .fixed-column{
-  position:sticky;
-  left:0px;
-} */
- /* td:first-child
- {
-  background-color:#28A745;
- } */
   </style>
-
-  <link rel="stylesheet" href="{{asset('/')}}theme/plugins/datatables-fixedcolumns/css/fixedColumns.bootstrap4.min.css">
 @endsection
 @section('content')
 
@@ -228,7 +196,7 @@ color:white;
     
      <div class="card-header">
       <div class="card-body table-responsive p-0" style="height: 500px;">
-        <table id="all-employee" class="table table-head-fixed text-nowrap">
+        <table id="all-employee" class="table table-striped table-head-fixed text-nowrap">
           <thead>
   
           <tr>
@@ -348,8 +316,6 @@ color:white;
     });
   
     </script>
-    <script src="{{ asset('theme/plugins/datatables-fixedcolumns/js/dataTables.fixedColumns.min.js') }}"></script>
-
   @endsection
 
  
