@@ -111,7 +111,7 @@ color:white;
             <select class="custom-select select2bs4 " id="staff_code" name="staff_code">
                 <option value="-1">--select--</option>
 
-                @foreach ($employees as $employee)
+                @foreach ($all_employees as $employee)
                   <option value="{{ sprintf("%04d", $employee->staff_code)}}"> {{ sprintf("%04d", $employee->staff_code)}} </option>
                 @endforeach
               
@@ -125,7 +125,7 @@ color:white;
                 <label>Name</label>
                 <select class="custom-select select2bs4" id="name" name="name">
                     <option value="-1">--select--</option>
-                      @foreach ($employees as $employee)
+                      @foreach ($all_employees as $employee)
                         <option value="{{ sprintf("%04d", $employee->staff_code)}}"> {{$employee->first_name}} {{$employee->last_name}} </option>
                       @endforeach
                     

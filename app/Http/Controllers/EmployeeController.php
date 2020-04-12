@@ -49,6 +49,7 @@ class EmployeeController extends Controller
       $levels = DB::table('levels')->get();
       $departments = DB::table('departments')->get();
       $work_places = DB::table('work_places')->get();
+      $all_employees = DB::table('employees')->get();
 
       if ($request->isMethod('post')) {
           $position = $request->position;
@@ -99,12 +100,12 @@ class EmployeeController extends Controller
 
           }
           $employees = DB::select($query);
-          return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
+          return view('employee.all_employee',compact('all_employees','employees','positions','categories','levels','bases','departments','work_places'));
       }
       else{
 
           $employees = DB::select($query);
-          return view('employee.all_employee',compact('employees','positions','categories','levels','bases','departments','work_places'));
+          return view('employee.all_employee',compact('all_employees','employees','positions','categories','levels','bases','departments','work_places'));
       }
     }
 
@@ -252,10 +253,10 @@ class EmployeeController extends Controller
               WHERE loans.staff_code ='".$staff_code."'");
 
        $interests_and_pf_deposit = DB::select("SELECT SUM(pf_deposit.total_pf) AS total_pf_amount, MAX(pf_deposit.total_pf) AS maximum_total_pf, pf_deposit.deposit_date, 
-          interests.id AS interests, interests.own, interests.organization, interests.interest_date, interests.interest_source
-                              FROM pf_deposit 
-                              INNER JOIN interests ON interests.staff_code = pf_deposit.staff_code
-                              WHERE pf_deposit.staff_code='".$staff_code."' ORDER BY deposit_date DESC");
+            interests.id AS interests, interests.own, interests.organization, interests.interest_date, interests.interest_source
+            FROM pf_deposit 
+            INNER JOIN interests ON interests.staff_code = pf_deposit.staff_code
+            WHERE pf_deposit.staff_code='".$staff_code."' ORDER BY deposit_date DESC");
 
    $loan_adjustments = DB::select("SELECT  payment, pay_date, payment_type
                                    FROM loan_installment 
@@ -331,90 +332,4 @@ class EmployeeController extends Controller
       return redirect()->back();
     }
 
-    // public function customSearchEmployee(Request $request)
-    // {
-    //     if(request()->ajax())
-    //       {
-    //         if($request->all())
-    //           {
-    //             $data = DB::table('employees')
-    //             ->select('staff_code','first_name', 'position', 'department_code', 'category', 'level', 'base','work_place')
-    //             ->where('staff_code', $request->staff_code)
-    //             ->where('first_name', $request->first_name)
-    //             ->where('position', $request->position)
-    //             ->where('department_code', $request->department_code)
-    //             ->where('category', $request->category)
-    //             ->where('level', $request->level)
-    //             ->where('base', $request->base)
-    //             ->where('work_place', $request->work_place)
-    //             ->get();
-    //             dd($data);
-    //             exit;
-    //           }
-
-    //       else if($request->staff_code){
-    //         $data = DB::table('employees')
-    //                ->select('staff_code')
-    //                ->where('staff_code', $request->staff_code)
-    //                ->first();
-    //       }
-
-    //       else if($request->first_name){
-    //         $data = DB::table('employees')
-    //                ->select('first_name')
-    //                ->where('first_name', $request->first_name)
-    //                ->first();
-    //       }
-
-    //       else if($request->position){
-    //         $data = DB::table('employees')
-    //                ->select('position')
-    //                ->where('position', $request->position)
-    //                ->first();
-    //       }
-
-    //       else if($request->department_code){
-    //         $data = DB::table('employees')
-    //                ->select('department_code')
-    //                ->where('department_code', $request->department_code)
-    //                ->first();
-    //       }
-
-    //       else if($request->category){
-    //         $data = DB::table('employees')
-    //                ->select('category')
-    //                ->where('category', $request->category)
-    //                ->first();
-    //       }
-
-    //       else if($request->base){
-    //         $data = DB::table('employees')
-    //                ->select('base')
-    //                ->where('base', $request->base)
-    //                ->first();
-    //       }
-
-    //       else if($request->level){
-    //         $data = DB::table('employees')
-    //                ->select('level')
-    //                ->where('level', $request->level)
-    //                ->first();
-    //       }
-
-    //       else if($request->work_place){
-    //         $data = DB::table('employees')
-    //                ->select('work_place')
-    //                ->where('work_place', $request->work_place)
-    //                ->first();
-    //       }
-
-    //       else{
-    //         echo 'Not Found';
-    //       }
-
-    //       return datatables()->of($data)->make(true);
-
-    //     }
-
-    // }
 }

@@ -26,15 +26,15 @@
             <table class="table table-striped table-head-fixed text-nowrap" id="loanTable">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Date</th>
-                  <th>Name</th>
-                  <th>Amount</th>
-                  <th>Interest</th>
-                  <th>Months</th>
-                  <th>Start Month</th>
-                  <th>End Month</th>
-                  <th>Action</th>
+                  <th class="bg-success" >ID</th>
+                  <th class="bg-success">Date</th>
+                  <th class="bg-success">Name</th>
+                  <th class="bg-success">Amount</th>
+                  <th class="bg-success">Interest</th>
+                  <th class="bg-success">Months</th>
+                  <th class="bg-success">Start Month</th>
+                  <th class="bg-success">End Month</th>
+                  <th class="bg-success">Action</th>
                 </tr>
               </thead>
               <tbody>

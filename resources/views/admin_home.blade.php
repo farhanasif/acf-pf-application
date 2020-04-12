@@ -35,7 +35,7 @@
           <div class="info-box-content">
             <span class="info-box-text">PF Ledger Amount</span>
             <span class="info-box-number">
-              {{number_format($employee_contribution + $employer_contribution)}}
+              {{number_format($employee_contribution + $employer_contribution)}} TK
             </span>
           </div>
           <!-- /.info-box-content -->
@@ -49,7 +49,7 @@
 
           <div class="info-box-content">
             <span class="info-box-text">Employee Contribution</span>
-            <span class="info-box-number">{{number_format($employee_contribution)}}</span>
+            <span class="info-box-number">{{number_format($employee_contribution)}} TK</span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -66,7 +66,7 @@
 
           <div class="info-box-content">
             <span class="info-box-text">Employer Contribution</span>
-          <span class="info-box-number">{{number_format($employer_contribution)}}</span>
+          <span class="info-box-number">{{number_format($employer_contribution)}} TK</span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -188,7 +188,7 @@
               <div class="col-sm-3 col-6">
                 <div class="description-block border-right">
                   {{-- <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 40%</span> --}}
-                  <h5 class="description-header">{{number_format($employee_contribution + $employer_contribution)}}</h5>
+                  <h5 class="description-header">{{number_format($employee_contribution + $employer_contribution)}} TK</h5>
                   <span class="description-text">TOTAL BALANCE IN ACCOUNT</span>
                 </div>
                 <!-- /.description-block -->
@@ -209,7 +209,7 @@
                   <h5 class="description-header">
                     
                     @foreach ($total_loans as $item)
-                        {{ number_format($item->total_loan_amount)}}
+                        {{ number_format($item->total_loan_amount)}} TK
                     @endforeach
                   </h5>
                   <span class="description-text">TOTAL LOAN AMOUNT</span>

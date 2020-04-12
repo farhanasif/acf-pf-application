@@ -226,13 +226,13 @@
                       @foreach ($loan_account_details as $item)
                         <tr>
                           <td>01</td>
-                          <td> {{ date('j F, Y', strtotime($item->issue_date)) ? date('j F, Y', strtotime($item->issue_date)) : 'Nill' }}  </td>
-                          <td> {{ $item->first_name.' '.$item->last_name ? $item->first_name.' '.$item->last_name : 'Nill'}} </td>
-                          <td><dt> {{ $item->loan_amount ? number_format($item->loan_amount) : 'Nill' }} </dt></td>
-                          <td>{{$item->interest ? $item->interest :'Nill'}}</td>
-                          <td> {{$item->total_months ? $item->total_months : 'Nill' }} </td>
-                          <td> {{ date('j F, Y', strtotime($item->min_date)) ? date('j F, Y', strtotime($item->min_date)) : 'Nill' }}  </td>
-                          <td> {{ date('j F, Y', strtotime($item->max_date)) ? date('j F, Y', strtotime($item->max_date)) : 'Nill' }}  </td>
+                          <td> {{ date('j F, Y', strtotime($item->issue_date))}}  </td>
+                          <td> {{ $item->first_name.' '.$item->last_name }} </td>
+                          <td><dt> {{ $item->loan_amount }} </dt></td>
+                          <td>{{$item->interest}}</td>
+                          <td> {{$item->total_months}} </td>
+                          <td> {{ date('j F, Y', strtotime($item->min_date))}}  </td>
+                          <td> {{ date('j F, Y', strtotime($item->max_date))}}  </td>
                         </tr>
                       @endforeach
 
@@ -266,11 +266,12 @@
                               <td> {{ date('j F, Y', strtotime($item->pay_date,3)) }}  </td>
                               <td><dt> {{$item->payment}}  </dt></td>
 
-                                  @if ( strtoupper( $item->payment_type) == 'DUE')
-                                    <td class="text-danger"> {{strtoupper( $item->payment_type)}} </td>
-                                  @elseif(strtoupper( $item->payment_type) == 'PAID')
-                                    <td class="text-success"> {{$item->payment_type}} </td>
-                                  @endif
+                              @if ( strtoupper( $item->payment_type) == 'DUE')
+                                <td class="text-danger"> {{strtoupper( $item->payment_type)}} </td>
+                              @elseif(strtoupper( $item->payment_type) == 'PAID')
+                                <td class="text-success"> {{strtoupper($item->payment_type) }} </td>
+                              @endif
+                              
                             </tr>
                             @endforeach
                           </tbody>
