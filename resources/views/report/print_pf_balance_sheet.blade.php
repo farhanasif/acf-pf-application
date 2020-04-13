@@ -19,7 +19,7 @@
             <!-- body header part section start -->
             <div class="header-part">
               <!-- body header part left section start -->
-              <img src="{{ asset('images/logo/acf2acf.jpg') }}" alt="acf" style="width: 300px;height: 100px;margin-left: auto;margin-right: auto;display: block;">
+              <img src="../images/logo/acf2acf.jpg" alt="acf" style="width: 300px;height: 100px;margin-left: auto;margin-right: auto;display: block;">
               <div class="header">
                 <h2 style="text-align: center;">Individual Staff Balance for Provident Fund as on 31 Decembar</h2>
                 <span style="line-height: 1.5;"></span>
@@ -76,44 +76,44 @@
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>{{$info[0]->base}}</b></p>
               </div>
             </div>
-            <div class="lik-uftcl-pdf-body" style="border: 1px solid gray;width: 795px!important;">
-              <div class="left-header" style="width: 45%;">
+            <div class="lik-uftcl-pdf-body" style="border: 1px solid gray;width: 795px!important;margin-top: 20px;">
+              <div class="left-header" style="width: 50%;">
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>Employees Contribution</b></p>
               </div>
-              <div class="right-header" style="border-left: 1px solid gray;">
+              <div class="right-header" style="border-left: 1px solid gray;width: 45%;">
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($info[0]->total_own_pf,2) }}</b></p>
               </div>
             </div>
             <div class="lik-uftcl-pdf-body" style="border: 1px solid gray;width: 795px!important;">
-              <div class="left-header" style="width: 45%;">
+              <div class="left-header" style="width: 50%;">
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>Employer's Contribution</b></p>
               </div>
-              <div class="right-header" style="border-left: 1px solid gray;">
+              <div class="right-header" style="border-left: 1px solid gray;width: 45%;">
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($info[0]->total_organaization_pf,2) }}</b></p>
               </div>
             </div>
             <div class="lik-uftcl-pdf-body" style="border: 1px solid gray;width: 795px!important;">
-              <div class="left-header" style="width: 45%;">
+              <div class="left-header" style="width: 50%;">
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>Employees Contribution Interest</b></p>
               </div>
-              <div class="right-header" style="border-left: 1px solid gray;">
+              <div class="right-header" style="border-left: 1px solid gray;width: 45%;">
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($info[0]->total_own_interest,2) }}</b></p>
               </div>
             </div>
             <div class="lik-uftcl-pdf-body" style="border: 1px solid gray;width: 795px!important;">
-              <div class="left-header" style="width: 45%;">
+              <div class="left-header" style="width: 50%;">
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>Employer's Contribution Interest</b></p>
               </div>
-              <div class="right-header" style="border-left: 1px solid gray;">
+              <div class="right-header" style="border-left: 1px solid gray;width: 45%;">
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($info[0]->total_organization_interest,2) }}</b></p>
               </div>
             </div>
 
             <div class="lik-uftcl-pdf-body" style="border: 1px solid gray;width: 795px!important;margin-top: 20px;">
-              <div class="left-header" style="width: 45%;">
+              <div class="left-header" style="width: 50%;">
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>Total Amount:</b></p>
               </div>
-              <div class="right-header" style="border-left: 1px solid gray;">
+              <div class="right-header" style="border-left: 1px solid gray;width: 45%;">
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($info[0]->total_amount,2) }}</b></p>
               </div>
             </div>
