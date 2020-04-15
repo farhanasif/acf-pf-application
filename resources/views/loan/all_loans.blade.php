@@ -20,6 +20,9 @@
       <div class="card card-success card-outline">
         <div class="card-header">
           <h3 class="card-title">Loan Amount Details</h3>
+          <div class="float-sm-right">
+          <a href="{{route('add-employee')}}" class="btn btn-success"><i class="fas fa-plus"></i> Create New Loan</a>
+        </div>
         </div>
         <div class="card-body">
           <div class="card-body table-responsive p-0" style="">
@@ -28,6 +31,7 @@
                 <tr>
                   <th>ID</th>
                   <th>Date</th>
+                  <th>Staff Code</th>
                   <th>Name</th>
                   <th>Amount</th>
                   <th>Interest</th>
@@ -46,6 +50,7 @@
                       else echo $ci;
                    ?></td>
                   <td> {{ date('j F, Y', strtotime($item->issue_date)) ? date('j F, Y', strtotime($item->issue_date)) : 'Nill' }}  </td>
+                  <td><a href="{{ url('/employee-details',$item->staff_code) }}">{{ $item->staff_code }} </a></td>
                   <td><a href="{{ url('/employee-details',$item->staff_code) }}">{{ $item->first_name.' '.$item->last_name ? $item->first_name.' '.$item->last_name : 'Nill'}} </a></td>
                   <td class="center"><dt> {{ $item->loan_amount ? number_format($item->loan_amount) : 'Nill' }} </dt></td>
                   <td class="center">{{$item->interest ? $item->interest :'Nill'}}</td>
