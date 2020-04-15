@@ -135,7 +135,7 @@
                         <table class="table table-striped table-head-fixed text-nowrap">
                           <thead>
                             <tr>
-                              <th  class="bg-success">ID</th>
+                              <th  class="bg-success">SL</th>
                               <th  class="bg-success">Date</th>
                               <th  class="bg-success">Employee Amount</th>
                               <th  class="bg-success">Employer Amount</th>
@@ -170,7 +170,7 @@
                         <table class="table table-striped table-head-fixed text-nowrap">
                           <thead>
                             <tr>
-                              <th class="bg-success">ID</th>
+                              <th class="bg-success">SL</th>
                               <th class="bg-success">Date</th>
                               <th class="bg-success">Interest Source</th>
                               <th class="bg-success">Own Interest</th>
@@ -212,7 +212,7 @@
                         <table class="table table-striped table-head-fixed text-nowrap">
                           <thead>
                             <tr>
-                              <th  class="bg-success">ID</th>
+                              <th  class="bg-success">SL</th>
                               <th  class="bg-success">Date</th>
                               <th  class="bg-success">Name</th>
                               <th  class="bg-success">Amount</th>
@@ -251,7 +251,7 @@
                         <table class="table table-striped table-head-fixed text-nowrap">
                           <thead>
                             <tr>
-                              <th class="bg-success">ID</th>
+                              <th class="bg-success">SL</th>
                               <th class="bg-success">Date</th>
                               <th class="bg-success">Amount</th>
                               <th class="bg-success">Status</th>

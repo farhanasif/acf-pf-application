@@ -21,7 +21,7 @@
         <div class="card-header">
           <h3 class="card-title">Loan Amount Details</h3>
           <div class="float-sm-right">
-          <a href="{{route('add-employee')}}" class="btn btn-success"><i class="fas fa-plus"></i> Create New Loan</a>
+          <a href="{{route('create-loan')}}" class="btn btn-success"><i class="fas fa-plus"></i> Create New Loan</a>
         </div>
         </div>
         <div class="card-body">

@@ -29,18 +29,18 @@ class ReportController extends Controller
     public function printPFBalanceSheet(Request $request)
     {
         $staff_code = $request->staff;
-        $date_info = $request->date_for_balance_sheet;
-        $date_info = date('Y-m-d H:m:s', strtotime($date_info));
-        // echo $date_info;exit();
+        $from_date = date('Y-m-d H:m:s', strtotime($request->from_date_for_balanace));
+        $to_date = date('Y-m-d H:m:s', strtotime($request->to_date_for_balance));
+        // echo $to_date;exit();
         $info = DB::select("SELECT employees.*, SUM(pf_deposit.own_pf) AS total_own_pf, 
                                SUM(pf_deposit.organization_pf) AS total_organaization_pf,
-                               SUM(interests.own) AS total_own_interest, 
-                               SUM(interests.organization) AS total_organization_interest,
-                               (SUM(pf_deposit.own_pf)+SUM(pf_deposit.organization_pf)+SUM(interests.own)+SUM(interests.organization)) AS total_amount 
+                               interests.own AS total_own_interest, 
+                               interests.organization AS total_organization_interest,
+                               (SUM(pf_deposit.own_pf)+SUM(pf_deposit.organization_pf)+ interests.own + interests.organization) AS total_amount 
                                FROM employees 
                                INNER JOIN pf_deposit ON pf_deposit.staff_code=employees.staff_code 
                                INNER JOIN interests ON interests.staff_code = pf_deposit.staff_code 
-                               WHERE employees.staff_code=".$staff_code." AND deposit_date <= '".$date_info."'");
+                               WHERE employees.staff_code=".$staff_code." AND deposit_date >= '".$from_date."' AND deposit_date <= '".$to_date."'");
         // print_r($info);exit();
         return view('report.print_pf_balance_sheet',["info"=>$info]);
     }

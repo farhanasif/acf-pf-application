@@ -140,16 +140,16 @@ class EmployeeController extends Controller
                       'first_name' =>$row[1],
                       'last_name' =>$row[2],
                       'position' =>$row[3],
-                      // 'department_code' =>NULL,
+                      'department_code' =>$row[4],
                       'category' =>$row[4],
                       'level' =>$row[5],
-                      'joining_date' =>date($row[7]),
-                      // 'ending_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[9]),
-                      'ending_date' =>formatDates($row[9]),
-                      // 'ending_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d'),
+                      'joining_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['7'])->format('Y-m-d'),
+                    // 'joining_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[7]),
+                      // 'ending_date' =>date('Y-m-d H:m:s', strtotime($row[9])),
+                      'ending_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') != "00/00/0000" ?  \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') : '00/00/0000' ,
                       'base' =>$row[10],
                       'work_place' =>$row[10],
-                      // 'sub_location' =>NULL,
+                      'sub_location' =>$row[10],
                       'basic_salary' =>$row[12],
                       'gross_salary' =>$row[13],
                       'pf_amount' =>$row[16],
@@ -167,13 +167,13 @@ class EmployeeController extends Controller
           }
       }
 
-        dd($insert_data);
-        exit;
+        // dd($insert_data);
+        // exit;
 
-      // if (!empty($insert_data)) {
-      //     DB::table('employees')->insert($insert_data);
-      //     return back()->with('success','Employees batch import successfully');
-      // }
+      if (!empty($insert_data)) {
+          DB::table('employees')->insert($insert_data);
+          return back()->with('success','Employees batch import successfully');
+      }
 
       // if (!empty($update_data)) {
       //   DB::table('employees')->update($update_data);

@@ -1,7 +1,4 @@
 
-
-
-
 @extends('master')
 
 @section('content')
@@ -171,7 +168,7 @@
                 <!-- /.progress-group -->
                 <div class="progress-group">
                   <span class="progress-text">Total Investment</span>
-                  <span class="float-right"><b>38</b>/48</span>
+                  <span class="float-right">38%</span>
                   <div class="progress progress-sm">
                     <div class="progress-bar bg-success" style="width: 60%"></div>
                   </div>
