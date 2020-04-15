@@ -32,10 +32,10 @@
                 <div class="card-body">
                 <form role="form" action="{{ url('/print-pf-balance-sheet') }}" method="get">
                     <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <!-- select -->
                         <div class="form-group">
-                        <label>Staff Code</label>
+                        <label> Staff Code</label>
                           <select name="staff" id="staff" class="form-control select2bs4">
                              <option value="">--select--</option>
                               @foreach ($employee_code as $empolyee)
@@ -44,11 +44,21 @@
                           </select>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+
+                    <div class="col-sm-4">
                         <div class="form-group">
-                        <label>To Month</label>
+                        <label>&nbsp;&nbsp; From Month</label>
                           <div class="col-md-12 col-sm-12">
-                             <input type="text" class="form-control" name="date_for_balance_sheet" placeholder="Date For Balance Sheet" id="data_id">
+                             <input type="text" class="form-control" name="from_date_for_balanace" placeholder="From Date For Balance Sheet" id="from_data">
+                          </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                        <label>&nbsp;&nbsp; To Month</label>
+                          <div class="col-md-12 col-sm-12">
+                             <input type="text" class="form-control" name="to_date_for_balance" placeholder="To Date For Balance Sheet" id="to_data">
                           </div>
                         </div>
                     </div>
@@ -70,8 +80,18 @@
 
 <script>
 $(document).ready(function() {
+
+      $('.select2bs4').select2({
+        theme: 'bootstrap4',
+      });
+
+
   $(function() { 
-     $( "#data_id" ).datepicker({
+     $( "#from_data" ).datepicker({
+          dateFormat: "YYYY-MM-DD HH:mm:ss",
+          orientation: "bottom left"
+     });
+    $( "#to_data" ).datepicker({
           dateFormat: "YYYY-MM-DD HH:mm:ss",
           orientation: "bottom left"
      });

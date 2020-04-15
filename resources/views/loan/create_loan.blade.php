@@ -234,7 +234,7 @@ $(document).ready(function() {
           
           // if(info != undefined){
           const { staff_code, first_name, last_name, joining_date, ending_date, position, base, total_pf } = info[0];
-
+          if(staff_code != undefined) {
           var newStaffCode = newStaffCode = staff_code.toString();
           if(4 - newStaffCode.length == 1 ) 
             newStaffCode = '0' + newStaffCode;
@@ -242,7 +242,7 @@ $(document).ready(function() {
             newStaffCode = '00' + newStaffCode;
           else if(4 - newStaffCode.length == 2) 
             newStaffCode = '000' + newStaffCode;
-
+         }
           document.getElementById("staff_code").value = newStaffCode;
           document.getElementById("joining_date").value = joining_date;
           document.getElementById("ending_date").value = ending_date;
