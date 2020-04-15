@@ -7,6 +7,7 @@
   <title>AAH | Provident Fund App</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="https://www.actionagainsthunger.org/sites/all/themes/acf2014zen/favicon.ico" type="image/vnd.microsoft.icon" />
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('theme/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Ionicons -->
@@ -346,11 +347,11 @@
                         <div class="card card-outline card-success">
                             <div class="card-header">
                               <h3 class="card-title">Provident Fund Deposits</h3>
-              
+
                               <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;">
                                   <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-              
+
                                   <div class="input-group-append">
                                     <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
                                   </div>
@@ -475,7 +476,7 @@
                                     <td>3,200</td>
                                     <td>6,400</td>
                                   </tr>
-                                  
+
                                 </tbody>
                               </table>
                             </div>
@@ -484,11 +485,11 @@
                           <div class="card card-outline card-warning">
                             <div class="card-header">
                               <h3 class="card-title">Provident Fund Interests</h3>
-              
+
                               <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;">
                                   <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-              
+
                                   <div class="input-group-append">
                                     <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
                                   </div>
@@ -522,8 +523,8 @@
                                     <td>3,200</td>
                                     <td>NA</td>
                                   </tr>
-                                  
-                                  
+
+
                                 </tbody>
                               </table>
                             </div>
@@ -535,11 +536,11 @@
                         <div class="card card-outline card-danger">
                             <div class="card-header">
                               <h3 class="card-title">Your Loans Against Provident Fund</h3>
-              
+
                               <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;">
                                   <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-              
+
                                   <div class="input-group-append">
                                     <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
                                   </div>
@@ -572,8 +573,8 @@
                                     <td>1st March, 2020</td>
                                     <td>1st February, 2020</td>
                                   </tr>
-                                 
-                                  
+
+
                                 </tbody>
                               </table>
                             </div>
@@ -582,11 +583,11 @@
                         <div class="card card-outline card-success">
                             <div class="card-header">
                               <h3 class="card-title">Loan Adjustments</h3>
-              
+
                               <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;">
                                   <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-              
+
                                   <div class="input-group-append">
                                     <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
                                   </div>
@@ -695,10 +696,10 @@
                             </div>
                             <!-- /.card-body -->
                           </div>
-                          
+
                     </div>
                     <!-- /.tab-pane -->
-  
+
                     <div class="tab-pane" id="generalinformation">
                       <form class="form-horizontal">
                         <div class="form-group row">

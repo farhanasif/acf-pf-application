@@ -7,6 +7,7 @@
     <title>AAH | Provident Fund App</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="https://www.actionagainsthunger.org/sites/all/themes/acf2014zen/favicon.ico" type="image/vnd.microsoft.icon" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('theme/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
@@ -494,7 +495,7 @@
     <script src="{{ asset('theme/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
     <!-- page script -->
     <script>
-        
+
         $(function () {
             const Toast = Swal.mixin({
               toast: true,
@@ -510,7 +511,7 @@
                 //format: "yyyy-mm-dd",
                 orientation: "bottom left",
                 format: "yyyy-mm",
-                startView: "months", 
+                startView: "months",
                 minViewMode: "months"
             });
 
@@ -543,7 +544,7 @@
                 });
               }
               else{
-                
+
                 //save the transaction
                 $.ajax({
                   type: 'GET',
@@ -563,7 +564,7 @@
                     console.log(data);
                     generate_book();
                     $('#modal-default').modal('hide');
-                
+
                     Toast.fire({
                       type: 'success',
                       title: ' Transaction successfully saved in Bank Book.'
@@ -572,7 +573,7 @@
                 });
               }
 
-              
+
             });
 
             $('#closeTransaction').click(function() {
@@ -609,7 +610,7 @@
               dataType: 'json',
               success: function (data) {
                 console.log(data);
-                
+
                 $("#example1 thead").empty();
                 $("#example1 tbody").empty();
                 $("#example1 thead").append('<tr>'+
