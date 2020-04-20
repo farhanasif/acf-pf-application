@@ -65,7 +65,9 @@ class ProvidentFundController extends Controller
 
     public function all_provident_fund()
     {
-      $provident_funds = DB::table('pf_deposit')->get();
+      $provident_funds = DB::table('pf_deposit')->orderBy('deposit_date','ASC')->get();
+      // dd($provident_funds);
+      // exit;
       return view('provident_fund.all_provident_fund',compact('provident_funds'));
     }
 

@@ -120,9 +120,11 @@
             <table class="table table-striped table-head-fixed text-nowrap" id="loanTable">
               <thead>
                 <tr>
-                  <th class="bg-success">ID</th>
+                  <th class="bg-success">SL</th>
                   <th class="bg-success">Date</th>
-                  <th class="bg-success">Amount</th>
+                  <th class="bg-success">Loan</th>
+                  <th class="bg-success">Interest</th>
+                  <th class="bg-success">Remaining</th>
                   <th class="bg-success">Status</th>
                   <th class="bg-success">Action</th>
                 </tr>
@@ -130,11 +132,15 @@
               <tbody>
                 <?php $i=1;?>
                 @foreach ($loan_adjustments as $item)
-
                 <tr>
                 <td>{{$i++}}</td>
                   <td> {{ date('j F, Y', strtotime($item->pay_date,3)) }}  </td>
-                  <td><dt> {{$item->payment}}  </dt></td>
+                  <td><dt> {{$item->monthly_installment}}  </dt></td>
+                  <td><dt> {{$item->monthly_interest}}</dt></td>
+                  <td><dt> 
+                    -
+                  
+                  </dt></td>
 
                       @if ( strtoupper( $item->payment_type) == 'DUE')
                         <td class="text-danger"> {{strtoupper( $item->payment_type)}} </td>

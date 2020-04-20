@@ -1,9 +1,20 @@
 @extends('master')
 @section('customcss') 
 
-  <style>
-
-  </style>
+<style>
+  tr.selected td {
+      background-color:coral !important;
+  }
+  .selected {
+      background-color: coral;
+  }
+  .first-col {
+      text-align: center; background-color: #212529; color: #fff;
+  }
+  .general-col {
+      text-align: center; background-color: #bee5eb; color: #000;
+  }
+</style>
 @endsection
 @section('content')
 
@@ -310,6 +321,13 @@
       <script>
 
    $(document).ready(function(){
+
+    $("tr").click(function() {
+            console.log('clicked');
+            $(this).addClass('selected').siblings().removeClass("selected");
+    });
+
+
       $('.select2bs4').select2({
         theme: 'bootstrap4',
       });

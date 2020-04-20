@@ -95,7 +95,7 @@
             <div class="description-block">
               <h5 class="description-header">
                 @foreach ($interests_and_pf_deposit as $item)
-                  {{number_format($item->total_pf_amount * 80/100)}} Tk
+                  {{number_format( ($item->own + $item->organization+ $item->total_pf_amount) * 80/100)}} Tk
                 @endforeach
               </h5>
               <span class="description-text">LOAN AMOUNT(MAXIMUM)</span>
