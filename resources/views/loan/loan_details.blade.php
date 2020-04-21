@@ -130,17 +130,22 @@
                 </tr>
               </thead>
               <tbody>
-                <?php $i=1;?>
+                <?php $i=1;$paid_amount = 0;?>
                 @foreach ($loan_adjustments as $item)
+
+                <?php 
+                if(strtoupper( $item->payment_type) == 'PAID'){
+                   $paid_amount +=  $loan_account_details[0]->monthly_installment;
+                 }
+                $remaning_amount = $total_loan - $paid_amount;
+              ?>
+
                 <tr>
                 <td>{{$i++}}</td>
                   <td> {{ date('j F, Y', strtotime($item->pay_date,3)) }}  </td>
                   <td><dt> {{$item->monthly_installment}}  </dt></td>
                   <td><dt> {{$item->monthly_interest}}</dt></td>
-                  <td><dt> 
-                    -
-                  
-                  </dt></td>
+                  <td><?php print_r(ceil($remaning_amount)."/="); ?></td>
 
                       @if ( strtoupper( $item->payment_type) == 'DUE')
                         <td class="text-danger"> {{strtoupper( $item->payment_type)}} </td>
