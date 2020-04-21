@@ -17,14 +17,20 @@ class ChangeProfileController extends Controller
 
     public function update_passsword(Request $request, $id)
     {
-        // $request->validate([
-        //     'current_password' => ['required', new MatchOldPassword],
-        //     'new_password' => ['required'],
-        //     'new_confirm_password' => ['same:new_password'],
-        // ]);
 
-        // User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
-        // dd('Password change successfully.');
+        $request->validate([
+            'old_password' => 'required',
+            'password' => 'required|confirmed|min:6',
+        ]);
 
+        $oldHashPassword = Auth::user()->password;
+
+        if (\Hash::check($request->old_password, $oldHashPassword)) {
+            $user = User::find(Auth::id());
+            $user->password = \Hash::make($request->password);
+            $user->save();
+
+            return back()->with('success','Password change successfully!..');
+        }
     }
 }

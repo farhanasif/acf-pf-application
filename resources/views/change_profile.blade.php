@@ -163,7 +163,7 @@
             <div class="form-group row">
               <label  class="col-form-label col-md-3 col-sm-3 label-align">Confirm Password</label>
               <div class="col-md-8 col-sm-3 ">
-                <input type="password" class="form-control" name="password_confirmation" placeholder="Retype Password">
+                <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password">
               </div>
             </div>
 
