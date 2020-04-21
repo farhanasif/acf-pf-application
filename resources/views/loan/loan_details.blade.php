@@ -80,7 +80,7 @@
             <div class="description-block">
 
               <?php $total_loan = 0; foreach ($loan_account_details as $item) {
-                $total_loan += $item->loan_amount;
+                   $total_loan += $item->loan_amount;
                 } ?>
                 <h5 class="description-header"> 
                   <?php echo $total_loan.'Tk.'; ?>
@@ -124,13 +124,19 @@
                   <th class="bg-success">Date</th>
                   <th class="bg-success">Amount</th>
                   <th class="bg-success">Status</th>
+                  <th class="bg-success">Remaning Amount</th>
                   <th class="bg-success">Action</th>
                 </tr>
               </thead>
               <tbody>
-                <?php $i=1;?>
+                <?php $i=1;$paid_amount = 0;?>
                 @foreach ($loan_adjustments as $item)
-
+                   <?php 
+                     if(strtoupper( $item->payment_type) == 'PAID'){
+                        $paid_amount +=  $loan_account_details[0]->monthly_installment;
+                      }
+                     $remaning_amount = $total_loan - $paid_amount;
+                    ?>
                 <tr>
                 <td>{{$i++}}</td>
                   <td> {{ date('j F, Y', strtotime($item->pay_date,3)) }}  </td>
@@ -142,7 +148,7 @@
                         <td class="text-success"> {{strtoupper($item->payment_type) }} </td>
                         
                       @endif
-                  
+                  <td><?php print_r(ceil($remaning_amount)."/="); ?></td>
                   @if ( strtoupper( $item->payment_type) == 'DUE')
                    <td><button  id ="{{$item->id}}" data-id="{{$item->id}}" class="btn btn-warning" data-toggle="modal" data-target="#modal-loan-installment" onclick="showId(this);" style="font-weight: 600;">Adjust Loan Installment</button></td>
                   @elseif(strtoupper( $item->payment_type) == 'PAID')
