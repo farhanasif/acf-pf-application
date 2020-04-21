@@ -269,7 +269,7 @@
             <td>{{$employee->gross_salary}}</td>
             <td>{{$employee->pf_amount}}</td>
             <td>{{$employee->joining_date}}</td>
-            <td>{{$employee->ending_date}}</td>
+            <td>{{$employee->ending_date == '1970-01-01' ? '' : $employee->ending_date}}</td>
           </tr>
           @endforeach
          </tbody>   
