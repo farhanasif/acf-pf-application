@@ -130,15 +130,12 @@
                 </tr>
               </thead>
               <tbody>
-                <?php $i=1;$paid_amount = 0;?>
+                <?php $i=1;$remaning_amount = $total_loan;?>
                 @foreach ($loan_adjustments as $item)
 
                 <?php 
-                if(strtoupper( $item->payment_type) == 'PAID'){
-                   $paid_amount +=  $loan_account_details[0]->monthly_installment;
-                 }
-                $remaning_amount = $total_loan - $paid_amount;
-              ?>
+                  $remaning_amount -= $loan_account_details[0]->monthly_installment;
+                ?>
 
                 <tr>
                 <td>{{$i++}}</td>
