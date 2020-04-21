@@ -19,9 +19,9 @@
             <!-- body header part section start -->
             <div class="header-part">
               <!-- body header part left section start -->
-              <img src="../images/logo/acf2acf.jpg" alt="acf" style="width: 300px;height: 100px;margin-left: auto;margin-right: auto;display: block;">
+            <img src="{{asset('images/logo/acf2acf.jpg')}}" alt="acf" style="width: 300px;height: 100px;margin-left: auto;margin-right: auto;display: block;">
               <div class="header">
-                <h2 style="text-align: center;">Individual Staff Balance for Provident Fund as on 31 Decembar</h2>
+                <h2 style="text-align: center;">Individual Staff Balance for Provident Fund as on 31 December</h2>
                 <span style="line-height: 1.5;"></span>
               </div>
             </div>

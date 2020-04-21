@@ -142,7 +142,7 @@
                   <td> {{ date('j F, Y', strtotime($item->pay_date,3)) }}  </td>
                   <td><dt> {{$item->monthly_installment}}  </dt></td>
                   <td><dt> {{$item->monthly_interest}}</dt></td>
-                  <td><?php print_r(ceil($remaning_amount)."/="); ?></td>
+                  <td><?php print_r(ceil($remaning_amount)."/-"); ?></td>
 
                       @if ( strtoupper( $item->payment_type) == 'DUE')
                         <td class="text-danger"> {{strtoupper( $item->payment_type)}} </td>
@@ -152,9 +152,9 @@
                       @endif
                   
                   @if ( strtoupper( $item->payment_type) == 'DUE')
-                   <td><button  id ="{{$item->id}}" data-id="{{$item->id}}" class="btn btn-warning" data-toggle="modal" data-target="#modal-loan-installment" onclick="showId(this);" style="font-weight: 600;">Adjust Loan Installment</button></td>
+                   <td><button  id ="{{$item->id}}" data-id="{{$item->id}}" class="btn btn-warning" data-toggle="modal" data-target="#modal-loan-installment" onclick="showId(this);" style="font-weight: 600;">Adjust</button></td>
                   @elseif(strtoupper( $item->payment_type) == 'PAID')
-                    <td><button class="btn btn-info" style="font-weight: 600;">Already Paid</button></td>
+                    <td><button class="btn btn-info" style="font-weight: 600;">PAID</button></td>
                   @endif
              
                 </tr>

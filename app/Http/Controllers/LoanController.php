@@ -120,8 +120,7 @@ class LoanController extends Controller
                   "SELECT SUM(total_pf) AS total_pf_amount, MAX(total_pf) AS maximum_total_pf , deposit_date
                   FROM pf_deposit WHERE staff_code ='".$staff_code."' ORDER BY deposit_date DESC");
 
-      $loan_adjustments = DB::select("SELECT  loans.*, loan_installment.id, loan_installment.loan_id, loan_installment.staff_code,
-                                     loan_installment.pay_date, loan_installment.payment_type, loan_installment.payment_recived_by
+      $loan_adjustments = DB::select("SELECT  loans.*, loan_installment.*
                                      FROM loans 
                                      INNER JOIN loan_installment ON loan_installment.loan_id = loans.id
                                      WHERE loans.staff_code ='".$staff_code."' ORDER BY loan_installment.pay_date ASC");

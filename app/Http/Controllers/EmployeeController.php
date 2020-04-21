@@ -258,12 +258,12 @@ class EmployeeController extends Controller
             INNER JOIN interests ON interests.staff_code = pf_deposit.staff_code
             WHERE pf_deposit.staff_code='".$staff_code."' ORDER BY deposit_date DESC");
 
-   $loan_adjustments = DB::select("SELECT  payment, pay_date, payment_type
+       $loan_adjustments = DB::select("SELECT  payment, pay_date, payment_type
                                    FROM loan_installment 
                                    WHERE staff_code ='".$staff_code."' ORDER BY pay_date ASC");
 
-      $pf_deposits = DB::table('pf_deposit')
-                    ->orderBy('deposit_date', 'desc')
+       $pf_deposits = DB::table('pf_deposit')
+                    ->orderBy('deposit_date', 'asc')
                     ->where('staff_code', $staff_code)
                     ->get();
 
