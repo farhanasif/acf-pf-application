@@ -253,10 +253,15 @@ class EmployeeController extends Controller
               WHERE loans.staff_code ='".$staff_code."'");
 
        $interests_and_pf_deposit = DB::select("SELECT SUM(pf_deposit.total_pf) AS total_pf_amount, MAX(pf_deposit.total_pf) AS maximum_total_pf, pf_deposit.deposit_date, 
-            interests.id AS interests, interests.own, interests.organization, interests.interest_date, interests.interest_source
+            interests.id AS interests_id, interests.own, interests.organization, interests.interest_date, interests.interest_source
             FROM pf_deposit 
-            INNER JOIN interests ON interests.staff_code = pf_deposit.staff_code
+            LEFT JOIN interests ON interests.staff_code = pf_deposit.staff_code
             WHERE pf_deposit.staff_code='".$staff_code."' ORDER BY deposit_date DESC");
+
+            // dd($interests_and_pf_deposit);
+
+            // echo($interests_and_pf_deposit[0]->interests_id);
+            // exit;
 
        $loan_adjustments = DB::select("SELECT  payment, pay_date, payment_type
                                    FROM loan_installment 

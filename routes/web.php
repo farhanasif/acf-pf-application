@@ -14,7 +14,7 @@
 Route::get('/', ['uses'=>'UserController@showLoginForm']);
 
 Route::get('/admin-home',['middleware'=>'admin','uses'=>'AdminController@admin_home']);
-Route::get('/user-home',['middleware'=>'user','uses'=>'AdminController@user_home']);
+Route::get('/user-home',['middleware'=>'user','uses'=>'AdminController@user_home']);  
 
 Auth::routes();
 

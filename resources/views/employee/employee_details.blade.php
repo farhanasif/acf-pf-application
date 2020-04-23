@@ -160,11 +160,14 @@
                       </div>
                       <!-- /.card-body -->
                     </div>
-                    <div class="card card-outline card-warning">
 
+                    
+                    <div class="card card-outline card-warning">
                       <div class="card-header">
                         <h3 class="card-title">Provident Fund Interests</h3>
                       </div>
+
+                      <?php if(!empty($interests_and_pf_deposit[0]->interests_id)) { ?>
                       <!-- /.card-header -->
                       <div class="card-body table-responsive p-0" style="height: 300px;">
                         <table class="table table-striped table-head-fixed text-nowrap">
@@ -196,6 +199,11 @@
                         </table>
                       </div>
                       <!-- /.card-body -->
+                      <?php }else { ?>
+                        <div>
+                          <p class="text-center"> No Data Found!</p>
+                       </div>
+                       <?php } ?>
                     </div>
               </div>
               <!-- /.tab-pane -->
@@ -282,7 +290,7 @@
 
               <?php }else { ?>
                 <div>
-                   <h3 class="text-center">No Data Found!</h3>
+                   <p class="text-center"> No Data Found!</p>
                 </div>
              <?php } ?>
               </div>
