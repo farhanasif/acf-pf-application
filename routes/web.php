@@ -13,6 +13,9 @@
 // Route::get('/update',['as'=>'update','middleware'=>'auth','uses'=>'UpdateController@index']);
 Route::get('/', ['uses'=>'UserController@showLoginForm']);
 
+Route::get('/admin-home',['middleware'=>'admin','uses'=>'AdminController@admin_home']);
+Route::get('/user-home',['middleware'=>'user','uses'=>'AdminController@user_home']);
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

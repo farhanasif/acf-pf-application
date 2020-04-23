@@ -19,35 +19,35 @@ class UserController extends Controller
 
     public function showLoginForm()
     {
-     return view('auth.login');
+      return view('auth.login');
     }
 
-    public  function checklogin(Request $request)
-    {
-     $this->validate($request, [
-      'email'   => 'required|email',
-      'password'  => 'required|min:3'
-     ]);
+  //   public  function checklogin(Request $request)
+  //   {
+  //    $this->validate($request, [
+  //     'email'   => 'required|email',
+  //     'password'  => 'required|min:3'
+  //    ]);
 
-     $user_data = array(
-      'email'  => $request->get('email'),
-      'password' => $request->get('password')
-     );
+  //    $user_data = array(
+  //     'email'  => $request->get('email'),
+  //     'password' => $request->get('password')
+  //    );
 
-     if(Auth::attempt($user_data))
-     {
-      return redirect('/');
-     }
-     else
-     {
-      return back()->with('error', 'Wrong Login Details');
-     }
-   }
+  //    if(Auth::attempt($user_data))
+  //    {
+  //     return redirect('/');
+  //    }
+  //    else
+  //    {
+  //     return back()->with('error', 'Wrong Login Details');
+  //    }
+  //  }
 
     public function logout()
     {
        Auth::logout();
-     return redirect('login');
+      return redirect('login');
     }
 
     public function show_add_user()
