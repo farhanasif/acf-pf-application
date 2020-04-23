@@ -19,7 +19,15 @@ class UserController extends Controller
 
     public function showLoginForm()
     {
-     return view('auth.login');
+      $user = Auth::user();
+      //return $user;
+      if($user->role == '0'){
+        return redirect('admin-home');
+      }
+      else{
+        return view('auth.login');
+      }
+      
     }
 
     public  function checklogin(Request $request)
