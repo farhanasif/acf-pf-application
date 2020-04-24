@@ -261,7 +261,7 @@
                         else{
                             for(i = 0; i < column_length; i++){
                                 if(i < 1){
-                                    tbody = tbody+'<td class="first-col">'+element[columns[i]]+'</td>';
+                                    tbody = tbody+'<td class="first-col">'+element[columns[i]].substring(1,5)+'</td>';
                                 }
                                 else if(i > 0 && i <5){
                                     tbody = tbody+'<td class="general-col">'+element[columns[i]]+'</td>';
@@ -270,11 +270,16 @@
                                     tbody = tbody+'<td style="text-align: center;">'+numberWithCommas(element[columns[i]])+'</td>';
                                 }
                             }
-                            console.log(tbody);
+                            //console.log(tbody);
                         }
-                        $("#example1 tbody").append("<tr onclick=\"var s = this.parentNode.querySelector('tr.selected'); s && s.classList.remove('selected'); this.classList.add('selected');\">"
-                            +tbody
-                        +"</tr>");
+                        if(element[columns[column_length -1]] < 1){
+                            //console.log('Found 0: '+element[columns[0]]);
+                        }else{
+                            $("#example1 tbody").append("<tr onclick=\"var s = this.parentNode.querySelector('tr.selected'); s && s.classList.remove('selected'); this.classList.add('selected');\">"
+                                +tbody
+                            +"</tr>");
+                        }
+                        
                     });
                     // $("#example1 thead").append('<tr>'+
                     //     '<th>Third Part</th>'+
