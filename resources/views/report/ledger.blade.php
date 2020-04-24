@@ -261,7 +261,7 @@
                         else{
                             for(i = 0; i < column_length; i++){
                                 if(i < 1){
-                                    tbody = tbody+'<td class="first-col">'+element[columns[i]].substring(1,5)+'</td>';
+                                    tbody = tbody+'<td class="first-col">'+element[columns[i]].slice(-4)+'</td>';
                                 }
                                 else if(i > 0 && i <5){
                                     tbody = tbody+'<td class="general-col">'+element[columns[i]]+'</td>';
