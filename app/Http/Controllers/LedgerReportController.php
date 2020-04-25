@@ -34,10 +34,28 @@ class LedgerReportController extends Controller
 
 
             foreach($months as $month){
-                $query = $query.",SUM(pd.".$month->month_name.") ".$month->month_name."";
+                $query = $query."
+                    ,SUM(pd.".$month->month_name."_own) `".$month->month_name." own`
+                    ,SUM(pd.".$month->month_name."_organization) `".$month->month_name." organization`
+                    ,SUM(pd.".$month->month_name.") ".$month->month_name."";
                 $total_query = $total_query."pd.".$month->month_name."+";
 
-                $sub_query = $sub_query.", SUM(
+                $sub_query = $sub_query.",
+                SUM(
+                    CASE
+                        WHEN date(p.`deposit_date`) = '".$month->deposit_date."'
+                        THEN p.`own_pf`
+                        ELSE 0
+                    END
+                ) AS '".$month->month_name."_own',
+                SUM(
+                    CASE
+                        WHEN date(p.`deposit_date`) = '".$month->deposit_date."'
+                        THEN p.`organization_pf`
+                        ELSE 0
+                    END
+                ) AS '".$month->month_name."_organization',
+                SUM(
                     CASE
                         WHEN date(p.`deposit_date`) = '".$month->deposit_date."'
                         THEN p.`total_pf`

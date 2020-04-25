@@ -19,8 +19,23 @@ class UserController extends Controller
 
     public function showLoginForm()
     {
-      return view('auth.login');
+      $user = Auth::user();
+      //return $user;
+      if($user){
+        if($user->role == '0'){
+          return redirect('admin-home');
+        }
+        else{
+          return view('auth.login');
+        }
+
+      }
+      else{
+        return view('auth.login');
+      }
+
     }
+
 
   //   public  function checklogin(Request $request)
   //   {
@@ -52,7 +67,7 @@ class UserController extends Controller
 
     public function show_add_user()
     {
-      
+
       $employees = DB::table('employees')->get();
 
        return view('user.add_user',compact('employees'));
@@ -72,7 +87,7 @@ class UserController extends Controller
          'department' => 'required',
          'description' => 'required',
          'password' => 'required',
-         'verified' => 'required', 
+         'verified' => 'required',
          'user_type' => 'required',
      ]);
 
@@ -101,7 +116,7 @@ class UserController extends Controller
 
      public function save_user_batch_upload(Request $request)
      {
-       
+
         $upload = $request->file('file');
         $filename = $_FILES['file']['name'];
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
@@ -117,7 +132,7 @@ class UserController extends Controller
         if($ext == "xlsx" || $ext == "csv") {
         // $result = Excel::import(new UsersImport, $upload);
         $result = Excel::toArray(new UsersImport, $upload);
- 
+
      foreach ($result as $key => $value) {
         foreach ($value as $row) {
                 $insert_data[] =array(
@@ -159,7 +174,7 @@ class UserController extends Controller
     }
 
   }
-  
+
     return back()->with('success','User batch import successfully');
 
     // }
