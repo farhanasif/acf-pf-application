@@ -22,7 +22,13 @@ class UserController extends Controller
       $user = Auth::user();
       //return $user;
       if($user){
-        return redirect('admin-home');
+        if($user->role == '0'){
+          return redirect('admin-home');
+        }
+        else{
+          return view('auth.login');  
+        }
+        
       }
       else{
         return view('auth.login');
