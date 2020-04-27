@@ -706,6 +706,7 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('/reconciliation', 'BankController@view_transaction');
 		Route::get('/monthy-bank-book', 'BankController@get_monthly_bank_book');
 		Route::get('/save-monthly-bank-book', 'BankController@save_monthly_bank_book');
+		Route::get('/monthly-bank-book-excel', 'BankController@get_monthly_bank_book_excel');
 		//-------------------RECONCILIATION ROUTES-------------------//
 
 
