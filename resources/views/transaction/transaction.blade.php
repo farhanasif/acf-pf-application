@@ -11,7 +11,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">Bank Book</li>
+                        <li class="breadcrumb-item active">Bank Reconciliation</li>
                     </ol>
                 </div>
             </div>
@@ -67,7 +67,34 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <h5 style="text-align: center">Bank Book</h5>
+                <br />
+                <div style="overflow-x: auto;">
+                    <table id="example1" class="table table-bordered table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;">Date</th>
+                                <th style="text-align: center;">Voucher No</th>
+                                <th style="text-align: center;">Description</th>
+                                <th style="text-align: center;">Cheque No</th>
+                                <th style="text-align: center;">Amount</th>
+                                <th style="text-align: center;">Account Head</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        <div class="card card-success card-outline">
+            <div class="card-header">
+                <h3 class="card-title">Bank Book</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
                 <br />
                 <div style="overflow-x: auto;">
                     <table id="example1" class="table table-bordered table-striped table-sm">
@@ -173,6 +200,18 @@
                         <select class="custom-select" id="transaction_type">
                           <option value="IN">CASH IN</option>
                           <option value="OUT">CASH OUT</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                  <div class="col-sm-6">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Transaction Type</label>
+                        <select class="custom-select" id="transaction_type">
+                          <option value="R">Bank Reconciliation</option>
+                          <option value="B">Bank Book</option>
                         </select>
                       </div>
                     </div>
