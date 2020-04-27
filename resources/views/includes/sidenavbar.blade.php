@@ -287,13 +287,19 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{ url('/loan-installment-report') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Loan Installment Report</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="javascript:void(0)" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>General Provident Fund</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="generate-pf-balance-sheet" class="nav-link">
+                <a href="{{ url('/generate-pf-balance-sheet') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>PF Balance Sheet</p>
                 </a>

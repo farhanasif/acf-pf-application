@@ -1,5 +1,7 @@
 <?php
 
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,8 +13,17 @@
 |
 */
 // Route::get('/update',['as'=>'update','middleware'=>'auth','uses'=>'UpdateController@index']);
-Route::get('/', ['uses'=>'UserController@showLoginForm']);
+// Route::group(['prefix' => '/'], function()
+// {
+//     if ( Auth::check()) 
+//     {
+//         Route::get('/admin-home',['middleware'=>'admin','uses'=>'AdminController@admin_home']);
+//     } else{
+//         Route::get('/', ['uses'=>'UserController@showLoginForm']);
+//     }
+// });
 
+Route::get('/', ['uses'=>'UserController@showLoginForm']);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -742,6 +753,29 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('ledger', 'LedgerReportController@view_ledger_report');
 		Route::get('ledger-report','LedgerReportController@ledger_report');
 
+		/**************************** Report Seaction route **************************/
+				Route::any('/generate-pf-balance-sheet', [
+					'uses'		=> 'ReportController@generatePFBalanceSheet',
+					'as'		=> 'generate-pf-balance-sheet'
+				]);
+
+				Route::any('/print-pf-balance-sheet', [
+					'uses'		=> 'ReportController@printPFBalanceSheet',
+					'as'		=> 'print-pf-balance-sheet'
+				]);
+
+				Route::any('/loan-installment-report', [
+					'uses'		=> 'ReportController@loanInstallmentReport',
+					'as'		=> 'loan-installment-report'
+				]);
+
+
+				Route::any('/loan_installment_data', [
+					'uses'		=> 'ReportController@loanInstallmentData',
+					'as'		=> 'loan_installment_data'
+				]);
+
+		/**************************** Arif Khan **************************************/
 
 		/**************************** Loan Seaction route *****************************/
 
@@ -775,15 +809,8 @@ Route::group(['middleware' => 'admin'], function () {
 			'as'		=> 'save-loan-insatllment'
 		]);
 
-/**************************** Arif Khan **************************************/
+     /**************************** Arif Khan **************************************/
 
-		Route::any('/generate-pf-balance-sheet', [
-			'uses'		=> 'ReportController@generatePFBalanceSheet',
-			'as'		=> 'generate-pf-balance-sheet'
-		]);
 
-		Route::any('/print-pf-balance-sheet', [
-			'uses'		=> 'ReportController@printPFBalanceSheet',
-			'as'		=> 'print-pf-balance-sheet'
-		]);
+
 });

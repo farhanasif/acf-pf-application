@@ -39,7 +39,6 @@ class LoginController extends Controller
     }
 
     protected function authenticated($request, $user){
-       
 
         if($user->role =='0'){
             return redirect()->intended('/admin-home');
@@ -48,7 +47,5 @@ class LoginController extends Controller
             return redirect()->intended('/user-home');
            
         }
-        
- 
     }
 }
