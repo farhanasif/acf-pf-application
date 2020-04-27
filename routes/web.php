@@ -14,7 +14,7 @@
 Route::get('/', ['uses'=>'UserController@showLoginForm']);
 
 Route::get('/admin-home',['middleware'=>'admin','uses'=>'AdminController@admin_home']);
-Route::get('/user-home',['middleware'=>'user','uses'=>'AdminController@user_home']);  
+Route::get('/user-home',['middleware'=>'user','uses'=>'AdminController@user_home']);
 
 Auth::routes();
 
@@ -47,7 +47,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 // ]);
 
 
-// Mater Data Department Category ............. 
+// Mater Data Department Category .............
 Route::group(['middleware' => 'admin'], function () {
 //category add edit update delete......
 		Route::get('/category/add-category', [
@@ -153,7 +153,7 @@ Route::group(['middleware' => 'admin'], function () {
 			'as'		=> 'delete-work-place'
 		]);
 
-		// Department add edit delete update 
+		// Department add edit delete update
 		Route::get('/add-department', [
 			'uses'		=> 'MasterController@add_department',
 			'as'		=> 'add-department'
@@ -209,7 +209,7 @@ Route::group(['middleware' => 'admin'], function () {
 			'as'		=> 'delete-office'
 		]);
 
-		// Department add edit delete update 
+		// Department add edit delete update
 
 		Route::get('/add-department', [
 			'uses'		=> 'MasterController@add_department',
@@ -738,10 +738,10 @@ Route::group(['middleware' => 'admin'], function () {
 			return 'DONE'; //Return anything
 		});
 
-		// report 
+		// report
 		Route::get('ledger-test', 'LedgerReportController@view_ledger_report_test');
 
-		
+
 		Route::get('provident-fund-report', 'ProvidentFundController@providentFund');
 		Route::get('get-fund-data', 'ProvidentFundController@getProvidentFund');
 
@@ -790,5 +790,16 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::any('/print-pf-balance-sheet', [
 			'uses'		=> 'ReportController@printPFBalanceSheet',
 			'as'		=> 'print-pf-balance-sheet'
-		]);
+        ]);
+
+        Route::any('/loan-installment-report', [
+            'uses'		=> 'ReportController@loanInstallmentReport',
+            'as'		=> 'loan-installment-report'
+        ]);
+
+
+        Route::any('/loan_installment_data', [
+            'uses'		=> 'ReportController@loanInstallmentData',
+            'as'		=> 'loan_installment_data'
+        ]);
 });

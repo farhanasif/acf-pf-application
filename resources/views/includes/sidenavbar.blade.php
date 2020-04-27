@@ -246,6 +246,14 @@
                   <p>Loan Statement</p>
                 </a>
               </li>
+
+             <li class="nav-item">
+                <a href="{{ url('/loan-installment-report') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Loan Installment Report</p>
+                </a>
+              </li>
+              
               <li class="nav-item">
                 <a href="javascript:void(0)" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -318,7 +326,7 @@
                 </p>
               </a>
             </li>
-            
+
           <li class="nav-header">MISCELLANEOUS</li>
           <li class="nav-item">
             <a href="javascript:void(0)" class="nav-link">
