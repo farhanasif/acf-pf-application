@@ -369,6 +369,7 @@
                 '</tr>');
 
                 $.each(data, function(index, element) {
+
                   if(element.description == 'TOTAL'){
                     $("#bankrecon tbody").append("<tr class=\"table-info\">"
                       +"<td style=\"text-align: center;\">"+element.transaction_date+"</td>"
@@ -397,7 +398,7 @@
             //--------------GENERATE BANK BOOK--------------//
             $.ajax({
               type: 'GET',
-              url: './monthy-bank-book',
+              url: './monthly-bank-book-excel',
               data: {
                   from_date: from_date,
               },
@@ -415,19 +416,11 @@
                     '<th style="text-align: center;">Amount</th>'+
                     '<th style="text-align: center;">Account Head</th>'+
                 '</tr>');
-
+                var total = 0;
                 $.each(data, function(index, element) {
-                  if(element.description == 'TOTAL'){
-                    $("#bankbook tbody").append("<tr class=\"table-info\">"
-                      +"<td style=\"text-align: center;\">"+element.transaction_date+"</td>"
-                      +"<td style=\"text-align: center;\">"+element.voucher_no+"</td>"
-                      +"<td style=\"text-align: center;font-weight: bold;\">"+element.description+"</td>"
-                      +"<td style=\"text-align: center;\">"+element.cheque_no+"</td>"
-                      +"<td style=\"text-align: right;font-weight: bold;\">"+numberWithCommas(element.amount)+"</td>"
-                      +"<td style=\"text-align: center;\">"+element.account_head+"</td>"
-                      +"</tr>");
-                  }
-                  else{
+                  
+                    total += parseFloat(element.amount);
+
                     $("#bankbook tbody").append("<tr>"
                       +"<td style=\"text-align: center;\">"+element.transaction_date+"</td>"
                       +"<td style=\"text-align: center;\">"+element.voucher_no+"</td>"
@@ -436,8 +429,17 @@
                       +"<td class=\"table-danger\" style=\"text-align: right;\">"+numberWithCommas(element.amount)+"</td>"
                       +"<td style=\"text-align: center;\">"+element.account_head+"</td>"
                       +"</tr>");
-                  }
+    
                 });
+
+                $("#bankbook tbody").append("<tr class=\"table-info\">"
+                      +"<td style=\"text-align: center;\"></td>"
+                      +"<td style=\"text-align: center;\"></td>"
+                      +"<td style=\"text-align: center;font-weight: bold;\">Total</td>"
+                      +"<td style=\"text-align: center;\"></td>"
+                      +"<td style=\"text-align: right;font-weight: bold;\">"+numberWithCommas(total)+"</td>"
+                      +"<td style=\"text-align: center;\"></td>"
+                      +"</tr>");
               }
             });
             //--------------GENERATE BANK BOOK--------------//
