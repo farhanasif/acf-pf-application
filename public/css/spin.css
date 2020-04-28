@@ -1,0 +1,42 @@
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+ 
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  border-top-color: #000;
+  animation: spinner .6s linear infinite;
+}
+
+.example {
+  margin: 10px;
+  background: #ffcccc;
+  padding: 10px;
+}
+
+.example-spinner {
+  position: relative;
+  min-height: 36px;
+  background: #fff;
+  margin: 10px 0 0;
+}
+
+
+.loading-bar,
+button[disabled].loading-bar {
+	background-image: linear-gradient(-45deg, rgba(255, 255, 255, .4) 25%, rgba(255, 255, 255, .0) 25%, rgba(255, 255, 255, .0) 50%, rgba(255, 255, 255, .4) 50%, rgba(255, 255, 255, .4) 75%, rgba(255, 255, 255, .0) 75%, rgba(255, 255, 255, .0)) !important;
+	background-size: 32px 32px !important;
+	background-repeat: repeat !important;
+  transition: background-position 60000s linear !important;
+	background-position: 4000000px !important;
+}

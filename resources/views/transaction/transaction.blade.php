@@ -1,4 +1,7 @@
 @extends('master')
+@section('customcss')
+  <link rel="stylesheet" href="{{ asset('css/spin.css') }}">
+@endsection
 
 @section('content')
             <!-- Content Header (Page header) -->
@@ -54,12 +57,14 @@
             <div class="card-footer">
                 <button type="submit" id="generate" class="btn btn-success">Generate</button>
                 <button type="submit" id="download" class="btn btn-info">Download</button>
+                
                 <button type="submit" id="addnewtransaction" class="btn btn-outline-success float-right" data-toggle="modal" data-target="#modal-default">Add a
                     new Transaction</button>
             </div>
+            <div class="example-spinner" id="spinner"></div>
             <!-- /.card-footer -->
         </div>
-        <!-- /.card -->
+        <!-- /.card BANK RECONCILIATION -->
         <!-- Default box -->
         <div class="card card-success card-outline">
             <div class="card-header">
@@ -88,10 +93,10 @@
             </div>
             <!-- /.card-body -->
         </div>
-        <!-- /.card -->
+        <!-- /.card BANK BOOK -->
         <div class="card card-success card-outline">
             <div class="card-header">
-                <h3 class="card-title">Bank Book</h3>
+                <h3 class="card-title">Bank Book in Excel</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -228,7 +233,7 @@
           <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
-    @endsection
+@endsection
 
     @section('customjs')
     <script>
@@ -302,8 +307,7 @@
                   },
                   dataType: 'text',
                   success: function (data) {
-                    console.log(data);
-                    table.destroy();
+                    
                     generate_book();
                     $('#modal-default').modal('hide');
                 
@@ -334,11 +338,18 @@
             $('#generate').click(function() {
               generate_book();
             });
+
+            $('#download').click(function() {
+              //$('#spinner').removeClass('spinner');
+              
+            })
         });
 
         function generate_book(){
           from_date = $('#from_date').val();
-
+          //$('#spinner').addClass('spinner');
+          $('#generate').attr('disabled', true);
+    	    $('#generate').addClass('loading-bar');
           if(from_date == '' || from_date == undefined){
             Toast.fire({
               type: 'error',
@@ -367,20 +378,12 @@
                     '<th style="text-align: center;">Amount</th>'+
                     '<th style="text-align: center;">Account Head</th>'+
                 '</tr>');
-
+                var rcontotal = 0;
                 $.each(data, function(index, element) {
 
-                  if(element.description == 'TOTAL'){
-                    $("#bankrecon tbody").append("<tr class=\"table-info\">"
-                      +"<td style=\"text-align: center;\">"+element.transaction_date+"</td>"
-                      +"<td style=\"text-align: center;\">"+element.voucher_no+"</td>"
-                      +"<td style=\"text-align: center;font-weight: bold;\">"+element.description+"</td>"
-                      +"<td style=\"text-align: center;\">"+element.cheque_no+"</td>"
-                      +"<td style=\"text-align: right;font-weight: bold;\">"+numberWithCommas(element.amount)+"</td>"
-                      +"<td style=\"text-align: center;\">"+element.account_head+"</td>"
-                      +"</tr>");
-                  }
-                  else{
+                  if(element.amount == undefined || element.amount == ''){}
+                    else rcontotal += parseFloat(element.amount);
+
                     $("#bankrecon tbody").append("<tr>"
                       +"<td style=\"text-align: center;\">"+element.transaction_date+"</td>"
                       +"<td style=\"text-align: center;\">"+element.voucher_no+"</td>"
@@ -389,8 +392,17 @@
                       +"<td class=\"table-danger\" style=\"text-align: right;\">"+numberWithCommas(element.amount)+"</td>"
                       +"<td style=\"text-align: center;\">"+element.account_head+"</td>"
                       +"</tr>");
-                  }
                 });
+
+                $("#bankrecon tbody").append("<tr class=\"table-info\">"
+                      +"<td style=\"text-align: center;\"></td>"
+                      +"<td style=\"text-align: center;\"></td>"
+                      +"<td style=\"text-align: center;font-weight: bold;\">Total</td>"
+                      +"<td style=\"text-align: center;\"></td>"
+                      +"<td style=\"text-align: right;font-weight: bold;\">"+numberWithCommas(rcontotal)+"</td>"
+                      +"<td style=\"text-align: center;\"></td>"
+                      +"</tr>");
+
               }
             });
             //--------------GENERATE BANK RECONCILIATION--------------//
@@ -405,7 +417,8 @@
               dataType: 'json',
               success: function (data) {
                 console.log(data);
-                
+                $('#generate').attr('disabled', false);
+    	          $('#generate').removeClass('loading-bar');
                 $("#bankbook thead").empty();
                 $("#bankbook tbody").empty();
                 $("#bankbook thead").append('<tr>'+
@@ -419,7 +432,8 @@
                 var total = 0;
                 $.each(data, function(index, element) {
                   
-                    total += parseFloat(element.amount);
+                    if(element.amount == undefined || element.amount == ''){}
+                    else total += parseFloat(element.amount);
 
                     $("#bankbook tbody").append("<tr>"
                       +"<td style=\"text-align: center;\">"+element.transaction_date+"</td>"
@@ -440,6 +454,9 @@
                       +"<td style=\"text-align: right;font-weight: bold;\">"+numberWithCommas(total)+"</td>"
                       +"<td style=\"text-align: center;\"></td>"
                       +"</tr>");
+
+                //remove spinner
+                
               }
             });
             //--------------GENERATE BANK BOOK--------------//
