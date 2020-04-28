@@ -253,7 +253,7 @@
                   <p>Loan Installment Report</p>
                 </a>
               </li>
-              
+
               <li class="nav-item">
                 <a href="javascript:void(0)" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -296,7 +296,7 @@
             <a href="javascript:void(0)" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-                Bank Book
+                Bank Transaction
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -312,7 +312,7 @@
               <li class="nav-item">
                 <a href="{{url('/reconciliation')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Bank Transaction</p>
+                  <p>Bank Reconciliation</p>
                 </a>
               </li>
             </ul>

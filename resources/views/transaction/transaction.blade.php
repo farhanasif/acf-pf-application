@@ -1,4 +1,7 @@
 @extends('master')
+@section('customcss')
+  <link rel="stylesheet" href="{{ asset('css/spin.css') }}">
+@endsection
 
 @section('content')
             <!-- Content Header (Page header) -->
@@ -11,7 +14,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">Bank Book</li>
+                        <li class="breadcrumb-item active">Bank Reconciliation</li>
                     </ol>
                 </div>
             </div>
@@ -54,12 +57,14 @@
             <div class="card-footer">
                 <button type="submit" id="generate" class="btn btn-success">Generate</button>
                 <button type="submit" id="download" class="btn btn-info">Download</button>
+
                 <button type="submit" id="addnewtransaction" class="btn btn-outline-success float-right" data-toggle="modal" data-target="#modal-default">Add a
                     new Transaction</button>
             </div>
+            <div class="example-spinner" id="spinner"></div>
             <!-- /.card-footer -->
         </div>
-        <!-- /.card -->
+        <!-- /.card BANK RECONCILIATION -->
         <!-- Default box -->
         <div class="card card-success card-outline">
             <div class="card-header">
@@ -67,10 +72,37 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <h5 style="text-align: center">Bank Book</h5>
                 <br />
                 <div style="overflow-x: auto;">
-                    <table id="example1" class="table table-bordered table-striped table-sm">
+                    <table id="bankrecon" class="table table-bordered table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;">Date</th>
+                                <th style="text-align: center;">Voucher No</th>
+                                <th style="text-align: center;">Description</th>
+                                <th style="text-align: center;">Cheque No</th>
+                                <th style="text-align: center;">Amount</th>
+                                <th style="text-align: center;">Account Head</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card BANK BOOK -->
+        <div class="card card-success card-outline">
+            <div class="card-header">
+                <h3 class="card-title">Bank Book in Excel</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <br />
+                <div style="overflow-x: auto;">
+                    <table id="bankbook" class="table table-bordered table-striped table-sm">
                         <thead>
                             <tr>
                                 <th style="text-align: center;">Date</th>
@@ -92,8 +124,8 @@
         <!-- /.card -->
     </section>
             <!-- /.content -->
-  
-        <!-- /.content-wrapper -->
+
+        <!-- /.content-wrapper--modal-for-entry -->
         <div class="modal fade" id="modal-default">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -177,6 +209,18 @@
                       </div>
                     </div>
                   </div>
+                  <div class="row">
+                  <div class="col-sm-6">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Transaction Type</label>
+                        <select class="custom-select" id="transaction_type">
+                          <option value="R">Bank Reconciliation</option>
+                          <option value="B">Bank Book</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
                 </form>
               </div>
               <div class="modal-footer justify-content-between">
@@ -189,42 +233,37 @@
           <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
-    @endsection
+@endsection
 
     @section('customjs')
     <script>
-        
-        $(function () {
-            const Toast = Swal.mixin({
+        const Toast = Swal.mixin({
               toast: true,
               position: 'top-end',
               showConfirmButton: false,
               timer: 4000
-            });
-
-            $("#example1 thead").empty();
-            $("#example1 tbody").empty();
-
+        });
+        $(function () {
+            $("#bankrecon thead").empty();
+            $("#bankrecon tbody").empty();
+            $("#bankbook thead").empty();
+            $("#bankbook tbody").empty();
             $('#from_date').datepicker({
                 //format: "yyyy-mm-dd",
                 orientation: "bottom left",
                 format: "yyyy-mm",
-                startView: "months", 
+                startView: "months",
                 minViewMode: "months"
             });
-
             $('#transactionDate').datepicker({
                 format: "yyyy-mm-dd",
                 orientation: "bottom left"
             });
-
             $('#effectiveDate').datepicker({
                 format: "yyyy-mm-dd",
                 orientation: "bottom left"
             });
-
             $('#saveTransaction').click(function() {
-
               //get the data
               var transactionDate = $('#transactionDate').val();
               var effectiveDate = $('#transactionDate').val();
@@ -234,16 +273,15 @@
               var chequeno = $('#chequeno').val();
               var amount = $('#amount').val();
               var type = $('#transaction_type').val();
-
               if(description == '' || transactionDate == '' || effectiveDate == '' || amount == '' || amount == '0' || account_head == '0'){
                 Toast.fire({
                   type: 'error',
                   title: ' Please enter all fields to save the transaction'
                 });
               }
-              
+
               else{
-                
+
                 //save the transaction
                 $.ajax({
                   type: 'GET',
@@ -260,11 +298,10 @@
                   },
                   dataType: 'text',
                   success: function (data) {
-                    console.log(data);
-                    table.destroy();
+
                     generate_book();
                     $('#modal-default').modal('hide');
-                
+
                     Toast.fire({
                       type: 'success',
                       title: ' Transaction successfully saved in Bank Book.'
@@ -273,11 +310,7 @@
                 });
               }
 
-              
             });
-
-
-                
 
             $('#closeTransaction').click(function() {
               generate_book();
@@ -288,15 +321,19 @@
                 title: ' Transaction closed.'
               })
             });
-
             $('#generate').click(function() {
               generate_book();
             });
-        });
+            $('#download').click(function() {
+              //$('#spinner').removeClass('spinner');
 
+            })
+        });
         function generate_book(){
           from_date = $('#from_date').val();
-
+          //$('#spinner').addClass('spinner');
+          $('#generate').attr('disabled', true);
+    	    $('#generate').addClass('loading-bar');
           if(from_date == '' || from_date == undefined){
             Toast.fire({
               type: 'error',
@@ -304,6 +341,7 @@
             });
           }
           else{
+            //--------------GENERATE BANK RECONCILIATION--------------//
             $.ajax({
               type: 'GET',
               url: './monthy-bank-book',
@@ -313,10 +351,10 @@
               dataType: 'json',
               success: function (data) {
                 console.log(data);
-                
-                $("#example1 thead").empty();
-                $("#example1 tbody").empty();
-                $("#example1 thead").append('<tr>'+
+
+                $("#bankrecon thead").empty();
+                $("#bankrecon tbody").empty();
+                $("#bankrecon thead").append('<tr>'+
                     '<th style="text-align: center;">Date</th>'+
                     '<th style="text-align: center;">Voucher No</th>'+
                     '<th style="text-align: center;">Description</th>'+
@@ -324,20 +362,11 @@
                     '<th style="text-align: center;">Amount</th>'+
                     '<th style="text-align: center;">Account Head</th>'+
                 '</tr>');
-
+                var rcontotal = 0;
                 $.each(data, function(index, element) {
-                  if(element.description == 'TOTAL'){
-                    $("#example1 tbody").append("<tr class=\"table-info\">"
-                      +"<td style=\"text-align: center;\">"+element.transaction_date+"</td>"
-                      +"<td style=\"text-align: center;\">"+element.voucher_no+"</td>"
-                      +"<td style=\"text-align: center;font-weight: bold;\">"+element.description+"</td>"
-                      +"<td style=\"text-align: center;\">"+element.cheque_no+"</td>"
-                      +"<td style=\"text-align: right;font-weight: bold;\">"+numberWithCommas(element.amount)+"</td>"
-                      +"<td style=\"text-align: center;\">"+element.account_head+"</td>"
-                      +"</tr>");
-                  }
-                  else{
-                    $("#example1 tbody").append("<tr>"
+                  if(element.amount == undefined || element.amount == ''){}
+                    else rcontotal += parseFloat(element.amount);
+                    $("#bankrecon tbody").append("<tr>"
                       +"<td style=\"text-align: center;\">"+element.transaction_date+"</td>"
                       +"<td style=\"text-align: center;\">"+element.voucher_no+"</td>"
                       +"<td style=\"text-align: center;\">"+element.description+"</td>"
@@ -345,14 +374,70 @@
                       +"<td class=\"table-danger\" style=\"text-align: right;\">"+numberWithCommas(element.amount)+"</td>"
                       +"<td style=\"text-align: center;\">"+element.account_head+"</td>"
                       +"</tr>");
-                  }
                 });
+                $("#bankrecon tbody").append("<tr class=\"table-info\">"
+                      +"<td style=\"text-align: center;\"></td>"
+                      +"<td style=\"text-align: center;\"></td>"
+                      +"<td style=\"text-align: center;font-weight: bold;\">Total</td>"
+                      +"<td style=\"text-align: center;\"></td>"
+                      +"<td style=\"text-align: right;font-weight: bold;\">"+numberWithCommas(rcontotal)+"</td>"
+                      +"<td style=\"text-align: center;\"></td>"
+                      +"</tr>");
               }
             });
+            //--------------GENERATE BANK RECONCILIATION--------------//
+            //--------------GENERATE BANK BOOK--------------//
+            $.ajax({
+              type: 'GET',
+              url: './monthly-bank-book-excel',
+              data: {
+                  from_date: from_date,
+              },
+              dataType: 'json',
+              success: function (data) {
+                console.log(data);
+                $('#generate').attr('disabled', false);
+    	          $('#generate').removeClass('loading-bar');
+                $("#bankbook thead").empty();
+                $("#bankbook tbody").empty();
+                $("#bankbook thead").append('<tr>'+
+                    '<th style="text-align: center;">Date</th>'+
+                    '<th style="text-align: center;">Voucher No</th>'+
+                    '<th style="text-align: center;">Description</th>'+
+                    '<th style="text-align: center;">Cheque No</th>'+
+                    '<th style="text-align: center;">Amount</th>'+
+                    '<th style="text-align: center;">Account Head</th>'+
+                '</tr>');
+                var total = 0;
+                $.each(data, function(index, element) {
+
+                    if(element.amount == undefined || element.amount == ''){}
+                    else total += parseFloat(element.amount);
+                    $("#bankbook tbody").append("<tr>"
+                      +"<td style=\"text-align: center;\">"+element.transaction_date+"</td>"
+                      +"<td style=\"text-align: center;\">"+element.voucher_no+"</td>"
+                      +"<td style=\"text-align: center;\">"+element.description+"</td>"
+                      +"<td style=\"text-align: center;\">"+element.cheque_no+"</td>"
+                      +"<td class=\"table-danger\" style=\"text-align: right;\">"+numberWithCommas(element.amount)+"</td>"
+                      +"<td style=\"text-align: center;\">"+element.account_head+"</td>"
+                      +"</tr>");
+
+                });
+                $("#bankbook tbody").append("<tr class=\"table-info\">"
+                      +"<td style=\"text-align: center;\"></td>"
+                      +"<td style=\"text-align: center;\"></td>"
+                      +"<td style=\"text-align: center;font-weight: bold;\">Total</td>"
+                      +"<td style=\"text-align: center;\"></td>"
+                      +"<td style=\"text-align: right;font-weight: bold;\">"+numberWithCommas(total)+"</td>"
+                      +"<td style=\"text-align: center;\"></td>"
+                      +"</tr>");
+                //remove spinner
+
+              }
+            });
+            //--------------GENERATE BANK BOOK--------------//
           }
         }
-
-
         function numberWithCommas(number) {
           if(number == 0 || number == undefined){
             return '0.00';

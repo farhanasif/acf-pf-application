@@ -1,5 +1,7 @@
 @extends('master')
-
+@section('customcss')
+  <link rel="stylesheet" href="{{ asset('css/spin.css') }}">
+@endsection
 @section('content')
 
     <style>
@@ -208,6 +210,8 @@
         $("#example1 thead").empty();
         $("#example1 tbody").empty();
         $( "#generate" ).click(function() {
+            $('#generate').attr('disabled', true);
+    	    $('#generate').addClass('loading-bar');
             from_date = $('#from_date').val();
             to_date = $('#to_date').val();
             $("#example1 thead").empty();
@@ -222,6 +226,8 @@
                 },
                 dataType: 'json',
                 success: function (data) {
+                    $('#generate').attr('disabled', false);
+    	            $('#generate').removeClass('loading-bar');
                     //console.log(data[1131]);
                     //table.destroy();
                     $("#example1 thead").empty();
