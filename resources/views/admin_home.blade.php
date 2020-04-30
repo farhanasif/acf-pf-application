@@ -241,3 +241,10 @@
 <!-- /.content -->
       
 @endsection
+
+@section('customjs')
+<script>
+  <script src="{{asset('theme/dist/js/pages/dashboard2.js')}}"></script> 
+</script>
+
+@endsection

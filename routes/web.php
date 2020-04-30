@@ -748,6 +748,8 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('ledger', 'LedgerReportController@view_ledger_report');
 		Route::get('ledger-report','LedgerReportController@ledger_report');
 
+		Route::get('/monthly-bank-book-excel', 'BankController@get_monthly_bank_book_excel');
+
 
 		/**************************** Loan Seaction route *****************************/
 
