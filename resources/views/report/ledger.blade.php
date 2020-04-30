@@ -76,8 +76,11 @@
                 <div class="col-md-3">
                     <div class="form-group">
                     <label>Position</label>
-                    <select class="custom-select" id="to_date">
-                        <option value="2019-01-31">--select--</option>
+                    <select class="custom-select select2bs4" id="position">
+                        <option value="">--select--</option>
+                            @foreach ($positions as $position)
+                                <option value="{{$position->position_name}}">{{$position->position_name}}</option>
+                            @endforeach
                     </select>
                     </div>
                 </div>
@@ -86,8 +89,11 @@
                     <!-- select -->
                     <div class="form-group">
                     <label>Department Code</label>
-                    <select class="custom-select" id="from_date">
-                        <option value="2019-01-01">--select--</option>
+                    <select class="custom-select select2bs4" id="department">
+                        <option value="">--select--</option>
+                        @foreach ($departments as $department)
+                            <option value="{{$department->department_code}}">{{$department->department_code}}</option>
+                        @endforeach
                     </select>
                     </div>
                 </div>
@@ -98,8 +104,11 @@
                     <div class="col-md-3">
                         <div class="form-group">
                         <label>Sub Location</label>
-                        <select class="custom-select" id="to_date">
-                            <option value="2019-01-31">--select--</option>
+                        <select class="custom-select select2bs4" id="subLocations">
+                            <option value="">--select--</option>
+                            @foreach ($subLocations as $subLocation)
+                                <option value="{{$subLocation->sub_location_name}}">{{$subLocation->sub_location_name}}</option>
+                            @endforeach
                         </select>
                         </div>
                     </div>
@@ -107,8 +116,11 @@
                     <div class="col-md-3">
                         <div class="form-group">
                         <label>Category</label>
-                        <select class="custom-select" id="to_date">
-                            <option value="2019-01-31">--select--</option>
+                        <select class="custom-select select2bs4" id="category">
+                            <option value="">--select--</option>
+                            @foreach ($categories as $category)
+                                <option value="{{$category->category_name}}">{{$category->category_name}}</option>
+                            @endforeach
                         </select>
                         </div>
                     </div>
@@ -117,8 +129,11 @@
                         <!-- select -->
                         <div class="form-group">
                         <label>Level</label>
-                        <select class="custom-select" id="from_date">
-                            <option value="2019-01-01">--select--</option>
+                        <select class="custom-select select2bs4" id="level">
+                            <option value="">--select--</option>
+                            @foreach ($levels as $level)
+                                <option value="{{$level->level_name}}">{{$level->level_name}}</option>
+                            @endforeach
                         </select>
                         </div>
                     </div>
@@ -128,8 +143,11 @@
                         <!-- select -->
                         <div class="form-group">
                         <label>Work Place</label>
-                        <select class="custom-select" id="from_date">
-                            <option value="2019-01-01">--select--</option>
+                        <select class="custom-select select2bs4" id="work_place">
+                            <option value="">--select--</option>
+                            @foreach ($work_places as $work_place)
+                                <option value="{{$work_place->work_place_name}}">{{$work_place->work_place_name}}</option>
+                            @endforeach
                         </select>
                         </div>
                     </div>
