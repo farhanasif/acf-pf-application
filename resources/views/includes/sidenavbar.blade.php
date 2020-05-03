@@ -220,7 +220,7 @@
                 </li>
 
               <li class="nav-item">
-              <a href="{{url('provident-fund-report')}}" class="nav-link">
+              <a href="javascript:void(0)" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Provident Fund</p>
                 </a>
@@ -240,24 +240,10 @@
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a href="javascript:void(0)" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Loan Statement</p>
-                </a>
-              </li>
-
              <li class="nav-item">
                 <a href="{{ url('/loan-installment-report') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Loan Installment Report</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="javascript:void(0)" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>General Provident Fund</p>
+                  <p>Loan Statement Report</p>
                 </a>
               </li>
             </ul>
