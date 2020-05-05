@@ -219,19 +219,19 @@
                   </a>
                 </li>
 
-              <li class="nav-item">
+              {{-- <li class="nav-item">
               <a href="javascript:void(0)" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Provident Fund</p>
                 </a>
-              </li>
+              </li> --}}
 
-              {{-- <li class="nav-item">
+              <li class="nav-item">
                 <a href="javascript:void(0)" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Balance Sheet</p>
+                  <p>Contribution Report</p>
                 </a>
-              </li> --}}
+              </li>
 
               <li class="nav-item">
                 <a href="{{ url('generate-pf-balance-sheet') }}" class="nav-link">
