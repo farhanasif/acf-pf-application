@@ -147,7 +147,11 @@
                 <!-- /.progress-group -->
                 <div class="progress-group">
                   <span class="progress-text">Total Investment</span>
-                  <span class="float-right">38%</span>
+                  <span class="float-right">
+                    @foreach ($total_investments as $investment)
+                    {{$investment->total_investment_amount ? number_format($investment->total_investment_amount) : 0}} TK
+                    @endforeach
+                  </span>
                   <div class="progress progress-sm">
                     <div class="progress-bar bg-success" style="width: 60%"></div>
                   </div>
@@ -173,7 +177,11 @@
               <div class="col-sm-3 col-6">
                 <div class="description-block border-right">
                   {{-- <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 20%</span> --}}
-                  <h5 class="description-header">24,813.53 TK</h5>
+                  <h5 class="description-header">
+                    @foreach ($total_investments as $investment)
+                        {{$investment->total_investment_amount ? number_format($investment->total_investment_amount) : 0}} TK
+                    @endforeach
+                  </h5>
                   <span class="description-text">TOTAL INVESTMENT</span>
                 </div>
                 <!-- /.description-block -->

@@ -145,7 +145,7 @@
       <div class="card card-success card-outline">
         <div class="card-header" style="">
           <h3 class="card-title" style="width: 50%;float: left;margin-top: 10px;">Installment Report Details</h3>
-          <button style="float: right;" type="submit" onclick="downloadExcel('loan_installment')" class="btn btn-info">Excel Download</button>
+          <button style="float: right;" type="submit" onclick="downloadExcel('loan_installment')" class="btn btn-success">Excel Download</button>
         </div>
 <!--         <div class="card-header" style="width: 45%;float: right;">
             <button type="submit" id="download" class="btn btn-info">Download</button>
@@ -156,16 +156,16 @@
                 <table id="loan_installment" class="table table-bordered table-striped table-sm">
                     <thead>
                     <tr>
-                    <th>SI</th>
-                    <th>Staff Code</th>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Department Code</th>
-                    <th>Level</th>
-                    <th>Base</th>
-                    <th>Workplace</th>
-                    <th>Amount</th>
-                    <th>Date</th>
+                    <th class="bg-success">SI</th>
+                    <th class="bg-success">Staff Code</th>
+                    <th class="bg-success">Name</th>
+                    <th class="bg-success">Position</th>
+                    <th class="bg-success">Department Code</th>
+                    <th class="bg-success">Level</th>
+                    <th class="bg-success">Base</th>
+                    <th class="bg-success">Workplace</th>
+                    <th class="bg-success">Amount</th>
+                    <th class="bg-success">Date</th>
                     </tr>
                     </thead>
                     <tbody>
