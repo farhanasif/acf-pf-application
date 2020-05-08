@@ -27,7 +27,7 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item {{ request()->is('admin-home') ? 'active' :''}}">
           <a href="{{url('/admin-home')}}" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-tachometer-alt text-blue"></i>
               <p>
                 Dashboard
               </p>
@@ -36,7 +36,7 @@
 
           <li class="nav-item">
             <a href="{{route('all-employee')}}" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
+              <i class="nav-icon fas fa-users text-green"></i>
               <p>
                 All Employees
                 {{-- <i class="right fas fa-angle-left"></i> --}}
@@ -47,7 +47,7 @@
 
           <li class="nav-item has-treeview">
             <a href="javascript:void(0)" class="nav-link">
-              <i class="nav-icon fa fa-book"></i>
+              <i class="nav-icon fa fa-book text-blue"></i>
               <p>
                 Provident Fund
                 <i class="right fas fa-angle-left"></i>
@@ -56,14 +56,14 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('all-provident-fund')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-blue"></i>
                   <p>PF Deposit</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="{{route('all-pf-interest')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-blue"></i>
                   <p>PF Interest</p>
                 </a>
             </li>
@@ -73,7 +73,7 @@
 
           <li class="nav-item has-treeview">
             <a href="javascript:void(0)" class="nav-link">
-              <i class=" nav-icon fas fa-chart-bar"></i>
+              <i class=" nav-icon fas fa-chart-bar text-yellow"></i>
               <p>
                Chart Of Accounts
                 <i class="right fas fa-angle-left"></i>
@@ -82,7 +82,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('all-account-head')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-yellow"></i>
                   <p>Account Head</p>
                 </a>
               </li>
@@ -92,7 +92,7 @@
 
         <li class="nav-item has-treeview ">
              <a href="javascript:void(0)" class="nav-link">
-              <i class="nav-icon fas fa-tree"></i>
+              <i class="nav-icon fas fa-briefcase text-teal"></i>
               <p>
                 Master Data
                 <i class="fas fa-angle-left right"></i>
@@ -102,101 +102,101 @@
 
               <li class="nav-item ">
                   <a href="{{route('all-category')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="far fa-circle nav-icon text-teal"></i>
                     <p>Category</p>
                   </a>
               </li>
 
               <li class="nav-item">
                 <a href="{{route('all-user-role')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-teal"></i>
                   <p>User Role</p>
                 </a>
                </li>
 
               <li class="nav-item">
                 <a href="{{route('all-employee-status')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-teal"></i>
                   <p>Employee Status</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('all-interest-source')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-teal"></i>
                   <p>Interest Source</p>
                 </a>
               </li>
 
               <li class="nav-item ">
                   <a href="{{route('all-level')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="far fa-circle nav-icon text-teal"></i>
                     <p>Level</p>
                   </a>
               </li>
 
               <li class="nav-item ">
                   <a href="{{route('all-sub-location')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="far fa-circle nav-icon text-teal"></i>
                     <p>Sub Location</p>
                   </a>
               </li>
 
               <li class="nav-item ">
                 <a href="{{route('all-work-place')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-teal"></i>
                   <p>Work Place</p>
                 </a>
               </li>
 
               <li class="nav-item {{ request()->is('/all-office') ? 'active menu-open' :''}}">
                 <a href="{{route('all-office')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-teal"></i>
                   <p>Offices</p>
                 </a>
               </li>
 
               <li class="nav-item">
               <a href="{{route('all-department')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-teal"></i>
                   <p>Department</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="{{route('all-position')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="far fa-circle nav-icon text-teal"></i>
                     <p>Position</p>
                   </a>
               </li>
 
               <li class="nav-item">
                 <a href="{{route('all-base')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="far fa-circle nav-icon text-teal"></i>
                     <p>Base</p>
                   </a>
               </li>
 
               <li class="nav-item">
               <a href="{{route('all-pf-calculation')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-teal"></i>
                   <p>PF Calculations</p>
                 </a>
               </li>
               <li class="nav-item">
               <a href="{{route('all-time-schedule')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-teal"></i>
                   <p>Time Schedule</p>
                 </a>
               </li>
               <li class="nav-item">
               <a href="{{route('all-duration')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-teal"></i>
                   <p>Duration</p>
                 </a>
               </li>
               <li class="nav-item">
               <a href="{{route('all-alert')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-teal"></i>
                   <p>Alerts</p>
                 </a>
               </li>
@@ -204,7 +204,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="javascript:void(0)" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
+              <i class="nav-icon fas fa-table text-danger"></i>
               <p>
                 Reports
                 <i class="fas fa-angle-left right"></i>
@@ -214,7 +214,7 @@
 
               <li class="nav-item">
                 <a href="{{url('ledger')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="far fa-circle nav-icon text-danger"></i>
                     <p>Ledger Report</p>
                   </a>
                 </li>
@@ -228,21 +228,21 @@
 
               <li class="nav-item">
                 <a href="javascript:void(0)" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-danger"></i>
                   <p>Contribution Report</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="{{ url('generate-pf-balance-sheet') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-danger"></i>
                   <p>PF Balance Sheet</p>
                 </a>
               </li>
 
              <li class="nav-item">
                 <a href="{{ url('/loan-installment-report') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-danger"></i>
                   <p>Loan Statement Report</p>
                 </a>
               </li>
@@ -251,7 +251,7 @@
 
           <li class="nav-item has-treeview">
             <a href="javascript:void(0)" class="nav-link">
-              <i class="fas fa-hand-holding-usd nav-icon"></i>
+              <i class="fas fa-hand-holding-usd nav-icon text-primary"></i>
               <p>
                 Loan Management
                 <i class="fas fa-angle-left right"></i>
@@ -260,19 +260,19 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{url('/all-loans')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-primary"></i>
                   <p>All Loans</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{url('/create-loan')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-primary"></i>
                   <p>Create Loan</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="javascript:void(0)" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-primary"></i>
                   <p>Adust Loan</p>
                 </a>
               </li>
@@ -280,7 +280,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="javascript:void(0)" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
+              <i class="nav-icon fas fa-coins text-success"></i>
               <p>
                 Bank Transaction
                 <i class="fas fa-angle-left right"></i>
@@ -290,14 +290,14 @@
 
               <li class="nav-item">
                 <a href="{{route('all-pf-withdraw')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-success"></i>
                   <p>PF Withdraw</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="{{url('/reconciliation')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon text-success"></i>
                   <p>Bank Reconciliation</p>
                 </a>
               </li>
@@ -306,20 +306,20 @@
 
           <li class="nav-item ">
             <a href="{{route('all-user')}}" class="nav-link">
-                <i class="nav-icon fas fa-users"></i>
+                <i class="nav-icon fas fa-users text-warning"></i>
                 <p>
                   System Accounts
                 </p>
               </a>
             </li>
 
-          <li class="nav-header">MISCELLANEOUS</li>
+<!--           <li class="nav-header">MISCELLANEOUS</li>
           <li class="nav-item">
             <a href="javascript:void(0)" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Documentation</p>
             </a>
-          </li>
+          </li> -->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
