@@ -77,7 +77,10 @@
                     <div class="form-group">
                     <label>Position</label>
                     <select class="custom-select" id="to_date">
-                        <option value="2019-01-31">--select--</option>
+                        <option value="-1">--select--</option>
+                        @foreach ($positions as $position)
+                            <option value="{{$position->position_name}}">{{$position->position_name}}</option>
+                        @endforeach
                     </select>
                     </div>
                 </div>
@@ -99,7 +102,10 @@
                         <div class="form-group">
                         <label>Sub Location</label>
                         <select class="custom-select" id="to_date">
-                            <option value="2019-01-31">--select--</option>
+                            <option value="-1">--select--</option>
+                            @foreach ($departments as $department)
+                                <option value="{{$department->department_code}}">{{$department->department_code}}</option>
+                            @endforeach
                         </select>
                         </div>
                     </div>

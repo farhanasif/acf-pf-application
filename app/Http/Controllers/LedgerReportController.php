@@ -83,7 +83,7 @@ class LedgerReportController extends Controller
             group by staff_code with rollup
             ";
 
-            //return $master_query;
+            return $master_query;
 
             $results = DB::select($master_query);
             //return count($results);
@@ -95,13 +95,17 @@ class LedgerReportController extends Controller
 
    public function view_ledger_report()
    {
-    $lreport = DB::select("SELECT DISTINCT(DATE(deposit_date)) AS deposit_date, DATE_FORMAT(deposit_date, '%b %Y') AS month_name
-                            FROM pf_deposit
-                            ORDER BY deposit_date");
+        $data['lreport'] = DB::select("SELECT DISTINCT(DATE(deposit_date)) AS deposit_date, DATE_FORMAT(deposit_date, '%b %Y') AS month_name
+                                FROM pf_deposit
+                                ORDER BY deposit_date");
+        $data['positions'] = DB::table('positions')->get();
+        $data['departments'] = DB::table('departments')->get();
+        $data['subLocations'] = DB::table('sub_locations')->get();
+        $data['categories'] = DB::table('categories')->get();
+        $data['levels'] = DB::table('levels')->get();
+        $data['work_places'] = DB::table('work_places')->get();
 
-        //    dd($lreport);
-        //    exit;
-        return view('report.ledger',compact('lreport'));
+        return view('report.ledger',$data);
     }
 
 
