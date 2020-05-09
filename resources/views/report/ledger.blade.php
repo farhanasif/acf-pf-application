@@ -76,7 +76,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                     <label>Position</label>
-                    <select class="custom-select" id="to_date">
+                    <select class="custom-select select2bs4" id="work_position">
                         <option value="-1">--select--</option>
                         @foreach ($positions as $position)
                             <option value="{{$position->position_name}}">{{$position->position_name}}</option>
@@ -89,8 +89,11 @@
                     <!-- select -->
                     <div class="form-group">
                     <label>Department Code</label>
-                    <select class="custom-select" id="from_date">
-                        <option value="2019-01-01">--select--</option>
+                    <select class="custom-select select2bs4" id="work_department">
+                        <option value="-1">--select--</option>
+                        @foreach ($departments as $department)
+                            <option value="{{$department->department_code}}">{{$department->department_code}}</option>
+                        @endforeach
                     </select>
                     </div>
                 </div>
@@ -101,10 +104,10 @@
                     <div class="col-md-3">
                         <div class="form-group">
                         <label>Sub Location</label>
-                        <select class="custom-select" id="to_date">
+                        <select class="custom-select select2bs4" id="work_sublocation">
                             <option value="-1">--select--</option>
-                            @foreach ($departments as $department)
-                                <option value="{{$department->department_code}}">{{$department->department_code}}</option>
+                            @foreach ($subLocations as $subLocation)
+                                <option value="{{$subLocation->sub_location_name}}">{{$subLocation->sub_location_name}}</option>
                             @endforeach
                         </select>
                         </div>
@@ -113,8 +116,11 @@
                     <div class="col-md-3">
                         <div class="form-group">
                         <label>Category</label>
-                        <select class="custom-select" id="to_date">
-                            <option value="2019-01-31">--select--</option>
+                        <select class="custom-select select2bs4" id="work_category">
+                            <option value="-1">--select--</option>
+                            @foreach ($categories as $category)
+                                <option value="{{$category->category_name}}">{{$category->category_name}}</option>
+                            @endforeach
                         </select>
                         </div>
                     </div>
@@ -123,8 +129,11 @@
                         <!-- select -->
                         <div class="form-group">
                         <label>Level</label>
-                        <select class="custom-select" id="from_date">
-                            <option value="2019-01-01">--select--</option>
+                        <select class="custom-select select2bs4" id="work_level">
+                            <option value="-1">--select--</option>
+                            @foreach ($levels as $level)
+                                <option value="{{$level->level_name}}">{{$level->level_name}}</option>
+                            @endforeach
                         </select>
                         </div>
                     </div>
@@ -134,8 +143,11 @@
                         <!-- select -->
                         <div class="form-group">
                         <label>Work Place</label>
-                        <select class="custom-select" id="from_date">
-                            <option value="2019-01-01">--select--</option>
+                        <select class="custom-select select2bs4" id="work_place">
+                            <option value="-1">--select--</option>
+                            @foreach ($work_places as $work_place)
+                                <option value="{{$work_place->work_place_name}}">{{$work_place->work_place_name}}</option>
+                            @endforeach
                         </select>
                         </div>
                     </div>
@@ -163,7 +175,7 @@
         <!-- /.card-header -->
         <div class="card-body">
             <div id='table-cont' style="max-height: 500px !important; overflow-y: auto; overflow-x: scroll; max-width: 100%;">
-                <table id="example1" class="table table-sm" style="height: 600px !important;">
+                <table id="example1" class="table table-sm">
                     <thead>
                     <tr>
                     <th>Third Part</th>
@@ -218,8 +230,16 @@
         $( "#generate" ).click(function() {
             $('#generate').attr('disabled', true);
     	    $('#generate').addClass('loading-bar');
+            //------params-------------///
             from_date = $('#from_date').val();
             to_date = $('#to_date').val();
+            work_position = $('#work_position').val();
+            work_department = $('#work_department').val();
+            work_sublocation = $('#work_sublocation').val();
+            work_category = $('#work_category').val();
+            work_level = $('#work_level').val();
+            work_place = $('#work_place').val();
+            //------params-------------///
             $("#example1 thead").empty();
             $("#example1 tbody").empty();
             //
@@ -228,7 +248,13 @@
                 url: './ledger-report',
                 data: {
                     from_date: from_date,
-                    to_date: to_date
+                    to_date: to_date,
+                    work_position: work_position,
+                    work_department: work_department,
+                    work_sublocation: work_sublocation,
+                    work_category: work_category,
+                    work_level: work_level,
+                    work_place: work_place
                 },
                 dataType: 'json',
                 success: function (data) {

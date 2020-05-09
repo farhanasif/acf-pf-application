@@ -11,6 +11,12 @@ class LedgerReportController extends Controller
         //fixed date for now
         $from_date = $_GET['from_date'];
         $to_date = $_GET['to_date'];
+        $work_position = $_GET['work_position'];
+        $work_department = $_GET['work_department'];
+        $work_sublocation = $_GET['work_sublocation'];
+        $work_category = $_GET['work_category'];
+        $work_level = $_GET['work_level'];
+        $work_place = $_GET['work_place'];
         //get all the months required
         $months = DB::select('select distinct(date(deposit_date)) as deposit_date, date_format(deposit_date, \'%b_%Y\') as month_name
         from pf_deposit
@@ -65,10 +71,45 @@ class LedgerReportController extends Controller
 
             }
 
+
+            $where_query = 'WHERE 1=1 ';
+
+            if($work_position == '-1' || $work_position == ''){}
+            else{
+                $where_query = $where_query." AND e.`position` = '".$work_position."'"; 
+            }
+
+            if($work_department == '-1' || $work_department == ''){}
+            else{
+                $where_query = $where_query." AND e.`department_code` = '".$work_department."'"; 
+            }
+
+            if($work_sublocation == '-1' || $work_sublocation == ''){}
+            else{
+                $work_sublocation = str_replace("'","\'",$work_sublocation);
+                $where_query = $where_query." AND e.`sub_location` = '".$work_sublocation."'"; 
+            }
+
+            if($work_category == '-1' || $work_category == ''){}
+            else{
+                $where_query = $where_query." AND e.`category` = '".$work_category."'"; 
+            }
+
+            if($work_level == '-1' || $work_level == ''){}
+            else{
+                $where_query = $where_query." AND e.`level` = '".$work_level."'"; 
+            }
+
+            if($work_place == '-1' || $work_place == ''){}
+            else{
+                $work_place = str_replace("'","\'",$work_place);
+                $where_query = $where_query." AND e.`work_place` = '".$work_place."'"; 
+            }
+
             //finish the subquery
             $sub_query = $sub_query." FROM `pf_deposit` as p
             INNER JOIN employees as e
-            ON p.`staff_code` = e.`staff_code`
+            ON p.`staff_code` = e.`staff_code` ".$where_query."
             GROUP BY p.`staff_code`, e.first_name, e.last_name, e.category, e.level, e.base
             ORDER BY p.`staff_code`";
 
@@ -83,7 +124,7 @@ class LedgerReportController extends Controller
             group by staff_code with rollup
             ";
 
-            return $master_query;
+            //return $master_query;
 
             $results = DB::select($master_query);
             //return count($results);
