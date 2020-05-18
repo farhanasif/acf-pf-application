@@ -24,7 +24,7 @@
         <div class="card-header">
           <h3 class="card-title">Edit User Information</h3>
         </div>
-        
+
         @if ($message = Session::get('success'))
           <div class="alert alert-success alert-block">
            <button type="button" class="close" data-dismiss="alert">×</button>
@@ -94,7 +94,7 @@
 			    	 <input type="text" class="form-control" name="mobile"  placeholder="Mobile" value="{{$users->mobile}}">
 			    </div>
         </div>
-        
+
       <div class="form-group row">
        <label for="email" class="col-form-label col-md-2 col-sm-3 label-align">Designation</label>
        <div class="col-md-3 col-sm-3 ">

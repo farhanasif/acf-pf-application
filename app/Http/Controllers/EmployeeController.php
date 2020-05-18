@@ -25,17 +25,17 @@ class EmployeeController extends Controller
     public function add_employee()
     {
         // $data = array();
-        $levels = Level::all();
-        $positions = Position::all();
-        $categories = Category::all();
-        $bases = Base::all();
-        $sub_locations = Sub_location::all();
-        $work_places = Work_place::all();
-        $departments = DB::table('departments')->get();
+        $data['levels'] = Level::all();
+        $data['positions'] = Position::all();
+        $data['categories'] = Category::all();
+        $data['bases'] = Base::all();
+        $data['sub_locations'] = Sub_location::all();
+        $data['work_places'] = Work_place::all();
+        $data['departments'] = DB::table('departments')->get();
         // print_r($data);
         // exit;
 
-        return view('employee.add_employee',compact('departments','work_places','levels','positions','categories','bases','sub_locations'));
+        return view('employee.add_employee',$data);
     }
 
     public function all_employee(Request $request)
@@ -43,13 +43,13 @@ class EmployeeController extends Controller
 
       $query = "select * from employees";
 
-      $positions = DB::table('positions')->get();
-      $categories = DB::table('categories')->get();
-      $bases = DB::table('bases')->get();
-      $levels = DB::table('levels')->get();
-      $departments = DB::table('departments')->get();
-      $work_places = DB::table('work_places')->get();
-      $all_employees = DB::table('employees')->get();
+      $data['positions'] = DB::table('positions')->get();
+      $data['categories'] = DB::table('categories')->get();
+      $data['bases'] = DB::table('bases')->get();
+      $data['levels'] = DB::table('levels')->get();
+      $data['departments'] = DB::table('departments')->get();
+      $data['work_places'] = DB::table('work_places')->get();
+      $data['all_employees'] = DB::table('employees')->get();
 
       if ($request->isMethod('post')) {
           $position = $request->position;
@@ -99,13 +99,13 @@ class EmployeeController extends Controller
               }
 
           }
-          $employees = DB::select($query);
-          return view('employee.all_employee',compact('all_employees','employees','positions','categories','levels','bases','departments','work_places'));
+          $data['employees'] = DB::select($query);
+          return view('employee.all_employee',$data);
       }
       else{
 
-          $employees = DB::select($query);
-          return view('employee.all_employee',compact('all_employees','employees','positions','categories','levels','bases','departments','work_places'));
+          $data['employees'] = DB::select($query);
+          return view('employee.all_employee',$data);
       }
     }
 
@@ -211,6 +211,24 @@ class EmployeeController extends Controller
        // $employees->save();
        // return back();
 
+       $this->validate($request,[
+        'staff_code' => 'required',
+        'first_name' => 'required',
+        'last_name' => 'required',
+        'position' => 'required',
+        'department_code' => 'required',
+        'category' => 'required',
+        'level' => 'required',
+        'base' => 'required',
+        'work_place' => 'required',
+        'sub_location' => 'required',
+        'basic_salary' => 'required',
+        'gross_salary' => 'required',
+        'pf_amount' => 'required',
+        'joining_date' => 'required',
+        'ending_date' => 'required',
+       ]);
+
        $data = array();
        $data['staff_code'] = $request->staff_code;
        $data['first_name'] = $request->first_name;
@@ -237,14 +255,14 @@ class EmployeeController extends Controller
     public function employee_details($staff_code)
     {
 
-      $employees = DB::table('employees')->where('staff_code', $staff_code)->first();
+      $data['employees'] = DB::table('employees')->where('staff_code', $staff_code)->first();
 
       // dd($employees);
       // exit;
 
-      $loan_account_details = DB::select(
+      $data['loan_account_details'] = DB::select(
               "SELECT
-              loans.id, loans.loan_amount, loans.total_months, loans.interest, loans.issue_date, 
+              loans.id, loans.loan_amount, loans.total_months, loans.interest, loans.issue_date,
               MIN(loan_installment.pay_date ) AS min_date, MAX(loan_installment.pay_date ) AS max_date,
               employees.first_name, employees.last_name, employees.position
               FROM loans
@@ -252,9 +270,9 @@ class EmployeeController extends Controller
               INNER JOIN employees ON employees.staff_code = loans.staff_code
               WHERE loans.staff_code ='".$staff_code."'");
 
-       $interests_and_pf_deposit = DB::select("SELECT SUM(pf_deposit.total_pf) AS total_pf_amount, MAX(pf_deposit.total_pf) AS maximum_total_pf, pf_deposit.deposit_date, 
+       $data['interests_and_pf_deposit'] = DB::select("SELECT SUM(pf_deposit.total_pf) AS total_pf_amount, MAX(pf_deposit.total_pf) AS maximum_total_pf, pf_deposit.deposit_date,
             interests.id AS interests_id, interests.own, interests.organization, interests.interest_date, interests.interest_source
-            FROM pf_deposit 
+            FROM pf_deposit
             LEFT JOIN interests ON interests.staff_code = pf_deposit.staff_code
             WHERE pf_deposit.staff_code='".$staff_code."' ORDER BY deposit_date DESC");
 
@@ -263,26 +281,24 @@ class EmployeeController extends Controller
             // echo($interests_and_pf_deposit[0]->interests_id);
             // exit;
 
-       $loan_adjustments = DB::select("SELECT  payment, pay_date, payment_type
-                                   FROM loan_installment 
+       $data['loan_adjustments'] = DB::select("SELECT  payment, pay_date, payment_type
+                                   FROM loan_installment
                                    WHERE staff_code ='".$staff_code."' ORDER BY pay_date ASC");
 
-       $pf_deposits = DB::table('pf_deposit')
+       $data['pf_deposits'] = DB::table('pf_deposit')
                     ->orderBy('deposit_date', 'asc')
                     ->where('staff_code', $staff_code)
                     ->get();
 
-      $levels = Level::all();
-      $positions = Position::all();
-      $categories = Category::all();
-      $bases = Base::all();
-      $sub_locations = Sub_location::all();
-      $work_places = Work_place::all();
-      $departments = DB::table('departments')->get();
+      $data['levels'] = Level::all();
+      $data['positions'] = Position::all();
+      $data['categories'] = Category::all();
+      $data['bases'] = Base::all();
+      $data['sub_locations'] = Sub_location::all();
+      $data['work_places'] = Work_place::all();
+      $data['departments'] = DB::table('departments')->get();
 
-      return view('employee.employee_details',compact('interests_and_pf_deposit',
-       'loan_account_details','employees','pf_deposits',
-        'departments','work_places','levels','positions','categories','bases','sub_locations','loan_adjustments'));
+      return view('employee.employee_details',$data);
 
       // return view('employee.employee_details',compact('employees','pf_deposits','total_pf_amounts'));
     }
@@ -290,19 +306,19 @@ class EmployeeController extends Controller
 
     public function edit_employee($id)
     {
-      $employee = DB::table('employees')->where('id',$id)->first();
-      $levels = Level::all();
-      $positions = Position::all();
-      $categories = Category::all();
-      $bases = Base::all();
-      $sub_locations = Sub_location::all();
-      $work_places = Work_place::all();
-      $departments = DB::table('departments')->get();
-      return view('employee.edit_employee',compact('employee','departments','work_places','levels','positions','categories','bases','sub_locations'));
+      $data['employee'] = DB::table('employees')->where('id',$id)->first();
+      $data['levels'] = Level::all();
+      $data['positions'] = Position::all();
+      $data['categories'] = Category::all();
+      $data['bases'] = Base::all();
+      $data['sub_locations'] = Sub_location::all();
+      $data['work_places'] = Work_place::all();
+      $data['departments'] = DB::table('departments')->get();
+      return view('employee.edit_employee',$data);
       // return view('employee.edit_employee',compact('employee'));
     }
     public function update_employee(Request $request,$staff_code)
-    {   
+    {
 
       //dd($request->status);
 

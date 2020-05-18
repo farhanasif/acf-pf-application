@@ -39,7 +39,6 @@
               <i class="nav-icon fas fa-users text-green"></i>
               <p>
                 All Employees
-                {{-- <i class="right fas fa-angle-left"></i> --}}
               </p>
             </a>
 
@@ -219,13 +218,6 @@
                   </a>
                 </li>
 
-              {{-- <li class="nav-item">
-              <a href="javascript:void(0)" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Provident Fund</p>
-                </a>
-              </li> --}}
-
               <li class="nav-item">
                 <a href="javascript:void(0)" class="nav-link">
                   <i class="far fa-circle nav-icon text-danger"></i>
@@ -313,13 +305,15 @@
               </a>
             </li>
 
-<!--           <li class="nav-header">MISCELLANEOUS</li>
-          <li class="nav-item">
-            <a href="javascript:void(0)" class="nav-link">
-              <i class="nav-icon fas fa-file"></i>
-              <p>Documentation</p>
-            </a>
-          </li> -->
+            <li class="nav-item ">
+                <a href="{{route('user-management')}}" class="nav-link">
+                    <i class="nav-icon fas fa-users text-warning"></i>
+                    <p>
+                      User Management
+                    </p>
+                </a>
+            </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

@@ -13,8 +13,9 @@
 // Route::get('/update',['as'=>'update','middleware'=>'auth','uses'=>'UpdateController@index']);
 Route::get('/', ['uses'=>'UserController@showLoginForm']);
 
-Route::get('/admin-home',['middleware'=>'admin','uses'=>'AdminController@admin_home']);
-Route::get('/user-home',['middleware'=>'user','uses'=>'AdminController@user_home']);
+Route::get('/admin-home', ['middleware'=>'admin', 'uses'=>'AdminController@admin_home', 'as'=> 'admin-home']);
+
+Route::get('/user_home',['uses'=>'AdminController@user_home']);
 
 Auth::routes();
 
@@ -706,7 +707,7 @@ Route::group(['middleware' => 'admin'], function () {
 		// ---------- END CHANGE PROFILE ROUTE ------------
 
 		//-------------------RECONCILIATION ROUTES-------------------//
-		Route::get('/reconciliation', 'BankController@view_transaction');
+		Route::get('/reconciliation', 'BankController@view_transaction')->name('reconciliation');
 		Route::get('/monthy-bank-book', 'BankController@get_monthly_bank_book');
 		Route::get('/save-monthly-bank-book', 'BankController@save_monthly_bank_book');
 		//-------------------RECONCILIATION ROUTES-------------------//
@@ -719,7 +720,7 @@ Route::group(['middleware' => 'admin'], function () {
 		]);
 
 		Route::get('/admin-home',['middleware'=>'admin','uses'=>'AdminController@admin_home']);
-		Route::get('/user-home',['middleware'=>'user','uses'=>'AdminController@user_home']);
+		//Route::get('/user-home',['middleware'=>'user','uses'=>'AdminController@user_home']);
 
 		// --------CHANGE PROFILE ROUTE---------------------
 		// Route::get('change-profile', [
@@ -745,7 +746,7 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('provident-fund-report', 'ProvidentFundController@providentFund');
 		Route::get('get-fund-data', 'ProvidentFundController@getProvidentFund');
 
-		Route::get('ledger', 'LedgerReportController@view_ledger_report');
+		Route::get('ledger', 'LedgerReportController@view_ledger_report')->name('ledger');
 		Route::get('ledger-report','LedgerReportController@ledger_report');
 
 		Route::get('/monthly-bank-book-excel', 'BankController@get_monthly_bank_book_excel');
@@ -804,4 +805,9 @@ Route::group(['middleware' => 'admin'], function () {
             'uses'		=> 'ReportController@loanInstallmentData',
             'as'		=> 'loan_installment_data'
         ]);
+
+
+        // user management route
+        Route::get('user-management','UserManagementController@index')->name('user-management');
+        Route::post('store-user-management','UserManagementController@store_user_management')->name('store-user-management');
 });

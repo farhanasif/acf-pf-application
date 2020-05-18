@@ -62,7 +62,7 @@
                              document.getElementById('logout-form').submit();">
                 {{ __('Logout') }}
             </a>
-          
+
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
@@ -75,11 +75,11 @@
 
 
 @if(Auth::guest())
-    @include('includes.sidenavbar_root') 
+    @include('includes.sidenavbar_root')
 @elseif(Auth::user()->role==0)
     @include('includes.sidenavbar')
 @elseif(Auth::user()->role==1)
-    @include('includes.sidenavbar_user')     
+    @include('includes.dynamic_menu')
 @endif
   <!-- Main Sidebar Container -->
 
