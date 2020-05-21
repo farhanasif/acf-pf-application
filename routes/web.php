@@ -775,6 +775,27 @@ Route::group(['middleware' => 'admin'], function () {
 					'as'		=> 'loan_installment_data'
 				]);
 
+
+				Route::any('/generate-staff-settlement', [
+					'uses'		=> 'ReportController@generateStaffSettlement',
+					'as'		=> 'generate-staff-settlement'
+				]);
+
+				Route::any('/print-staff-settlement', [
+					'uses'		=> 'ReportController@printStaffSettlement',
+					'as'		=> 'print-staff-settlement'
+				]);
+
+			    Route::any('/generate-employee-history', [
+					'uses'		=> 'ReportController@generateEmployeeHistory',
+					'as'		=> 'generate-employee-history'
+				]);
+
+				Route::any('/print-employee-history', [
+					'uses'		=> 'ReportController@printEmployeeHistory',
+					'as'		=> 'print-employee-history'
+				]);
+
 		/**************************** Arif Khan **************************************/
 
 		/**************************** Loan Seaction route *****************************/

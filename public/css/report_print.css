@@ -1975,10 +1975,10 @@ Version: 1.0.1
 		.p9-ln-21 span:nth-child(3) > span:nth-child(2){	width: 300px; font-size: 12px;}	
 
 		.main-2{border: 1px solid #666;
-			width: 750px;
-			margin: 1px 10px;
+			width: 788px;
 			padding: 5px;
 			float: left;
+			border-radius: 10px;
 		}
 
 		.p9-ln-22 {width: 750px !important;}
@@ -2893,6 +2893,8 @@ Version: 1.0.1
 			
 		}
 
+
+
 		.ptf-table-portfolio{
 			width: 795px;
 			height: auto;
@@ -2903,6 +2905,43 @@ Version: 1.0.1
 			border: 1px solid #000000;
 			
 		}
+
+
+		.settlement{
+			width: 795px;
+			height: auto;
+			/*margin: 10px 0 ;*/
+			padding: 0 ;
+			float: left;
+			border-spacing: 0 ;
+			border: 1px solid #000000;
+			margin-top: 15px;
+			text-align: center;
+			border-radius: 10px;
+			
+		}
+		.settlement-table{
+			width: 795px;
+			height: auto;
+			/*margin: 10px 0 ;*/
+			padding: 0 ;
+			float: left;
+			border-spacing: 0 ;
+			border: 1px solid #000000;
+			text-align: center;
+		}
+		.settlement-table tbody tr {
+		    margin: 0;
+		    padding: 0;
+		    border: 1px solid #000;
+		}
+		.settlement tbody tr {
+		    margin: 0;
+		    padding: 0;
+		    border: 1px solid #000;
+		    height: 40px;
+		}
+
 		.ptf-table-portfolio tbody tr {
 		    margin: 0;
 		    padding: 0;
@@ -3394,13 +3433,116 @@ Version: 1.0.1
 		    width: 35px;
 		    padding: 4px;
 		    text-align: left;
-		    font-size: 11px;
+		    font-size: 15px;
+		    font-family: 'helvetica';
+		    border: none;
+		    border-right: 1px solid #000;
+		    /* border-bottom: 1px solid #000;*/
+		}
+		.settlement tr th:nth-child(1), .settlement tr td:nth-child(1) {
+			text-align: center;
+			margin: 0;
+		    width: 260px;
+		    padding: 4px;
+		    font-size: 15px;
 		    font-family: 'helvetica';
 		    border: none;
 		    border-right: 1px solid #000;
 		    /* border-bottom: 1px solid #000;*/
 		}
 
+		.settlement-table tr th:nth-child(1), .settlement-table tr td:nth-child(1) {
+			text-align: left;
+			margin: 0;
+		    width: 260px;
+		    padding: 4px;
+		    font-size: 13px;
+		    font-family: 'helvetica';
+		    border: none;
+		    border-right: 1px solid #000;
+		     border-bottom: 1px solid #000;
+		}
+	 .settlement-table tr th:nth-child(2), .settlement-table tr td:nth-child(2) {
+	    margin: 0;
+	    width: 80px;
+	    padding: 4px;
+	    text-align: center;
+	    font-size: 13px;
+	    font-family: 'helvetica';
+	    border: none;
+	    border-right: 1px solid #000;
+	     border-bottom: 1px solid #000;
+	    /* border-bottom: 1px solid #000; */
+	   }
+	   .settlement tr th:nth-child(2), .settlement tr td:nth-child(2) {
+	    margin: 0;
+	    width: 80px;
+	    padding: 4px;
+	    text-align: center;
+	    font-size: 15px;
+	    font-family: 'helvetica';
+	    border: none;
+	    border-right: 1px solid #000;
+	    /* border-bottom: 1px solid #000; */
+	   }
+		.settlement tr th:nth-child(5),		.settlement tr td:nth-child(5) {
+				    margin: 0;
+				    width: 120px;
+				    padding: 4px;
+				    text-align: center;
+				    font-size: 15px;
+				    font-family: 'helvetica';
+				    border: none;
+				   /* border-right: 1px solid #000;*/
+		}
+		.settlement-table tr th:nth-child(5),		.settlement-table tr td:nth-child(5) {
+				    margin: 0;
+				    width: 120px;
+				    padding: 4px;
+				    text-align: right;
+				    font-size: 13px;
+				    font-family: 'helvetica';
+				    border: none;
+				     border-bottom: 1px solid #000;
+				   /* border-right: 1px solid #000;*/
+		}
+		.settlement-table tr th:nth-child(3),		.settlement-table tr td:nth-child(3),
+		.settlement-table tr th:nth-child(4),		.settlement-table tr td:nth-child(4),
+		.settlement-table tr th:nth-child(6),		.settlement-table tr td:nth-child(6),
+		.settlement-table tr th:nth-child(7),		.settlement-table tr td:nth-child(7),
+		.settlement-table tr th:nth-child(8),		.settlement-table tr td:nth-child(8),
+		.settlement-table tr th:nth-child(9),		.settlement-table tr td:nth-child(9),
+		.settlement-table tr th:nth-child(11),		.settlement-table tr td:nth-child(11),
+		.settlement-table tr th:nth-child(12),		.settlement-table tr td:nth-child(12),
+		.settlement-table tr th:nth-child(10),		.settlement-table tr td:nth-child(10){
+				margin: 0;
+			    width: 110px;
+			    padding: 4px;
+			    text-align: center;
+			    font-size: 13px;
+			    font-family: 'helvetica';
+			    border: none;
+			    border-right: 1px solid #000;
+			     border-bottom: 1px solid #000;
+		}
+		.settlement tr th:nth-child(3),		.settlement tr td:nth-child(3),
+		.settlement tr th:nth-child(4),		.settlement tr td:nth-child(4),
+		.settlement tr th:nth-child(6),		.settlement tr td:nth-child(6),
+		.settlement tr th:nth-child(7),		.settlement tr td:nth-child(7),
+		.settlement tr th:nth-child(8),		.settlement tr td:nth-child(8),
+		.settlement tr th:nth-child(9),		.settlement tr td:nth-child(9),
+		.settlement tr th:nth-child(11),		.settlement tr td:nth-child(11),
+		.settlement tr th:nth-child(12),		.settlement tr td:nth-child(12),
+		.settlement tr th:nth-child(10),		.settlement tr td:nth-child(10){
+				margin: 0;
+			    width: 110px;
+			    padding: 4px;
+			    text-align: center;
+			    font-size: 15px;
+			    font-family: 'helvetica';
+			    border: none;
+			    border-right: 1px solid #000;
+		}
 		.client_protfolio {
 			border: 1px solid #888 !important;
 			/*width: 895px !important;*/

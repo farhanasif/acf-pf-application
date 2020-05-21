@@ -114,4 +114,67 @@ class ReportController extends Controller
               ->get();
         return json_encode($data);
     }
+
+
+    public function generateStaffSettlement(Request $request)
+    {
+      $employees = DB::table('employees')->get();
+      return view('report.staff_settlement',["employees"=>$employees]);
+    }
+
+    public function printStaffSettlement(Request $request)
+    {
+        $staff_code = $request->staff;
+
+        $data = DB::select("SELECT employees.*, SUM(pf_deposit.own_pf) AS employee_contribution, SUM(pf_deposit.organization_pf) AS employer_contribution, interests.own AS interest_percent,
+          loans.loan_amount, loans.monthly_installment, loans.monthly_interest, loans.interest, loans.issue_date
+          FROM employees
+          INNER JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
+          INNER JOIN interests ON interests.staff_code = pf_deposit.staff_code
+          INNER JOIN loans ON loans.staff_code = interests.staff_code
+          WHERE employees.staff_code = ".$staff_code);
+        // print_r($data);exit();
+        $loan_details = DB::select("SELECT SUM((CASE WHEN (loan_installment.payment_type = 'paid') THEN loan_installment.payment ELSE 0 END)) AS with_interest_paid_loan, 
+                 SUM((CASE WHEN (loan_installment.payment_type = 'Due') THEN loan_installment.payment ELSE 0 END)) AS with_interest_due_loan,
+                 SUM((CASE WHEN (loan_installment.payment_type = 'paid') THEN loans.monthly_installment ELSE 0 END)) AS without_interest_paid_loan, 
+                 SUM((CASE WHEN (loan_installment.payment_type = 'Due') THEN loans.monthly_installment ELSE 0 END)) AS without_interest_due_loan,
+                 SUM((CASE WHEN (loan_installment.payment_type = 'paid') THEN 1 ELSE 0 END)) AS num_of_paid_installment,
+                 SUM((CASE WHEN (loan_installment.payment_type = 'Due') THEN 1 ELSE 0 END)) AS num_of_due_installment
+                 FROM loan_installment
+                 INNER JOIN loans ON loans.staff_code = loan_installment.staff_code
+                 WHERE loan_installment.staff_code = ".$staff_code); 
+
+        return view('report.print_staff_settlement',['data'=>$data,'loan_details'=>$loan_details]);
+    }
+
+    public function generateEmployeeHistory(Request $request)
+    {
+      $employees = DB::table('employees')->get();
+      return view('report.employee_history',["employees"=>$employees]);
+    }
+
+    public function printEmployeeHistory(Request $request)
+    {
+        $staff_code = $request->staff;
+
+        $data = DB::select("SELECT employees.*, SUM(pf_deposit.own_pf) AS employee_contribution, SUM(pf_deposit.organization_pf) AS employer_contribution, interests.own AS interest_percent,
+          loans.loan_amount, loans.monthly_installment, loans.monthly_interest, loans.interest, loans.issue_date
+          FROM employees
+          INNER JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
+          INNER JOIN interests ON interests.staff_code = pf_deposit.staff_code
+          INNER JOIN loans ON loans.staff_code = interests.staff_code
+          WHERE employees.staff_code = ".$staff_code);
+        // print_r($data);exit();
+        $loan_details = DB::select("SELECT SUM((CASE WHEN (loan_installment.payment_type = 'paid') THEN loan_installment.payment ELSE 0 END)) AS with_interest_paid_loan, 
+                 SUM((CASE WHEN (loan_installment.payment_type = 'Due') THEN loan_installment.payment ELSE 0 END)) AS with_interest_due_loan,
+                 SUM((CASE WHEN (loan_installment.payment_type = 'paid') THEN loans.monthly_installment ELSE 0 END)) AS without_interest_paid_loan, 
+                 SUM((CASE WHEN (loan_installment.payment_type = 'Due') THEN loans.monthly_installment ELSE 0 END)) AS without_interest_due_loan,
+                 SUM((CASE WHEN (loan_installment.payment_type = 'paid') THEN 1 ELSE 0 END)) AS num_of_paid_installment,
+                 SUM((CASE WHEN (loan_installment.payment_type = 'Due') THEN 1 ELSE 0 END)) AS num_of_due_installment
+                 FROM loan_installment
+                 INNER JOIN loans ON loans.staff_code = loan_installment.staff_code
+                 WHERE loan_installment.staff_code = ".$staff_code); 
+
+        return view('report.print_employee_history',['data'=>$data,'loan_details'=>$loan_details]);
+    }
 }

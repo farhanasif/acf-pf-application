@@ -304,6 +304,18 @@
                   <p>PF Balance Sheet</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ url('/generate-staff-settlement') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Staff Settlement</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('/generate-employee-history') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Employee History</p>
+                </a>
+              </li>
             </ul>
           </li>
 
