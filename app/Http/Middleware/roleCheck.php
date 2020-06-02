@@ -1,12 +1,28 @@
 <?php
-namespace App\Helpers;
+
+namespace App\Http\Middleware;
+
+use App\Providers\RouteServiceProvider;
+use Closure;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
 
-class RoleHelper
+class roleCheck
 {
-    public static function checkPermission($url, $role)
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @param  string|null  $guard
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
     {
+        $url = $request->path();
+        //$role = Auth::user()->role;
+        $role = 2;
         $query = "SELECT * FROM (
             SELECT mp.menu_id AS link_id, m.route, m.name
             FROM menu_permissions mp
@@ -24,12 +40,16 @@ class RoleHelper
             ) AS t WHERE    '".$url."' LIKE CONCAT('%', t.route, '%')";
         $result = DB::select($query);
         if($result){
-            //return $result[0]->link_id;
-            return 'grant';
+            return $next($request);
         }
         else{
-            return "block";
+            return redirect('/');
         }
-        
+
+        //  if (Auth::check() && Auth::user()->role==1 ) {
+        //     return $next($request);
+        // }
+        //return redirect('/');
     }
 }
+

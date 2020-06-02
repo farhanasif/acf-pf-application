@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class TestController extends Controller
 {
@@ -14,12 +15,7 @@ class TestController extends Controller
     public function __construct(Request $request)
     {
         $this->middleware('auth');
-        // $url = $request->path(); //roleman
-        // $get_user_role = 2; //get user role from auth info, mostly from users table
-        // $someval = \RoleHelper::checkPermission($url, $get_user_role);
-        // if($someval != 'grant'){
-        //     Route::redirect('/admin-home');
-        // }
+        $this->middleware('rolecheck');
 
     }
 
@@ -30,9 +26,12 @@ class TestController extends Controller
      */
     public function roleman(Request $request)
     {
-        $url = $request->path(); //roleman
-        $get_user_role = 2; //get user role from auth info, mostly from users table
-        $someval = \RoleHelper::checkPermission($url, $get_user_role);
-        return $someval;
+        return 'solid 22 access granted';
+    }
+
+    public function soli(Request $request)
+    {
+        return 'soli access granted';
+        
     }
 }
