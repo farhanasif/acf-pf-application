@@ -17,6 +17,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/roleman/solid/{id}', 'TestController@roleman')->name('home');
+
 // Route::get('/report', function () {
 //     return view('report');
 // });
