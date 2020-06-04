@@ -17,9 +17,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/roleman/solid/{id}', 'TestController@roleman')->name('home');
-Route::get('/roleman/soli', 'TestController@soli')->name('home');
+Route::get('/roleman/solid/{id}', 'TestController@roleman')->middleware('rolecheck');
+Route::get('/roleman/soli', 'TestController@soli')->middleware('rolecheck');
+Route::post('/roleman','TestController@samplepost')->name('roleman');
 
+	
 // Route::get('/report', function () {
 //     return view('report');
 // });
@@ -50,7 +52,7 @@ Route::get('/roleman/soli', 'TestController@soli')->name('home');
 // Mater Data Department Category ............. 
 Route::group(['middleware' => 'admin'], function () {
 //category add edit update delete......
-		Route::get('/category/add-category', [
+		Route::get('/category/add-category	', [
 			'uses'		=> 'MasterController@add_category',
 			'as'		=> 'add-category'
 		]);

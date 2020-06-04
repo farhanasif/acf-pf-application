@@ -15,7 +15,7 @@ class TestController extends Controller
     public function __construct(Request $request)
     {
         $this->middleware('auth');
-        $this->middleware('rolecheck');
+        //$this->middleware('rolecheck');
 
     }
 
@@ -26,12 +26,18 @@ class TestController extends Controller
      */
     public function roleman(Request $request)
     {
-        return 'solid 22 access granted';
+        return view('simplepost');
     }
 
     public function soli(Request $request)
     {
         return 'soli access granted';
+        
+    }
+
+    public function samplepost(Request $request)
+    {
+        return 'we got the request';
         
     }
 }
