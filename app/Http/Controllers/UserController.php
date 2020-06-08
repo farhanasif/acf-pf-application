@@ -68,9 +68,9 @@ class UserController extends Controller
     public function show_add_user()
     {
 
-      $employees = DB::table('employees')->get();
-
-       return view('user.add_user',compact('employees'));
+      $data['employees'] = DB::table('employees')->get();
+      $data['user_roles'] = DB::table('user_roles')->get();
+       return view('user.add_user',$data);
     }
 
     public function store_add_user(Request $request)
@@ -188,11 +188,10 @@ class UserController extends Controller
 
     public function edit_user($id)
     {
-       $users = User::find($id);
-       $alluserdata = User::get();
-      //  print_r($alluserdata);
-      //  exit;
-       return view('user.edit_user',compact('users','alluserdata'));
+       $data['users'] = User::find($id);
+       $data['alluserdata'] = User::get();
+       $data['user_roles'] = DB::table('user_roles')->get();
+       return view('user.edit_user',$data);
     }
 
     public function update_user(Request $request, $id)

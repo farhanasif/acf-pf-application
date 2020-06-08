@@ -74,8 +74,8 @@
           <label for="role" class="col-form-label col-md-2 col-sm-3 label-align">Role</label>
 			    <div class="col-md-3 col-sm-3 ">
 	            <select class="form-control select2bs4" name="role">
-                  @foreach ($alluserdata as $row)
-                  <option <?php echo ($row->role) ? "selected" : ""; ?> value="{{$row->role}}">{{$row->role}}</option>
+                  @foreach ($user_roles as $role)
+                    <option <?php echo ($role->role) ? "selected" : ""; ?> value="{{$role->role}}">{{$role->role}}</option>
                   @endforeach
 	            </select>
 			    </div>

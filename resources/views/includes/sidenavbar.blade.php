@@ -232,6 +232,19 @@
                 </a>
               </li>
 
+              <li class="nav-item">
+                <a href="{{ url('/generate-staff-settlement') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon text-danger"></i>
+                  <p>Staff Settlement</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('/generate-employee-history') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon text-danger"></i>
+                  <p>Employee History</p>
+                </a>
+              </li>
+
              <li class="nav-item">
                 <a href="{{ url('/loan-installment-report') }}" class="nav-link">
                   <i class="far fa-circle nav-icon text-danger"></i>

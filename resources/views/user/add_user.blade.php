@@ -7,13 +7,13 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Add Employeer Information</h1>
+        <h1>Add User Information</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
           <li class="breadcrumb-item active"><a href="javascript:void(0)">Employeer</a></li>
-          <li class="breadcrumb-item active"><a href="javascript:void(0)">Add Employeer Information</a></li>
+          <li class="breadcrumb-item active"><a href="javascript:void(0)">Add User Information</a></li>
         </ol>
       </div>
     </div>
@@ -21,44 +21,18 @@
 </section>
    <div class="card card-success card-outline">
         <div class="card-header">
-          <h3 class="card-title">Add Employeer Information</h3>
+          <h3 class="card-title">Add User Information</h3>
         </div>
 
 
-        <div class="col-md-6 offset-3 mt-2">
-          @if ($message = Session::get('success'))
-              <div class="alert alert-success alert-block text-center">
-              <button type="button" class="close" data-dismiss="alert">×</button>
-              <strong>{{ $message }}</strong>
-              </div>
-          @endif
-
-          @if ($message = Session::get('danger'))
-            <div class="alert alert-danger alert-block text-center">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>{{ $message }}</strong>
-            </div>
-          @endif
-
-          @if ($errors->any())
-              <div class="alert alert-warning">
-              <button type="button" class="close" data-dismiss="alert">×</button>
-                  <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                  <ul>
-                      @foreach ($errors->all() as $error)
-                          <li>{{ $error }}</li>
-                      @endforeach
-                  </ul>
-              </div>
-          @endif
-      </div>
+            @include('message')
 
         <div class="card-body">
           <!-- /.card -->
             <!-- Horizontal Form -->
            <form class="form-horizontal form-label-left" action="{{route('save-user')}}" method="post">
              @csrf
-   
+
                <div class="row">
                   <div class="col-md-6">
                     <div class="form-group row">
@@ -122,8 +96,9 @@
                         <div class="col-md-8 col-sm-3 ">
                           <select class="form-control select2bs4" name="role">
                             <option value="">--select--</option>
-                            <option value="0">0</option>
-                            <option value="1">1</option>
+                             @foreach ($user_roles as $role)
+                                <option value="{{ $role->value }}"> {{ $role->role_name }} </option>
+                             @endforeach
                          </select>
                         </div>
                       </div>
@@ -142,7 +117,7 @@
                           </div>
                       </div>
 
-                                          
+
                     <div class="form-group row">
                       <label for="role" class="col-form-label col-md-3 col-sm-3 label-align offset-1">Verified</label>
                       <div class="col-md-8 col-sm-8 ">
@@ -154,7 +129,7 @@
                       </div>
                     </div>
 
-                    </div> 
+                    </div>
                     <div class="form-group">
                         <div class="">
                           <button style="margin-left:139px;" type="submit" class="btn btn-success">Submit</button>
