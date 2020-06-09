@@ -144,7 +144,7 @@ class EmployeeController extends Controller
                       'category' =>$row[4],
                       'level' =>$row[5],
                       'joining_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['7'])->format('Y-m-d'),
-                    // 'joining_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[7]),
+                    //'joining_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[7]),
                       // 'ending_date' =>date('Y-m-d H:m:s', strtotime($row[9])),
                       'ending_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') != "00/00/0000" ?  \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') : '00/00/0000' ,
                       'base' =>$row[10],
@@ -167,13 +167,13 @@ class EmployeeController extends Controller
           }
       }
 
-        // dd($insert_data);
-        // exit;
+        dd($insert_data);
+        exit;
 
-      if (!empty($insert_data)) {
-          DB::table('employees')->insert($insert_data);
-          return back()->with('success','Employees batch import successfully');
-      }
+    //   if (!empty($insert_data)) {
+    //       DB::table('employees')->insert($insert_data);
+    //       return back()->with('success','Employees batch import successfully');
+    //   }
 
       // if (!empty($update_data)) {
       //   DB::table('employees')->update($update_data);
@@ -187,6 +187,24 @@ class EmployeeController extends Controller
 
     public function save_employee(Request $request)
     {
+       $this->validate($request,[
+        'staff_code' => 'required',
+        'first_name' => 'required',
+        'last_name' => 'required',
+        'position' => 'required',
+        'department_code' => 'required',
+        'category' => 'required',
+        'level' => 'required',
+        'base' => 'required',
+        'work_place' => 'required',
+        'sub_location' => 'required',
+        'basic_salary' => 'required',
+        'gross_salary' => 'required',
+        'pf_amount' => 'required',
+        'joining_date' => 'required',
+        'ending_date' => 'required',
+       ]);
+
        // $employees = new Employee;
        // $employees->staff_code = $request->staff_code;
        // $employees->trimmed = $request->staff_code;
@@ -210,24 +228,6 @@ class EmployeeController extends Controller
        // $employees->updated_by = Auth::user()->id;
        // $employees->save();
        // return back();
-
-       $this->validate($request,[
-        'staff_code' => 'required',
-        'first_name' => 'required',
-        'last_name' => 'required',
-        'position' => 'required',
-        'department_code' => 'required',
-        'category' => 'required',
-        'level' => 'required',
-        'base' => 'required',
-        'work_place' => 'required',
-        'sub_location' => 'required',
-        'basic_salary' => 'required',
-        'gross_salary' => 'required',
-        'pf_amount' => 'required',
-        'joining_date' => 'required',
-        'ending_date' => 'required',
-       ]);
 
        $data = array();
        $data['staff_code'] = $request->staff_code;
@@ -276,11 +276,6 @@ class EmployeeController extends Controller
             LEFT JOIN interests ON interests.staff_code = pf_deposit.staff_code
             WHERE pf_deposit.staff_code='".$staff_code."' ORDER BY deposit_date DESC");
 
-            // dd($interests_and_pf_deposit);
-
-            // echo($interests_and_pf_deposit[0]->interests_id);
-            // exit;
-
        $data['loan_adjustments'] = DB::select("SELECT  payment, pay_date, payment_type
                                    FROM loan_installment
                                    WHERE staff_code ='".$staff_code."' ORDER BY pay_date ASC");
@@ -299,8 +294,6 @@ class EmployeeController extends Controller
       $data['departments'] = DB::table('departments')->get();
 
       return view('employee.employee_details',$data);
-
-      // return view('employee.employee_details',compact('employees','pf_deposits','total_pf_amounts'));
     }
 
 
@@ -314,14 +307,11 @@ class EmployeeController extends Controller
       $data['sub_locations'] = Sub_location::all();
       $data['work_places'] = Work_place::all();
       $data['departments'] = DB::table('departments')->get();
+
       return view('employee.edit_employee',$data);
-      // return view('employee.edit_employee',compact('employee'));
     }
     public function update_employee(Request $request,$staff_code)
     {
-
-      //dd($request->status);
-
       $data = array();
       $data['staff_code'] = $request->staff_code;
       $data['first_name'] = $request->first_name;

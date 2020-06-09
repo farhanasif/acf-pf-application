@@ -68,7 +68,7 @@ body{
               <div class="col-md-4 col-md-auto login-box">
                 {{-- <h1 class="text-center wdi-red">Login</h1> --}}
                 <div class="text-center">
-                  <img src="{{asset('images/logo/acf2acf.jpg')}}" style="width:170px;" alt="">
+                  <img src="{{asset('images/logo/acf-pf.png')}}" style="width:170px;" alt="">
                 </div>
                 <hr>
                 <form method="POST" action="{{ route('login') }}">
