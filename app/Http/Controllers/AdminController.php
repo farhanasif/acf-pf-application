@@ -20,7 +20,7 @@ class AdminController extends Controller
     //  exit;
 
         $data['total_balance_in_account_from_pf_deposit'] = DB::table('pf_deposit')->sum('total_pf');
-        $data['total_balance_in_account_from_transaction'] = DB::table('pf_deposit')->sum('total_pf');
+        $data['total_balance_in_account_from_transaction'] = DB::table('transactions')->sum('amount');
 
         $data['total_employees'] = DB::table("employees")->count('staff_code');
         $data['total_loans'] = DB::select('SELECT COUNT(DISTINCT staff_code) AS total_loan, SUM(loan_amount) AS total_loan_amount FROM loans');
