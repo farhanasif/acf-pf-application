@@ -132,7 +132,7 @@
                 <div class="progress-group">
                   Employee Under Loan
                 <span class="float-right">
-                  <b> 
+                  <b>
                    @foreach ($total_loans as $item)
                     {{$item->total_loan}}
                    @endforeach
@@ -168,7 +168,7 @@
               <div class="col-sm-3 col-6">
                 <div class="description-block border-right">
                   {{-- <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 40%</span> --}}
-                  <h5 class="description-header">{{number_format($employee_contribution + $employer_contribution)}} TK</h5>
+                  <h5 class="description-header">{{number_format($total_balance_in_account_from_pf_deposit + $total_balance_in_account_from_transaction)}} TK</h5>
                   <span class="description-text">TOTAL BALANCE IN ACCOUNT</span>
                 </div>
                 <!-- /.description-block -->
@@ -191,7 +191,7 @@
                 <div class="description-block border-right">
                   {{-- <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span> --}}
                   <h5 class="description-header">
-                    
+
                     @foreach ($total_loans as $item)
                         {{ number_format($item->total_loan_amount)}} TK
                     @endforeach
@@ -221,14 +221,14 @@
     <!-- /.row -->
 
     <!-- Main row -->
- 
+
     <!-- /.row -->
   </div><!--/. container-fluid -->
 </section>
 <!-- /.content -->
-      
+
 @endsection
 
 @section('customjs')
-  <script src="{{asset('theme/dist/js/pages/dashboard2.js')}}"></script> 
+  <script src="{{asset('theme/dist/js/pages/dashboard2.js')}}"></script>
 @endsection
