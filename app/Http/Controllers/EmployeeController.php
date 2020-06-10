@@ -131,7 +131,7 @@ class EmployeeController extends Controller
         if($ext == "xlsx" || $ext == "csv") {
         $result = Excel::toArray(new EmployeesImport, $upload);
 
-        foreach ($result as $key => $value) {
+        foreach ($result as  $value) {
           foreach ($value as $row) {
                   // try {
                     $insert_data[] =array(
@@ -167,13 +167,13 @@ class EmployeeController extends Controller
           }
       }
 
-        dd($insert_data);
-        exit;
+        // dd($insert_data);
+        // exit;
 
-    //   if (!empty($insert_data)) {
-    //       DB::table('employees')->insert($insert_data);
-    //       return back()->with('success','Employees batch import successfully');
-    //   }
+      if (!empty($insert_data)) {
+          DB::table('employees')->insert($insert_data);
+          return back()->with('success','Employees batch import successfully');
+      }
 
       // if (!empty($update_data)) {
       //   DB::table('employees')->update($update_data);

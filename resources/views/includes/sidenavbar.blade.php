@@ -225,7 +225,7 @@
               <li class="nav-item">
                 <a href="{{ url('generate-pf-balance-sheet') }}" class="nav-link">
                   <i class="far fa-circle nav-icon text-danger"></i>
-                  <p>PF Balance Sheet</p>
+                  <p>PF Balance Sharing</p>
                 </a>
               </li>
 

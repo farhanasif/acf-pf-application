@@ -25,7 +25,7 @@ class ProvidentFundController extends Controller
 
     public function add_provident_fund()
     {
-      
+
       $provident_funds = DB::table('employees')->get();
       return view('provident_fund.add_provident_fund',compact('provident_funds'));
     }
@@ -120,7 +120,7 @@ class ProvidentFundController extends Controller
 
      public function getProvidentFund()
      {
-        // $from = $request->from_date; 
+        // $from = $request->from_date;
         // echo $from;
         // exit;
       $results = DB::select('select pf.*,  e.`basic_salary`, e.`gross_salary`, date_format(pf.`created_at`, "%Y%m") as PaymentMonth, e.`first_name`, e.`last_name`, e.`category`, e.`level`, e.`joining_date`, e.`ending_date`, e.`work_place`
@@ -161,11 +161,15 @@ class ProvidentFundController extends Controller
             );
         }
      }
+
+    //  dd($insert_data);
+    //  exit;
+
         if (!empty($insert_data)) {
             DB::table('pf_deposit')->insert($insert_data);
         }
           return back()->with('success','Provident batch import successfully');
       }
-  
+
     }
 }

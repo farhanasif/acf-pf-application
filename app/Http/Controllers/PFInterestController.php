@@ -16,13 +16,13 @@ class PFInterestController extends Controller
        $employees = DB::table('employees')->get();
        return view('pf_interest.add_pf_interest',compact('employees'));
      }
- 
+
      public function all_pf_interest()
      {
        $all_pf_interests = Interest::get();
        return view('pf_interest.all_pf_interest',compact('all_pf_interests'));
      }
- 
+
      public function save_pf_interest(Request $request)
      {
            $this->validate($request,[
@@ -32,7 +32,7 @@ class PFInterestController extends Controller
              'own' =>'required',
              'organization' =>'required',
            ]);
- 
+
            $pf_interests = new Interest;
            $pf_interests->interest_date = $request->interest_date;
            $pf_interests->interest_source = $request->interest_source;
@@ -40,7 +40,7 @@ class PFInterestController extends Controller
            $pf_interests->own = $request->own;
            $pf_interests->organization = $request->organization;
            $pf_interests->save();
- 
+
            return redirect()->back()->with('success','PF interest added successfully.');
      }
 
@@ -61,7 +61,7 @@ class PFInterestController extends Controller
       if($ext == "xlsx" || $ext == "csv") {
       // $result = Excel::import(new Pf_interestsImport, $upload);
       $result = Excel::toArray(new Pf_interestsImport, $upload);
-      
+
     foreach ($result as $key => $value) {
       foreach ($value as $row) {
 
@@ -73,12 +73,15 @@ class PFInterestController extends Controller
                 'own' =>$row[3],
                 'organization' =>$row[4],
                 );
-           } 
+           }
         catch (\Exception $e) {
             return redirect()->back()->with('error','Somthing went wrong!');
-        }      
+        }
       }
    }
+    // dd($insert_data);
+    // exit;
+
 
       if (!empty($insert_data)) {
           DB::table('interests')->insert($insert_data);
@@ -86,14 +89,14 @@ class PFInterestController extends Controller
       }
      }
     }
- 
+
      public function edit_pf_interest($id)
      {
        $employees = DB::table('employees')->get();
        $pf_interest = Interest::find($id);
        return view('pf_interest.edit_pf_interest',compact('pf_interest','employees'));
      }
- 
+
      public function update_pf_interest(Request $request,$id)
      {
            $this->validate($request,[
@@ -103,7 +106,7 @@ class PFInterestController extends Controller
              'own' =>'required',
              'organization' =>'required',
            ]);
- 
+
            $pf_interests = Interest::find($id);
            $pf_interests->interest_date = $request->interest_date;
            $pf_interests->interest_source = $request->interest_source;
@@ -111,11 +114,11 @@ class PFInterestController extends Controller
            $pf_interests->own = $request->own;
            $pf_interests->organization = $request->organization;
            $pf_interests->save();
-          
- 
+
+
            return redirect()->route('all-pf-interest')->with('success','PF interest updated successfully.');
      }
- 
+
      public function delete_pf_interest($id)
      {
       $pf_interest = Interest::find($id);

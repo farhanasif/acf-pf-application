@@ -139,6 +139,9 @@ class LedgerReportController extends Controller
         $data['lreport'] = DB::select("SELECT DISTINCT(DATE(deposit_date)) AS deposit_date, DATE_FORMAT(deposit_date, '%b %Y') AS month_name
                                 FROM pf_deposit
                                 ORDER BY deposit_date");
+
+// dd($data['lreport']);
+// exit;
         $data['positions'] = DB::table('positions')->get();
         $data['departments'] = DB::table('departments')->get();
         $data['subLocations'] = DB::table('sub_locations')->get();
