@@ -796,6 +796,36 @@ Route::group(['middleware' => 'admin'], function () {
 					'as'		=> 'print-employee-history'
 				]);
 
+
+			    Route::any('/income-expenditure-report', [
+					'uses'		=> 'ReportController@incomeExpenditureReport',
+					'as'		=> 'income-expenditure-report'
+				]);
+
+				Route::any('/print-income-expenditure-report', [
+					'uses'		=> 'ReportController@printIncomeExpenditureReport',
+					'as'		=> 'print-income-expenditure-report'
+				]);
+
+			    Route::any('/receipts-payment-statement', [
+					'uses'		=> 'ReportController@receiptsPaymentStatement',
+					'as'		=> 'receipts-payment-statement'
+				]);
+
+				Route::any('/print-receipts-payment-statement', [
+					'uses'		=> 'ReportController@printReceiptsPaymentStatement',
+					'as'		=> 'print-receipts-payment-statement'
+				]);
+
+			    Route::any('/financial-statement', [
+					'uses'		=> 'ReportController@financialStatement',
+					'as'		=> 'financial-statement'
+				]);
+
+				Route::any('/print-financial-statement', [
+					'uses'		=> 'ReportController@printFinancialStatement',
+					'as'		=> 'print-financial-statement'
+				]);
 		/**************************** Arif Khan **************************************/
 
 		/**************************** Loan Seaction route *****************************/

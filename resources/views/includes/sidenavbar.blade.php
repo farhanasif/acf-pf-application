@@ -316,6 +316,24 @@
                   <p>Employee History</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ url('/income-expenditure-report') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Income & Expenditure</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('/receipts-payment-statement') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Receipts & Payments</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('/financial-statement') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Financial Statement</p>
+                </a>
+              </li>
             </ul>
           </li>
 
