@@ -36,7 +36,7 @@
                     <span>Action Contre La Faim <br/>
                     House-23, Road- 113/A, Gulshan-2, Dhaka-1212, Bangladesh </span></b>
                   </p>
-                  <img src="{{asset('images/logo/acf2acf.jpg')}}" alt="acf" style="width: 200px;height: 100px;margin-left: auto;margin-right: auto;">
+                  <img src="{{asset('images/logo/acf-pf.png')}}" alt="acf" style="width: 200px;height: 100px;margin-left: auto;margin-right: auto;">
                   <p class="ptf-ln-top-6">
                     <span></span>
                     <b><span></span>
@@ -46,12 +46,12 @@
                   <p class="ptf-ln-top-4" style="">
                     <span><b>Workplace</b></span>
                     <b><span>:</span>
-                    <span>{{ $data[0]->work_place }}</span></b>
+                    <span>{{ $userInfo[0]->work_place }}</span></b>
                   </p>
                   <p class="ptf-ln-top-6">
                     <span><b>Project Subdivision</b>
                       <b><span>:</span>
-                      <span>{{ $data[0]->sub_location }}</span>
+                      <span>{{ $userInfo[0]->sub_location }}</span>
                       </b>
                     </p>
 
@@ -65,54 +65,54 @@
                     <p class="ptf-ln-top-5">
                       <span>Staff Code</span>
                       <b><span>:</span>
-                      <span>{{ $data[0]->staff_code }}</span></b>
+                      <span>{{ $userInfo[0]->staff_code }}</span></b>
                     </p>
                     <p class="ptf-ln-top-6">
                       <span>First Name</span>
                       <b><span>:</span>
-                      <span>{{ $data[0]->first_name }}</span>
+                      <span>{{ $userInfo[0]->first_name }}</span>
                       </b>
                     </p>
                     <p class="ptf-ln-top-6">
                       <span>Last Name</span>
                       <b><span>:</span>
-                      <span>{{ $data[0]->last_name }}</span>
+                      <span>{{ $userInfo[0]->last_name }}</span>
                       </b>
                     </p>
                     <p class="ptf-ln-top-6">
                       <span>Designation</span>
                       <b><span>:</span>
-                      <span>{{ $data[0]->position }}</span>
+                      <span>{{ $userInfo[0]->position }}</span>
                       </b>
                     </p>
                     <p class="ptf-ln-top-6">
                       <span>Level</span>
                       <b><span>:</span>
-                      <span>{{ $data[0]->level }}</span>
+                      <span>{{ $userInfo[0]->level }}</span>
                       </b>
                     </p>
                     <p class="ptf-ln-top-6">
                       <span>Department</span>
                       <b><span>:</span>
-                      <span>{{ $data[0]->department_code }}</span>
+                      <span>{{ $userInfo[0]->department_code }}</span>
                       </b>
                     </p>
                     <p class="ptf-ln-top-6">
                       <span>Entry Date</span>
                       <b><span>:</span>
-                      <span>{{ $data[0]->joining_date }}</span>
+                      <span>{{ $userInfo[0]->joining_date }}</span>
                       </b>
                     </p>
                     <p class="ptf-ln-top-6">
                       <span>Contract start Date</span>
                       <b><span>:</span>
-                      <span>{{ $data[0]->joining_date }}</span>
+                      <span>{{ $userInfo[0]->joining_date }}</span>
                       </b>
                     </p>
                     <p class="ptf-ln-top-6">
                       <span>Contract end Date</span>
                       <b><span>:</span>
-                      <span>{{ $data[0]->ending_date }}</span>
+                      <span>{{ $userInfo[0]->ending_date }}</span>
                       </b>
                     </p>
                   </div>
@@ -136,24 +136,24 @@
             <tbody>
               <tr><td>Provident fund Balance without interest</td>
               <td>10</td>
-              <td>{{ $data[0]->employee_contribution }}</td>
-              <td>{{ $data[0]->employer_contribution }}</td>
-              <td>{{ $data[0]->employee_contribution + $data[0]->employer_contribution }}</td></tr>
+              <td>{{ $userInfo[0]->employee_contribution }}</td>
+              <td>{{ $userInfo[0]->employer_contribution }}</td>
+              <td>{{ $userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution }}</td></tr>
               <tr><td>Interest received after Audit</td>
               <td>2</td>
-              <td>{{ $data[0]->employee_contribution * ($data[0]->interest_percent/100) }}</td>
-              <td>{{ $data[0]->employer_contribution * ($data[0]->interest_percent/100) }}</td>
-              <td>{{ ($data[0]->employee_contribution * ($data[0]->interest_percent/100)) + ($data[0]->employer_contribution * ($data[0]->interest_percent/100)) }}</td></tr>
+              <td>{{ $userInfo[0]->employee_contribution * ($userInfo[0]->interest_percent/100) }}</td>
+              <td>{{ $userInfo[0]->employer_contribution * ($userInfo[0]->interest_percent/100) }}</td>
+              <td>{{ ($userInfo[0]->employee_contribution * ($userInfo[0]->interest_percent/100)) + ($userInfo[0]->employer_contribution * ($userInfo[0]->interest_percent/100)) }}</td></tr>
               <tr><td><b>Provident fund Balance with interest</b></td>
               <td></td>
               <td></td>
               <td></td>
-              <td><b>{{ $data[0]->employee_contribution + $data[0]->employer_contribution + ($data[0]->employee_contribution * ($data[0]->interest_percent/100)) + ($data[0]->employer_contribution * ($data[0]->interest_percent/100)) }}</b></td></tr>
+              <td><b>{{ $userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution + ($userInfo[0]->employee_contribution * ($userInfo[0]->interest_percent/100)) + ($userInfo[0]->employer_contribution * ($userInfo[0]->interest_percent/100)) }}</b></td></tr>
               <tr><td>Maximum Loan Amount 80%  Balance</td>
               <td></td>
               <td></td>
               <td></td>
-              <td>{{ number_format(($data[0]->employee_contribution + $data[0]->employer_contribution + ($data[0]->employee_contribution * ($data[0]->interest_percent/100)) + ($data[0]->employer_contribution * ($data[0]->interest_percent/100))) * 0.8, 2) }}</td></tr>
+              <td>{{ number_format(($userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution + ($userInfo[0]->employee_contribution * ($userInfo[0]->interest_percent/100)) + ($userInfo[0]->employer_contribution * ($userInfo[0]->interest_percent/100))) * 0.8, 2) }}</td></tr>
               <tr><td><b>Loan Date:</b></td>
               <td></td>
               <td></td>
@@ -223,7 +223,7 @@
               <td></td>
               <td></td>
               <td></td>
-              <td><b>{{ ($data[0]->employee_contribution + $data[0]->employer_contribution + ($data[0]->employee_contribution * ($data[0]->interest_percent/100)) + ($data[0]->employer_contribution * ($data[0]->interest_percent/100))) - $data[0]->loan_amount  }}</b></td></tr>
+              <td><b>{{ ($userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution + ($userInfo[0]->employee_contribution * ($userInfo[0]->interest_percent/100)) + ($userInfo[0]->employer_contribution * ($userInfo[0]->interest_percent/100))) - $data[0]->loan_amount  }}</b></td></tr>
             </tbody>
             </table>
             <div style="">
