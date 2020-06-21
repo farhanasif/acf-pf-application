@@ -51,7 +51,7 @@
               @foreach ($interests_and_pf_deposit as $item)
                  {{number_format($item->total_pf_amount)}} Tk
               @endforeach
-              
+
             </h5>
               <span class="description-text">Total PF Amount (without interest)</span>
             </div>
@@ -65,7 +65,7 @@
                 @foreach ($interests_and_pf_deposit as $item)
                 {{ number_format($item->own + $item->organization+ $item->total_pf_amount) }} Tk
                 @endforeach
-                
+
                 @else
                     0 Tk
                 @endif
@@ -79,11 +79,11 @@
           <div class="col-sm-2 border-right">
             <div class="description-block">
               @foreach ($loan_account_details as $item)
-                <h5 class="description-header"> 
+                <h5 class="description-header">
                   {{$item->loan_amount ? number_format($item->loan_amount) : '0'}} Tk
                 </h5>
               @endforeach
-              
+
               <span class="description-text">Loan Amount (Total)</span>
             </div>
             <!-- /.description-block -->
@@ -129,7 +129,10 @@
                   <div class="card card-outline card-success">
                       <div class="card-header">
                         <h3 class="card-title">Provident Fund Deposits</h3>
-                        <button type="submit" id="pf-deposit-download" class="btn btn-success float-right">Download Excel</button>
+                        <div class="float-sm-right">
+                        <button type="submit" id="pf-deposit-download" class="btn btn-success">Download Excel</button>
+                        <button type="submit" class="print-pdf-pf-deposit" class="btn btn-success" >Download PDF</button>
+                        </div>
                       </div>
                       <!-- /.card-header -->
                       <div class="card-body table-responsive p-0" style="height: 300px;">
@@ -162,7 +165,7 @@
                       <!-- /.card-body -->
                     </div>
 
-                    
+
                     <div class="card card-outline card-warning">
                       <div class="card-header">
                         <h3 class="card-title">Provident Fund Interests</h3>
@@ -196,8 +199,8 @@
                               <td> {{$item->own + $item->organization }} </td>
                             </tr>
                             @endforeach
-                            
-                            
+
+
                           </tbody>
                         </table>
                       </div>
@@ -284,7 +287,7 @@
                               @elseif(strtoupper( $item->payment_type) == 'PAID')
                                 <td class="text-success"> {{strtoupper($item->payment_type) }} </td>
                               @endif
-                              
+
                             </tr>
                             @endforeach
                           </tbody>
@@ -392,7 +395,7 @@
                           <option <?php echo ($employees->work_place == $work_place->work_place_name) ? "selected" : '' ?> value="{{$work_place->work_place_name}}">{{$work_place->work_place_name}}</option>
                         @endforeach
                       </select>
-                    </div> 
+                    </div>
                   </div>
 
                   <div class="form-group row">
@@ -406,7 +409,7 @@
                     </div>
                   </div>
 
-                  
+
                   <div class="form-group row">
                     <label for="basic_salary" class="col-sm-2 col-form-label">Basic Salary</label>
                     <div class="col-sm-10">
@@ -450,11 +453,11 @@
                         <option <?php echo ($employees->status == 0) ? "selected" : ""; ?> value="0">Deactive</option>
                       </select>
                     </div>
-                  </div>   
+                  </div>
 
                   <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">
-                      
+
                       <button type="submit" id="employee-update" class="btn btn-success">Update</button>
                     </div>
                   </div>
@@ -568,7 +571,7 @@
        var ending_date = $('#ending_date').val();
        var status = $('#status').val();
         if(staff_code == '' || first_name == '' || last_name == '' || position == ''
-          || department_code == '' || category == '' ||  label == '' 
+          || department_code == '' || category == '' ||  label == ''
           ||  base == '' ||  work_place == '' ||  sub_location == '' || basic_salary == ''
           || gross_salary == '' || pf_amount == '' || joining_date == '' || ending_date == '')
           {
@@ -580,7 +583,7 @@
             console.log('empty');
           }
           else{
-                
+
                 $.ajax({
                   type: 'POST',
                   url: '../update-employee/'+staff_code,
@@ -626,5 +629,14 @@
       orientation: "bottom left"
     });
   });
+
+  // $(".print-pdf-pf-deposit").on("click", function() {
+  //       $("#search-grid").hide();
+  //       $(".main-footer").hide();
+  //       $('#title_data').hide();
+  //       $('.print-button').hide();
+  //       window.print();
+  //       window.location = url;
+  //   });
   </script>
  @endsection
