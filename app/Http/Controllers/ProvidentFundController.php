@@ -139,7 +139,7 @@ class ProvidentFundController extends Controller
         $accept_files = ["csv", "txt", "xlsx"];
         if(!in_array($ext, $accept_files)) {
             return redirect()->back()
-            ->with('error', 'Invalid file extension. permitted file is .csv, .txt & .xlsx');
+            ->with('error', 'Invalid file extension. permitted file is .csv & .xlsx');
         }
         // get the file
         $upload = $request->file('file');

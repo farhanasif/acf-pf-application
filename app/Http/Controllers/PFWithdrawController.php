@@ -12,7 +12,7 @@ use DB;
 
 class PFWithdrawController extends Controller
 {
-   
+
     public function add_pf_withdraw()
     {
       $employees = DB::table('employees')->get();
@@ -57,10 +57,10 @@ class PFWithdrawController extends Controller
       $upload = $request->file('file');
       $filename = $_FILES['file']['name'];
       $ext = pathinfo($filename, PATHINFO_EXTENSION);
-      $accept_files = ["csv", "txt", "xlsx"];
+      $accept_files = ["csv", "xlsx"];
       if(!in_array($ext, $accept_files)) {
           return redirect()->back()
-          ->with('error', 'Invalid file extension. permitted file is .csv, .txt & .xlsx');
+          ->with('error', 'Invalid file extension. permitted file is .csv & .xlsx');
       }
       // get the file
       $upload = $request->file('file');
@@ -69,7 +69,7 @@ class PFWithdrawController extends Controller
       if($ext == "xlsx" || $ext == "csv") {
       // $result = Excel::import(new Pf_withdrawsImport, $upload);
       $result = Excel::toArray(new Pf_withdrawsImport, $upload);
-      
+
     foreach ($result as $key => $value) {
       foreach ($value as $row) {
           try{
@@ -84,17 +84,17 @@ class PFWithdrawController extends Controller
               );
           }
 
-          catch (\Exception $e) 
+          catch (\Exception $e)
             {
               return redirect()->back()->with('error','Somthing went wrong!');
-            } 
+            }
         }
       }
    }
       if (!empty($insert_data)) {
           DB::table('pf_withdraws')->insert($insert_data);
           return back()->with('success','PF Withdraws batch import successfully');
-      }   
+      }
     }
 
     public function edit_pf_withdraw($id)
@@ -137,6 +137,6 @@ class PFWithdrawController extends Controller
      $pf_withdraw->delete();
      return redirect()->back()->with('danger','PF withdraw deleted successfully');
     }
-  
+
 
 }

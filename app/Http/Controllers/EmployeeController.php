@@ -119,10 +119,10 @@ class EmployeeController extends Controller
         $upload = $request->file('file');
         $filename = $_FILES['file']['name'];
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
-        $accept_files = ["csv", "txt", "xlsx"];
+        $accept_files = ["csv", "xlsx"];
         if(!in_array($ext, $accept_files)) {
             return redirect()->back()
-            ->with('error', 'Invalid file extension. permitted file is .csv, .txt & .xlsx');
+            ->with('error', 'Invalid file extension. permitted file is .csv & .xlsx');
         }
         // get the file
         $upload = $request->file('file');
