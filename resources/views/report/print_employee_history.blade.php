@@ -58,7 +58,7 @@
                     <p class="ptf-ln-top-5">
                       <span>Staff Code</span>
                       <b><span>:</span>
-                      <span>{{ $userInfo[0]->staff_code }}</span></b>
+                      <span>{{ sprintf('%04d', $userInfo[0]->staff_code) }}</span></b>
                     </p>
                     <p class="ptf-ln-top-6">
                       <span>First Name</span>
@@ -105,7 +105,7 @@
                     <p class="ptf-ln-top-6">
                       <span>Contract end Date</span>
                       <b><span>:</span>
-                      <span>{{ $userInfo[0]->ending_date }}</span>
+                      <span><?php if($userInfo[0]->ending_date != "1970-01-01")  echo $userInfo[0]->ending_date; ?></span>
                       </b>
                     </p>
                   </div>
@@ -222,7 +222,7 @@
             <div style="">
               <div style="width: 45%;border: 1px solid #000; border-radius: 10px;float: right;text-align: center;">
                 <p style="font-weight: 600;font-size: 16px;"><b><u>Net Balance</u></b></p>
-                <p style="font-size: 18px;font-weight: 700;"><b><u>BDT 12,667</u></b></p>
+                <p style="font-size: 18px;font-weight: 700;"><b><u>BDT  {{ number_format((($userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution + ($userInfo[0]->employee_contribution * ($userInfo[0]->interest_percent/100)) + ($userInfo[0]->employer_contribution * ($userInfo[0]->interest_percent/100))) - $data[0]->loan_amount) + $loan_details[0]->without_interest_paid_loan, 2) }}</u></b></p>
               </div>
 <!--               <div style="width: 45%;border: 1px solid #000; border-radius: 10px;float: left;text-align: center;">
                 <p style="font-weight: 600;font-size: 16px;"><b><u>Net to Pay</u></b></p>

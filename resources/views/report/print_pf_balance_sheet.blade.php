@@ -21,7 +21,7 @@
               <!-- body header part left section start -->
               <img src="../images/logo/acf2acf.jpg" alt="acf" style="width: 300px;height: 100px;margin-left: auto;margin-right: auto;display: block;">
               <div class="header">
-                <h2 style="text-align: center;">Individual Staff Balance for Provident Fund as on 31 Decembar</h2>
+                <h2 style="text-align: center;">Individual Staff Balance for Provident Fund as form {{ $date_info['from_date'] }} to {{ $date_info['to_date'] }}</h2>
                 <span style="line-height: 1.5;"></span>
               </div>
             </div>
@@ -41,7 +41,7 @@
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>Staff Code</b></p>
               </div>
               <div class="right-header" style="border-left: 1px solid gray;">
-                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>{{$info[0]->staff_code}}</b></p>
+                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>{{ sprintf('%04d', $info[0]->staff_code) }}</b></p>
               </div>
             </div>
             <div class="lik-uftcl-pdf-body" style="border: 1px solid gray;width: 795px!important;">

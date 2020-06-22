@@ -39,6 +39,9 @@ class ReportController extends Controller
         $staff_code = $request->staff;
         $from_date = date('Y-m-d H:m:s', strtotime($request->from_date_for_balanace));
         $to_date = date('Y-m-d H:m:s', strtotime($request->to_date_for_balance));
+
+        $date_info['from_date'] = date('d M Y', strtotime($from_date));
+        $date_info['to_date'] = date('d M Y', strtotime($to_date));
         // echo $to_date;exit();
         $info = DB::select("SELECT employees.*, SUM(pf_deposit.own_pf) AS total_own_pf, 
                                SUM(pf_deposit.organization_pf) AS total_organaization_pf,
@@ -50,7 +53,7 @@ class ReportController extends Controller
                                INNER JOIN interests ON interests.staff_code = pf_deposit.staff_code 
                                WHERE employees.staff_code=".$staff_code." AND deposit_date >= '".$from_date."' AND deposit_date <= '".$to_date."'");
         // print_r($info);exit();
-        return view('report.print_pf_balance_sheet',["info"=>$info]);
+        return view('report.print_pf_balance_sheet',["info"=>$info, "date_info"=>$date_info]);
     }
 
     public function loanInstallmentReport()
@@ -193,9 +196,27 @@ class ReportController extends Controller
       return view('report.income_expenditure_report');
     }
 
-    public function printIncomeExpenditureReport()
+    public function printIncomeExpenditureReport(Request $request)
     {
-      return view('report.print_income_expenditure_report');
+        $from_date = date('Y-m-d H:m:s', strtotime($request->from_date));
+        $to_date = date('Y-m-d H:m:s', strtotime($request->to_date));
+
+        $date_info['from_date'] = date('d M Y', strtotime($from_date));
+        $date_info['to_date'] = date('d M Y', strtotime($to_date));
+        
+        $incomes = DB::select("SELECT account_heads.account_head,  SUM(IF(transactions.created_at <= '".$from_date."' ,transactions.amount,0)) AS formAmount, SUM(IF(transactions.created_at >= '".$from_date."' AND transactions.created_at <= '".$to_date."',transactions.amount,0)) AS toAmount FROM account_heads 
+         INNER JOIN transactions ON transactions.account_head_id = account_heads.id 
+         WHERE account_heads.account_type = 'INCOME'
+         GROUP BY transactions.account_head_id");
+        
+       $expens = DB::select("SELECT account_heads.account_head,  SUM(IF(transactions.created_at <= '".$from_date."' ,transactions.amount,0)) AS formAmount, SUM(IF(transactions.created_at >= '".$from_date."' AND transactions.created_at <= '".$to_date."',transactions.amount,0)) AS toAmount FROM account_heads 
+         INNER JOIN transactions ON transactions.account_head_id = account_heads.id 
+         WHERE account_heads.account_type = 'EXPENSE'
+         GROUP BY transactions.account_head_id");
+      
+       $interest = DB::select("SELECT SUM(IF(interests.created_at <= '".$from_date."' ,interests.own,0)) AS own_form,SUM(IF(interests.created_at <= '".$from_date."' ,interests.organization,0)) AS organization_form, SUM(IF(interests.created_at >= '".$from_date."' AND interests.created_at <= '".$to_date."',interests.own,0)) AS own_to, SUM(IF(interests.created_at >= '".$from_date."' AND interests.created_at <= '".$to_date."',interests.organization,0)) AS organization_to FROM interests");
+
+      return view('report.print_income_expenditure_report',["date_info"=>$date_info,'incomes'=>$incomes,'expens'=>$expens,'interest'=>$interest]);
     }
 
     public function receiptsPaymentStatement()
@@ -204,9 +225,25 @@ class ReportController extends Controller
       return view('report.receipts_payment_statement');
     }
 
-    public function printReceiptsPaymentStatement()
+    public function printReceiptsPaymentStatement(Request $request)
     {
-      return view('report.print_receipts_payment_statement');
+        $from_date = date('Y-m-d H:m:s', strtotime($request->from_date));
+        $to_date = date('Y-m-d H:m:s', strtotime($request->to_date));
+
+        $date_info['from_date'] = date('d M Y', strtotime($request->from_date));
+        $date_info['to_date'] = date('d M Y', strtotime($request->to_date));
+
+        $investment = DB::select("SELECT SUM(IF(transactions.created_at <= '".$from_date."' ,transactions.amount,0)) AS formAmount, SUM(IF(transactions.created_at >= '".$from_date."' AND transactions.created_at <= '".$to_date."',transactions.amount,0)) AS toAmount FROM `transactions` WHERE account_head_id = 12113");
+        
+       $pay1 = DB::select("SELECT SUM(IF(transactions.created_at <= '".$from_date."' ,transactions.amount,0)) AS formAmount, SUM(IF(transactions.created_at >= '".$from_date."' AND transactions.created_at <= '".$to_date."',transactions.amount,0)) AS toAmount FROM `transactions` WHERE account_head_id = 12112");
+
+      $pay2 = DB::select("SELECT SUM(IF(transactions.created_at <= '".$from_date."' ,transactions.amount,0)) AS formAmount, SUM(IF(transactions.created_at >= '".$from_date."' AND transactions.created_at <= '".$to_date."',transactions.amount,0)) AS toAmount FROM `transactions` WHERE account_head_id = 12114");
+      
+      $closing_bal = DB::select("SELECT SUM(IF(transactions.created_at <= '".$from_date."' ,transactions.amount,0)) AS formAmount, SUM(IF(transactions.created_at >= '".$from_date."' AND transactions.created_at <= '".$to_date."',transactions.amount,0)) AS toAmount FROM `transactions` WHERE account_head_id = 2");
+
+       $contribution = DB::select("SELECT SUM(IF(pf_deposit.created_at <= '".$from_date."' ,pf_deposit.own_pf,0)) AS own_formAmount, SUM(IF(pf_deposit.created_at >= '".$from_date."' AND pf_deposit.created_at <= '".$to_date."' ,pf_deposit.own_pf,0)) AS own_toAmount,SUM(IF(pf_deposit.created_at <= '".$from_date."' ,pf_deposit.organization_pf,0)) AS organization_formAmount, SUM(IF(pf_deposit.created_at >= '".$from_date."' AND pf_deposit.created_at <= '".$to_date."' ,pf_deposit.organization_pf,0)) AS organization_toAmount FROM `pf_deposit");
+
+      return view('report.print_receipts_payment_statement',["date_info"=>$date_info,'investment'=>$investment,'pay1'=>$pay1,'pay2'=>$pay2,'contribution'=>$contribution,'closing_bal'=>$closing_bal]);
     }
 
     public function financialStatement()
@@ -215,8 +252,20 @@ class ReportController extends Controller
       return view('report.financial_statement');
     }
 
-    public function printFinancialStatement()
+    public function printFinancialStatement(Request $request)
     {
-      return view('report.print_financial_statement');
+        $from_date = date('Y-m-d H:m:s', strtotime($request->from_date));
+        $to_date = date('Y-m-d H:m:s', strtotime($request->to_date));
+
+        $date_info['from_date'] = date('d M Y', strtotime($from_date));
+        $date_info['to_date'] = date('d M Y', strtotime($to_date));
+        // print_r($date_info);die();
+        $investment = DB::select("SELECT SUM(IF(transactions.created_at <= '".$from_date."' ,transactions.amount,0)) AS formAmount, SUM(IF(transactions.created_at >= '".$from_date."' AND transactions.created_at <= '".$to_date."',transactions.amount,0)) AS toAmount FROM `transactions` WHERE account_head_id = 12112");
+        
+       $current_asset = DB::select("SELECT SUM(IF(transactions.created_at <= '".$from_date."' ,transactions.amount,0)) AS formAmount, SUM(IF(transactions.created_at >= '".$from_date."' AND transactions.created_at <= '".$to_date."',transactions.amount,0)) AS toAmount FROM `transactions` WHERE account_head_id = 2");
+      
+       $contribution = DB::select("SELECT SUM(IF(pf_deposit.created_at <= '".$from_date."' ,pf_deposit.own_pf,0)) AS own_formAmount, SUM(IF(pf_deposit.created_at >= '".$from_date."' AND pf_deposit.created_at <= '".$to_date."' ,pf_deposit.own_pf,0)) AS own_toAmount,SUM(IF(pf_deposit.created_at <= '".$from_date."' ,pf_deposit.organization_pf,0)) AS organization_formAmount, SUM(IF(pf_deposit.created_at >= '".$from_date."' AND pf_deposit.created_at <= '".$to_date."' ,pf_deposit.organization_pf,0)) AS organization_toAmount FROM `pf_deposit");
+
+      return view('report.print_financial_statement',["date_info"=>$date_info,'investment'=>$investment,'current_asset'=>$current_asset,'contribution'=>$contribution]);
     }
 }
