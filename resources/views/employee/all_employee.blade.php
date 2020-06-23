@@ -1,5 +1,5 @@
 @extends('master')
-@section('customcss') 
+@section('customcss')
 
 <style>
   tr.selected td {
@@ -42,8 +42,8 @@
 
         <div class="float-sm-right">
           <button type="submit" id="all-employee-download" class="btn btn-success">Download Excel</button>
-          <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 
-          <a href="{{url('download_excel/employee/employee.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
+          <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a>
+          <a href="{{url('download_excel/employee/employee.xlsx')}}" class="btn btn-success">Download Sample Excel</a>
           <a href="{{route('add-employee')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add Employee</a>
         </div>
 
@@ -68,7 +68,7 @@
                 @foreach ($all_employees as $employee)
                   <option value="{{ sprintf("%04d", $employee->staff_code)}}"> {{ sprintf("%04d", $employee->staff_code)}} </option>
                 @endforeach
-              
+
             </select>
             </div>
           </div>
@@ -82,7 +82,7 @@
                       @foreach ($all_employees as $employee)
                         <option value="{{ sprintf("%04d", $employee->staff_code)}}"> {{$employee->first_name}} {{$employee->last_name}} </option>
                       @endforeach
-                    
+
                 </select>
                 </div>
             </div>
@@ -179,12 +179,12 @@
      </form>
     </div>
     <!-- /.card-header -->
-    
+
      <div class="card-header">
       <div class="card-body table-responsive p-0" style="height: 500px;">
         <table id="all-employee" class="table table-bordered table-striped table-head-fixed text-nowrap">
           <thead>
-  
+
           <tr>
             <th class="bg-success "> SL NO </th>
             <th class="bg-success fixed-column"> Staff Code </th>
@@ -209,8 +209,8 @@
           @foreach($employees as $employee)
             <tr>
               <td>{{ $i++ }}</td>
-              <?php 
-                if($employee->status == 0)
+              <?php
+                if(($employee->ending_date == '1970-01-01' || $employee->ending_date == null))
                 {
               ?>
               <td class="bg-danger text-bold fixed-column">
@@ -218,9 +218,9 @@
                   {{ sprintf("%04d", $employee->staff_code)}}
                 </a>
               </td>
-          <?php 
+          <?php
               }
-              else { 
+              else {
           ?>
                 <td class="bg-success text-bold fixed-column">
                   <a href="{{route('employee-details',$employee->staff_code)}}">
@@ -247,12 +247,12 @@
             <td>{{$employee->ending_date == '1970-01-01' ? '' : $employee->ending_date}}</td>
           </tr>
           @endforeach
-         </tbody>   
+         </tbody>
         </table>
       </div>
      </div>
     <!-- /.card-body -->
-     
+
     <div class="card-footer">
       <div class="float-right">
        </div>
@@ -291,8 +291,8 @@
 <!-- END EMPLOYEE BATCH UPLOAD MODAL -->
 
  @endsection
- 
-  @section('customjs')  
+
+  @section('customjs')
   <script src="http://www.jqueryscript.net/demo/jQuery-Plugin-To-Convert-HTML-Table-To-CSV-tabletoCSV/jquery.tabletoCSV.js"></script>
 
   <script>
@@ -353,9 +353,9 @@
         theme: 'bootstrap4',
       });
     });
-  
+
     </script>
   @endsection
 
- 
+
 

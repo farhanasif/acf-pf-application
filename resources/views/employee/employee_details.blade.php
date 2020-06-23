@@ -147,6 +147,13 @@
                             </tr>
                           </thead>
                           <tbody>
+                              <tr>
+                                <td colspan="4"> Staff Code:  {{ sprintf("%04d", $employees->staff_code)}}</td>
+                                {{-- <td></td>
+                                <td></td>
+                                <td></td> --}}
+                                <td rowspan=""> Full Name: {{$employees->first_name.' '.$employees->last_name}}</td>
+                              </tr>
                             <?php $i=1;?>
                             @foreach ($pf_deposits as $pf_deposit)
                             <tr>
@@ -188,6 +195,10 @@
                             </tr>
                           </thead>
                           <tbody>
+                            <tr>
+                                <td colspan="4"> Staff Code: {{ sprintf("%04d", $employees->staff_code)}}</td>
+                                <td rowspan=""> Full Name: {{$employees->first_name.' '.$employees->last_name}}</td>
+                            </tr>
                             <?php $i=1;?>
                             @foreach ($interests_and_pf_deposit as $item)
                             <tr>
@@ -238,6 +249,10 @@
                             </tr>
                           </thead>
                           <tbody>
+                            <tr>
+                                <td colspan="4"> Staff Code: {{ sprintf("%04d", $employees->staff_code)}}</td>
+                                <td rowspan=""> Full Name: {{$employees->first_name.' '.$employees->last_name}}</td>
+                            </tr>
                       @foreach ($loan_account_details as $item)
                         <tr>
                           <td>01</td>
@@ -274,6 +289,10 @@
                             </tr>
                           </thead>
                           <tbody>
+                            <tr>
+                                <td colspan="4"> Staff Code: {{ sprintf("%04d", $employees->staff_code)}}</td>
+                                <td rowspan=""> Full Name: {{$employees->first_name.' '.$employees->last_name}}</td>
+                            </tr>
                             <?php $i=1;?>
                             @foreach ($loan_adjustments as $item)
 
