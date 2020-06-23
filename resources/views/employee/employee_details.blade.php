@@ -441,7 +441,7 @@
                   <div class="form-group row">
                     <label for="ending_date" class="col-sm-2 col-form-label">Ending Date</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control employee_date" id="ending_date" name="ending_date" placeholder="Ending Date" value="{{$employees->ending_date}}">
+                      <input type="text" class="form-control employee_date" id="ending_date" name="ending_date" placeholder="Ending Date" value="{{$employees->ending_date == '1970-01-01' ? '' : $employees->ending_date}}">
                     </div>
                   </div>
 
