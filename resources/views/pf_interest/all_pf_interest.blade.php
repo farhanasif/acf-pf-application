@@ -1,7 +1,7 @@
 
 @extends('master')
-@section('customcss') 
-  
+@section('customcss')
+
 @endsection
 @section('content')
 
@@ -29,8 +29,8 @@
         <div class="float-sm-right">
           <button type="submit" id="pf-interest-download" class="btn btn-success">Download Excel</button>
           {{-- <a href="" class="btn btn-success" data-toggle="modal" data-target="#update-modal-default">Update Batch</a> --}}
-          <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 
-          <a href="{{url('download_excel/pf_interest/Interest.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
+          <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a>
+          <a href="{{url('download_excel/pf_interest/Interest.xlsx')}}" class="btn btn-success">Download Sample Excel</a>
           <a href="{{route('add-pf-interest')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add Interest</a>
         </div>
         @include('message')
@@ -131,18 +131,18 @@
     <!--  /.END INTEREST UPDATE BATCH UPLOAD MODAL -->
 @endsection
 
-@section('customjs')  
+@section('customjs')
 <script src="http://www.jqueryscript.net/demo/jQuery-Plugin-To-Convert-HTML-Table-To-CSV-tabletoCSV/jquery.tabletoCSV.js"></script>
 
   <script>
 
    $(document).ready( function(){
 
-  // START PF INTEREST TABLE DATA DOWNLOAD CLICK FUNCTION
-    $( "#pf-interest-download" ).click(function() {
+     // START ALL EMPLOYEE TABLE DATA DOWNLOAD CLICK FUNCTION
+     $( "#pf-interest-download" ).click(function() {
           $("#pf-interest").tableToCSV();
       });
-  // END PF INTEREST TABLE DATA DOWNLOAD CLICK FUNCTION
+  // END ALL EMPLOYEE TABLE DATA DOWNLOAD CLICK FUNCTION
 
   // START TABLE TO CSV CONVERT FUNCTION
   var tableToExcel = (function() {
@@ -183,14 +183,15 @@
 // END TABLE TO CSV CONVERT FUNCTION
 
 
+
     $('#pf-interest').DataTable({
         "info": true,
         "autoWidth": false,
-        scrollX:'50vh', 
+        scrollX:'50vh',
         scrollY:'50vh',
         scrollCollapse: true,
     });
    });
- 
+
     </script>
 @endsection

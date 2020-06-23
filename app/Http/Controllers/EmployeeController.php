@@ -131,9 +131,8 @@ class EmployeeController extends Controller
         if($ext == "xlsx" || $ext == "csv") {
         $result = Excel::toArray(new EmployeesImport, $upload);
 
-        foreach ($result as  $value) {
+        foreach ($result as  $key => $value) {
           foreach ($value as $row) {
-                  // try {
                     $insert_data[] =array(
                       'staff_code' =>$row[0],
                       'trimmed' =>$row[0],
@@ -158,32 +157,18 @@ class EmployeeController extends Controller
                       'created_by' =>Auth::user()->id,
                       'updated_by' =>Auth::user()->id,
                   );
-                  // }
-                  // catch (\Exception $e)
-                  //   {
-                  //     return redirect()->back()->with('error','Something went wrong!');
-                  //   }
-              // }
           }
       }
 
-        // dd($insert_data);
-        // exit;
+        dd($insert_data);
+        exit;
 
       if (!empty($insert_data)) {
           DB::table('employees')->insert($insert_data);
           return back()->with('success','Employees batch import successfully');
       }
-
-      // if (!empty($update_data)) {
-      //   DB::table('employees')->update($update_data);
-      //   return back()->with('success','Employees batch updated successfully');
-      //  }
-      }
-
-
-
     }
+}
 
     public function save_employee(Request $request)
     {
@@ -341,6 +326,42 @@ class EmployeeController extends Controller
     {
       DB::table('employees')->where('id',$id)->delete();
       return redirect()->back();
+    }
+
+
+    function import(Request $request)
+    {
+     $this->validate($request, [
+      'select_file'  => 'required|mimes:xls,xlsx'
+     ]);
+
+     $path = $request->file('select_file')->getRealPath();
+
+     $data = Excel::load($path)->get();
+
+     if($data->count() > 0)
+     {
+      foreach($data->toArray() as $key => $value)
+      {
+       foreach($value as $row)
+       {
+        $insert_data[] = array(
+         'CustomerName'  => $row['customer_name'],
+         'Gender'   => $row['gender'],
+         'Address'   => $row['address'],
+         'City'    => $row['city'],
+         'PostalCode'  => $row['postal_code'],
+         'Country'   => $row['country']
+        );
+       }
+      }
+
+      if(!empty($insert_data))
+      {
+       DB::table('tbl_customer')->insert($insert_data);
+      }
+     }
+     return back()->with('success', 'Excel Data Imported successfully.');
     }
 
 }

@@ -1,7 +1,7 @@
 
 @extends('master')
-@section('customcss') 
-  
+@section('customcss')
+
 @endsection
 @section('content')
 
@@ -28,11 +28,11 @@
           <h3 class="card-title">All PF Deposit Information</h3>
         <div class="float-sm-right">
           <button type="submit" id="all-pf-deposit-download" class="btn btn-success">Download Excel</button>
-          <a href="" class="btn btn-success" data-toggle="modal" data-target="#pf-deposit">Batch Upload</a> 
-          <a href="{{url('download_excel/pf_deposit/pf-deposit.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
+          <a href="" class="btn btn-success" data-toggle="modal" data-target="#pf-deposit">Batch Upload</a>
+          <a href="{{url('download_excel/pf_deposit/pf-deposit.xlsx')}}" class="btn btn-success">Download Sample Excel</a>
           <a href="{{route('add-provident-fund')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add PF Deposit</a>
         </div>
-         
+
          @include('message')
 
     </div>
@@ -99,63 +99,63 @@
       <!-- /.modal-dialog -->
     </div>
     <!-- END PF DEPOSIT BATCH UPLOAD MODAL -->
+    @endsection
 
-    @section('customjs')  
-    <script src="http://www.jqueryscript.net/demo/jQuery-Plugin-To-Convert-HTML-Table-To-CSV-tabletoCSV/jquery.tabletoCSV.js"></script>
+@section('customjs')
+<script src="http://www.jqueryscript.net/demo/jQuery-Plugin-To-Convert-HTML-Table-To-CSV-tabletoCSV/jquery.tabletoCSV.js"></script>
 
-    <script>
+<script>
 
-  $(document).ready( function(){
+ $(document).ready(function(){
 
-    // START ALL PROVIDENT FUND TABLE DATA DOWNLOAD CLICK FUNCTION
-    $( "#all-pf-deposit-download" ).click(function() {
-          $("#all-pf-deposit").tableToCSV();
-      });
-  // END ALL PROVIDENT FUND TABLE DATA DOWNLOAD CLICK FUNCTION
+ // START ALL EMPLOYEE TABLE DATA DOWNLOAD CLICK FUNCTION
+  $( "#all-pf-deposit-download" ).click(function() {
+        $("#all-pf-deposit").tableToCSV();
+    });
+// END ALL EMPLOYEE TABLE DATA DOWNLOAD CLICK FUNCTION
 
-  // START TABLE TO CSV CONVERT FUNCTION
-  var tableToExcel = (function() {
-        var uri = 'data:application/vnd.ms-excel;base64,',
-            template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
-            base64 = function(s) {
-            return window.btoa(unescape(encodeURIComponent(s)))
-            },
-            format = function(s, c) {
-            return s.replace(/{(\w+)}/g, function(m, p) {
-                return c[p];
-            })
-            }
-        return function(table, name) {
-            if (!table.nodeType)
-            table = document.getElementById(table)
-            var ctx = {
-            worksheet: name || 'Worksheet',
-            table: table.innerHTML
-            }
-            var HeaderName = 'Download-ExcelFile';
-            var ua = window.navigator.userAgent;
-            var msieEdge = ua.indexOf("Edge");
-            var msie = ua.indexOf("MSIE ");
-            if (msieEdge > 0 || msie > 0) {
-            if (window.navigator.msSaveBlob) {
-                var dataContent = new Blob([base64(format(template, ctx))], {
-                type: "application/csv;charset=utf-8;"
-                });
-                var fileName = "excel.xls";
-                navigator.msSaveBlob(dataContent, fileName);
-            }
-            return;
-            }
-            window.open('data:application/vnd.ms-excel,' + encodeURIComponent(format(template, ctx)));
-        }
-    })()
+// START TABLE TO CSV CONVERT FUNCTION
+var tableToExcel = (function() {
+      var uri = 'data:application/vnd.ms-excel;base64,',
+          template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+          base64 = function(s) {
+          return window.btoa(unescape(encodeURIComponent(s)))
+          },
+          format = function(s, c) {
+          return s.replace(/{(\w+)}/g, function(m, p) {
+              return c[p];
+          })
+          }
+      return function(table, name) {
+          if (!table.nodeType)
+          table = document.getElementById(table)
+          var ctx = {
+          worksheet: name || 'Worksheet',
+          table: table.innerHTML
+          }
+          var HeaderName = 'Download-ExcelFile';
+          var ua = window.navigator.userAgent;
+          var msieEdge = ua.indexOf("Edge");
+          var msie = ua.indexOf("MSIE ");
+          if (msieEdge > 0 || msie > 0) {
+          if (window.navigator.msSaveBlob) {
+              var dataContent = new Blob([base64(format(template, ctx))], {
+              type: "application/csv;charset=utf-8;"
+              });
+              var fileName = "excel.xls";
+              navigator.msSaveBlob(dataContent, fileName);
+          }
+          return;
+          }
+          window.open('data:application/vnd.ms-excel,' + encodeURIComponent(format(template, ctx)));
+      }
+  })()
 // END TABLE TO CSV CONVERT FUNCTION
 
-
-    $('#all-pf-deposit').DataTable({
+$('#all-pf-deposit').DataTable({
         "info": true,
         "autoWidth": false,
-        scrollX:'50vh', 
+        scrollX:'50vh',
         scrollY:'50vh',
         scrollCollapse: true,
         fixedColumns: {
@@ -165,6 +165,4 @@
   });
 
   </script>
-@endsection
-
 @endsection

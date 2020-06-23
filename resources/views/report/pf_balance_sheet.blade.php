@@ -1,13 +1,13 @@
 @extends('master')
 @section('content')
       <!-- Content Wrapper. Contains page content -->
-      
+
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1>Per Staff Balance Sheet Report</h1>
+                <h1>Per Staff Balance Sharing Report</h1>
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -18,10 +18,10 @@
             </div>
           </div><!-- /.container-fluid -->
         </section>
-    
+
         <!-- Main content -->
         <section class="content">
-    
+
           <!-- general form elements disabled -->
           <div class="card card-secondary">
                 <div class="card-header">
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     </div>
-    
+
                 </div>
                 <!-- /.card-body -->
                 <!-- /.card-body -->
@@ -82,7 +82,7 @@ $(document).ready(function() {
       $('.select2bs4').select2({
         theme: 'bootstrap4',
       });
-  $(function() { 
+  $(function() {
      $( "#from_data" ).datepicker({
           dateFormat: "YYYY-MM-DD HH:mm:ss",
           orientation: "bottom left"
