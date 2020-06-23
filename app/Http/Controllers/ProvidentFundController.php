@@ -14,6 +14,7 @@ use App\Pf_withdraw;
 use App\Interest;
 use Auth;
 use DB;
+use App\Exports\PF_DepositsExport;
 
 class ProvidentFundController extends Controller
 {
@@ -171,5 +172,14 @@ class ProvidentFundController extends Controller
           return back()->with('success','Provident batch import successfully');
       }
 
+    }
+
+    public function export()
+    {
+        $data = DB::table('pf_deposit')->get();
+        Excel::download(new UsersExport, function($excel) use ($data){
+            $excel->setTitile('pf_deposit excel sheet');
+            $
+        });
     }
 }
