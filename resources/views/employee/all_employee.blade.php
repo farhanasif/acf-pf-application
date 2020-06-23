@@ -210,7 +210,7 @@
             <tr>
               <td>{{ $i++ }}</td>
               <?php
-                if(($employee->ending_date == '1970-01-01' || $employee->ending_date == null))
+                if($employee->ending_date != '1970-01-01')
                 {
               ?>
               <td class="bg-danger text-bold fixed-column">
