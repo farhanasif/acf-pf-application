@@ -160,8 +160,8 @@ class EmployeeController extends Controller
           }
       }
 
-        dd($insert_data);
-        exit;
+        // dd($insert_data);
+        // exit;
 
       if (!empty($insert_data)) {
           DB::table('employees')->insert($insert_data);

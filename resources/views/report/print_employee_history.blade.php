@@ -29,7 +29,7 @@
                     <span>Action Contre La Faim <br/>
                     House-23, Road- 113/A, Gulshan-2, Dhaka-1212, Bangladesh </span></b>
                   </p>
-                  <img src="../images/logo/acf-pf.png" alt="acf" style="width: 200px;height: 100px;margin-left: auto;margin-right: auto;">
+                  <img src="{{ asset('images/logo/acf-pf.png') }}" alt="acf" style="width: 200px;height: 100px;margin-left: auto;margin-right: auto;">
                   <p class="ptf-ln-top-6">
                     <span></span>
                     <b><span></span>

@@ -131,7 +131,7 @@
                         <h3 class="card-title">Provident Fund Deposits</h3>
                         <div class="float-sm-right">
                         <button type="submit" id="pf-deposit-download" class="btn btn-success">Download Excel</button>
-                        <button type="submit" class="print-pdf-pf-deposit" class="btn btn-success" >Download PDF</button>
+                        {{-- <button type="submit" class="print-pdf-pf-deposit" class="btn btn-success" >Download PDF</button> --}}
                         </div>
                       </div>
                       <!-- /.card-header -->

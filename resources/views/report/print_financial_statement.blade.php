@@ -29,7 +29,7 @@
                 <p class="ptf-ln-3">
                   <span>ACTION CONTRE LA FAIM <br /> EMPLOYEES PROVIDENT FUND</span>
                   <span></span>
-                  <img src="../images/logo/acf-pf.png" alt="acf" style="width: 200px;height: 100px;margin-left: auto;margin-right: auto;">
+                  <img src="{{ asset('images/logo/acf-pf.png') }}" alt="acf" style="width: 200px;height: 100px;margin-left: auto;margin-right: auto;">
                   <span>STATEMENTS OF FINANCIAL POSITION <br /> AS AT {{ $date_info['from_date'] }} to {{ $date_info['to_date'] }}</span>
                 </p>
               </div>
