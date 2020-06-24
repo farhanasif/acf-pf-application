@@ -174,12 +174,12 @@ class ProvidentFundController extends Controller
 
     }
 
-    public function export()
-    {
-        $data = DB::table('pf_deposit')->get();
-        Excel::download(new UsersExport, function($excel) use ($data){
-            $excel->setTitile('pf_deposit excel sheet');
-            $
-        });
-    }
+    // public function export()
+    // {
+    //     $data = DB::table('pf_deposit')->get();
+    //     Excel::download(new UsersExport, function($excel) use ($data){
+    //         $excel->setTitile('pf_deposit excel sheet');
+    //         $
+    //     });
+    // }
 }

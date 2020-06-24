@@ -21,7 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('pf-deposit/excel-export/', 'ProvidentFundController@export')->name('pf-deposit-export');
+// Route::get('pf-deposit/excel-export/', 'ProvidentFundController@export')->name('pf-deposit-export');
 
 // Route::get('/report', function () {
 //     return view('report');
