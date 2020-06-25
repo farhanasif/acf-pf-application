@@ -51,15 +51,15 @@
                     <td></td>
                     <td></td></tr>
                     <tr><td>Employees Contribution</td>
-                <td>11.01</td>
+                <td></td>
                 <td style="text-align: right;">{{ $contribution[0]->own_formAmount }}</td>
                 <td style="text-align: right;">{{ $contribution[0]->own_toAmount }}</td></tr>
                 <tr><td>Employers Contribution</td>
-                <td>11.01</td>
+                <td></td>
                 <td style="text-align: right;">{{ $contribution[0]->organization_formAmount }}</td>
                 <td style="text-align: right;">{{ $contribution[0]->organization_toAmount }}</td></tr>
                     <tr><td>Bank Interest (Saving Account)</td>
-                    <td>12</td>
+                    <td></td>
                     <td style="text-align: right;">{{ number_format($investment[0]->formAmount, 2) }}</td>
                     <td style="text-align: right;">{{ number_format($investment[0]->toAmount, 2) }}</td></tr>
 
@@ -78,23 +78,23 @@
                     <td></td>
                     <td></td></tr>
                     <tr><td>Investment (Sanchayapatra)</td>
-                    <td>9.00</td>
+                    <td></td>
                     <td style="text-align: right;">{{ $pay1[0]->formAmount }}</td>
                     <td style="text-align: right;">{{ $pay1[0]->toAmount }}</td></tr>
 
                     <tr><td>Payments to Members</td>
-                    <td>11.01</td>
-                    <td style="text-align: right;">0</td>
-                    <td style="text-align: right;">0</td></tr>
+                    <td></td>
+                    <td style="text-align: right;">{{ $pay3[0]->formAmount }}</td>
+                    <td style="text-align: right;">{{ $pay3[0]->formAmount }}</td></tr>
 
                     <tr><td>Bank Charge</td>
-                    <td>12</td>
+                    <td></td>
                     <td style="text-align: right;">{{ $pay2[0]->formAmount }}</td>
                     <td style="text-align: right;">{{ $pay2[0]->toAmount }}</td></tr>
                     <tr><td style="text-align: right;"> <b>Total Payments:</b></td>
                     <td></td>
-                    <td style="text-align: right;"><b>{{ number_format($pay1[0]->formAmount + $pay2[0]->formAmount,2) }}</b></td>
-                    <td style="text-align: right;"><b>{{ number_format($pay1[0]->toAmount + $pay2[0]->toAmount,2) }}</b></td>
+                    <td style="text-align: right;"><b>{{ number_format($pay1[0]->formAmount + $pay2[0]->formAmount + $pay3[0]->formAmount,2) }}</b></td>
+                    <td style="text-align: right;"><b>{{ number_format($pay1[0]->toAmount + $pay2[0]->toAmount +  $pay3[0]->toAmount,2) }}</b></td>
                   </tr>
                   <tr><td style="height: 16px;"><b></b></td>
                   <td style="height: 16px;"></td>
@@ -105,7 +105,7 @@
                   <td></td>
                   <td></td></tr>
                   <tr><td>Cash At Bank</td>
-                  <td>10</td>
+                  <td></td>
                   <td style="text-align: right;">{{ $closing_bal[0]->formAmount }}</td>
                   <td style="text-align: right;">{{ $closing_bal[0]->toAmount }}</td>
                 <tr></tr>
@@ -115,8 +115,8 @@
                 <td style="height: 16px;"><b></b></td></tr>
                 <tr><td style="text-align: right;"> <b>Total Taka:</b></td>
                 <td></td>
-                <td style="text-align: right;"><b>{{ number_format($contribution[0]->own_formAmount + $contribution[0]->organization_formAmount + $investment[0]->formAmount + $pay1[0]->formAmount + $pay2[0]->formAmount +  $closing_bal[0]->formAmount, 2 )}}</b></td>
-                <td style="text-align: right;"><b>{{ number_format($contribution[0]->own_toAmount + $contribution[0]->organization_toAmount + $investment[0]->toAmount + $pay1[0]->toAmount + $pay2[0]->toAmount + $closing_bal[0]->toAmount , 2 )}}</b></td>
+                <td style="text-align: right;"><b>{{ number_format($contribution[0]->own_formAmount + $contribution[0]->organization_formAmount + $investment[0]->formAmount + $pay1[0]->formAmount + $pay2[0]->formAmount + $pay3[0]->formAmount +  $closing_bal[0]->formAmount, 2 )}}</b></td>
+                <td style="text-align: right;"><b>{{ number_format($contribution[0]->own_toAmount + $contribution[0]->organization_toAmount + $investment[0]->toAmount + $pay1[0]->toAmount + $pay2[0]->toAmount + $pay3[0]->toAmount + $closing_bal[0]->toAmount , 2 )}}</b></td>
               </tr>
             </tbody>
           </table>

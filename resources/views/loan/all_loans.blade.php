@@ -72,7 +72,7 @@
     @section('customjs')
     <script>
     $(document).ready(function() {
-    $('#loanTable').DataTable();
+        $('#loanTable').DataTable();
     } );
     </script>
     @endsection

@@ -52,7 +52,7 @@
                     <td></td></tr>
                     <?php $total_income_form = 0;$total_income_to = 0; foreach ($incomes as $income) { $total_income_form += $income->formAmount; $total_income_to += $income->toAmount;?>
                     <tr><td>{{ $income->account_head }}</td>
-                    <td>12</td>
+                    <td></td>
                     <td style="text-align: right;">{{ number_format($income->formAmount,2) }}</td>
                     <td style="text-align: right;">{{ number_format($income->toAmount,2) }}</td></tr>
                     <?php } ?>
@@ -76,7 +76,7 @@
                     <td></td></tr>
                     <?php $total_expen_form = 0;$total_expen_to = 0; foreach ($expens as $expen) { $total_expen_form += $expen->formAmount < 0? $expen->formAmount*-1 : $expen->formAmount; $total_expen_to += $expen->toAmount < 0 ? $expen->toAmount*-1: $expen->toAmount;?>
                     <tr><td>{{ $expen->account_head }}</td>
-                    <td>12</td>
+                    <td></td>
                     <td style="text-align: right;">{{ $expen->formAmount < 0 ? number_format( $expen->formAmount*-1,2) : number_format( $expen->formAmount,2) }}</td>
                     <td style="text-align: right;">{{ $expen->toAmount < 0 ? number_format( $expen->toAmount*-1,2) : number_format( $expen->toAmount,2) }}</td></tr>
                      <?php } ?>
@@ -94,9 +94,9 @@
                   <td style="height: 16px;"></td>
                   <td style="height: 16px;"><b></b></td></tr>
                   <tr><td>Surplus(Deficit) of Income over Expenditure</td>
-                  <td>11.01</td>
+                  <td></td>
                   <td style="text-align: right;"><?php echo number_format($total_income_form - $total_expen_form, 2); ?></td>
-                  <td style="text-align: right;"><?php echo number_format($total_income_form - $total_expen_to, 2); ?></td>
+                  <td style="text-align: right;"><?php echo number_format($total_income_to - $total_expen_to, 2); ?></td>
                 <tr></tr>
                 <tr><td style="height: 16px;"><b></b></td>
                 <td style="height: 16px;"></td>
@@ -105,7 +105,7 @@
                 <tr><td style="text-align: right;"> <b>Total Taka:</b></td>
                 <td></td>
                 <td style="text-align: right;"><b><?php echo number_format($total_income_form - $total_expen_form, 2); ?></b></td>
-                <td style="text-align: right;"><b><?php echo number_format($total_income_form - $total_expen_to, 2); ?></b></td>
+                <td style="text-align: right;"><b><?php echo number_format($total_income_to - $total_expen_to, 2); ?></b></td>
               </tr>
               <tr><td style="height: 16px;"><b></b></td>
               <td style="height: 16px;"></td>
@@ -117,7 +117,7 @@
                 <td></td>
                 <td></td></tr>
                 <tr><td>Employees Contribution</td>
-                <td>11.01</td>
+                <td></td>
                 <td style="text-align: right;">{{ $interest[0]->own_form }}</td>
                 <td style="text-align: right;">{{ $interest[0]->own_to }}</td></tr>
                 <tr><td>Employers Contribution</td>
@@ -131,7 +131,7 @@
                 <tr style=""><td style="text-align: right;"> <b>Total Taka:</b></td>
                 <td></td>
                 <td style="text-align: right;"><b><?php echo number_format($total_income_form - $total_expen_form, 2); ?></b></td>
-                <td style="text-align: right;"><?php echo number_format($total_income_form - $total_expen_to, 2); ?></td>
+                <td style="text-align: right;"><?php echo number_format($total_income_to - $total_expen_to, 2); ?></td>
               </tr>
               
             </tbody>

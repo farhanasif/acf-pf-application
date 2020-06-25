@@ -75,6 +75,7 @@ class LoanController extends Controller
     	       $transaction->account_head_id = $request->account_head;
     	       $transaction->description = $request->description;
     	       $transaction->amount = $request->loan_amount*-1;
+             $transaction->transaction_date = date('Y-m-d H:i:s', strtotime($request->date));
     	       $transaction->save();
 
 
@@ -143,14 +144,15 @@ class LoanController extends Controller
         $transaction->account_head_id = $request->account_head_for_monthly_installment;
         $transaction->description = $staff_code.' '.$employees[0]->first_name.' '.$employees[0]->last_name.' monthly loan installment without interest' ;
         $transaction->amount = $request->monthly_installment;
-        $transaction->transaction_date = date('Y-m-d', strtotime($request->date_of_adjusment));
+        $transaction->transaction_date = date('Y-m-d H:i:s', strtotime($request->date_of_adjusment));
+        // print_r($transaction->transaction_date);die();
         $transaction->save();
 
         $transaction = new Transaction;
         $transaction->account_head_id = $request->account_head_for_monthly_interest;
         $transaction->description = $staff_code.' '.$employees[0]->first_name.' '.$employees[0]->last_name.' monthly loan interest' ;
         $transaction->amount = $request->monthly_interest;
-        $transaction->transaction_date = date('Y-m-d', strtotime($request->date_of_adjusment));
+        $transaction->transaction_date = date('Y-m-d H:i:s', strtotime($request->date_of_adjusment));
         $transaction->save();
         
         DB::select('update loan_installment set payment_type="paid" where id='.$request->installment_id);
