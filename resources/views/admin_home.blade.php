@@ -1,7 +1,4 @@
 
-
-
-
 @extends('master')
 
 @section('content')
@@ -35,7 +32,7 @@
           <div class="info-box-content">
             <span class="info-box-text">PF Ledger Amount</span>
             <span class="info-box-number">
-              {{number_format($employee_contribution + $employer_contribution)}}
+              {{number_format($employee_contribution + $employer_contribution)}} TK
             </span>
           </div>
           <!-- /.info-box-content -->
@@ -49,7 +46,7 @@
 
           <div class="info-box-content">
             <span class="info-box-text">Employee Contribution</span>
-            <span class="info-box-number">{{number_format($employee_contribution)}}</span>
+            <span class="info-box-number">{{number_format($employee_contribution)}} TK</span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -66,7 +63,7 @@
 
           <div class="info-box-content">
             <span class="info-box-text">Employer Contribution</span>
-          <span class="info-box-number">{{number_format($employer_contribution)}}</span>
+          <span class="info-box-number">{{number_format($employer_contribution)}} TK</span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -94,27 +91,6 @@
         <div class="card">
           <div class="card-header">
             <h5 class="card-title">Monthly Recap Report</h5>
-
-            {{-- <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                <i class="fas fa-minus"></i>
-              </button>
-              <div class="btn-group">
-                <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
-                  <i class="fas fa-wrench"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right" role="menu">
-                  <a href="#" class="dropdown-item">Action</a>
-                  <a href="#" class="dropdown-item">Another action</a>
-                  <a href="#" class="dropdown-item">Something else here</a>
-                  <a class="dropdown-divider"></a>
-                  <a href="#" class="dropdown-item">Separated link</a>
-                </div>
-              </div>
-              <button type="button" class="btn btn-tool" data-card-widget="remove">
-                <i class="fas fa-times"></i>
-              </button>
-            </div> --}}
           </div>
           <!-- /.card-header -->
           <div class="card-body">
@@ -156,7 +132,7 @@
                 <div class="progress-group">
                   Employee Under Loan
                 <span class="float-right">
-                  <b> 
+                  <b>
                    @foreach ($total_loans as $item)
                     {{$item->total_loan}}
                    @endforeach
@@ -171,7 +147,11 @@
                 <!-- /.progress-group -->
                 <div class="progress-group">
                   <span class="progress-text">Total Investment</span>
-                  <span class="float-right"><b>38</b>/48</span>
+                  <span class="float-right">
+                    @foreach ($total_investments as $investment)
+                    {{$investment->total_investment_amount ? number_format($investment->total_investment_amount) : 0}} TK
+                    @endforeach
+                  </span>
                   <div class="progress progress-sm">
                     <div class="progress-bar bg-success" style="width: 60%"></div>
                   </div>
@@ -188,7 +168,7 @@
               <div class="col-sm-3 col-6">
                 <div class="description-block border-right">
                   {{-- <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 40%</span> --}}
-                  <h5 class="description-header">{{number_format($employee_contribution + $employer_contribution)}}</h5>
+                  <h5 class="description-header">{{number_format($total_balance_in_account_from_pf_deposit + $total_balance_in_account_from_transaction)}} TK</h5>
                   <span class="description-text">TOTAL BALANCE IN ACCOUNT</span>
                 </div>
                 <!-- /.description-block -->
@@ -197,7 +177,11 @@
               <div class="col-sm-3 col-6">
                 <div class="description-block border-right">
                   {{-- <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 20%</span> --}}
-                  <h5 class="description-header">$24,813.53</h5>
+                  <h5 class="description-header">
+                    @foreach ($total_investments as $investment)
+                        {{$investment->total_investment_amount ? number_format($investment->total_investment_amount) : 0}} TK
+                    @endforeach
+                  </h5>
                   <span class="description-text">TOTAL INVESTMENT</span>
                 </div>
                 <!-- /.description-block -->
@@ -207,9 +191,9 @@
                 <div class="description-block border-right">
                   {{-- <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span> --}}
                   <h5 class="description-header">
-                    
+
                     @foreach ($total_loans as $item)
-                        {{ number_format($item->total_loan_amount)}}
+                        {{ number_format($item->total_loan_amount)}} TK
                     @endforeach
                   </h5>
                   <span class="description-text">TOTAL LOAN AMOUNT</span>
@@ -237,10 +221,14 @@
     <!-- /.row -->
 
     <!-- Main row -->
- 
+
     <!-- /.row -->
   </div><!--/. container-fluid -->
 </section>
 <!-- /.content -->
-      
+
+@endsection
+
+@section('customjs')
+  <script src="{{asset('theme/dist/js/pages/dashboard2.js')}}"></script>
 @endsection

@@ -53,121 +53,126 @@
           @endif
       </div>
 
-        <div class="card-body">
-          <!-- /.card -->
-            <!-- Horizontal Form -->
-           <form class="form-horizontal form-label-left" action="" method="post">
-             @csrf
-   
-               <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group row">
-                      <label  class="col-form-label col-md-3 col-sm-3 label-align">Name</label>
-                      <div class="col-md-8 col-sm-3 ">
-                      <input type="text" class="form-control" name="name" placeholder="Name" value="{{$profile->name}}">
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <label  class="col-form-label col-md-3 col-sm-3 label-align">Password</label>
-                      <div class="col-md-8 col-sm-3 ">
-                        <input type="password" class="form-control" name="password" placeholder="Password">
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <label  class="col-form-label col-md-3 col-sm-3 label-align">Retype Password</label>
-                      <div class="col-md-8 col-sm-3 ">
-                        <input type="password" class="form-control" name="retype_password" placeholder="Retype Password">
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <label  class="col-form-label col-md-3 col-sm-3 label-align">Rights Body</label>
-                      <div class="col-md-8 col-sm-8 ">
-                         <input type="text" class="form-control" name="rights_body" placeholder="Rights Body" value="{{$profile->rights_body}}">
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <label for="email" class="col-form-label col-md-3 col-sm-3 label-align">Designation</label>
-                        <div class="col-md-8 col-sm-8 ">
-                          <input type="text" class="form-control" name="designation" placeholder="Designation" value="{{$profile->designation}}">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <label for="email" class="col-form-label col-md-3 col-sm-3 label-align">Department</label>
-                        <div class="col-md-8 col-sm-8 ">
-                          <input type="text" class="form-control" name="department"  placeholder="Department" value="{{$profile->department}}">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <label for="email" class="col-form-label col-md-3 col-sm-3 label-align">Description</label>
-                        <div class="col-md-8 col-sm-8 ">
-                        <textarea class="form-control" name="description" rows="5" cols="70">{{$profile->description}}</textarea>
-                        </div>
-                    </div>
-
-                    </div>
-
-                  <div class="col-md-6 ">
-                    {{-- <div class="form-group row ">
-                      <label for="staff_code" class="col-form-label col-md-3 col-sm-3 label-align offset-1">Staff Code</label>
-                        <div class="col-md-8 col-sm-8 ">
-                          <select class="form-control select2bs4" name="staff_code">
-                                <option value="">--select--</option>
-                            </select>
-                        </div>
-                      </div> --}}
-                      <div class="form-group row ">
-                        <label for="role" class="col-form-label col-md-3 col-sm-3 label-align offset-1">Role</label>
-                        <div class="col-md-8 col-sm-3 ">
-                          <select class="form-control select2bs4" name="role">
-                            <option value="">--select--</option>
-                            <option <?php echo ($profile == '0') ? "selected" : ""; ?> value="0">0</option>
-                            <option <?php echo ($profile == '0') ? "selected" : ""; ?> value="1">1</option>
-                         </select>
-                        </div>
-                      </div>
-
-                      <div class="form-group row">
-                        <label for="email" class="col-form-label col-md-3 col-sm-3 label-align offset-1">Mobile</label>
-                        <div class="col-md-8 col-sm-8 ">
-                        <input type="text" class="form-control" name="mobile"  placeholder="Mobile" value="{{$profile->mobile}}">
-                        </div>
-                      </div>
-
-                      <div class="form-group row">
-                        <label for="email" class="col-form-label col-md-3 col-sm-3 label-align offset-1">Address</label>
-                          <div class="col-md-8 col-sm-8 ">
-                          <input type="text" class="form-control" name="address"  placeholder="Address" value="{{$profile->address}}">
-                          </div>
-                      </div>
-
-                                          
-                    <div class="form-group row">
-                      <label for="role" class="col-form-label col-md-3 col-sm-3 label-align offset-1">Verified</label>
-                      <div class="col-md-8 col-sm-8 ">
-                        <select class="form-control select2bs4" name="verified">
-                            <option value="">--select--</option>
-                            <option <?php echo ($profile == '0') ? "selected" : ""; ?> value="0">0</option>
-                            <option <?php echo ($profile == '1') ? "selected" : ""; ?> value="1">1</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    </div> 
-                    <div class="form-group">
-                        <div class="">
-                          <button style="margin-left:139px;" type="submit" class="btn btn-success">Submit</button>
-                        </div>
-                    </div>
-
+        <div class="card-header">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label  class="col-form-label col-md-3 col-sm-3 label-align">Name</label>
+                  <div class="col-md-8 col-sm-3 ">
+                    <label" for="">{{$profile->name}}</label>
                   </div>
-			    </form>
-			  <!-- /.card -->
+                </div>
+
+                <div class="form-group row">
+                  <label  class="col-form-label col-md-3 col-sm-3 label-align">Rights Body</label>
+                  <div class="col-md-8 col-sm-8 ">
+                    <label" for="">{{$profile->rights_body}}</label>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="email" class="col-form-label col-md-3 col-sm-3 label-align">Designation</label>
+                    <div class="col-md-8 col-sm-8 ">
+                      <label" for="">{{$profile->designation}}</label>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="email" class="col-form-label col-md-3 col-sm-3 label-align">Department</label>
+                    <div class="col-md-8 col-sm-8 ">
+                      <label" for="">{{$profile->department}}</label>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="email" class="col-form-label col-md-3 col-sm-3 label-align">Description</label>
+                    <div class="col-md-8 col-sm-8 ">
+                      <label" for="">{{$profile->description}}</label>
+                    </div>
+                </div>
+
+                </div>
+
+              <div class="col-md-6 ">
+                <div class="form-group row ">
+                  <label for="staff_code" class="col-form-label col-md-3 col-sm-3 label-align offset-1">Staff Code</label>
+                    <div class="col-md-8 col-sm-8 ">
+                      <label" for="">{{$profile->staff_code}}</label>
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <label for="role" class="col-form-label col-md-3 col-sm-3 label-align offset-1">Role</label>
+                    <div class="col-md-8 col-sm-3 ">
+                      <label" for="">{{$profile->role}}</label>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="email" class="col-form-label col-md-3 col-sm-3 label-align offset-1">Mobile</label>
+                    <div class="col-md-8 col-sm-8 ">
+                      <label" for="">{{$profile->mobile}}</label>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="email" class="col-form-label col-md-3 col-sm-3 label-align offset-1">Address</label>
+                      <div class="col-md-8 col-sm-8 ">
+                        <label" for="">{{$profile->address}}</label>
+                      </div>
+                  </div>
+
+                                      
+                <div class="form-group row">
+                  <label for="role" class="col-form-label col-md-3 col-sm-3 label-align offset-1">Verified</label>
+                  <div class="col-md-8 col-sm-8 ">
+                    <label" for="">{{$profile->verified}}</label>
+                  </div>
+                </div>
+
+                </div> 
+
+              </div>
         </div>
+			   
+        <!-- /.card -->
+        
+          <div class="card-header  card-secondary">
+              <div class="card-header">
+                  <h3 class="card-title">Change Password</h3>
+              </div>
+          </div>
+
+        <form class="form-horizontal form-label-left" action="{{route('update-passsword',Auth::user()->id)}}" method="post">
+            @csrf
+          <div class="card-body">
+
+            <div class="form-group row">
+              <label  class="col-form-label col-md-3 col-sm-3 label-align">Old Password</label>
+              <div class="col-md-8 col-sm-3 ">
+                <input type="password" class="form-control" name="old_password" placeholder="Old Password">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label  class="col-form-label col-md-3 col-sm-3 label-align">New Password</label>
+              <div class="col-md-8 col-sm-3 ">
+                <input type="password" class="form-control" name="password" placeholder="New Password">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label  class="col-form-label col-md-3 col-sm-3 label-align">Confirm Password</label>
+              <div class="col-md-8 col-sm-3 ">
+                <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label  class="col-form-label col-md-3 col-sm-3 label-align"></label>
+              <div class="col-md-8 col-sm-3 ">
+                <button type="submit" class="btn btn-success">Submit</button>                  </div>
+            </div>
+          </div>
+        </form>
       </div>
 @endsection

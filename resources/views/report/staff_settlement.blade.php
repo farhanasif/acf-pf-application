@@ -1,8 +1,7 @@
-
 @extends('master')
 @section('content')
       <!-- Content Wrapper. Contains page content -->
-      
+
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <div class="container-fluid">
@@ -19,10 +18,10 @@
             </div>
           </div><!-- /.container-fluid -->
         </section>
-    
+
         <!-- Main content -->
         <section class="content">
-    
+
           <!-- general form elements disabled -->
           <div class="card card-secondary">
                 <div class="card-header">
@@ -53,7 +52,6 @@
                           </div>
                         </div>
                     </div>
-
                     <div class="col-sm-4">
                         <div class="form-group">
                         <label>&nbsp;&nbsp; To Month</label>
@@ -63,7 +61,7 @@
                         </div>
                     </div> -->
                     </div>
-    
+
                 </div>
                 <!-- /.card-body -->
                 <!-- /.card-body -->
@@ -80,13 +78,10 @@
 
 <script>
 $(document).ready(function() {
-
       $('.select2bs4').select2({
         theme: 'bootstrap4',
       });
-
-
-  $(function() { 
+  $(function() {
      $( "#from_data" ).datepicker({
           dateFormat: "YYYY-MM-DD HH:mm:ss",
           orientation: "bottom left"

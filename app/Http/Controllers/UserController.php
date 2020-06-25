@@ -19,43 +19,58 @@ class UserController extends Controller
 
     public function showLoginForm()
     {
-     return view('auth.login');
+      $user = Auth::user();
+      //return $user;
+      if($user){
+        if($user->role == '0'){
+          return redirect('admin-home');
+        }
+        else{
+          return view('auth.login');
+        }
+
+      }
+      else{
+        return view('auth.login');
+      }
+
     }
 
-    public  function checklogin(Request $request)
-    {
-     $this->validate($request, [
-      'email'   => 'required|email',
-      'password'  => 'required|min:3'
-     ]);
 
-     $user_data = array(
-      'email'  => $request->get('email'),
-      'password' => $request->get('password')
-     );
+  //   public  function checklogin(Request $request)
+  //   {
+  //    $this->validate($request, [
+  //     'email'   => 'required|email',
+  //     'password'  => 'required|min:3'
+  //    ]);
 
-     if(Auth::attempt($user_data))
-     {
-      return redirect('/');
-     }
-     else
-     {
-      return back()->with('error', 'Wrong Login Details');
-     }
-   }
+  //    $user_data = array(
+  //     'email'  => $request->get('email'),
+  //     'password' => $request->get('password')
+  //    );
+
+  //    if(Auth::attempt($user_data))
+  //    {
+  //     return redirect('/');
+  //    }
+  //    else
+  //    {
+  //     return back()->with('error', 'Wrong Login Details');
+  //    }
+  //  }
 
     public function logout()
     {
        Auth::logout();
-     return redirect('login');
+      return redirect('login');
     }
 
     public function show_add_user()
     {
-      
-      $employees = DB::table('employees')->get();
 
-       return view('user.add_user',compact('employees'));
+      $data['employees'] = DB::table('employees')->get();
+      $data['user_roles'] = DB::table('user_roles')->get();
+       return view('user.add_user',$data);
     }
 
     public function store_add_user(Request $request)
@@ -72,7 +87,7 @@ class UserController extends Controller
          'department' => 'required',
          'description' => 'required',
          'password' => 'required',
-         'verified' => 'required', 
+         'verified' => 'required',
          'user_type' => 'required',
      ]);
 
@@ -101,7 +116,7 @@ class UserController extends Controller
 
      public function save_user_batch_upload(Request $request)
      {
-       
+
         $upload = $request->file('file');
         $filename = $_FILES['file']['name'];
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
@@ -117,7 +132,7 @@ class UserController extends Controller
         if($ext == "xlsx" || $ext == "csv") {
         // $result = Excel::import(new UsersImport, $upload);
         $result = Excel::toArray(new UsersImport, $upload);
- 
+
      foreach ($result as $key => $value) {
         foreach ($value as $row) {
                 $insert_data[] =array(
@@ -159,7 +174,7 @@ class UserController extends Controller
     }
 
   }
-  
+
     return back()->with('success','User batch import successfully');
 
     // }
@@ -173,11 +188,10 @@ class UserController extends Controller
 
     public function edit_user($id)
     {
-       $users = User::find($id);
-       $alluserdata = User::get();
-      //  print_r($alluserdata);
-      //  exit;
-       return view('user.edit_user',compact('users','alluserdata'));
+       $data['users'] = User::find($id);
+       $data['alluserdata'] = User::get();
+       $data['user_roles'] = DB::table('user_roles')->get();
+       return view('user.edit_user',$data);
     }
 
     public function update_user(Request $request, $id)

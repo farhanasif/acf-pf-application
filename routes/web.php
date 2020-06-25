@@ -1,7 +1,5 @@
 <?php
 
-use App\Providers\RouteServiceProvider;
-use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,20 +11,17 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 // Route::get('/update',['as'=>'update','middleware'=>'auth','uses'=>'UpdateController@index']);
-// Route::group(['prefix' => '/'], function()
-// {
-//     if ( Auth::check()) 
-//     {
-//         Route::get('/admin-home',['middleware'=>'admin','uses'=>'AdminController@admin_home']);
-//     } else{
-//         Route::get('/', ['uses'=>'UserController@showLoginForm']);
-//     }
-// });
-
 Route::get('/', ['uses'=>'UserController@showLoginForm']);
+
+Route::get('/admin-home', ['middleware'=>'admin', 'uses'=>'AdminController@admin_home', 'as'=> 'admin-home']);
+
+Route::get('/user_home',['middleware'=>'user', 'uses'=>'AdminController@user_home']);
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Route::get('pf-deposit/excel-export/', 'ProvidentFundController@export')->name('pf-deposit-export');
 
 // Route::get('/report', function () {
 //     return view('report');
@@ -55,7 +50,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 // ]);
 
 
-// Mater Data Department Category ............. 
+// Mater Data Department Category .............
 Route::group(['middleware' => 'admin'], function () {
 //category add edit update delete......
 		Route::get('/category/add-category', [
@@ -161,7 +156,7 @@ Route::group(['middleware' => 'admin'], function () {
 			'as'		=> 'delete-work-place'
 		]);
 
-		// Department add edit delete update 
+		// Department add edit delete update
 		Route::get('/add-department', [
 			'uses'		=> 'MasterController@add_department',
 			'as'		=> 'add-department'
@@ -217,7 +212,7 @@ Route::group(['middleware' => 'admin'], function () {
 			'as'		=> 'delete-office'
 		]);
 
-		// Department add edit delete update 
+		// Department add edit delete update
 
 		Route::get('/add-department', [
 			'uses'		=> 'MasterController@add_department',
@@ -707,14 +702,14 @@ Route::group(['middleware' => 'admin'], function () {
 			'uses'		=> 'ChangeProfileController@edit_change_profile',
 			'as'		=> 'edit-change-profile'
 		]);
-		Route::post('/update-change-profile/{id}', [
-			'uses'		=> 'ChangeProfileController@update_change_profile',
-			'as'		=> 'update-change-profile'
+		Route::post('/update-passsword/{id}', [
+			'uses'		=> 'ChangeProfileController@update_passsword',
+			'as'		=> 'update-passsword'
 		]);
 		// ---------- END CHANGE PROFILE ROUTE ------------
 
 		//-------------------RECONCILIATION ROUTES-------------------//
-		Route::get('/reconciliation', 'BankController@view_transaction');
+		Route::get('/reconciliation', 'BankController@view_transaction')->name('reconciliation');
 		Route::get('/monthy-bank-book', 'BankController@get_monthly_bank_book');
 		Route::get('/save-monthly-bank-book', 'BankController@save_monthly_bank_book');
 		//-------------------RECONCILIATION ROUTES-------------------//
@@ -727,7 +722,7 @@ Route::group(['middleware' => 'admin'], function () {
 		]);
 
 		Route::get('/admin-home',['middleware'=>'admin','uses'=>'AdminController@admin_home']);
-		Route::get('/user-home',['middleware'=>'user','uses'=>'AdminController@user_home']);
+		//Route::get('/user-home',['middleware'=>'user','uses'=>'AdminController@user_home']);
 
 		// --------CHANGE PROFILE ROUTE---------------------
 		// Route::get('change-profile', [
@@ -746,87 +741,18 @@ Route::group(['middleware' => 'admin'], function () {
 			return 'DONE'; //Return anything
 		});
 
-		// report 
+		// report
+		Route::get('ledger-test', 'LedgerReportController@view_ledger_report_test');
+
+
 		Route::get('provident-fund-report', 'ProvidentFundController@providentFund');
 		Route::get('get-fund-data', 'ProvidentFundController@getProvidentFund');
 
-		Route::get('ledger', 'LedgerReportController@view_ledger_report');
+		Route::get('ledger', 'LedgerReportController@view_ledger_report')->name('ledger');
 		Route::get('ledger-report','LedgerReportController@ledger_report');
 
-		/**************************** Report Seaction route **************************/
-				Route::any('/generate-pf-balance-sheet', [
-					'uses'		=> 'ReportController@generatePFBalanceSheet',
-					'as'		=> 'generate-pf-balance-sheet'
-				]);
+		Route::get('/monthly-bank-book-excel', 'BankController@get_monthly_bank_book_excel');
 
-				Route::any('/print-pf-balance-sheet', [
-					'uses'		=> 'ReportController@printPFBalanceSheet',
-					'as'		=> 'print-pf-balance-sheet'
-				]);
-
-				Route::any('/loan-installment-report', [
-					'uses'		=> 'ReportController@loanInstallmentReport',
-					'as'		=> 'loan-installment-report'
-				]);
-
-
-				Route::any('/loan_installment_data', [
-					'uses'		=> 'ReportController@loanInstallmentData',
-					'as'		=> 'loan_installment_data'
-				]);
-
-
-				Route::any('/generate-staff-settlement', [
-					'uses'		=> 'ReportController@generateStaffSettlement',
-					'as'		=> 'generate-staff-settlement'
-				]);
-
-				Route::any('/print-staff-settlement', [
-					'uses'		=> 'ReportController@printStaffSettlement',
-					'as'		=> 'print-staff-settlement'
-				]);
-
-			    Route::any('/generate-employee-history', [
-					'uses'		=> 'ReportController@generateEmployeeHistory',
-					'as'		=> 'generate-employee-history'
-				]);
-
-				Route::any('/print-employee-history', [
-					'uses'		=> 'ReportController@printEmployeeHistory',
-					'as'		=> 'print-employee-history'
-				]);
-
-
-			    Route::any('/income-expenditure-report', [
-					'uses'		=> 'ReportController@incomeExpenditureReport',
-					'as'		=> 'income-expenditure-report'
-				]);
-
-				Route::any('/print-income-expenditure-report', [
-					'uses'		=> 'ReportController@printIncomeExpenditureReport',
-					'as'		=> 'print-income-expenditure-report'
-				]);
-
-			    Route::any('/receipts-payment-statement', [
-					'uses'		=> 'ReportController@receiptsPaymentStatement',
-					'as'		=> 'receipts-payment-statement'
-				]);
-
-				Route::any('/print-receipts-payment-statement', [
-					'uses'		=> 'ReportController@printReceiptsPaymentStatement',
-					'as'		=> 'print-receipts-payment-statement'
-				]);
-
-			    Route::any('/financial-statement', [
-					'uses'		=> 'ReportController@financialStatement',
-					'as'		=> 'financial-statement'
-				]);
-
-				Route::any('/print-financial-statement', [
-					'uses'		=> 'ReportController@printFinancialStatement',
-					'as'		=> 'print-financial-statement'
-				]);
-		/**************************** Arif Khan **************************************/
 
 		/**************************** Loan Seaction route *****************************/
 
@@ -858,10 +784,82 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::any('/save-loan-insatllment', [
 			'uses'		=> 'LoanController@saveLoanInstallment',
 			'as'		=> 'save-loan-insatllment'
+        ]);
+
+        Route::any('/generate-staff-settlement', [
+            'uses'		=> 'ReportController@generateStaffSettlement',
+            'as'		=> 'generate-staff-settlement'
+        ]);
+
+        Route::any('/print-staff-settlement', [
+            'uses'		=> 'ReportController@printStaffSettlement',
+            'as'		=> 'print-staff-settlement'
+        ]);
+
+        Route::any('/generate-employee-history', [
+            'uses'		=> 'ReportController@generateEmployeeHistory',
+            'as'		=> 'generate-employee-history'
+        ]);
+
+        Route::any('/print-employee-history', [
+            'uses'		=> 'ReportController@printEmployeeHistory',
+            'as'		=> 'print-employee-history'
+        ]);
+
+        Route::any('/income-expenditure-report', [
+            'uses'		=> 'ReportController@incomeExpenditureReport',
+            'as'		=> 'income-expenditure-report'
+        ]);
+
+        Route::any('/print-income-expenditure-report', [
+            'uses'		=> 'ReportController@printIncomeExpenditureReport',
+            'as'		=> 'print-income-expenditure-report'
+        ]);
+
+        Route::any('/receipts-payment-statement', [
+            'uses'		=> 'ReportController@receiptsPaymentStatement',
+            'as'		=> 'receipts-payment-statement'
+        ]);
+
+        Route::any('/print-receipts-payment-statement', [
+            'uses'		=> 'ReportController@printReceiptsPaymentStatement',
+            'as'		=> 'print-receipts-payment-statement'
+        ]);
+
+        Route::any('/financial-statement', [
+            'uses'		=> 'ReportController@financialStatement',
+            'as'		=> 'financial-statement'
+        ]);
+
+        Route::any('/print-financial-statement', [
+            'uses'		=> 'ReportController@printFinancialStatement',
+            'as'		=> 'print-financial-statement'
+        ]);
+
+/**************************** Arif Khan **************************************/
+		Route::any('/generate-pf-balance-sheet', [
+			'uses'		=> 'ReportController@generatePFBalanceSheet',
+			'as'		=> 'generate-pf-balance-sheet'
 		]);
 
-     /**************************** Arif Khan **************************************/
+		Route::any('/print-pf-balance-sheet', [
+			'uses'		=> 'ReportController@printPFBalanceSheet',
+			'as'		=> 'print-pf-balance-sheet'
+        ]);
+
+        Route::any('/loan-installment-report', [
+            'uses'		=> 'ReportController@loanInstallmentReport',
+            'as'		=> 'loan-installment-report'
+        ]);
 
 
+        Route::any('/loan_installment_data', [
+            'uses'		=> 'ReportController@loanInstallmentData',
+            'as'		=> 'loan_installment_data'
+        ]);
 
+
+        // user management route
+        Route::get('user-management','UserManagementController@index')->name('user-management');
+        Route::post('store-user-management','UserManagementController@store_user_management')->name('store-user-management');
 });

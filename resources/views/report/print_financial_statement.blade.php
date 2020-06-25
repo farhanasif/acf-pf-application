@@ -7,7 +7,7 @@
     <!-- <link rel="stylesheet"  type="text/css"  href="print.css" media="print" /> -->
     <!-- <style type="text/css" media="all"> @import "print.css";</style> -->
     <link rel="stylesheet" type="text/css" media="all" href="{{ URL::to('css/report_print.css') }}" />
-    
+
   </head>
   <body>
     <button class="print-button">Print Page</button>

@@ -21,7 +21,8 @@
         <div class="card-header">
           <h3 class="card-title">Loan Amount Details</h3>
           <div class="float-sm-right">
-          <a href="{{url('/create-loan')}}" class="btn btn-success"><i class="fas fa-plus"></i> Create New Loan</a>
+            <button type="submit" id="loanTable-download" class="btn btn-success">Download Excel</button>
+          <a href="{{route('create-loan')}}" class="btn btn-success"><i class="fas fa-plus"></i> Create New Loan</a>
         </div>
         </div>
         <div class="card-body">
@@ -29,16 +30,16 @@
             <table class="table table-striped table-head-fixed text-nowrap" id="loanTable">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Date</th>
-                  <th>Staff Code</th>
-                  <th>Name</th>
-                  <th>Amount</th>
-                  <th>Interest</th>
-                  <th>Months</th>
-                  <th>Start Month</th>
-                  <th>End Month</th>
-                  <th>Action</th>
+                  <th class="bg-success">SL</th>
+                  <th class="bg-success">Date</th>
+                  <th class="bg-success">Staff Code</th>
+                  <th class="bg-success">Name</th>
+                  <th class="bg-success">Amount</th>
+                  <th class="bg-success">Interest</th>
+                  <th class="bg-success">Months</th>
+                  <th class="bg-success">Start Month</th>
+                  <th class="bg-success">End Month</th>
+                  <th class="bg-success">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -70,9 +71,57 @@
     </section>
     @endsection
     @section('customjs')
+    <script src="http://www.jqueryscript.net/demo/jQuery-Plugin-To-Convert-HTML-Table-To-CSV-tabletoCSV/jquery.tabletoCSV.js"></script>
+
     <script>
     $(document).ready(function() {
-        $('#loanTable').DataTable();
+
+      // START ALL LOANS TABLE DATA DOWNLOAD CLICK FUNCTION
+    $( "#loanTable-download" ).click(function() {
+          $("#loanTable").tableToCSV();
+      });
+  // END ALL LOANS TABLE DATA DOWNLOAD CLICK FUNCTION
+
+  // START TABLE TO CSV CONVERT FUNCTION
+  var tableToExcel = (function() {
+        var uri = 'data:application/vnd.ms-excel;base64,',
+            template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+            base64 = function(s) {
+            return window.btoa(unescape(encodeURIComponent(s)))
+            },
+            format = function(s, c) {
+            return s.replace(/{(\w+)}/g, function(m, p) {
+                return c[p];
+            })
+            }
+        return function(table, name) {
+            if (!table.nodeType)
+            table = document.getElementById(table)
+            var ctx = {
+            worksheet: name || 'Worksheet',
+            table: table.innerHTML
+            }
+            var HeaderName = 'Download-ExcelFile';
+            var ua = window.navigator.userAgent;
+            var msieEdge = ua.indexOf("Edge");
+            var msie = ua.indexOf("MSIE ");
+            if (msieEdge > 0 || msie > 0) {
+            if (window.navigator.msSaveBlob) {
+                var dataContent = new Blob([base64(format(template, ctx))], {
+                type: "application/csv;charset=utf-8;"
+                });
+                var fileName = "excel.xls";
+                navigator.msSaveBlob(dataContent, fileName);
+            }
+            return;
+            }
+            window.open('data:application/vnd.ms-excel,' + encodeURIComponent(format(template, ctx)));
+        }
+    })()
+// END TABLE TO CSV CONVERT FUNCTION
+
+
+    $('#loanTable').DataTable();
     } );
     </script>
     @endsection

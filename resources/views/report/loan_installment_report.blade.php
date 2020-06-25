@@ -1,4 +1,3 @@
-
 @extends('master')
 
 @section('content')
@@ -55,7 +54,7 @@
                         <?php foreach ($info['position'] as $pos) { ?>
                             <option value="{{ $pos->position_name }}">{{ $pos->position_name}}</option>
                          <?php } ?>
-                        
+
                     </select>
                     </div>
                 </div>
@@ -69,7 +68,7 @@
                         <?php foreach ($info['department'] as $depart) { ?>
                             <option value="{{ $depart->department_code }}">{{ $depart->department_code}}</option>
                          <?php } ?>
-                        
+
                     </select>
                     </div>
                 </div>
@@ -114,7 +113,7 @@
                         </div>
                     </div>
 
-                    
+
                     <div class="col-md-3">
                         <!-- select -->
                         <div class="form-group">
@@ -146,7 +145,7 @@
       <div class="card card-success card-outline">
         <div class="card-header" style="">
           <h3 class="card-title" style="width: 50%;float: left;margin-top: 10px;">Installment Report Details</h3>
-          <button style="float: right;" type="submit" onclick="downloadExcel('loan_installment')" class="btn btn-info">Excel Download</button>
+          <button style="float: right;" type="submit" onclick="downloadExcel('loan_installment')" class="btn btn-success">Excel Download</button>
         </div>
 <!--         <div class="card-header" style="width: 45%;float: right;">
             <button type="submit" id="download" class="btn btn-info">Download</button>
@@ -157,16 +156,16 @@
                 <table id="loan_installment" class="table table-bordered table-striped table-sm">
                     <thead>
                     <tr>
-                    <th>SI</th>
-                    <th>Staff Code</th>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Department Code</th>
-                    <th>Level</th>
-                    <th>Base</th>
-                    <th>Workplace</th>
-                    <th>Amount</th>
-                    <th>Date</th>
+                    <th class="bg-success">SI</th>
+                    <th class="bg-success">Staff Code</th>
+                    <th class="bg-success">Name</th>
+                    <th class="bg-success">Position</th>
+                    <th class="bg-success">Department Code</th>
+                    <th class="bg-success">Level</th>
+                    <th class="bg-success">Base</th>
+                    <th class="bg-success">Workplace</th>
+                    <th class="bg-success">Amount</th>
+                    <th class="bg-success">Date</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -225,10 +224,10 @@
                 success: function (data) {
                     var trHTML = '';
                         $.each(data, function (i, item) {
-                            trHTML += '<tr><td>' + (i+1) 
+                            trHTML += '<tr><td>' + (i+1)
                                     + '</td><td>' + item.staff_code
-                                    + '</td><td>' + item.first_name + ' ' + item.last_name 
-                                    + '</td><td>' + item.position 
+                                    + '</td><td>' + item.first_name + ' ' + item.last_name
+                                    + '</td><td>' + item.position
                                     + '</td><td>' + item.department_code
                                     + '</td><td>' + item.level
                                     + '</td><td>' + item.base
@@ -254,21 +253,20 @@
         const fixedNumber = Number.parseFloat(number).toFixed(2);
         return String(fixedNumber).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-
     function downloadExcel(loan_installment,filename='loan_installment_data'){
         var downloadLink;
         var dataType = 'application/vnd.ms-excel';
         var tableSelect = document.getElementById(loan_installment);
         var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-        
+
         // Specify file name
         filename = filename?filename+'.xls':'excel_data.xls';
-        
+
         // Create download link element
         downloadLink = document.createElement("a");
-        
+
         document.body.appendChild(downloadLink);
-        
+
         if(navigator.msSaveOrOpenBlob){
             var blob = new Blob(['\ufeff', tableHTML], {
                 type: dataType
@@ -277,10 +275,10 @@
         }else{
             // Create a link to the file
             downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-        
+
             // Setting the file name
             downloadLink.download = filename;
-            
+
             //triggering the function
             downloadLink.click();
         }
@@ -288,13 +286,10 @@
 </script>
 <script>
 $(document).ready(function() {
-
       $('.select2bs4').select2({
         theme: 'bootstrap4',
       });
-
-
-  $(function() { 
+  $(function() {
      $( "#from_data" ).datepicker({
           dateFormat: "YYYY-MM-DD HH:mm:ss",
           orientation: "bottom left"

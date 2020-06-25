@@ -57,9 +57,9 @@ class LoanController extends Controller
     	       $loan->description  = $request->purpose;
     	       $loan->issue_date = date('Y-m-d', strtotime($request->date));
     	       $loan->save();
-               
+
                // $loan_id = DB::select("select id from loans where staff_code='".$request->staff_code."' ORDER BY created_at DESC limit 1");
-               
+
     	       for($i = 1; $i <= 12; $i++){
        		       $loanInstallment = new LoanInstallment;
     		       $loanInstallment->staff_code = $request->staff_code;
@@ -70,7 +70,7 @@ class LoanController extends Controller
     	       	   $loanInstallment->save();
     	       	   // echo json_encode($loanInstallment);
     	       }
-       
+
     	       $transaction = new Transaction;
     	       $transaction->account_head_id = $request->account_head;
     	       $transaction->description = $request->description;
@@ -96,7 +96,7 @@ class LoanController extends Controller
 
     public function allLoans()
     {
-    	$data = DB::select("SELECT loans.loan_amount, loans.total_months, loans.interest, loans.issue_date, 
+    	$data = DB::select("SELECT loans.loan_amount, loans.total_months, loans.interest, loans.issue_date,
               MIN(loan_installment.pay_date ) AS loan_start_date, MAX(loan_installment.pay_date ) AS loan_end_date,
                COUNT( DISTINCT loans.loan_amount) AS total_loan,
               employees.first_name, employees.last_name, employees.position, employees.staff_code
@@ -116,13 +116,13 @@ class LoanController extends Controller
                  INNER JOIN employees ON employees.staff_code = loans.staff_code
                  WHERE loans.staff_code ='".$staff_code."' LIMIT 1");
      // print_r($loan_account_details[0]->first_name);exit();
-                            
+
       $total_and_maximum_pf = DB::select(
                   "SELECT SUM(total_pf) AS total_pf_amount, MAX(total_pf) AS maximum_total_pf , deposit_date
                   FROM pf_deposit WHERE staff_code ='".$staff_code."' ORDER BY deposit_date DESC");
 
       $loan_adjustments = DB::select("SELECT  id, payment, pay_date, payment_type
-                                     FROM loan_installment 
+                                     FROM loan_installment
                                      WHERE staff_code ='".$staff_code."' ORDER BY pay_date ASC");
 
       $pf_deposits = DB::table('pf_deposit')
@@ -138,7 +138,7 @@ class LoanController extends Controller
     {
         $staff_code = $request->staff_code;
         $employees = DB::table('employees')->where('staff_code',$staff_code)->get();
-        
+
         // print_r($request->all());exit();
         $transaction = new Transaction;
         $transaction->account_head_id = $request->account_head_for_monthly_installment;
@@ -154,9 +154,9 @@ class LoanController extends Controller
         $transaction->amount = $request->monthly_interest;
         $transaction->transaction_date = date('Y-m-d H:i:s', strtotime($request->date_of_adjusment));
         $transaction->save();
-        
+
         DB::select('update loan_installment set payment_type="paid" where id='.$request->installment_id);
-        
+
         return back()->with('success','Your monthly loan installment is successfully paid!.');
     }
 

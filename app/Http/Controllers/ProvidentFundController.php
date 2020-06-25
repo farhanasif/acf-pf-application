@@ -14,6 +14,7 @@ use App\Pf_withdraw;
 use App\Interest;
 use Auth;
 use DB;
+use App\Exports\PF_DepositsExport;
 
 class ProvidentFundController extends Controller
 {
@@ -25,7 +26,7 @@ class ProvidentFundController extends Controller
 
     public function add_provident_fund()
     {
-      
+
       $provident_funds = DB::table('employees')->get();
       return view('provident_fund.add_provident_fund',compact('provident_funds'));
     }
@@ -65,7 +66,9 @@ class ProvidentFundController extends Controller
 
     public function all_provident_fund()
     {
-      $provident_funds = DB::table('pf_deposit')->get();
+      $provident_funds = DB::table('pf_deposit')->orderBy('deposit_date','ASC')->get();
+      // dd($provident_funds);
+      // exit;
       return view('provident_fund.all_provident_fund',compact('provident_funds'));
     }
 
@@ -118,7 +121,7 @@ class ProvidentFundController extends Controller
 
      public function getProvidentFund()
      {
-        // $from = $request->from_date; 
+        // $from = $request->from_date;
         // echo $from;
         // exit;
       $results = DB::select('select pf.*,  e.`basic_salary`, e.`gross_salary`, date_format(pf.`created_at`, "%Y%m") as PaymentMonth, e.`first_name`, e.`last_name`, e.`category`, e.`level`, e.`joining_date`, e.`ending_date`, e.`work_place`
@@ -137,7 +140,7 @@ class ProvidentFundController extends Controller
         $accept_files = ["csv", "txt", "xlsx"];
         if(!in_array($ext, $accept_files)) {
             return redirect()->back()
-            ->with('error', 'Invalid file extension. permitted file is .csv, .txt & .xlsx');
+            ->with('error', 'Invalid file extension. permitted file is .csv & .xlsx');
         }
         // get the file
         $upload = $request->file('file');
@@ -159,11 +162,24 @@ class ProvidentFundController extends Controller
             );
         }
      }
+
+    //  dd($insert_data);
+    //  exit;
+
         if (!empty($insert_data)) {
             DB::table('pf_deposit')->insert($insert_data);
         }
           return back()->with('success','Provident batch import successfully');
       }
-  
+
     }
+
+    // public function export()
+    // {
+    //     $data = DB::table('pf_deposit')->get();
+    //     Excel::download(new UsersExport, function($excel) use ($data){
+    //         $excel->setTitile('pf_deposit excel sheet');
+    //         $
+    //     });
+    // }
 }

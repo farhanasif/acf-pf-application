@@ -7,7 +7,7 @@
     <!-- <link rel="stylesheet"  type="text/css"  href="print.css" media="print" /> -->
     <!-- <style type="text/css" media="all"> @import "print.css";</style> -->
     <link rel="stylesheet" type="text/css" media="all" href="{{ URL::to('css/report_print.css') }}" />
-    
+
   </head>
   <body>
     <button class="print-button">Print Page</button>
@@ -36,7 +36,7 @@
                     <span>Action Contre La Faim <br/>
                     House-23, Road- 113/A, Gulshan-2, Dhaka-1212, Bangladesh </span></b>
                   </p>
-                  <img src="../images/logo/acf-pf.png" alt="acf" style="width: 200px;height: 100px;margin-left: auto;margin-right: auto;">
+                  <img src="{{ asset('images/logo/acf-pf.png') }}" alt="acf" style="width: 200px;height: 100px;margin-left: auto;margin-right: auto;">
                   <p class="ptf-ln-top-6">
                     <span></span>
                     <b><span></span>
@@ -54,7 +54,7 @@
                       <span>{{ $userInfo[0]->sub_location }}</span>
                       </b>
                     </p>
-                    
+
                   </div>
                   <div class="top-info">
                     <p class="ptf-ln-top-4" style="">
@@ -112,7 +112,7 @@
                     <p class="ptf-ln-top-6">
                       <span>Contract end Date</span>
                       <b><span>:</span>
-                      <span>{{ $userInfo[0]->ending_date }}</span>
+                      <span><?php if($userInfo[0]->ending_date != "1970-01-01")  echo $userInfo[0]->ending_date; ?></span>
                       </b>
                     </p>
                   </div>

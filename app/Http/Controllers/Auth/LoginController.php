@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -40,12 +41,25 @@ class LoginController extends Controller
 
     protected function authenticated($request, $user){
 
-        if($user->role =='0'){
+        // if(Auth::user()->role =='0'){
+        //     return redirect()->intended('/admin-home');
+        // }
+        // elseif (Auth::user()->role =='1') {
+        //     // dd('user');
+        //     return redirect()->intended('/user-home');
+
+        // }
+
+        if(Auth::user()->role =='0'){
             return redirect()->intended('/admin-home');
         }
-        elseif ($user->role=='1') {
-            return redirect()->intended('/user-home');
-           
+        elseif (Auth::user()->role =='1') {
+            return redirect()->intended('/user_home');
+
+        }else{
+            return redirect('/login');
         }
+
+
     }
 }

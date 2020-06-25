@@ -166,13 +166,13 @@
 <script>
   var table;
   $(function () {
-    table = $("#example1").DataTable({
-        "info": true,
-        "autoWidth": false,
-        scrollX:'50vh',
-        scrollY:'50vh',
-        scrollCollapse: true,
-    });
+    // table = $("#example1").DataTable({
+    //     "info": true,
+    //     "autoWidth": false,
+    //     scrollX:'50vh',
+    //     scrollY:'50vh',
+    //     scrollCollapse: true,
+    // });
 
     $( "#generate" ).click(function() {
         from_date = $('#from_date').val();

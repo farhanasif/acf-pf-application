@@ -1,3 +1,5 @@
+   
+   <link rel="shortcut icon" href="https://www.actionagainsthunger.org/sites/all/themes/acf2014zen/favicon.ico" type="image/vnd.microsoft.icon" />
    <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('theme/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Ionicons -->
@@ -17,8 +19,5 @@
     <!-- daterange picker -->
  <link rel="stylesheet" href="{{asset('/')}}theme/plugins/daterangepicker/daterangepicker.css">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
  <link rel="stylesheet" href="{{ asset('theme/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
-

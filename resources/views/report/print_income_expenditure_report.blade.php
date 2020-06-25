@@ -7,7 +7,7 @@
     <!-- <link rel="stylesheet"  type="text/css"  href="print.css" media="print" /> -->
     <!-- <style type="text/css" media="all"> @import "print.css";</style> -->
     <link rel="stylesheet" type="text/css" media="all" href="{{ URL::to('css/report_print.css') }}" />
-    
+
   </head>
   <body>
     <button class="print-button">Print Page</button>
@@ -133,7 +133,7 @@
                 <td style="text-align: right;"><b><?php echo number_format($total_income_form - $total_expen_form, 2); ?></b></td>
                 <td style="text-align: right;"><?php echo number_format($total_income_to - $total_expen_to, 2); ?></td>
               </tr>
-              
+
             </tbody>
           </table>
           <div style="">

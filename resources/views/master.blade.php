@@ -16,7 +16,7 @@
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-dark navbar-success">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-success">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -35,7 +35,7 @@
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-user"></i>
+          <i class="far fa-user"></i> {{ Auth::user()->name }}
           {{-- <span class="badge badge-danger navbar-badge">2</span> --}}
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -62,7 +62,7 @@
                              document.getElementById('logout-form').submit();">
                 {{ __('Logout') }}
             </a>
-          
+
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
@@ -75,11 +75,11 @@
 
 
 @if(Auth::guest())
-    @include('includes.sidenavbar_root') 
+    @include('includes.sidenavbar_root')
 @elseif(Auth::user()->role==0)
     @include('includes.sidenavbar')
 @elseif(Auth::user()->role==1)
-    @include('includes.sidenavbar_user')     
+    @include('includes.dynamic_menu')
 @endif
   <!-- Main Sidebar Container -->
 

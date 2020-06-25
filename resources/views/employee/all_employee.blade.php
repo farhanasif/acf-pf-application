@@ -1,22 +1,20 @@
 @extends('master')
-@section('customcss') 
+@section('customcss')
 
-  <style>
-    tfoot input {
-        width: 100%;
-        /* padding: 6px; */
-        /* box-sizing: border-box; */
-    }
-     th input {
-        width: 90%;
-    }
-
-    /* tfoot{
-      display: table-header-group;
-    } */
-  </style>
-
-  <link rel="stylesheet" href="{{asset('/')}}theme/plugins/datatables-fixedcolumns/css/fixedColumns.bootstrap4.min.css">
+<style>
+  tr.selected td {
+      background-color:coral !important;
+  }
+  .selected {
+      background-color: coral;
+  }
+  .first-col {
+      text-align: center; background-color: #212529; color: #fff;
+  }
+  .general-col {
+      text-align: center; background-color: #bee5eb; color: #000;
+  }
+</style>
 @endsection
 @section('content')
 
@@ -43,39 +41,14 @@
           <h3 class="card-title">All Employees Information</h3>
 
         <div class="float-sm-right">
-          <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a> 
-          <a href="{{url('download_excel/employee/employee.xlsx')}}" class="btn btn-success">Download Sample Excel</a> 
+          <button type="submit" id="all-employee-download" class="btn btn-success">Download Excel</button>
+          <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a>
+          <a href="{{url('download_excel/employee/employee.xlsx')}}" class="btn btn-success">Download Sample Excel</a>
           <a href="{{route('add-employee')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add Employee</a>
         </div>
 
+        @include('message')
 
-        <div class="col-md-6 offset-3 mt-2">
-          @if ($message = Session::get('success'))
-              <div class="alert alert-success alert-block text-center">
-              <button type="button" class="close" data-dismiss="alert">×</button>
-              <strong>{{ $message }}</strong>
-              </div>
-          @endif
-
-          @if ($message = Session::get('danger'))
-            <div class="alert alert-danger alert-block text-center">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>{{ $message }}</strong>
-            </div>
-          @endif
-
-          @if ($errors->any())
-              <div class="alert alert-warning">
-              <button type="button" class="close" data-dismiss="alert">×</button>
-                  <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                  <ul>
-                      @foreach ($errors->all() as $error)
-                          <li>{{ $error }}</li>
-                      @endforeach
-                  </ul>
-              </div>
-          @endif
-      </div>
     </div>
 
     <div class="card-header card-secondary">
@@ -90,12 +63,12 @@
             <div class="form-group">
             <label>Staff Code</label>
             <select class="custom-select select2bs4 " id="staff_code" name="staff_code">
-                <option value="">--select--</option>
+                <option value="-1">--select--</option>
 
-                @foreach ($employees as $employee)
+                @foreach ($all_employees as $employee)
                   <option value="{{ sprintf("%04d", $employee->staff_code)}}"> {{ sprintf("%04d", $employee->staff_code)}} </option>
                 @endforeach
-              
+
             </select>
             </div>
           </div>
@@ -104,12 +77,12 @@
                 <!-- select -->
                 <div class="form-group">
                 <label>Name</label>
-                <select class="custom-select select2bs4" id="first_name" name="first_name">
-                    <option value="">--select--</option>
-                      @foreach ($employees as $employee)
-                        <option value="{{$employee->first_name}} {{$employee->last_name}}"> {{$employee->first_name}} {{$employee->last_name}} </option>
+                <select class="custom-select select2bs4" id="name" name="name">
+                    <option value="-1">--select--</option>
+                      @foreach ($all_employees as $employee)
+                        <option value="{{ sprintf("%04d", $employee->staff_code)}}"> {{$employee->first_name}} {{$employee->last_name}} </option>
                       @endforeach
-                    
+
                 </select>
                 </div>
             </div>
@@ -202,112 +175,86 @@
 
             <div class="mb-5">
               <button type="submit" id="search" class="btn btn-success">Generate</button>
-              <button type="submit" id="reset" class="btn btn-info float-sm-right">Reset</button>
             </div>
      </form>
     </div>
     <!-- /.card-header -->
-    
-    <div class="card-body table-responsive p-0" style="height: 500px;">
-      <table id="all-employee" class="table table-head-fixed text-nowrap">
-        <thead>
 
-        <tr>
-          <th class="bg-success"> SL NO </th>
-          <th class="bg-success"> Staff Code </th>
-          <th class="bg-success"> Name </th>
-          <th class="bg-success"> Position </th>
-          <th class="bg-success"> Department Code </th>
-          <th class="bg-success"> Category </th>
-          <th class="bg-success"> Level </th>
-          <th class="bg-success"> Base </th>
-          <th class="bg-success"> Work Place </th>
-          <th class="bg-success"> Sub Location </th>
-          <th class="bg-success"> Basic Salary </th>
-          <th class="bg-success"> Gross Salary </th>
-          <th class="bg-success"> Provident Amount </th>
-          <th class="bg-success"> Joining Date </th>
-          <th class="bg-success"> Ending Date </th>
-          {{-- <th>Action</th> --}}
-        </tr>
-        </thead>
-        <tbody>
-      <?php $i=1;?>
-        @foreach($employees as $employee)
+     <div class="card-header">
+      <div class="card-body table-responsive p-0" style="height: 500px;">
+        <table id="all-employee" class="table table-bordered table-striped table-head-fixed text-nowrap">
+          <thead>
+
           <tr>
-            <td>{{ $i++ }}</td>
-            <?php 
-              if($employee->status == 0)
-              {
-            ?>
-            <td class="bg-danger text-bold">
-              <a href="{{route('employee-details',$employee->staff_code)}}">
-                {{ sprintf("%04d", $employee->staff_code)}}
-              </a>
-            </td>
-        <?php 
-            }
-            else { 
-        ?>
-              <td class="bg-success text-bold">
+            <th class="bg-success "> SL NO </th>
+            <th class="bg-success fixed-column"> Staff Code </th>
+            <th class="bg-success"> Name </th>
+            <th class="bg-success"> Position </th>
+            <th class="bg-success"> Department Code </th>
+            <th class="bg-success"> Category </th>
+            <th class="bg-success"> Level </th>
+            <th class="bg-success"> Base </th>
+            <th class="bg-success"> Work Place </th>
+            <th class="bg-success"> Sub Location </th>
+            <th class="bg-success"> Basic Salary </th>
+            <th class="bg-success"> Gross Salary </th>
+            <th class="bg-success"> Provident Amount </th>
+            <th class="bg-success"> Joining Date </th>
+            <th class="bg-success"> Ending Date </th>
+            {{-- <th>Action</th> --}}
+          </tr>
+          </thead>
+          <tbody>
+        <?php $i=1;?>
+          @foreach($employees as $employee)
+            <tr>
+              <td>{{ $i++ }}</td>
+              <?php
+                if($employee->ending_date != '1970-01-01')
+                {
+              ?>
+              <td class="bg-danger text-bold fixed-column">
                 <a href="{{route('employee-details',$employee->staff_code)}}">
-                  {{sprintf("%04d", $employee->staff_code)}}
+                  {{ sprintf("%04d", $employee->staff_code)}}
                 </a>
               </td>
-        <?php } ?>
-          <td class="text-bold">
-            <a href="{{route('employee-details',$employee->staff_code)}}">
-              {{$employee->first_name}} {{$employee->last_name}}
-            </a>
-          </td>
-          <td>{{$employee->position}}</td>
-          <td>{{$employee->department_code}}</td>
-          <td>{{$employee->category}}</td>
-          <td>{{$employee->level}}</td>
-          <td>{{$employee->base}}</td>
-          <td>{{$employee->work_place}}</td>
-          <td>{{$employee->sub_location}}</td>
-          <td>{{$employee->basic_salary}}</td>
-          <td>{{$employee->gross_salary}}</td>
-          <td>{{$employee->pf_amount}}</td>
-          <td>{{$employee->joining_date}}</td>
-          <td>{{$employee->ending_date}}</td>
-          {{-- <td >
-              <a href="{{route('edit-employee',$employee->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-              <a href="{{route('delete-employee',$employee->id)}}" onclick="ConfirmDelete()" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-          </td> --}}
-        </tr>
-        @endforeach
-       </tbody>
-
-        {{-- <tfoot>
-          <tr>
-            <th style="display:none;"></th>
-            <th>Staff Code</th>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Department Code</th>
-            <th>Category</th>
-            <th>Level</th>
-            <th>Base</th>
-            <th>Work Place</th>
-            <th>Sub Location</th>
-            <th style="display:none;"></th>
-            <th style="display:none;"></th>
-            <th style="display:none;"></th>
-            <th style="display:none;"></th>
-            <th style="display:none;"></th>
+          <?php
+              }
+              else {
+          ?>
+                <td class="bg-success text-bold fixed-column">
+                  <a href="{{route('employee-details',$employee->staff_code)}}">
+                    {{sprintf("%04d", $employee->staff_code)}}
+                  </a>
+                </td>
+          <?php } ?>
+            <td class="text-bold">
+              <a href="{{route('employee-details',$employee->staff_code)}}">
+                {{$employee->first_name}} {{$employee->last_name}}
+              </a>
+            </td>
+            <td>{{$employee->position}}</td>
+            <td>{{$employee->department_code}}</td>
+            <td>{{$employee->category}}</td>
+            <td>{{$employee->level}}</td>
+            <td>{{$employee->base}}</td>
+            <td>{{$employee->work_place}}</td>
+            <td>{{$employee->sub_location}}</td>
+            <td>{{$employee->basic_salary}}</td>
+            <td>{{$employee->gross_salary}}</td>
+            <td>{{$employee->pf_amount}}</td>
+            <td>{{$employee->joining_date}}</td>
+            <td>{{$employee->ending_date == '1970-01-01' ? '' : $employee->ending_date}}</td>
           </tr>
-        </tfoot> --}}
-   
-      </table>
-    </div>
+          @endforeach
+         </tbody>
+        </table>
+      </div>
+     </div>
     <!-- /.card-body -->
-     
 
     <div class="card-footer">
       <div class="float-right">
-        {{-- {{ $employees->links() }} --}}
        </div>
     </div>
   </div>
@@ -344,267 +291,71 @@
 <!-- END EMPLOYEE BATCH UPLOAD MODAL -->
 
  @endsection
- 
-  @section('customjs')  
-      <script>
+
+  @section('customjs')
+  <script src="http://www.jqueryscript.net/demo/jQuery-Plugin-To-Convert-HTML-Table-To-CSV-tabletoCSV/jquery.tabletoCSV.js"></script>
+
+  <script>
 
    $(document).ready(function(){
 
-// ---------------------START TOP HEADING SEARCHING -------------------
-    // $('#all-employee thead tr').clone(true).appendTo( '#all-employee thead' );
-    // $('#all-employee thead tr:eq(1) th').each( function (i) {
-    //     var title = $(this).text();
-    //     $(this).html( '<input type="text" class="form-control" placeholder=" '+title+'" />' );
- 
-    //     $( 'input', this ).on( 'keyup change', function () {
-    //         if ( table.column(i).search() !== this.value ) {
-    //             table
-    //                 .column(i)
-    //                 .search( this.value )
-    //                 .draw();
-    //         }
-    //     } );
-    // } );
- 
-    // var table = $('#all-employee').DataTable( {
-    //     orderCellsTop: true,
-    //     fixedHeader: true,
-    //     scrollX:'50vh',
-    //     scrollY:'50vh',
-    //     fixedColumns: true,
-    //     fixedColumns:   {
-    //         leftColumns: 2
-    //     }
-    // } );
-// ---------------------END TOP HEADING SEARCHING -------------------
+   // START ALL EMPLOYEE TABLE DATA DOWNLOAD CLICK FUNCTION
+    $( "#all-employee-download" ).click(function() {
+          $("#all-employee").tableToCSV();
+      });
+  // END ALL EMPLOYEE TABLE DATA DOWNLOAD CLICK FUNCTION
 
+  // START TABLE TO CSV CONVERT FUNCTION
+  var tableToExcel = (function() {
+        var uri = 'data:application/vnd.ms-excel;base64,',
+            template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+            base64 = function(s) {
+            return window.btoa(unescape(encodeURIComponent(s)))
+            },
+            format = function(s, c) {
+            return s.replace(/{(\w+)}/g, function(m, p) {
+                return c[p];
+            })
+            }
+        return function(table, name) {
+            if (!table.nodeType)
+            table = document.getElementById(table)
+            var ctx = {
+            worksheet: name || 'Worksheet',
+            table: table.innerHTML
+            }
+            var HeaderName = 'Download-ExcelFile';
+            var ua = window.navigator.userAgent;
+            var msieEdge = ua.indexOf("Edge");
+            var msie = ua.indexOf("MSIE ");
+            if (msieEdge > 0 || msie > 0) {
+            if (window.navigator.msSaveBlob) {
+                var dataContent = new Blob([base64(format(template, ctx))], {
+                type: "application/csv;charset=utf-8;"
+                });
+                var fileName = "excel.xls";
+                navigator.msSaveBlob(dataContent, fileName);
+            }
+            return;
+            }
+            window.open('data:application/vnd.ms-excel,' + encodeURIComponent(format(template, ctx)));
+        }
+    })()
+// END TABLE TO CSV CONVERT FUNCTION
 
+    $("tr").click(function() {
+            console.log('clicked');
+            $(this).addClass('selected').siblings().removeClass("selected");
+    });
 
-// ---------------------START BOTTOM SEARCHING -------------------
-    $('#all-employee tfoot th').each( function () {
-        var title = $(this).text();
-        $(this).html( '<input type="text"  class="form-control" placeholder="'+title+'" />' );
-    } );
- 
-    // DataTable
-    // var table = $('#all-employee').DataTable();
-    
-    // var table = $('#all-employee').DataTable({
-    //       "info": true,
-    //       "autoWidth": false,
-    //       scrollX:'50vh', 
-    //       scrollY:'50vh',
-    //       scrollCollapse: true,
-    //       fixedColumns: true,
-    //       fixedColumns:   {
-    //         leftColumns: 2
-    //     }
-    //   });
- 
-    // Apply the search
-    // table.columns().every( function () {
-    //     var that = this;
- 
-    //     $( 'input', this.footer() ).on( 'keyup change clear', function () {
-    //         if ( that.search() !== this.value ) {
-    //             that
-    //                 .search( this.value )
-    //                 .draw();
-    //         }
-    //     } );
-    // } );
-// ---------------------END BOTTOM SEARCHING -------------------
-    
-
-// ---------------------START DROPDOWN SEARCHING -------------------
-
-    // $('#all-employee').DataTable( {
-
-    //             scrollX:'50vh', 
-    //       scrollY:'50vh',
-    //       scrollCollapse: true,
-    //       fixedColumns: true,
-    //       fixedColumns:   {
-    //         leftColumns: 2
-    //     },
-
-    //     initComplete: function () {
-    //         this.api().columns().every( function () {
-    //             var column = this;
-    //             var select = $('<select class="select2bs4" style="width:120px;" ><option value=""></option></select>')
-    //                 .appendTo( $(column.footer()).empty() )
-    //                 .on( 'change', function () {
-    //                     var val = $.fn.dataTable.util.escapeRegex(
-    //                         $(this).val()
-    //                     );
- 
-    //                     column
-    //                         .search( val ? '^'+val+'$' : '', true, false )
-    //                         .draw();
-    //                 } );
- 
-    //             column.data().unique().sort().each( function ( d, j ) {
-    //                 select.append( '<option value="'+d+'">'+d+'</option>' )
-    //             } );
-    //         } );
-    //     }
-    // } );
-
-// ---------------------END DROPDOWN SEARCHING -------------------
-
-
-
-
-    //START CUSTOM SEARCH 
-    // fill_datatable();
-    
-    // function fill_datatable(staff_code = '', first_name = '', category = '', level = '', base ='',work_place = '',position = '',department_code = '')
-    // {
-    //     var dataTable = $('#all-employee').DataTable({
-    //         processing: true,
-    //         serverSide: true,
-    //         ajax:{
-    //             url: "{{ route('custom-search-employee') }}",
-    //             method:post,
-    //             data:{
-    //               staff_code:staff_code, 
-    //               first_name:first_name,
-    //               category:category, 
-    //               level:level,
-    //               base:base, 
-    //               work_place:work_place,
-    //               position:position, 
-    //               department_code:department_code
-    //               }
-    //         },
-    //         columns: [
-    //             {
-    //                 data:'staff_code',
-    //                 name:'staff_code'
-    //             },
-    //             {
-    //                 data:'first_name',
-    //                 name:'first_name'
-    //             },
-    //             {
-    //                 data:'category',
-    //                 name:'category'
-    //             },
-    //             {
-    //                 data:'level',
-    //                 name:'level'
-    //             },
-    //             {
-    //                 data:'base',
-    //                 name:'base'
-    //             },
-    //             {
-    //                 data:'position',
-    //                 name:'position'
-    //             },
-
-    //             {
-    //                 data:'department_code',
-    //                 name:'department_code'
-    //             }
-    //         ]
-    //     });
-    // }
-
-    // $('#search').click(function(){
-    //     var staff_code = $('#staff_code').val();
-    //     var first_name = $('#first_name').val();
-    //     var category = $('#category').val();
-    //     var level = $('#level').val();
-    //     var base = $('#base').val();
-    //     var position = $('#position').val();
-    //     var department_code = $('#department_code').val();
-
-    //     if(staff_code != '' &&  first_name != '' &&  category != '' &&  level != '' &&  base != '' &&  position != '' &&  department_code != '')
-    //     {
-    //         $('#all-employee').DataTable().destroy();
-    //         fill_datatable(staff_code, first_name,category,level,base,position,department_code);
-    //     }
-
-    //     else if(staff_code != '')
-    //     {
-    //       $('#all-employee').DataTable().destroy();
-    //         fill_datatable(staff_code);
-    //     }
-
-    //     else if(first_name != '')
-    //     {
-    //       $('#all-employee').DataTable().destroy();
-    //         fill_datatable(first_name);
-    //     }
-
-    //     else if(category != '')
-    //     {
-    //       $('#all-employee').DataTable().destroy();
-    //         fill_datatable(category);
-    //     }
-
-    //     else if(level != '')
-    //     {
-    //       $('#all-employee').DataTable().destroy();
-    //         fill_datatable(category);
-    //     }
-
-    //     else if(base != '')
-    //     {
-    //       $('#all-employee').DataTable().destroy();
-    //         fill_datatable(base);
-    //     }
-
-    //     else if(position != '')
-    //     {
-    //       $('#all-employee').DataTable().destroy();
-    //         fill_datatable(position);
-    //     }
-
-    //     else if(department_code != '')
-    //     {
-    //       $('#all-employee').DataTable().destroy();
-    //         fill_datatable(department_code);
-    //     }
-
-    //     else
-    //     {
-    //         alert('Select Both filter option');
-    //     }
-    // });
-
-    // $('#reset').click(function(){
-    //     $('#filter_gender').val('');
-    //     $('#filter_country').val('');
-    //     $('#all-employee').DataTable().destroy();
-    //     fill_datatable();
-    // });
-
-    //END CUSTOM SEARCH 
-
-      // $('#all-employee').DataTable({
-      //     "info": true,
-      //     "autoWidth": false,
-      //     scrollX:'50vh', 
-      //     scrollY:'50vh',
-      //     scrollCollapse: true,
-      //     fixedColumns: true,
-      //     fixedColumns:   {
-      //       leftColumns: 2
-      //   }
-      // });
 
       $('.select2bs4').select2({
         theme: 'bootstrap4',
       });
-
     });
-  
-    </script>
-    <script src="{{ asset('theme/plugins/datatables-fixedcolumns/js/dataTables.fixedColumns.min.js') }}"></script>
 
+    </script>
   @endsection
 
- 
+
 

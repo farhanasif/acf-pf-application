@@ -16,7 +16,6 @@
 <!-- Select2 -->
 <script src="{{asset('theme/plugins/select2/js/select2.full.min.js')}}"></script>
 <!-- PAGE SCRIPTS -->
- <script src="{{asset('theme/dist/js/pages/dashboard2.js')}}"></script> 
 
 <!-- date-range-picker -->
 <script src="{{asset('theme/plugins/daterangepicker/daterangepicker.js')}}"></script>
@@ -26,6 +25,3 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
 </script>
 <script src="{{ asset('theme/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
