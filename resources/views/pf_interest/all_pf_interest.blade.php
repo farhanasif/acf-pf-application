@@ -27,7 +27,7 @@
     <div class="card-header">
         <h3 class="card-title">All PF Interest Information</h3>
         <div class="float-sm-right">
-          <button type="submit" id="pf-interest-download" class="btn btn-success">Download Excel</button>
+          <button type="submit" id="pf-interest-download" class="btn btn-success"  onclick="exportToExcel('pf-interest','pf-interest')">Download Excel</button>
           {{-- <a href="" class="btn btn-success" data-toggle="modal" data-target="#update-modal-default">Update Batch</a> --}}
           <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a>
           <a href="{{url('download_excel/pf_interest/Interest.xlsx')}}" class="btn btn-success">Download Sample Excel</a>
@@ -132,54 +132,54 @@
 @endsection
 
 @section('customjs')
-<script src="http://www.jqueryscript.net/demo/jQuery-Plugin-To-Convert-HTML-Table-To-CSV-tabletoCSV/jquery.tabletoCSV.js"></script>
+{{-- <script src="http://www.jqueryscript.net/demo/jQuery-Plugin-To-Convert-HTML-Table-To-CSV-tabletoCSV/jquery.tabletoCSV.js"></script> --}}
 
   <script>
 
    $(document).ready( function(){
 
      // START ALL EMPLOYEE TABLE DATA DOWNLOAD CLICK FUNCTION
-     $( "#pf-interest-download" ).click(function() {
-          $("#pf-interest").tableToCSV();
-      });
+    //  $( "#pf-interest-download" ).click(function() {
+    //       $("#pf-interest").tableToCSV();
+    //   });
   // END ALL EMPLOYEE TABLE DATA DOWNLOAD CLICK FUNCTION
 
   // START TABLE TO CSV CONVERT FUNCTION
-  var tableToExcel = (function() {
-        var uri = 'data:application/vnd.ms-excel;base64,',
-            template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
-            base64 = function(s) {
-            return window.btoa(unescape(encodeURIComponent(s)))
-            },
-            format = function(s, c) {
-            return s.replace(/{(\w+)}/g, function(m, p) {
-                return c[p];
-            })
-            }
-        return function(table, name) {
-            if (!table.nodeType)
-            table = document.getElementById(table)
-            var ctx = {
-            worksheet: name || 'Worksheet',
-            table: table.innerHTML
-            }
-            var HeaderName = 'Download-ExcelFile';
-            var ua = window.navigator.userAgent;
-            var msieEdge = ua.indexOf("Edge");
-            var msie = ua.indexOf("MSIE ");
-            if (msieEdge > 0 || msie > 0) {
-            if (window.navigator.msSaveBlob) {
-                var dataContent = new Blob([base64(format(template, ctx))], {
-                type: "application/csv;charset=utf-8;"
-                });
-                var fileName = "excel.xls";
-                navigator.msSaveBlob(dataContent, fileName);
-            }
-            return;
-            }
-            window.open('data:application/vnd.ms-excel,' + encodeURIComponent(format(template, ctx)));
-        }
-    })()
+//   var tableToExcel = (function() {
+//         var uri = 'data:application/vnd.ms-excel;base64,',
+//             template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+//             base64 = function(s) {
+//             return window.btoa(unescape(encodeURIComponent(s)))
+//             },
+//             format = function(s, c) {
+//             return s.replace(/{(\w+)}/g, function(m, p) {
+//                 return c[p];
+//             })
+//             }
+//         return function(table, name) {
+//             if (!table.nodeType)
+//             table = document.getElementById(table)
+//             var ctx = {
+//             worksheet: name || 'Worksheet',
+//             table: table.innerHTML
+//             }
+//             var HeaderName = 'Download-ExcelFile';
+//             var ua = window.navigator.userAgent;
+//             var msieEdge = ua.indexOf("Edge");
+//             var msie = ua.indexOf("MSIE ");
+//             if (msieEdge > 0 || msie > 0) {
+//             if (window.navigator.msSaveBlob) {
+//                 var dataContent = new Blob([base64(format(template, ctx))], {
+//                 type: "application/csv;charset=utf-8;"
+//                 });
+//                 var fileName = "excel.xls";
+//                 navigator.msSaveBlob(dataContent, fileName);
+//             }
+//             return;
+//             }
+//             window.open('data:application/vnd.ms-excel,' + encodeURIComponent(format(template, ctx)));
+//         }
+//     })()
 // END TABLE TO CSV CONVERT FUNCTION
 
 
@@ -194,4 +194,41 @@
    });
 
     </script>
+    <script>
+        function exportToExcel(tableID, filename){
+            // var staff_code = $('#staff_code').val();
+          //  console.log(staff_code);
+        //    var first_name = $('#first_name').val();
+        //    var last_name = $('#last_name').val();
+        var downloadLink;
+        var dataType = 'application/vnd.ms-excel';
+        var header = "<h2 style='text-align:center;'>Name : Arif Khan</h2><h2 style='text-align:center;'>Staff Code: 1111</h2>";
+        var tableSelect = document.getElementById(tableID);
+        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+        // console.log(header);
+        // Specify file name
+        filename = filename?filename+'.xls':'excel_data.xls';
+
+        // Create download link element
+        downloadLink = document.createElement("a");
+
+        document.body.appendChild(downloadLink);
+
+        if(navigator.msSaveOrOpenBlob){
+            var blob = new Blob(['\ufeff', tableHTML], {
+                type: dataType
+            });
+            navigator.msSaveOrOpenBlob( blob, filename);
+        }else{
+            // Create a link to the file
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+            // Setting the file name
+            downloadLink.download = filename;
+
+            //triggering the function
+            downloadLink.click();
+        }
+    }
+      </script>
 @endsection

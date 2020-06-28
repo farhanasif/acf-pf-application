@@ -130,7 +130,7 @@
                       <div class="card-header">
                         <h3 class="card-title">Provident Fund Deposits</h3>
                         <div class="float-sm-right">
-                        <button type="submit" id="pf-deposit-download" class="btn btn-success">Download Excel</button>
+                        <button type="submit" id="pf-deposit-download" class="btn btn-success" onclick="exportToExcel('pf-deposit','pf-deposit')">Download Excel</button>
                         {{-- <button type="submit" class="print-pdf-pf-deposit" class="btn btn-success" >Download PDF</button> --}}
                         </div>
                       </div>
@@ -147,13 +147,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                              <tr style="display:none">
-                                <td colspan="4"> Staff Code:  {{ sprintf("%04d", $employees->staff_code)}}</td>
-                                {{-- <td></td>
-                                <td></td>
-                                <td></td> --}}
-                                <td rowspan=""> Full Name: {{$employees->first_name.' '.$employees->last_name}}</td>
-                              </tr>
+
                             <?php $i=1;?>
                             @foreach ($pf_deposits as $pf_deposit)
                             <tr>
@@ -176,7 +170,7 @@
                     <div class="card card-outline card-warning">
                       <div class="card-header">
                         <h3 class="card-title">Provident Fund Interests</h3>
-                        <button type="submit" id="pf-interest-download" class="btn btn-success float-right">Download Excel</button>
+                        <button type="submit" id="pf-interest-download" class="btn btn-success float-right" onclick="exportToExcel('pf-interest','pf-interest')">Download Excel</button>
 
                       </div>
 
@@ -195,13 +189,6 @@
                             </tr>
                           </thead>
                           <tbody>
-                              <tr style="display:none">
-                                <td colspan="4"> Staff Code:  {{ sprintf("%04d", $employees->staff_code)}}</td>
-                                {{-- <td></td>
-                                <td></td>
-                                <td></td> --}}
-                                <td rowspan=""> Full Name: {{$employees->first_name.' '.$employees->last_name}}</td>
-                              </tr>
                             <?php $i=1;?>
                             @foreach ($interests_and_pf_deposit as $item)
                             <tr>
@@ -233,7 +220,7 @@
                   <div class="card card-outline card-danger">
                       <div class="card-header">
                         <h3 class="card-title">Your Loans Against Provident Fund</h3>
-                        <button type="submit" id="loan-against-pf-download" class="btn btn-success float-right">Download Excel</button>
+                        <button type="submit" id="loan-against-pf-download" class="btn btn-success float-right" onclick="exportToExcel('loan-against-pf','loan-against-pf')" >Download Excel</button>
                       </div>
                       <!-- /.card-header arif-->
 
@@ -252,13 +239,6 @@
                             </tr>
                           </thead>
                           <tbody>
-                              <tr style="display:none">
-                                <td colspan="4"> Staff Code:  {{ sprintf("%04d", $employees->staff_code)}}</td>
-                                {{-- <td></td>
-                                <td></td>
-                                <td></td> --}}
-                                <td rowspan=""> Full Name: {{$employees->first_name.' '.$employees->last_name}}</td>
-                              </tr>
                       @foreach ($loan_account_details as $item)
                         <tr>
                           <td>01</td>
@@ -281,7 +261,7 @@
                   <div class="card card-outline card-success">
                       <div class="card-header">
                         <h3 class="card-title">Loan Adjustments</h3>
-                        <button type="submit" id="loan-adjustment-download" class="btn btn-success float-right">Download Excel</button>
+                        <button type="submit" id="loan-adjustment-download" class="btn btn-success float-right" onclick="exportToExcel('loan-adjustment','loan-adjustment')">Download Excel</button>
                       </div>
                       <!-- /.card-header -->
                       <div class="card-body table-responsive p-0" style="height: 300px;">
@@ -295,13 +275,6 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr style="display:none">
-                              <td colspan="4"> Staff Code:  {{ sprintf("%04d", $employees->staff_code)}}</td>
-                              {{-- <td></td>
-                              <td></td>
-                              <td></td> --}}
-                              <td rowspan=""> Full Name: {{$employees->first_name.' '.$employees->last_name}}</td>
-                            </tr>
                             <?php $i=1;?>
                             @foreach ($loan_adjustments as $item)
 
@@ -511,66 +484,66 @@
   $( document ).ready(function() {
 
     // START DEPOSIT TABLE DATA DOWNLOAD CLICK FUNCTION
-        $( "#pf-deposit-download" ).click(function() {
-            $("#pf-deposit").tableToCSV();
-        });
+        // $( "#pf-deposit-download" ).click(function() {
+        //     $("#pf-deposit").tableToCSV();
+        // });
     // END DEPOSIT TABLE DATA DOWNLOAD CLICK FUNCTION
 
     // STRAT INTEREST TABLE DATA DOWNLOAD CLICK FUNCTION
-    $( "#pf-interest-download" ).click(function() {
-            $("#pf-interest").tableToCSV();
-        });
+    // $( "#pf-interest-download" ).click(function() {
+    //         $("#pf-interest").tableToCSV();
+    //     });
     // END INTEREST TABLE DATA DOWNLOAD CLICK FUNCTION
 
     // STRAT YOUR LOAN AGAINST PF TABLE DATA DOWNLOAD CLICK FUNCTION
-        $( "#loan-against-pf-download" ).click(function() {
-            $("#loan-against-pf").tableToCSV();
-        });
+        // $( "#loan-against-pf-download" ).click(function() {
+        //     $("#loan-against-pf").tableToCSV();
+        // });
     // END YOUR LOAN AGAINST PF TABLE DATA DOWNLOAD CLICK FUNCTION
 
     // STRAT LOAN ADJUSMENT TABLE DATA DOWNLOAD CLICK FUNCTION
-        $( "#loan-adjustment-download" ).click(function() {
-            $("#loan-adjustment").tableToCSV();
-        });
+        // $( "#loan-adjustment-download" ).click(function() {
+        //     $("#loan-adjustment").tableToCSV();
+        // });
     // END LOAN ADJUSMENT PF TABLE DATA DOWNLOAD CLICK FUNCTION
 
 
     // START TABLE TO CSV CONVERT FUNCTION
-    var tableToExcel = (function() {
-        var uri = 'data:application/vnd.ms-excel;base64,',
-            template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
-            base64 = function(s) {
-            return window.btoa(unescape(encodeURIComponent(s)))
-            },
-            format = function(s, c) {
-            return s.replace(/{(\w+)}/g, function(m, p) {
-                return c[p];
-            })
-            }
-        return function(table, name) {
-            if (!table.nodeType)
-            table = document.getElementById(table)
-            var ctx = {
-            worksheet: name || 'Worksheet',
-            table: table.innerHTML
-            }
-            var HeaderName = 'Download-ExcelFile';
-            var ua = window.navigator.userAgent;
-            var msieEdge = ua.indexOf("Edge");
-            var msie = ua.indexOf("MSIE ");
-            if (msieEdge > 0 || msie > 0) {
-            if (window.navigator.msSaveBlob) {
-                var dataContent = new Blob([base64(format(template, ctx))], {
-                type: "application/csv;charset=utf-8;"
-                });
-                var fileName = "excel.xls";
-                navigator.msSaveBlob(dataContent, fileName);
-            }
-            return;
-            }
-            window.open('data:application/vnd.ms-excel,' + encodeURIComponent(format(template, ctx)));
-        }
-    })()
+    // var tableToExcel = (function() {
+    //     var uri = 'data:application/vnd.ms-excel;base64,',
+    //         template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+    //         base64 = function(s) {
+    //         return window.btoa(unescape(encodeURIComponent(s)))
+    //         },
+    //         format = function(s, c) {
+    //         return s.replace(/{(\w+)}/g, function(m, p) {
+    //             return c[p];
+    //         })
+    //         }
+    //     return function(table, name) {
+    //         if (!table.nodeType)
+    //         table = document.getElementById(table)
+    //         var ctx = {
+    //         worksheet: name || 'Worksheet',
+    //         table: table.innerHTML
+    //         }
+    //         var HeaderName = 'Download-ExcelFile';
+    //         var ua = window.navigator.userAgent;
+    //         var msieEdge = ua.indexOf("Edge");
+    //         var msie = ua.indexOf("MSIE ");
+    //         if (msieEdge > 0 || msie > 0) {
+    //         if (window.navigator.msSaveBlob) {
+    //             var dataContent = new Blob([base64(format(template, ctx))], {
+    //             type: "application/csv;charset=utf-8;"
+    //             });
+    //             var fileName = "excel.xls";
+    //             navigator.msSaveBlob(dataContent, fileName);
+    //         }
+    //         return;
+    //         }
+    //         window.open('data:application/vnd.ms-excel,' + encodeURIComponent(format(template, ctx)));
+    //     }
+    // })()
 // END TABLE TO CSV CONVERT FUNCTION
 
        //get the data
@@ -666,5 +639,43 @@
   //       window.print();
   //       window.location = url;
   //   });
+  </script>
+
+<script>
+    function exportToExcel(tableID, filename){
+        var staff_code = $('#staff_code').val();
+      //  console.log(staff_code);
+       var first_name = $('#first_name').val();
+       var last_name = $('#last_name').val();
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var header = "<h2 style='text-align:center;'>Name : Arif Khan</h2><h2 style='text-align:center;'>Staff Code: 1111</h2>";
+    var tableSelect = document.getElementById(tableID);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    // console.log(header);
+    // Specify file name
+    filename = filename?filename+'('+ staff_code + '-' + first_name + ' ' + last_name +').xls':'excel_data.xls';
+
+    // Create download link element
+    downloadLink = document.createElement("a");
+
+    document.body.appendChild(downloadLink);
+
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+        // Setting the file name
+        downloadLink.download = filename;
+
+        //triggering the function
+        downloadLink.click();
+    }
+}
   </script>
  @endsection
