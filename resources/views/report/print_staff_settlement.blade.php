@@ -112,7 +112,7 @@
                     <p class="ptf-ln-top-6">
                       <span>Contract end Date</span>
                       <b><span>:</span>
-                      <span>{{ $userInfo[0]->ending_date }}</span>
+                      <span><?php if($userInfo[0]->ending_date != "1970-01-01")  echo $userInfo[0]->ending_date; ?></span>
                       </b>
                     </p>
                   </div>

@@ -131,15 +131,15 @@ class ReportController extends Controller
         $userInfo = DB::select("SELECT employees.*, SUM(pf_deposit.own_pf) AS employee_contribution, SUM(pf_deposit.organization_pf) AS employer_contribution, interests.own AS interest_percent
           FROM employees
           INNER JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
-          INNER JOIN interests ON interests.staff_code = pf_deposit.staff_code
+          left JOIN interests ON interests.staff_code = pf_deposit.staff_code
           WHERE employees.staff_code = ".$staff_code);
 
         $loan_data = DB::select("SELECT employees.*, SUM(pf_deposit.own_pf) AS employee_contribution, SUM(pf_deposit.organization_pf) AS employer_contribution, interests.own AS interest_percent,
           loans.loan_amount, loans.monthly_installment, loans.monthly_interest, loans.interest, loans.issue_date
           FROM employees
           INNER JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
-          INNER JOIN interests ON interests.staff_code = pf_deposit.staff_code
-          INNER JOIN loans ON loans.staff_code = interests.staff_code
+          left JOIN interests ON interests.staff_code = pf_deposit.staff_code
+          left JOIN loans ON loans.staff_code = interests.staff_code
           WHERE employees.staff_code = ".$staff_code);
         // print_r($data);exit();
         $loan_details = DB::select("SELECT SUM((CASE WHEN (loan_installment.payment_type = 'paid') THEN loan_installment.payment ELSE 0 END)) AS with_interest_paid_loan,
@@ -167,14 +167,14 @@ class ReportController extends Controller
         $userInfo = DB::select("SELECT employees.*, SUM(pf_deposit.own_pf) AS employee_contribution, SUM(pf_deposit.organization_pf) AS employer_contribution, interests.own AS interest_percent
           FROM employees
           INNER JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
-          INNER JOIN interests ON interests.staff_code = pf_deposit.staff_code
+          left JOIN interests ON interests.staff_code = pf_deposit.staff_code
           WHERE employees.staff_code = ".$staff_code);
         $data = DB::select("SELECT employees.*, SUM(pf_deposit.own_pf) AS employee_contribution, SUM(pf_deposit.organization_pf) AS employer_contribution, interests.own AS interest_percent,
           loans.loan_amount, loans.monthly_installment, loans.monthly_interest, loans.interest, loans.issue_date
           FROM employees
           INNER JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
-          INNER JOIN interests ON interests.staff_code = pf_deposit.staff_code
-          INNER JOIN loans ON loans.staff_code = interests.staff_code
+          left JOIN interests ON interests.staff_code = pf_deposit.staff_code
+          left JOIN loans ON loans.staff_code = interests.staff_code
           WHERE employees.staff_code = ".$staff_code);
         // print_r($data);exit();
         $loan_details = DB::select("SELECT SUM((CASE WHEN (loan_installment.payment_type = 'paid') THEN loan_installment.payment ELSE 0 END)) AS with_interest_paid_loan,
