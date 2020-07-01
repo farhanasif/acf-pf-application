@@ -329,6 +329,8 @@
 
             })
         });
+
+        
         function generate_book(){
           from_date = $('#from_date').val();
           //$('#spinner').addClass('spinner');

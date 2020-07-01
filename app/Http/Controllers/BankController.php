@@ -138,6 +138,11 @@ class BankController extends Controller
         $transaction->cheque_no = $chequeno;
         $transaction->effective_date = $effectiveDate.' 00:00:00';
 
+        if($type == 'R') $transaction->is_bank_book = 0;
+        else $transaction->is_bank_book = 1;
+
+        //dd($transaction);
+
         if($transaction->save()){
             return 'success';
         }

@@ -124,7 +124,7 @@ class LedgerReportController extends Controller
             group by staff_code with rollup
             ";
 
-            //return $master_query;
+            return $master_query;
 
             $results = DB::select($master_query);
             //return count($results);
