@@ -214,7 +214,7 @@
                       <!-- text input -->
                       <div class="form-group">
                         <label>Transaction Type</label>
-                        <select class="custom-select" id="transaction_type">
+                        <select class="custom-select" id="bank_transaction_type">
                           <option value="R">Bank Reconciliation</option>
                           <option value="B">Bank Book</option>
                         </select>
@@ -266,13 +266,15 @@
             $('#saveTransaction').click(function() {
               //get the data
               var transactionDate = $('#transactionDate').val();
-              var effectiveDate = $('#transactionDate').val();
+              var effectiveDate = $('#effectiveDate').val();
               var description = $('#description').val();
               var account_head = $('#account_head').val();
               var voucherno = $('#voucherno').val();
               var chequeno = $('#chequeno').val();
               var amount = $('#amount').val();
               var type = $('#transaction_type').val();
+              var bank_transaction_type = $('#bank_transaction_type').val();
+
               if(description == '' || transactionDate == '' || effectiveDate == '' || amount == '' || amount == '0' || account_head == '0'){
                 Toast.fire({
                   type: 'error',
@@ -294,7 +296,8 @@
                       voucherno: voucherno,
                       chequeno: chequeno,
                       amount: amount,
-                      type: type
+                      type: type,
+                      bank_transaction_type: bank_transaction_type
                   },
                   dataType: 'text',
                   success: function (data) {
@@ -330,7 +333,7 @@
             })
         });
 
-        
+
         function generate_book(){
           from_date = $('#from_date').val();
           //$('#spinner').addClass('spinner');

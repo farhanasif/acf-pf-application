@@ -92,7 +92,7 @@ class BankController extends Controller
 
         $query = "select '' as transaction_date,'Balance ".$last_month."' as description, (
             (select sum(total_pf) from pf_deposit where `deposit_date` <= '".$last_date."')
-            - (select ifnull(sum(amount),0) from transactions where transaction_date <= '".$last_date."' and is_bank_book = 1)
+            + (select ifnull(sum(amount),0) from transactions where transaction_date <= '".$last_date."' and is_bank_book = 1)
             ) as amount, '' as voucher_no, '' as cheque_no, '' as account_head
             union
             select '' as transaction_date,'Employee Contribution ".$con_month."' as description, sum(own_pf) as amount, '' as voucher_no, '' as cheque_no, '' as account_head
@@ -126,6 +126,7 @@ class BankController extends Controller
         $chequeno = $_GET['chequeno'];
         $amount = $_GET['amount'];
         $type = $_GET['type'];
+        $bank_transaction_type = $_GET['bank_transaction_type'];
 
 
         $transaction = new Transaction;
@@ -138,7 +139,7 @@ class BankController extends Controller
         $transaction->cheque_no = $chequeno;
         $transaction->effective_date = $effectiveDate.' 00:00:00';
 
-        if($type == 'R') $transaction->is_bank_book = 0;
+        if($bank_transaction_type == 'R') $transaction->is_bank_book = 0;
         else $transaction->is_bank_book = 1;
 
         //dd($transaction);
