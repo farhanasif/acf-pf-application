@@ -130,14 +130,14 @@ class ReportController extends Controller
         $staff_code = $request->staff;
         $userInfo = DB::select("SELECT employees.*, SUM(pf_deposit.own_pf) AS employee_contribution, SUM(pf_deposit.organization_pf) AS employer_contribution, interests.own AS interest_percent
           FROM employees
-          INNER JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
+          left JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
           left JOIN interests ON interests.staff_code = pf_deposit.staff_code
           WHERE employees.staff_code = ".$staff_code);
 
         $loan_data = DB::select("SELECT employees.*, SUM(pf_deposit.own_pf) AS employee_contribution, SUM(pf_deposit.organization_pf) AS employer_contribution, interests.own AS interest_percent,
           loans.loan_amount, loans.monthly_installment, loans.monthly_interest, loans.interest, loans.issue_date
           FROM employees
-          INNER JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
+          left JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
           left JOIN interests ON interests.staff_code = pf_deposit.staff_code
           left JOIN loans ON loans.staff_code = interests.staff_code
           WHERE employees.staff_code = ".$staff_code);
@@ -149,7 +149,7 @@ class ReportController extends Controller
                  SUM((CASE WHEN (loan_installment.payment_type = 'paid') THEN 1 ELSE 0 END)) AS num_of_paid_installment,
                  SUM((CASE WHEN (loan_installment.payment_type = 'Due') THEN 1 ELSE 0 END)) AS num_of_due_installment
                  FROM loan_installment
-                 INNER JOIN loans ON loans.staff_code = loan_installment.staff_code
+                 left JOIN loans ON loans.staff_code = loan_installment.staff_code
                  WHERE loan_installment.staff_code = ".$staff_code);
 
         return view('report.print_staff_settlement',['data'=>$loan_data,'loan_details'=>$loan_details,'userInfo'=>$userInfo]);
@@ -166,13 +166,13 @@ class ReportController extends Controller
         $staff_code = $request->staff;
         $userInfo = DB::select("SELECT employees.*, SUM(pf_deposit.own_pf) AS employee_contribution, SUM(pf_deposit.organization_pf) AS employer_contribution, interests.own AS interest_percent
           FROM employees
-          INNER JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
+          left JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
           left JOIN interests ON interests.staff_code = pf_deposit.staff_code
           WHERE employees.staff_code = ".$staff_code);
         $data = DB::select("SELECT employees.*, SUM(pf_deposit.own_pf) AS employee_contribution, SUM(pf_deposit.organization_pf) AS employer_contribution, interests.own AS interest_percent,
           loans.loan_amount, loans.monthly_installment, loans.monthly_interest, loans.interest, loans.issue_date
           FROM employees
-          INNER JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
+          left JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
           left JOIN interests ON interests.staff_code = pf_deposit.staff_code
           left JOIN loans ON loans.staff_code = interests.staff_code
           WHERE employees.staff_code = ".$staff_code);
@@ -184,7 +184,7 @@ class ReportController extends Controller
                  SUM((CASE WHEN (loan_installment.payment_type = 'paid') THEN 1 ELSE 0 END)) AS num_of_paid_installment,
                  SUM((CASE WHEN (loan_installment.payment_type = 'Due') THEN 1 ELSE 0 END)) AS num_of_due_installment
                  FROM loan_installment
-                 INNER JOIN loans ON loans.staff_code = loan_installment.staff_code
+                 left JOIN loans ON loans.staff_code = loan_installment.staff_code
                  WHERE loan_installment.staff_code = ".$staff_code);
 
         return view('report.print_employee_history',['data'=>$data,'loan_details'=>$loan_details,'userInfo'=>$userInfo]);
