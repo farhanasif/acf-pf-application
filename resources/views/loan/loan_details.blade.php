@@ -80,9 +80,9 @@
             <div class="description-block">
 
               <?php $total_loan = 0; foreach ($loan_account_details as $item) {
-                $total_loan += $item->loan_amount;
+                   $total_loan += $item->loan_amount;
                 } ?>
-                <h5 class="description-header"> 
+                <h5 class="description-header">
                   <?php echo $total_loan.'Tk.'; ?>
                 </h5>
 
@@ -114,19 +114,17 @@
       <div class="card card-success card-outline">
         <div class="card-header">
           <h3 class="card-title">Loan Amount Details</h3>
-          <button type="submit" id="loan-amount-details-download" class="btn btn-success float-right">Download Excel</button>
         </div>
         <div class="card-body">
           <div class="card-body table-responsive p-0" style="">
-            <table class="table table-striped table-head-fixed text-nowrap" id="loan-amount-details">
+            <table class="table table-striped table-head-fixed text-nowrap" id="loanTable">
               <thead>
                 <tr>
-                  <th class="bg-success">SL</th>
+                  <th class="bg-success">ID</th>
                   <th class="bg-success">Date</th>
-                  <th class="bg-success">Loan</th>
-                  <th class="bg-success">Interest</th>
-                  <th class="bg-success">Remaining</th>
+                  <th class="bg-success">Amount</th>
                   <th class="bg-success">Status</th>
+                  <th class="bg-success">Remaning Amount</th>
                   <th class="bg-success">Action</th>
                 </tr>
               </thead>
@@ -134,30 +132,27 @@
                 <?php $i=1;$remaning_amount = $total_loan;?>
                 @foreach ($loan_adjustments as $item)
 
-                <?php 
+                <?php
                   $remaning_amount -= $loan_account_details[0]->monthly_installment;
                 ?>
-
                 <tr>
                 <td>{{$i++}}</td>
                   <td> {{ date('j F, Y', strtotime($item->pay_date,3)) }}  </td>
-                  <td><dt> {{$item->monthly_installment}}  </dt></td>
-                  <td><dt> {{$item->monthly_interest}}</dt></td>
-                  <td><?php print_r(ceil($remaning_amount)."/-"); ?></td>
+                  <td><dt> {{$item->payment}}/=  </dt></td>
 
                       @if ( strtoupper( $item->payment_type) == 'DUE')
                         <td class="text-danger"> {{strtoupper( $item->payment_type)}} </td>
                       @elseif(strtoupper( $item->payment_type) == 'PAID')
                         <td class="text-success"> {{strtoupper($item->payment_type) }} </td>
-                        
+
                       @endif
-                  
+                  <td><?php print_r(ceil($remaning_amount)."/="); ?></td>
                   @if ( strtoupper( $item->payment_type) == 'DUE')
-                   <td><button  id ="{{$item->id}}" data-id="{{$item->id}}" class="btn btn-warning" data-toggle="modal" data-target="#modal-loan-installment" onclick="showId(this);" style="font-weight: 600;">Adjust</button></td>
+                   <td><button  id ="{{$item->id}}" data-id="{{$item->id}}" class="btn btn-warning" data-toggle="modal" data-target="#modal-loan-installment" onclick="showId(this);" style="font-weight: 600;">Adjust Loan Installment</button></td>
                   @elseif(strtoupper( $item->payment_type) == 'PAID')
-                    <td><button class="btn btn-info" style="font-weight: 600;">PAID</button></td>
+                    <td><button class="btn btn-info" style="font-weight: 600;">Already Paid</button></td>
                   @endif
-             
+
                 </tr>
 
                 @endforeach
@@ -256,8 +251,6 @@
 @endsection
 
 @section('customjs')
-<script src="http://www.jqueryscript.net/demo/jQuery-Plugin-To-Convert-HTML-Table-To-CSV-tabletoCSV/jquery.tabletoCSV.js"></script>
-
 <script>
 function showId(button) {
   var id = button.id;
@@ -265,53 +258,7 @@ function showId(button) {
   document.getElementById("installment_id").value = id;
 }
 $(document).ready(function() {
-
-   // START ALL LOANS TABLE DATA DOWNLOAD CLICK FUNCTION
-   $( "#loan-amount-details-download" ).click(function() {
-          $("#loan-amount-details").tableToCSV();
-      });
-  // END ALL LOANS TABLE DATA DOWNLOAD CLICK FUNCTION
-
-  // START TABLE TO CSV CONVERT FUNCTION
-  var tableToExcel = (function() {
-        var uri = 'data:application/vnd.ms-excel;base64,',
-            template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
-            base64 = function(s) {
-            return window.btoa(unescape(encodeURIComponent(s)))
-            },
-            format = function(s, c) {
-            return s.replace(/{(\w+)}/g, function(m, p) {
-                return c[p];
-            })
-            }
-        return function(table, name) {
-            if (!table.nodeType)
-            table = document.getElementById(table)
-            var ctx = {
-            worksheet: name || 'Worksheet',
-            table: table.innerHTML
-            }
-            var HeaderName = 'Download-ExcelFile';
-            var ua = window.navigator.userAgent;
-            var msieEdge = ua.indexOf("Edge");
-            var msie = ua.indexOf("MSIE ");
-            if (msieEdge > 0 || msie > 0) {
-            if (window.navigator.msSaveBlob) {
-                var dataContent = new Blob([base64(format(template, ctx))], {
-                type: "application/csv;charset=utf-8;"
-                });
-                var fileName = "excel.xls";
-                navigator.msSaveBlob(dataContent, fileName);
-            }
-            return;
-            }
-            window.open('data:application/vnd.ms-excel,' + encodeURIComponent(format(template, ctx)));
-        }
-        })()
-    // END TABLE TO CSV CONVERT FUNCTION
-
-
-    $(function() { 
+    $(function() {
        $( "#adjustment_date" ).datepicker();
     });
   });

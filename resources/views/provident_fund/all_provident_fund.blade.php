@@ -27,7 +27,11 @@
     <div class="card-header">
           <h3 class="card-title">All PF Deposit Information</h3>
         <div class="float-sm-right">
-          <button type="submit" id="all-pf-deposit-download" class="btn btn-success">Download Excel</button>
+          {{-- <button type="submit" id="all-pf-deposit-download" class="btn btn-success">Download Excel</button> --}}
+          <form action="{{ route('pf-deposit-export') }}" method="POST">
+              @csrf
+              <button class="btn btn-success">Download Excel</button>
+          </form>
           <a href="" class="btn btn-success" data-toggle="modal" data-target="#pf-deposit">Batch Upload</a>
           <a href="{{url('download_excel/pf_deposit/pf-deposit.xlsx')}}" class="btn btn-success">Download Sample Excel</a>
           <a href="{{route('add-provident-fund')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add PF Deposit</a>
