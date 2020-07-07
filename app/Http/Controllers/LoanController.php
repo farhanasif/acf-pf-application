@@ -124,6 +124,7 @@ class LoanController extends Controller
       $loan_adjustments = DB::select("SELECT  id, payment, pay_date, payment_type
                                      FROM loan_installment
                                      WHERE staff_code ='".$staff_code."' ORDER BY pay_date ASC");
+      // print_r($loan_adjustments);die();
 
       $pf_deposits = DB::table('pf_deposit')
                       ->orderBy('deposit_date', 'desc')
