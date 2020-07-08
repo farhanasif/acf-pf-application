@@ -27,7 +27,8 @@
     <div class="card-header">
         <h3 class="card-title">All PF Interest Information</h3>
         <div class="float-sm-right">
-          <button type="submit" id="pf-interest-download" class="btn btn-success"  onclick="exportToExcel('pf-interest','pf-interest')">Download Excel</button>
+            <a href="{{route('pf-interest-export')}}" class="btn btn-success"> Download Excel</a>
+          {{-- <button type="submit" id="pf-interest-download" class="btn btn-success"  onclick="exportToExcel('pf-interest','pf-interest')">Download Excel</button> --}}
           {{-- <a href="" class="btn btn-success" data-toggle="modal" data-target="#update-modal-default">Update Batch</a> --}}
           <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a>
           <a href="{{url('download_excel/pf_interest/Interest.xlsx')}}" class="btn btn-success">Download Sample Excel</a>

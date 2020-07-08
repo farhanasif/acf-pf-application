@@ -14,7 +14,7 @@ use App\Pf_withdraw;
 use App\Interest;
 use Auth;
 use DB;
-use App\Exports\PFDepositsExport;
+use App\Exports\ProvidentFundsExport;
 
 class ProvidentFundController extends Controller
 {
@@ -176,25 +176,6 @@ class ProvidentFundController extends Controller
 
     public function export()
     {
-        // $data = DB::table('pf_deposit')->get();
-        // Excel::download(new PFDepositsExport, function($excel) use ($data){
-        //     $excel->setTitile('pf_deposit excel sheet');
-        // });
-
-        $data = DB::table('pf_deposit')->get();
-        // dd($data);
-        // exit;
-        $result = Excel::download(new PFDepositsExport, 'pfDeposit.xlsx');
-        dd($result);
-        exit;
-        // $data = DB::table('pf_deposit')->get();
-        // Excel::download(new PFDepositsExport, function($excel) use ($data){
-        //     // $excel->setTitile('pf_deposit excel sheet');
-        //     $excel->sheet('Sheet 1', function($sheet) use ($data){
-        //         $sheet->fromArray($data);
-        //     });
-        // })->download('xls');
-
-        return back()->with('success','Successfully Export PF Deposit');
+        return Excel::download(new ProvidentFundsExport, 'provident-fund-deposit.csv');
     }
 }

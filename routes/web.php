@@ -21,7 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('pf-deposit/excel-export/', 'ProvidentFundController@export')->name('pf-deposit-export');
+
 
 // Route::get('/report', function () {
 //     return view('report');
@@ -599,7 +599,12 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('/all-provident-fund', [
 			'uses'		=> 'ProvidentFundController@all_provident_fund',
 			'as'		=> 'all-provident-fund'
-		]);
+        ]);
+
+		Route::get('pf-deposit/excel-export', [
+			'uses'		=> 'ProvidentFundController@export',
+			'as'		=> 'pf-deposit-export'
+        ]);
 
 		//provident fund  withdraw insert update edit and  excel upload
 		Route::get('/add-pf-withdraw', [
@@ -661,7 +666,12 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('/delete-pf-interest/{id}', [
 			'uses'		=> 'PFInterestController@delete_pf_interest',
 			'as'		=> 'delete-pf-interest'
-		]);
+        ]);
+
+        Route::get('pf-interest/excel-export', [
+			'uses'		=> 'PFInterestController@export',
+			'as'		=> 'pf-interest-export'
+        ]);
 
 
 		/*

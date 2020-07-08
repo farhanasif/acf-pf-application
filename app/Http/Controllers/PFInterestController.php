@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Imports\Pf_interestsImport;
+use App\Exports\InterestsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use DB;
 use App\Interest;
@@ -125,4 +126,8 @@ class PFInterestController extends Controller
       $pf_interest->delete();
       return redirect()->back()->with('danger','PF interest deleted successfully');
      }
+     public function export(){
+        return Excel::download(new InterestsExport, 'interests.csv');
+      }
+
 }
