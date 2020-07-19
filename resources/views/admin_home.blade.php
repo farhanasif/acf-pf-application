@@ -148,10 +148,10 @@
                   <span class="progress-text">Total Investment</span>
                   <span class="float-right">
                     @foreach ($total_investments as $investment)
-                    {{$investment->total_investment_amount ? number_format($investment->total_investment_amount) : 0}} TK
+                    {{$investment->total_investment_amount ? number_format($investment->total_investment_amount+$total_pf_from_pf_deposit) : 0}} TK
                   </span>
                   <div class="progress progress-sm">
-                    <div class="progress-bar bg-success" style="width: 100%"></div>
+                    <div class="progress-bar bg-success" style="width:{{ $investment->total_investment_amount / ($total_pf_from_pf_deposit + $sum_from_transaction) *100 }}%"></div>
                   </div>
                   @endforeach
                 </div>

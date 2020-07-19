@@ -16,6 +16,7 @@ class AdminController extends Controller
                                         FROM transactions
                                         WHERE transactions.account_head_id = 12112");
 
+
     //  dd($data['total_investments']);
     //  exit;
 
@@ -29,6 +30,12 @@ class AdminController extends Controller
 
         $data['employer_contribution'] = DB::table('pf_deposit')->sum('own_pf');
         $data['employee_contribution'] = DB::table('pf_deposit')->sum('organization_pf');
+
+        $data['total_pf_from_pf_deposit'] = DB::table('pf_deposit')->sum('total_pf');
+        $data['sum_from_transaction'] = DB::table('transactions')->sum('amount');
+
+        // dd($data['sum_from_transaction']);
+        // exit;
 
         $data['total_employee_under_loan'] = DB::select('SELECT COUNT(DISTINCT staff_code) AS total_pf_staff FROM pf_deposit;');
     	return view('admin_home',$data);
