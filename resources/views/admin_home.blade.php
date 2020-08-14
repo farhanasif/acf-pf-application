@@ -1,4 +1,3 @@
-
 @extends('master')
 
 @section('content')
@@ -118,14 +117,14 @@
                     <b>
                      @foreach ($total_employee_under_loan as $item)
                          {{$item->total_pf_staff}}
-                     @endforeach
                     </b>
                     /
                     {{$total_employees}}
                   </span>
                   <div class="progress progress-sm">
-                    <div class="progress-bar bg-primary" style="width: 80%"></div>
+                    <div class="progress-bar bg-primary" style="width: {{($item->total_pf_staff/$total_employees)*100}}%"></div>
                   </div>
+                  @endforeach
                 </div>
                 <!-- /.progress-group -->
 
@@ -135,13 +134,13 @@
                   <b>
                    @foreach ($total_loans as $item)
                     {{$item->total_loan}}
-                   @endforeach
                   </b>
                    /{{$total_employees}}
                 </span>
                   <div class="progress progress-sm">
-                    <div class="progress-bar bg-danger" style="width: 75%"></div>
+                    <div class="progress-bar bg-danger" style="width: {{($item->total_loan/$total_employees)*100}}%"></div>
                   </div>
+                  @endforeach
                 </div>
 
                 <!-- /.progress-group -->
@@ -149,12 +148,12 @@
                   <span class="progress-text">Total Investment</span>
                   <span class="float-right">
                     @foreach ($total_investments as $investment)
-                    {{$investment->total_investment_amount ? number_format($investment->total_investment_amount) : 0}} TK
-                    @endforeach
+                    {{$investment->total_investment_amount ? number_format($investment->total_investment_amount+$total_pf_from_pf_deposit) : 0}} TK
                   </span>
                   <div class="progress progress-sm">
-                    <div class="progress-bar bg-success" style="width: 60%"></div>
+                    <div class="progress-bar bg-success" style="width:{{ $investment->total_investment_amount / ($total_pf_from_pf_deposit + $sum_from_transaction) *100 }}%"></div>
                   </div>
+                  @endforeach
                 </div>
                 <!-- /.progress-group -->
               </div>

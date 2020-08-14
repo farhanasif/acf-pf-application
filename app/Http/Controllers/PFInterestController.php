@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Imports\Pf_interestsImport;
+use App\Exports\InterestsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use DB;
 use App\Interest;
@@ -49,10 +50,10 @@ class PFInterestController extends Controller
       $upload = $request->file('file');
       $filename = $_FILES['file']['name'];
       $ext = pathinfo($filename, PATHINFO_EXTENSION);
-      $accept_files = ["csv", "txt", "xlsx"];
+      $accept_files = ["csv", "xlsx"];
       if(!in_array($ext, $accept_files)) {
           return redirect()->back()
-          ->with('error', 'Invalid file extension. permitted file is .csv, .txt & .xlsx');
+          ->with('error', 'Invalid file extension. permitted file is .csv & .xlsx');
       }
       // get the file
       $upload = $request->file('file');
@@ -125,4 +126,8 @@ class PFInterestController extends Controller
       $pf_interest->delete();
       return redirect()->back()->with('danger','PF interest deleted successfully');
      }
+     public function export(){
+        return Excel::download(new InterestsExport, 'interests.csv');
+      }
+
 }

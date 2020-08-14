@@ -1,4 +1,4 @@
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-white-primary elevation-4">
     <!-- Brand Logo -->
   <a href="{{url('/admin-home')}}" class="brand-link">
       <img src="{{ asset('images/logo/acf-pf.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -215,12 +215,12 @@
                   </a>
                 </li>
 
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="javascript:void(0)" class="nav-link">
                   <i class="far fa-circle nav-icon text-danger"></i>
                   <p>Contribution Report</p>
                 </a>
-              </li>
+              </li> --}}
 
               <li class="nav-item">
                 <a href="{{ url('generate-pf-balance-sheet') }}" class="nav-link">
@@ -290,12 +290,12 @@
                   <p>Create Loan</p>
                 </a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="javascript:void(0)" class="nav-link">
                   <i class="far fa-circle nav-icon text-primary"></i>
                   <p>Adust Loan</p>
                 </a>
-              </li>
+              </li> --}}
             </ul>
           </li>
           <li class="nav-item has-treeview">

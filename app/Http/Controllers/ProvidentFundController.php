@@ -14,6 +14,7 @@ use App\Pf_withdraw;
 use App\Interest;
 use Auth;
 use DB;
+use App\Exports\ProvidentFundsExport;
 
 class ProvidentFundController extends Controller
 {
@@ -139,7 +140,7 @@ class ProvidentFundController extends Controller
         $accept_files = ["csv", "txt", "xlsx"];
         if(!in_array($ext, $accept_files)) {
             return redirect()->back()
-            ->with('error', 'Invalid file extension. permitted file is .csv, .txt & .xlsx');
+            ->with('error', 'Invalid file extension. permitted file is .csv & .xlsx');
         }
         // get the file
         $upload = $request->file('file');
@@ -171,5 +172,10 @@ class ProvidentFundController extends Controller
           return back()->with('success','Provident batch import successfully');
       }
 
+    }
+
+    public function export()
+    {
+        return Excel::download(new ProvidentFundsExport, 'provident-fund-deposit.csv');
     }
 }

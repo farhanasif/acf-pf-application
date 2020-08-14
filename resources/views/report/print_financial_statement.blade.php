@@ -28,8 +28,9 @@
               <div class="body-top">
                 <p class="ptf-ln-3">
                   <span>ACTION CONTRE LA FAIM <br /> EMPLOYEES PROVIDENT FUND</span>
-                  <span> <br /></span>
-                  <span>STATEMENTS OF FINANCIAL POSITION <br /> AS AT 31 DECEMBER 2018</span>
+                  <span></span>
+                  <img src="../images/logo/acf-pf.png" alt="acf" style="width: 200px;height: 100px;margin-left: auto;margin-right: auto;">
+                  <span>STATEMENTS OF FINANCIAL POSITION <br /> AS AT {{ $date_info['from_date'] }} to {{ $date_info['to_date'] }}</span>
                 </p>
               </div>
               <table class="settlement" width="800" style="table-layout:fixed; border-radius: 0px!important; width: 788px;border: none;border-top: 1px solid #000;margin-top: 0px!important;">
@@ -37,8 +38,8 @@
                   <tr class="">
                     <th>Particulars</th>
                     <th>Note</th>
-                    <th>31-12-2018</th>
-                    <th>31-12-2017</th>
+                    <th>{{ $date_info['from_date'] }}</th>
+                    <th>{{ $date_info['to_date'] }}</th>
                   </tr>
                 </tbody>
               </table>
@@ -53,9 +54,9 @@
                   <td style="height: 16px;"></td>
                   <td style="height: 16px;"><b></b></td></tr>
                   <tr><td>INVESTMENT (SANCHAYAPATRA)</td>
-                  <td>9.00</td>
-                  <td style="text-align: right;">12,500,000</td>
-                  <td style="text-align: right;">0</td></tr>
+                  <td></td>
+                  <td style="text-align: right;">{{ $investment[0]->formAmount }}</td>
+                  <td style="text-align: right;">{{ $investment[0]->toAmount }}</td></tr>
                   <tr><td style="height: 16px;"><b></b></td>
                   <td style="height: 16px;"></td>
                   <td style="height: 16px;"></td>
@@ -66,9 +67,9 @@
                     <td></td>
                     <td></td></tr>
                     <tr><td>Cash At Bank</td>
-                    <td>10</td>
-                    <td style="text-align: right;">17,744,620</td>
-                    <td style="text-align: right;">4,709,457</td>
+                    <td></td>
+                    <td style="text-align: right;">{{ $current_asset[0]->formAmount }}</td>
+                    <td style="text-align: right;">{{ $current_asset[0]->toAmount }}</td>
                   <tr></tr>
                   <tr><td style="height: 16px;"><b></b></td>
                   <td style="height: 16px;"></td>
@@ -76,8 +77,8 @@
                   <td style="height: 16px;"><b></b></td></tr>
                   <tr><td style="text-align: right;"> <b>Total Taka:</b></td>
                   <td></td>
-                  <td style="text-align: right;">31,730,287</td>
-                  <td style="text-align: right;">4,709,457</td>
+                  <td style="text-align: right;"><b>{{ $investment[0]->formAmount + $current_asset[0]->formAmount }}</b></td>
+                  <td style="text-align: right;">{{ $investment[0]->toAmount + $current_asset[0]->toAmount }}</td>
                 </tr>
                                  <tr><td style="height: 16px;"><b></b></td>
                   <td style="height: 16px;"></td>
@@ -92,13 +93,13 @@
                 <td style="height: 16px;"></td>
                 <td style="height: 16px;"><b></b></td></tr>
                 <tr><td>Employees Contribution</td>
-                <td>11.01</td>
-                <td style="text-align: right;">15,121,939</td>
-                <td style="text-align: right;">23,54,728</td></tr>
+                <td></td>
+                <td style="text-align: right;">{{ $contribution[0]->own_formAmount }}</td>
+                <td style="text-align: right;">{{ $contribution[0]->own_toAmount }}</td></tr>
                 <tr><td>Employers Contribution</td>
-                <td>11.01</td>
-                <td style="text-align: right;">15,121,938</td>
-                <td style="text-align: right;">23,54,729</td></tr>
+                <td></td>
+                <td style="text-align: right;">{{ $contribution[0]->organization_formAmount }}</td>
+                <td style="text-align: right;">{{ $contribution[0]->organization_toAmount }}</td></tr>
                 <tr><td style="height: 16px;"><b></b></td>
                 <td style="height: 16px;"></td>
                 <td style="height: 16px;"></td>
@@ -108,17 +109,17 @@
                 <td></td>
                 <td></td></tr>
                 <tr><td>Forfeiture Account</td>
-                <td>11.02</td>
-                <td style="text-align: right;">743</td>
-                <td style="text-align: right;">0</td></tr>
+                <td></td>
+                <td style="text-align: right;">{{ $current_liabilites[0]->formAmount }}</td>
+                <td style="text-align: right;">{{ $current_liabilites[0]->toAmount }}</td></tr>
                 <tr><td style="height: 16px;"><b></b></td>
                 <td style="height: 16px;"></td>
                 <td style="height: 16px;"></td>
                 <td style="height: 16px;"><b></b></td></tr>
                 <tr><td style="text-align: right;"> <b>Total Taka:</b></td>
                 <td></td>
-                <td style="text-align: right;">31,730,287</td>
-                <td style="text-align: right;">4,709,457</td>
+                <td style="text-align: right;"><b>{{ $investment[0]->formAmount + $current_asset[0]->formAmount + $contribution[0]->own_formAmount + $contribution[0]->organization_formAmount + $current_liabilites[0]->formAmount }}</b></td>
+                <td style="text-align: right;"><b>{{ $investment[0]->toAmount + $current_asset[0]->toAmount + $contribution[0]->own_toAmount + $contribution[0]->organization_toAmount + $current_liabilites[0]->toAmount }}</b></td>
               </tr>
             </tbody>
           </table>
