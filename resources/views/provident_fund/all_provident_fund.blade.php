@@ -37,6 +37,44 @@
          @include('message')
 
     </div>
+
+    <div class="card-header card-secondary">
+      <div class="card-header">
+        <h3 class="card-title">Filters</h3>
+        </div>
+    <form role="form" action="{{route('all-provident-fund')}}" method="POST">
+      @csrf
+      <div class="row">
+        <div class="col-md-6 col-sm-6">
+          <div class="form-group">
+          <label>Staff Code</label>
+          <select class="custom-select select2bs4 " id="staff_code" name="staff_code">
+              <option value="-1">--select--</option>
+              @foreach ($provident_funds as $provident_fund)
+                <option value="{{ sprintf("%04d", $provident_fund->staff_code)}}"> {{ sprintf("%04d", $provident_fund->staff_code)}} </option>
+              @endforeach
+          </select>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-6">
+          <div class="form-group">
+          <label>Deposit Date</label>
+          <select class="custom-select select2bs4 " id="deposit_date" name="deposit_date">
+              <option value="-1">--select--</option>
+              @foreach ($deposit_dates as $deposit_date)
+                <option value="{{ $deposit_date->deposit_date }}">{{ $deposit_date->month_name }}</option>
+              @endforeach
+          </select>
+          </div>
+        </div>
+          </div>
+
+          <div class="mb-5">
+            <button type="submit" id="search" class="btn btn-success">Generate</button>
+          </div>
+   </form>
+  </div>
     <!-- /.card-header -->
     <div class="card-body">
       <table id="all-pf-deposit" class="table table-bordered table-striped">
@@ -108,6 +146,10 @@
 <script>
 
  $(document).ready(function(){
+
+  $('.select2bs4').select2({
+    theme: 'bootstrap4',
+  });
 
  // START ALL EMPLOYEE TABLE DATA DOWNLOAD CLICK FUNCTION
   $( "#all-pf-deposit-download" ).click(function() {

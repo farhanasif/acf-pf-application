@@ -64,12 +64,45 @@ class ProvidentFundController extends Controller
     return back()->with('success', 'Provident Fund Added Successfully.');
     }
 
-    public function all_provident_fund()
+    public function all_provident_fund(Request $request)
     {
-      $provident_funds = DB::table('pf_deposit')->orderBy('deposit_date','ASC')->get();
-      // dd($provident_funds);
-      // exit;
-      return view('provident_fund.all_provident_fund',compact('provident_funds'));
+
+      $query = "select * from pf_deposit";
+
+      $data['provident_funds'] = DB::table('pf_deposit')->orderBy('deposit_date','ASC')->get();
+
+      $data['deposit_dates'] = DB::select("SELECT DISTINCT(DATE(deposit_date)) AS deposit_date,  DATE_FORMAT(deposit_date, '%b %Y') AS month_name
+      FROM pf_deposit
+      GROUP BY month_name
+      ORDER BY deposit_date");
+
+      if ($request->isMethod('post')) {
+
+          $staff_code = $request->staff_code;
+          $deposit_date = $request->deposit_date;
+
+          if($staff_code == '-1' && $deposit_date == '-1'){
+          }
+          else{
+              $query = $query. " where 1=1 ";
+
+              if($staff_code != '-1'){
+                $query = $query . " AND staff_code = '".$staff_code."'";
+              }
+
+              if($deposit_date != '-1'){
+                $query = $query . " AND deposit_date = '".$deposit_date."'";
+              }
+
+          }
+          $data['provident_funds'] = DB::select($query);
+          return view('provident_fund.all_provident_fund',$data);
+      }
+      else{
+
+          $data['provident_funds'] = DB::select($query);
+          return view('provident_fund.all_provident_fund',$data);
+      }
     }
 
     public function edit_provident_fund($id)

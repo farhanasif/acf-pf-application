@@ -166,25 +166,25 @@
   <div class="form-group row" style="border: 1px solid gray; box-shadow: 5px 8px gray; ">
     <div style="margin: 8px;" class="row">
     <div class="col-md-6 col-sm-6 ">
-       <p>Monthly deduction(to be deducted from salary) of Taka : <strong></strong></p>
+       <p>Monthly deduction(to be deducted from salary) of Taka : <strong><span id="monIns"></span></strong></p>
     </div>
     <div class="col-md-6 col-sm-6 ">
-       <p>Interest rate 4% per annum : <strong></strong></p>
+       <p>Interest rate 4% per annum : <strong><span id="toInte"></span></strong></p>
     </div>
       <div class="col-md-6 col-sm-6 ">
-       <p>Monthly deduction(to be deducted from salary) of Taka in words : <strong></strong></p>
+       <p>Monthly deduction(to be deducted from salary) of Taka in words : <strong><span id="wordNum"></span></strong></p>
     </div>
     <div class="col-md-6 col-sm-6 ">
        <p>Installment Times : <strong>12</strong></p>
     </div>
     <div class="col-md-6 col-sm-6 ">
-       <p>Contribution Balance with interest as on : <strong></strong></p>
+       <p>Contribution Balance with interest as on : <strong><span id="toContri"></span></strong></p>
     </div>
     <div class="col-md-6 col-sm-6 ">
        <p>PF Loan Balance(if any)as no : <strong><span id="preloan"></span></strong></p>
     </div>
     <div class="col-md-6 col-sm-6 ">
-     <p > Maximum Loan allow : <span id="mxloan"><strong></strong></span></p>
+     <p > Maximum Loan allow : <strong><span id="mxloan"></span></strong></p>
     </div>
     </div>
  </div>
@@ -203,6 +203,7 @@
       </div>
 @endsection
 @section('customjs')
+<script src="{{ asset('../js/numberTowords.js') }}"></script>
 <script>
 $(document).ready(function() {
   var mxlaonAllow = 0;
@@ -249,8 +250,21 @@ $(document).ready(function() {
           document.getElementById("position").value = position;
           document.getElementById("base").value = base;
           document.getElementById("deposit_amount").value = total_pf;
+           
           mxlaonAllow = (total_pf*0.8).toFixed(4);
+          var monthly_installment = (mxlaonAllow/12).toFixed(4);
+          var interest = (mxlaonAllow*0.004).toFixed(4);
+          var monthly_interest = (interest/12).toFixed(4);
+          var totCon = parseFloat(mxlaonAllow) + parseFloat(interest);
+          var monInst = (parseFloat(monthly_installment) + parseFloat(monthly_interest)).toFixed(4);
+          console.log(interest);
           $('#mxloan').html(mxlaonAllow + "Tk.");
+          
+          $('#preloan').html((total_pf - mxlaonAllow).toFixed(4)  + "Tk.");
+          $('#toContri').html(totCon + "Tk.");
+          $('#toInte').html(interest + "Tk.");
+          $('#monIns').html(monInst + "Tk.");
+          $('#wordNum').html(withDecimal(monInst) + " Tk.");
           description = staff_code+' '+ first_name +' '+last_name+' Loan Application';
         }
       });
@@ -354,4 +368,5 @@ $(document).ready(function() {
   });
 });
 </script>
+
 @endsection
