@@ -163,7 +163,7 @@
       <input type="text" class="form-control" name="date" placeholder="Issue Date" id="date">
    </div>
   </div>
-  <div class="form-group row" style="border: 1px solid gray; box-shadow: 5px 8px gray; ">
+  <div class="form-group row" style="border: 1px solid gray; box-shadow: 5px 8px gray; " id="show">
     <div style="margin: 8px;" class="row">
     <div class="col-md-6 col-sm-6 ">
        <p>Monthly deduction(to be deducted from salary) of Taka : <strong><span id="monIns"></span></strong></p>
@@ -208,6 +208,7 @@
 $(document).ready(function() {
   var mxlaonAllow = 0;
   var description = "";
+  var total_dpf = 0;
 
   $(function() { 
      $( "#joining_date" ).datepicker();
@@ -253,31 +254,46 @@ $(document).ready(function() {
           document.getElementById("deposit_amount").value = total_pf;
            
           mxlaonAllow = (total_pf*0.8).toFixed(4);
-
-          var monthly_installment = (mxlaonAllow/12).toFixed(4);
-          var interest = (mxlaonAllow*0.004).toFixed(4);
-          var monthly_interest = (interest/12).toFixed(4);
-
-          var totCon = parseFloat(mxlaonAllow) + parseFloat(interest);
-          var monInst = (parseFloat(monthly_installment) + parseFloat(monthly_interest)).toFixed(4);
-
-          console.log(interest);
-          $('#mxloan').html(mxlaonAllow + "Tk.");
-          
-          $('#preloan').html((total_pf - mxlaonAllow).toFixed(4)  + "Tk.");
-
-          $('#toContri').html(totCon + "Tk.");
-
-          $('#toInte').html(interest + "Tk.");
-
-          $('#monIns').html(monInst + "Tk.");
-
-          $('#wordNum').html(withDecimal(monInst) + " Tk.");
-
+          total_dpf = total_pf;
           description = staff_code+' '+ first_name +' '+last_name+' Loan Application';
         }
       });
   });
+
+
+  setInterval(function() {
+      var loan_amount = $("#loan_amount").val();
+      var mxlaonAllow2 = 0;
+      
+        // console.log(loan_amount)
+           if(loan_amount != null) {
+              mxlaonAllow2 = loan_amount;
+           }else {
+            mxlaonAllow2 = mxlaonAllow;
+           }
+        var monthly_installment = (mxlaonAllow2/12).toFixed(4);
+        var interest = (mxlaonAllow2*0.004).toFixed(4);
+        var monthly_interest = (interest/12).toFixed(4);
+
+        var totCon = parseFloat(mxlaonAllow2) + parseFloat(interest);
+        var monInst = (parseFloat(monthly_installment) + parseFloat(monthly_interest)).toFixed(4);
+
+        // console.log(interest);
+        $('#mxloan').html(mxlaonAllow + "Tk.");
+        
+        $('#preloan').html((total_dpf - mxlaonAllow2).toFixed(4)  + "Tk.");
+
+        $('#toContri').html(totCon + "Tk.");
+
+        $('#toInte').html(interest + "Tk.");
+
+        $('#monIns').html(monInst + "Tk.");
+
+        $('#wordNum').html(withDecimal(monInst) + " Tk.");
+
+  }, 3000);
+
+
   $("#submitInfo").on("click", function(e) {
     e.preventDefault();
     var staff_code = $("#staff_code").val();
