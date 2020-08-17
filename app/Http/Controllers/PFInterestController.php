@@ -30,6 +30,8 @@ class PFInterestController extends Controller
       GROUP BY month_name
       ORDER BY interest_date");
 
+      $data['staff_codes'] = DB::select("SELECT DISTINCT(staff_code) AS staff_code FROM interests");
+
       if ($request->isMethod('post')) {
 
           $staff_code = $request->staff_code;

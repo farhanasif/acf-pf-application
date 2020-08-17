@@ -49,7 +49,7 @@
           <label>Staff Code</label>
           <select class="custom-select select2bs4 " id="staff_code" name="staff_code">
             <option value="-1">--select--</option>
-            @foreach ($all_pf_interests as $interests)
+            @foreach ($staff_codes as $interests)
               <option value="{{ sprintf("%04d", $interests->staff_code)}}"> {{ sprintf("%04d", $interests->staff_code)}} </option>
             @endforeach
         </select>
