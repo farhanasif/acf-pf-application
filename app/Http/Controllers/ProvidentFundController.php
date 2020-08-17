@@ -71,10 +71,12 @@ class ProvidentFundController extends Controller
 
       $data['provident_funds'] = DB::table('pf_deposit')->orderBy('deposit_date','ASC')->get();
 
-      $data['deposit_dates'] = DB::select("SELECT DISTINCT(DATE(deposit_date)) AS deposit_date,  DATE_FORMAT(deposit_date, '%b %Y') AS month_name
+      $data['deposit_dates'] = DB::select("SELECT deposit_date,  DATE_FORMAT(deposit_date, '%b %Y') AS month_name
       FROM pf_deposit
       GROUP BY month_name
       ORDER BY deposit_date");
+
+      // dd($data['deposit_dates']);
 
       $data['staff_codes'] = DB::select("SELECT DISTINCT(staff_code) AS staff_code FROM pf_deposit");
 

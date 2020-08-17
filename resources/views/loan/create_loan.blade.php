@@ -214,6 +214,11 @@ $(document).ready(function() {
      $( "#ending_date" ).datepicker();
      $( "#date" ).datepicker();
   });
+
+  $('.select2bs4').select2({
+    theme: 'bootstrap4',
+  });
+
   
   $("#loan_amount").hover(function(){
     $("#mxl").text("Maximum allowable loan amount is "+ mxlaonAllow + "Tk.");
@@ -276,7 +281,7 @@ $(document).ready(function() {
         // console.log(interest);
         $('#mxloan').html(mxlaonAllow + "Tk.");
         
-        $('#preloan').html((total_dpf - mxlaonAllow2).toFixed(4)  + "Tk.");
+        $('#preloan').html((mxlaonAllow - mxlaonAllow2).toFixed(4)  + "Tk.");
         $('#toContri').html(totCon + "Tk.");
         $('#toInte').html(interest + "Tk.");
         $('#monIns').html(monInst + "Tk.");
