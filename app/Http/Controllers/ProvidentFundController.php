@@ -76,6 +76,10 @@ class ProvidentFundController extends Controller
       GROUP BY month_name
       ORDER BY deposit_date");
 
+      $data['staff_codes'] = DB::select("SELECT DISTINCT(staff_code) AS staff_code FROM pf_deposit");
+
+      // dd($data['staff_codes']);
+
       if ($request->isMethod('post')) {
 
           $staff_code = $request->staff_code;
