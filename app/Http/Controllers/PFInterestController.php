@@ -18,10 +18,47 @@ class PFInterestController extends Controller
        return view('pf_interest.add_pf_interest',compact('employees'));
      }
 
-     public function all_pf_interest()
+     public function all_pf_interest(Request $request)
      {
-       $all_pf_interests = Interest::get();
-       return view('pf_interest.all_pf_interest',compact('all_pf_interests'));
+
+      $query = "select * from interests";
+
+      $data['all_pf_interests'] = Interest::get();
+
+      $data['interest_dates'] = DB::select("SELECT DISTINCT(DATE(interest_date)) AS interest_date,  DATE_FORMAT(interest_date, '%b %Y') AS month_name
+      FROM interests
+      GROUP BY month_name
+      ORDER BY interest_date");
+
+      $data['staff_codes'] = DB::select("SELECT DISTINCT(staff_code) AS staff_code FROM interests");
+
+      if ($request->isMethod('post')) {
+
+          $staff_code = $request->staff_code;
+          $interest_date = $request->interest_date;
+
+          if($staff_code == '-1' && $interest_date == '-1'){
+          }
+          else{
+              $query = $query. " where 1=1 ";
+
+              if($staff_code != '-1'){
+                $query = $query . " AND staff_code = '".$staff_code."'";
+              }
+
+              if($interest_date != '-1'){
+                $query = $query . " AND interest_date = '".$interest_date."'";
+              }
+
+          }
+          $data['all_pf_interests'] = DB::select($query);
+          return view('pf_interest.all_pf_interest',$data);
+      }
+      else{
+
+          $data['all_pf_interests'] = DB::select($query);
+          return view('pf_interest.all_pf_interest',$data);
+      }
      }
 
      public function save_pf_interest(Request $request)

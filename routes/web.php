@@ -596,7 +596,7 @@ Route::group(['middleware' => 'admin'], function () {
 			'uses'		=> 'ProvidentFundController@update_provident_fund',
 			'as'		=> 'update-provident-fund'
 		]);
-		Route::get('/all-provident-fund', [
+		Route::match(['get', 'post'],'/all-provident-fund', [
 			'uses'		=> 'ProvidentFundController@all_provident_fund',
 			'as'		=> 'all-provident-fund'
         ]);
@@ -646,7 +646,7 @@ Route::group(['middleware' => 'admin'], function () {
 			'uses'		=> 'PFInterestController@save_pf_interest',
 			'as'		=> 'save-pf-interest'
 		]);
-		Route::get('/all-pf-interest', [
+		Route::match(['get', 'post'],'/all-pf-interest', [
 			'uses'		=> 'PFInterestController@all_pf_interest',
 			'as'		=> 'all-pf-interest'
 		]);

@@ -36,6 +36,45 @@
         </div>
         @include('message')
     </div>
+
+    <div class="card-header card-secondary">
+      <div class="card-header">
+        <h3 class="card-title">Filters</h3>
+        </div>
+    <form role="form" action="{{route('all-pf-interest')}}" method="POST">
+      @csrf
+      <div class="row">
+        <div class="col-md-6 col-sm-6">
+          <div class="form-group">
+          <label>Staff Code</label>
+          <select class="custom-select select2bs4 " id="staff_code" name="staff_code">
+            <option value="-1">--select--</option>
+            @foreach ($staff_codes as $interests)
+              <option value="{{ sprintf("%04d", $interests->staff_code)}}"> {{ sprintf("%04d", $interests->staff_code)}} </option>
+            @endforeach
+        </select>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-6">
+          <div class="form-group">
+          <label>Interest Date</label>
+          <select class="custom-select select2bs4 " id="interest_date" name="interest_date">
+            <option value="-1">--select--</option>
+            @foreach ($interest_dates as $interests)
+              <option value="{{$interests->interest_date}}"> {{$interests->month_name}} </option>
+            @endforeach
+        </select>
+          </div>
+        </div>        
+          </div>
+
+          <div class="mb-5">
+            <button type="submit" class="btn btn-success">Generate</button>
+          </div>
+   </form>
+  </div>
+
     <!-- /.card-header -->
     <div class="card-body">
       <table id="pf-interest" class="table table-bordered table-striped">
@@ -139,56 +178,14 @@
 
    $(document).ready( function(){
 
-     // START ALL EMPLOYEE TABLE DATA DOWNLOAD CLICK FUNCTION
-    //  $( "#pf-interest-download" ).click(function() {
-    //       $("#pf-interest").tableToCSV();
-    //   });
-  // END ALL EMPLOYEE TABLE DATA DOWNLOAD CLICK FUNCTION
-
-  // START TABLE TO CSV CONVERT FUNCTION
-//   var tableToExcel = (function() {
-//         var uri = 'data:application/vnd.ms-excel;base64,',
-//             template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
-//             base64 = function(s) {
-//             return window.btoa(unescape(encodeURIComponent(s)))
-//             },
-//             format = function(s, c) {
-//             return s.replace(/{(\w+)}/g, function(m, p) {
-//                 return c[p];
-//             })
-//             }
-//         return function(table, name) {
-//             if (!table.nodeType)
-//             table = document.getElementById(table)
-//             var ctx = {
-//             worksheet: name || 'Worksheet',
-//             table: table.innerHTML
-//             }
-//             var HeaderName = 'Download-ExcelFile';
-//             var ua = window.navigator.userAgent;
-//             var msieEdge = ua.indexOf("Edge");
-//             var msie = ua.indexOf("MSIE ");
-//             if (msieEdge > 0 || msie > 0) {
-//             if (window.navigator.msSaveBlob) {
-//                 var dataContent = new Blob([base64(format(template, ctx))], {
-//                 type: "application/csv;charset=utf-8;"
-//                 });
-//                 var fileName = "excel.xls";
-//                 navigator.msSaveBlob(dataContent, fileName);
-//             }
-//             return;
-//             }
-//             window.open('data:application/vnd.ms-excel,' + encodeURIComponent(format(template, ctx)));
-//         }
-//     })()
-// END TABLE TO CSV CONVERT FUNCTION
-
-
+    $('.select2bs4').select2({
+      theme: 'bootstrap4',
+    });
 
     $('#pf-interest').DataTable({
-        "info": true,
-        "autoWidth": false,
-        scrollX:'50vh',
+      "info": true,
+      "autoWidth": false,
+       scrollX:'50vh',
         scrollY:'50vh',
         scrollCollapse: true,
     });

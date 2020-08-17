@@ -163,28 +163,28 @@
       <input type="text" class="form-control" name="date" placeholder="Issue Date" id="date">
    </div>
   </div>
-  <div class="form-group row" style="border: 1px solid gray; box-shadow: 5px 8px gray; ">
+  <div class="form-group row" style="border: 1px solid gray; box-shadow: 5px 8px gray; " id="show">
     <div style="margin: 8px;" class="row">
     <div class="col-md-6 col-sm-6 ">
-       <p>Monthly deduction(to be deducted from salary) of Taka : <strong></strong></p>
+       <p>Monthly deduction(to be deducted from salary) of Taka : <strong><span id="monIns"></span></strong></p>
     </div>
     <div class="col-md-6 col-sm-6 ">
-       <p>Interest rate 4% per annum : <strong></strong></p>
+       <p>Interest rate 4% per annum : <strong><span id="toInte"></span></strong></p>
     </div>
       <div class="col-md-6 col-sm-6 ">
-       <p>Monthly deduction(to be deducted from salary) of Taka in words : <strong></strong></p>
+       <p>Monthly deduction(to be deducted from salary) of Taka in words : <strong><span id="wordNum"></span></strong></p>
     </div>
     <div class="col-md-6 col-sm-6 ">
        <p>Installment Times : <strong>12</strong></p>
     </div>
     <div class="col-md-6 col-sm-6 ">
-       <p>Contribution Balance with interest as on : <strong></strong></p>
+       <p>Contribution Balance with interest as on : <strong><span id="toContri"></span></strong></p>
     </div>
     <div class="col-md-6 col-sm-6 ">
        <p>PF Loan Balance(if any)as no : <strong><span id="preloan"></span></strong></p>
     </div>
     <div class="col-md-6 col-sm-6 ">
-     <p > Maximum Loan allow : <span id="mxloan"><strong></strong></span></p>
+     <p > Maximum Loan allow : <strong><span id="mxloan"></span></strong></p>
     </div>
     </div>
  </div>
@@ -203,15 +203,22 @@
       </div>
 @endsection
 @section('customjs')
+<script src="{{ asset('../js/numberTowords.js') }}"></script>
 <script>
 $(document).ready(function() {
   var mxlaonAllow = 0;
   var description = "";
+  var total_dpf = 0;
   $(function() { 
      $( "#joining_date" ).datepicker();
      $( "#ending_date" ).datepicker();
      $( "#date" ).datepicker();
   });
+
+  $('.select2bs4').select2({
+    theme: 'bootstrap4',
+  });
+
   
   $("#loan_amount").hover(function(){
     $("#mxl").text("Maximum allowable loan amount is "+ mxlaonAllow + "Tk.");
@@ -249,12 +256,37 @@ $(document).ready(function() {
           document.getElementById("position").value = position;
           document.getElementById("base").value = base;
           document.getElementById("deposit_amount").value = total_pf;
+           
           mxlaonAllow = (total_pf*0.8).toFixed(4);
-          $('#mxloan').html(mxlaonAllow + "Tk.");
+          total_dpf = total_pf;
           description = staff_code+' '+ first_name +' '+last_name+' Loan Application';
         }
       });
   });
+  setInterval(function() {
+      var loan_amount = $("#loan_amount").val();
+      var mxlaonAllow2 = 0;
+      
+        // console.log(loan_amount)
+           if(loan_amount != null) {
+              mxlaonAllow2 = loan_amount;
+           }else {
+            mxlaonAllow2 = mxlaonAllow;
+           }
+        var monthly_installment = (mxlaonAllow2/12).toFixed(4);
+        var interest = (mxlaonAllow2*0.004).toFixed(4);
+        var monthly_interest = (interest/12).toFixed(4);
+        var totCon = parseFloat(mxlaonAllow2) + parseFloat(interest);
+        var monInst = (parseFloat(monthly_installment) + parseFloat(monthly_interest)).toFixed(4);
+        // console.log(interest);
+        $('#mxloan').html(mxlaonAllow + "Tk.");
+        
+        $('#preloan').html((mxlaonAllow - mxlaonAllow2).toFixed(4)  + "Tk.");
+        $('#toContri').html(totCon + "Tk.");
+        $('#toInte').html(interest + "Tk.");
+        $('#monIns').html(monInst + "Tk.");
+        $('#wordNum').html(withDecimal(monInst) + " Tk.");
+  }, 3000);
   $("#submitInfo").on("click", function(e) {
     e.preventDefault();
     var staff_code = $("#staff_code").val();
@@ -354,4 +386,5 @@ $(document).ready(function() {
   });
 });
 </script>
+
 @endsection
