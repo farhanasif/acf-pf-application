@@ -214,15 +214,55 @@ $(document).ready(function() {
      $( "#ending_date" ).datepicker();
      $( "#date" ).datepicker();
   });
-
   
   $("#loan_amount").hover(function(){
     $("#mxl").text("Maximum allowable loan amount is "+ mxlaonAllow + "Tk.");
   });
-  $("#staff").on("click", function() {
-    // e.preventDefault();
+  // $("#staff").on("click", function() {
+  //   // $('#staff').select2({
+  //   // e.preventDefault();
+  //   var staff_code = $("#staff").val();
+  //   console.log(staff_code);
+  //   var token = "{{ csrf_token() }}";
+  //   var url_data = "{{ url('/loan-from-data') }}";
+  //     $.ajax({
+  //       method: "POST",
+  //       url: url_data,
+  //       data: {
+  //           _token: token,
+  //           staff_code: staff_code,
+  //       },
+  //       success: function(data) {
+  //         var info = JSON.parse(data);
+          
+  //         // if(info != undefined){
+  //         const { staff_code, first_name, last_name, joining_date, ending_date, position, base, total_pf } = info[0];
+  //         if(staff_code != undefined) {
+  //         var newStaffCode = newStaffCode = staff_code.toString();
+  //         if(4 - newStaffCode.length == 1 ) 
+  //           newStaffCode = '0' + newStaffCode;
+  //         else if(4 - newStaffCode.length == 2) 
+  //           newStaffCode = '00' + newStaffCode;
+  //         else if(4 - newStaffCode.length == 2) 
+  //           newStaffCode = '000' + newStaffCode;
+  //        }
+  //         document.getElementById("staff_code").value = newStaffCode;
+  //         document.getElementById("joining_date").value = joining_date;
+  //         document.getElementById("ending_date").value = ending_date;
+  //         document.getElementById("position").value = position;
+  //         document.getElementById("base").value = base;
+  //         document.getElementById("deposit_amount").value = total_pf;
+           
+  //         mxlaonAllow = (total_pf*0.8).toFixed(4);
+  //         total_dpf = total_pf;
+  //         description = staff_code+' '+ first_name +' '+last_name+' Loan Application';
+  //       }
+  //     });
+  // });
+  setInterval(function() {
+    var loan_amount = $("#loan_amount").val();
     var staff_code = $("#staff").val();
-    console.log(staff_code);
+    // console.log(staff_code);
     var token = "{{ csrf_token() }}";
     var url_data = "{{ url('/loan-from-data') }}";
       $.ajax({
@@ -258,9 +298,6 @@ $(document).ready(function() {
           description = staff_code+' '+ first_name +' '+last_name+' Loan Application';
         }
       });
-  });
-  setInterval(function() {
-      var loan_amount = $("#loan_amount").val();
       var mxlaonAllow2 = 0;
       
         // console.log(loan_amount)
@@ -379,6 +416,9 @@ $(document).ready(function() {
           alert(data);
         }
       });
+  });
+  $('.select2bs4').select2({
+        theme: 'bootstrap4',
   });
 });
 </script>
