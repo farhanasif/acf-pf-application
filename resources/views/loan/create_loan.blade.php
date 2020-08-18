@@ -215,10 +215,6 @@ $(document).ready(function() {
      $( "#date" ).datepicker();
   });
 
-  $('.select2bs4').select2({
-    theme: 'bootstrap4',
-  });
-
   
   $("#loan_amount").hover(function(){
     $("#mxl").text("Maximum allowable loan amount is "+ mxlaonAllow + "Tk.");
