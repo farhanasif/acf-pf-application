@@ -567,7 +567,34 @@
             return;
           }
 
-          
+          //add to reconciliation
+          $.ajax({
+            type: 'GET',
+            url: './add_to_reconciliation',
+            data: {
+                transactionDate: from_date,
+                id: id,
+            },
+            dataType: 'text',
+            success: function (data) {
+              console.log(data);
+
+              if(data == 'success'){
+                  generate_book();
+
+                  Toast.fire({
+                    type: 'success',
+                    title: ' Transaction successfully added in Bank Reconciliation.'
+                  });
+                }
+                else{
+                  Toast.fire({
+                    type: 'info',
+                    title: data
+                  });
+                }
+            }
+          });
 
         }
 

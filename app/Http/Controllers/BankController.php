@@ -183,7 +183,7 @@ class BankController extends Controller
         
     }
 
-    function save_end_of_month(){
+    public function save_end_of_month(){
         $transactionDate = $_GET['transactionDate'];
         $amount = $_GET['amount'];
 
@@ -219,9 +219,60 @@ class BankController extends Controller
             else{
                 return 'error';
             }
-        }
-
-
-        
+        }        
     }
+
+    public function add_to_reconciliation(){
+        $transactionDate = $_GET['transactionDate'];
+        $id = $_GET['id'];
+
+        $from_date = $_GET['transactionDate'];
+        $from_date = $from_date.'-01';
+
+        //get last date of previous month
+        $last_date = date('Y-m-d',strtotime('-1 second',strtotime(date($from_date))));
+        $last_month = date('M,Y',strtotime('-1 second',strtotime(date($from_date))));
+
+        $con_month = date('M,Y',strtotime(date($from_date)));
+        $end_date = date("Y-m-t", strtotime($from_date));
+        $start_date = $from_date;
+
+        //check if we have that id in that month or not
+        $checkQuery = "select * from transactions as t where t.id=".$id." and t.effective_date between '".$start_date."' and '".$end_date."'";
+
+        $results = DB::select($checkQuery);
+
+        if($results){
+            //got data
+            //now we need to check if already inserted
+            $checkALQuery = "select * from transactions as t where t.description='".$results[0]->description."' and t.is_bank_book = 0 and t.effective_date between '".$start_date."' and '".$end_date."'";
+            $resultALQuery = DB::select($checkALQuery);
+            if($resultALQuery){
+                return 'Information already inserted for that month';
+            }
+            else{
+                //we need to entry that values
+                $transaction = new Transaction;
+                $transaction->account_head_id = $results[0]->account_head_id;
+                $transaction->description = $results[0]->description;
+                $transaction->amount = $results[0]->amount;
+                $transaction->transaction_date = $results[0]->transaction_date;
+                $transaction->effective_date = $results[0]->effective_date;
+                $transaction->voucher_no = $results[0]->voucher_no;
+                $transaction->cheque_no = $results[0]->cheque_no;
+                $transaction->is_bank_book = 0;
+
+                if($transaction->save()){
+                    return 'success';
+                }
+                else{
+                    return 'error';
+                }
+            }
+        }
+        else{
+            return 'This entry is not valid for this month';
+        }
+    }
+
 }
