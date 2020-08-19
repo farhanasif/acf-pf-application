@@ -27,8 +27,8 @@
     <div class="card-header">
         <h3 class="card-title">All PF Interest Information</h3>
         <div class="float-sm-right">
-            <a href="{{route('pf-interest-export')}}" class="btn btn-success"> Download Excel</a>
-          {{-- <button type="submit" id="pf-interest-download" class="btn btn-success"  onclick="exportToExcel('pf-interest','pf-interest')">Download Excel</button> --}}
+            {{-- <a href="{{route('pf-interest-export')}}" class="btn btn-success"> Download Excel</a> --}}
+          <button type="submit" id="pf-interest-download" class="btn btn-success"  onclick="exportToExcel('pf-interest','pf-interest')">Download Excel</button>
           {{-- <a href="" class="btn btn-success" data-toggle="modal" data-target="#update-modal-default">Update Batch</a> --}}
           <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Batch Upload</a>
           <a href="{{url('download_excel/pf_interest/Interest.xlsx')}}" class="btn btn-success">Download Sample Excel</a>
@@ -76,17 +76,17 @@
   </div>
 
     <!-- /.card-header -->
-    <div class="card-body">
-      <table id="pf-interest" class="table table-bordered table-striped">
+    <div class="card-body table-responsive p-0"  style="height: 500px;">
+      <table id="pf-interest" class="table table-bordered table-striped table-head-fixed text-nowrap">
         <thead>
-          <tr class="bg-success">
-          <th>SL NO</th>
-          <th>Interest Date</th>
-          <th>Interest Source</th>
-          <th>Staff Code</th>
-          <th>Own</th>
-          <th>Organization</th>
-          <th>Action</th>
+          <tr>
+          <th class="bg-success">SL NO</th>
+          <th class="bg-success">Interest Date</th>
+          <th class="bg-success">Interest Source</th>
+          <th class="bg-success">Staff Code</th>
+          <th class="bg-success">Own</th>
+          <th class="bg-success">Organization</th>
+          <th class="bg-success">Action</th>
         </tr>
         </thead>
         <tbody>
@@ -182,13 +182,13 @@
       theme: 'bootstrap4',
     });
 
-    $('#pf-interest').DataTable({
-      "info": true,
-      "autoWidth": false,
-       scrollX:'50vh',
-        scrollY:'50vh',
-        scrollCollapse: true,
-    });
+   // $('#pf-interest').DataTable({
+      //"info": true,
+      //"autoWidth": false,
+      /// scrollX:'50vh',
+       // scrollY:'50vh',
+       // scrollCollapse: true,
+    //});
    });
 
     </script>
