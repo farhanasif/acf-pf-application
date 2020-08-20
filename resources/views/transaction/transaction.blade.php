@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Bank Reconciliation</h1>
+                    <h1>Bank Transactions</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -23,7 +23,7 @@
 
     <!-- Main content -->
     <section class="content">
-
+        
         <!-- general form elements disabled -->
         <div class="card card-secondary">
             <div class="card-header">
@@ -64,15 +64,28 @@
             <div class="example-spinner" id="spinner"></div>
             <!-- /.card-footer -->
         </div>
+
+        <div class="card card-success card-outline">
+            <div class="card-header">
+                <h3 class="card-title">Difference : </h3>
+                <h3 class="card-title" id="differenceVal">0</h3>
+            </div>
+            <!-- /.card-header -->
+        </div>
         <!-- /.card BANK RECONCILIATION -->
         <!-- Default box -->
         <div class="card card-success card-outline">
             <div class="card-header">
                 <h3 class="card-title">Bank Reconciliation</h3>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i></button>
+                </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <button type="button" class="btn btn-success" id="endofmonthButton" data-toggle="modal" data-target="#modal-endofmonth">Enter End of Month Balance</button>
+                <button type="button" class="btn btn-success btn-sm" id="endofmonthButton" data-toggle="modal" data-target="#modal-endofmonth">Enter End of Month Balance</button>
+                <button type="button" class="btn btn-warning btn-sm" id="chkDiff">Check Difference</button>
                 <br />
                 <br />
                 <div style="overflow-x: auto;">
@@ -99,6 +112,10 @@
         <div class="card card-success card-outline">
             <div class="card-header">
                 <h3 class="card-title">Bank Book in Excel</h3>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i></button>
+                </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -117,7 +134,6 @@
                             </tr>
                         </thead>
                         <tbody>
-
                         </tbody>
                     </table>
                 </div>
@@ -274,6 +290,9 @@
 
     @section('customjs')
     <script>
+        var differenceVal = 0;
+        var grcontotal = 0;
+        var gbbtotal = 0;
         const Toast = Swal.mixin({
               toast: true,
               position: 'top-end',
@@ -390,6 +409,27 @@
                   }
                 });
             });
+            $('#chkDiff').click(function() {
+              from_date = $('#from_date').val();
+                if(from_date == '' || from_date == undefined){
+                  Toast.fire({
+                    type: 'error',
+                    title: ' Please enter a date and generate to enter End of Month Balance'
+                  });
+                  return;
+              }
+              if(grcontotal > 0 && gbbtotal > 0){
+                if(grcontotal > gbbtotal){
+                  differenceVal = parseFloat(grcontotal) - parseFloat(gbbtotal);
+                  $('#differenceVal').text(numberWithCommas(differenceVal));
+                }
+                else{
+                  differenceVal = parseFloat(gbbtotal) - parseFloat(grcontotal);
+                  $('#differenceVal').text(numberWithCommas(differenceVal));
+                }
+              }
+              console.log('done');
+            });
             $('#closeTransaction').click(function() {
               generate_book();
               $('#modal-default').modal('hide');
@@ -459,6 +499,7 @@
                       +"<td style=\"text-align: right;font-weight: bold;\">"+numberWithCommas(rcontotal)+"</td>"
                       +"<td style=\"text-align: center;\"></td>"
                       +"</tr>");
+                grcontotal = rcontotal;
               }
             });
             //--------------GENERATE BANK RECONCILIATION--------------//
@@ -524,6 +565,7 @@
                       +"<td style=\"text-align: center;\"></td>"
                       +"</tr>");
                 //remove spinner
+                gbbtotal = total;
               }
             });
             //--------------GENERATE BANK BOOK--------------//
