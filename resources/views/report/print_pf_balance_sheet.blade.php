@@ -21,7 +21,7 @@
               <!-- body header part left section start -->
               <img src="{{ asset('images/logo/acf-pf.png') }}" alt="acf" style="width: 300px;height: 100px;margin-left: auto;margin-right: auto;display: block;">
               <div class="header">
-                <h2 style="text-align: center;">Individual Staff Balance for Provident Fund as form {{ $date_info['from_date'] }} to {{ $date_info['to_date'] }}</h2>
+                <h3 style="text-align: center;">Individual Staff Balance for Provident Fund as from {{ $date_info['from_date'] }} to {{ $date_info['to_date'] }}</h3>
                 <span style="line-height: 1.5;"></span>
               </div>
             </div>
