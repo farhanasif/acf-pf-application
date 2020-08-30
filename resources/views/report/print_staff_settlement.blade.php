@@ -135,12 +135,20 @@
             <table class="settlement-table" width="800" style="table-layout:fixed; margin-bottom: 10px;">
             <tbody>
               <tr><td>Provident fund Balance without interest</td>
-              <td>10</td>
+              <td>
+                @foreach ($total_pf_deposits as $total_pf_deposit)
+                {{$total_pf_deposit->total_provident_fund}}
+              @endforeach
+              </td>
               <td>{{ $userInfo[0]->employee_contribution }}</td>
               <td>{{ $userInfo[0]->employer_contribution }}</td>
               <td>{{ $userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution }}</td></tr>
               <tr><td>Interest received after Audit</td>
-              <td>2</td>
+              <td>
+                @foreach ($total_pf_interests as $total_pf_interest)
+                  {{$total_pf_interest->total_provident_fund_interest}}
+                @endforeach
+              </td>
               <td>{{ $userInfo[0]->employee_contribution * ($userInfo[0]->interest_percent/100) }}</td>
               <td>{{ $userInfo[0]->employer_contribution * ($userInfo[0]->interest_percent/100) }}</td>
               <td>{{ ($userInfo[0]->employee_contribution * ($userInfo[0]->interest_percent/100)) + ($userInfo[0]->employer_contribution * ($userInfo[0]->interest_percent/100)) }}</td></tr>
@@ -233,7 +241,20 @@
               </div>
               <div style="width: 45%;border: 1px solid #000; border-radius: 10px;float: left;text-align: center;">
                 <p style="font-weight: 600;font-size: 16px;"><b><u>Net to Pay</u></b></p>
-                <p style="font-size: 18px;font-weight: 700;"><b><u>BDT  {{ number_format(($userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution + ($userInfo[0]->employee_contribution * ($userInfo[0]->interest_percent/100)) + ($userInfo[0]->employer_contribution * ($userInfo[0]->interest_percent/100)) + $loan_details[0]->num_of_due_installment), 2) }}</u></b></p>
+                <?php 
+                 $net_blance = ($userInfo[0]->employee_contribution 
+                
+                + $userInfo[0]->employer_contribution
+                + ($userInfo[0]->employee_contribution
+                * ($userInfo[0]->interest_percent/100)) 
+                + ($userInfo[0]->employer_contribution 
+                * ($userInfo[0]->interest_percent/100)) 
+                - $data[0]->loan_amount) 
+                + $loan_details[0]->without_interest_paid_loan;
+
+                // dd($net_blance);
+                 ?>
+                <p style="font-size: 18px;font-weight: 700;"><b><u>BDT  {{number_format($net_blance - ($data[0]->monthly_interest * $loan_details[0]->num_of_due_installment) ) }}</u></b></p>
               </div>
             </div>
 
