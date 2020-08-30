@@ -274,5 +274,4 @@ class BankController extends Controller
             return 'This entry is not valid for this month';
         }
     }
-
 }

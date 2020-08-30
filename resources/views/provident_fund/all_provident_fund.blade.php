@@ -27,8 +27,8 @@
     <div class="card-header">
           <h3 class="card-title">All PF Deposit Information</h3>
         <div class="float-sm-right">
-          {{-- <button type="submit" id="all-pf-deposit-download" class="btn btn-success">Download Excel</button> --}}
-          <a href="{{route('pf-deposit-export')}}" class="btn btn-success"> Download Excel</a>
+          <button type="submit" id="all-pf-deposit-download" onclick="exportToExcel('all-pf-deposit','all-pf-deposit')" class="btn btn-success">Download Excel</button>
+          {{-- <a href="{{route('pf-deposit-export')}}" class="btn btn-success"> Download Excel</a> --}}
           <a href="" class="btn btn-success" data-toggle="modal" data-target="#pf-deposit">Batch Upload</a>
           <a href="{{url('download_excel/pf_deposit/pf-deposit.xlsx')}}" class="btn btn-success">Download Sample Excel</a>
           <a href="{{route('add-provident-fund')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add PF Deposit</a>
@@ -76,17 +76,17 @@
    </form>
   </div>
     <!-- /.card-header -->
-    <div class="card-body">
-      <table id="all-pf-deposit" class="table table-bordered table-striped">
+    <div class="card-body table-responsive p-0" style="height: 500px;">
+      <table id="all-pf-deposit" class="table table-bordered table-striped table-head-fixed text-nowrap">
         <thead>
-          <tr class="bg-success">
-            <th>SL NO</th>
-            <th>Deposit Date</th>
-            <th>Staff Code</th>
-            <th>Own PF Deposit</th>
-            <th>Organization PF Deposit</th>
-            <th>Total PF Deposit</th>
-            <th>Action</th>
+          <tr>
+            <th class="bg-success">SL NO</th>
+            <th class="bg-success">Deposit Date</th>
+            <th class="bg-success">Staff Code</th>
+            <th class="bg-success">Own PF Deposit</th>
+            <th class="bg-success">Organization PF Deposit</th>
+            <th class="bg-success">Total PF Deposit</th>
+            <th class="bg-success">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -195,16 +195,16 @@ var tableToExcel = (function() {
   })()
 // END TABLE TO CSV CONVERT FUNCTION
 
-$('#all-pf-deposit').DataTable({
-        "info": true,
-        "autoWidth": false,
-        scrollX:'50vh',
-        scrollY:'50vh',
-        scrollCollapse: true,
-        fixedColumns: {
-        leftColumns: 2
-    }
-    });
+//$('#all-pf-deposit').DataTable({
+       // "info": true,
+       // "autoWidth": false,
+       // scrollX:'50vh',
+       // scrollY:'50vh',
+        //scrollCollapse: true,
+        //fixedColumns: {
+       // leftColumns: 2
+    //}
+    //});
   });
 
   </script>
