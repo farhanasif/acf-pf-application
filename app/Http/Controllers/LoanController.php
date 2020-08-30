@@ -43,10 +43,10 @@ class LoanController extends Controller
 
     public function saveLoan(Request $request)
     {
-      $loan_info = DB::table('loans')->where('staff_code',$request->staff_code)->get();
-      if(empty($loan_info)) {
+        $loan_info = DB::table('loans')->where('staff_code',$request->staff_code)->count();
+        //dd($loan_info);
+        if($loan_info < 1) {
     	   	try{
-
     	       $loan = new Loan;
     	       $loan->staff_code = $request->staff_code;
     	       $loan->monthly_installment = $request->monthly_installment;
@@ -87,10 +87,10 @@ class LoanController extends Controller
                 return;
             }
 
-          }else {
+        }else {
             echo("Already you get a loan!");
             return;
-          }
+        }
 
     }
 
