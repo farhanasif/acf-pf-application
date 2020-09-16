@@ -121,6 +121,7 @@
               <li class="nav-item"><a class="nav-link active" href="#pfaccount" data-toggle="tab">PF Account Details</a></li>
               <li class="nav-item"><a class="nav-link" href="#loandetails" data-toggle="tab">Loan Account Details</a></li>
               <li class="nav-item"><a class="nav-link" href="#generalinformation" data-toggle="tab">General Information</a></li>
+              <li class="nav-item"><a class="nav-link" href="#employeehistory" data-toggle="tab">Employee History</a></li>
             </ul>
           </div><!-- /.card-header -->
           <div class="card-body">
@@ -464,6 +465,54 @@
                   </div>
                 </form>
               </div>
+
+      <div class="tab-pane" id="employeehistory">
+       <div class="card card-outline card-success">
+           <div class="card-header">
+             <h3 class="card-title">Employee Backup</h3>
+             {{-- <button type="submit" id="loan-against-pf-download" class="btn btn-success float-right" onclick="exportToExcel('loan-against-pf','loan-against-pf')" >Download Excel</button> --}}
+           </div>
+           <!-- /.card-header arif-->
+
+           <div class="card-body table-responsive p-0" style="height: 200px;">
+             <table id="loan-against-pf" class="table table-striped table-head-fixed text-nowrap">
+               <thead>
+                 <tr>
+                   <th class="bg-success">SL NO</th>
+                   <th class="bg-success">Staff Code</th>
+                   <th class="bg-success">Name</th>
+                   <th class="bg-success">Position</th>
+                   <th class="bg-success"> Department Code </th>
+                   <th class="bg-success"> Level </th>
+                   <th class="bg-success"> Work Place </th>
+                   <th class="bg-success">Gross Salary</th>
+                   <th class="bg-success">Basic Salary </th>
+                   <th class="bg-success"> PF Amount</th>
+                   <th class="bg-success"> Joining Date </th>
+                   <th class="bg-success"> Ending Date </th>
+                 </tr>
+               </thead>
+               <tbody>
+             <tr>
+               <td>01</td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+             </tr>
+               </tbody>
+             </table>
+           </div>
+           <!-- /.card-body -->
+         </div>
+   </div>
               <!-- /.tab-pane -->
             </div>
             <!-- /.tab-content -->
