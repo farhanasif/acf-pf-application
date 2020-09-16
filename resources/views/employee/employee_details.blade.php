@@ -496,7 +496,7 @@
             @foreach ($employee_histories as $employee_history)
              <tr>
                <td>01</td>
-              <td>{{$employee_history->staff_code}}</td>
+              <td>{{ sprintf("%04d", $employee_history->staff_code)}}</td>
                <td>{{$employee_history->first_name}} {{$employee_history->last_name}}</td>
                <td>{{$employee_history->position}}</td>
                <td>{{$employee_history->department_code}}</td>
