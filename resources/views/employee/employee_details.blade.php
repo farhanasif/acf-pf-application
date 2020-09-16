@@ -469,7 +469,7 @@
       <div class="tab-pane" id="employeehistory">
        <div class="card card-outline card-success">
            <div class="card-header">
-             <h3 class="card-title">Employee Backup</h3>
+             <h3 class="card-title">Employee History</h3>
              {{-- <button type="submit" id="loan-against-pf-download" class="btn btn-success float-right" onclick="exportToExcel('loan-against-pf','loan-against-pf')" >Download Excel</button> --}}
            </div>
            <!-- /.card-header arif-->
@@ -493,20 +493,22 @@
                  </tr>
                </thead>
                <tbody>
+            @foreach ($employee_histories as $employee_history)
              <tr>
                <td>01</td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
+              <td>{{$employee_history->staff_code}}</td>
+               <td>{{$employee_history->first_name}} {{$employee_history->last_name}}</td>
+               <td>{{$employee_history->position}}</td>
+               <td>{{$employee_history->department_code}}</td>
+               <td>{{$employee_history->level}}</td>
+               <td>{{$employee_history->work_place}}</td>
+               <td>{{$employee_history->basic_salary}}</td>
+               <td>{{$employee_history->gross_salary}}</td>
+               <td>{{$employee_history->pf_amount}}</td>
+               <td>{{$employee_history->joining_date}}</td>
+               <td>{{$employee_history->ending_date}}</td>
              </tr>
+             @endforeach
                </tbody>
              </table>
            </div>

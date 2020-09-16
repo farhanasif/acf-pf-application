@@ -17,6 +17,7 @@ use App\Sub_location;
 use App\Work_place;
 use App\Department;
 use App\Employee;
+use App\EmployeeHistory;
 
 class EmployeeController extends Controller
 {
@@ -157,14 +158,34 @@ class EmployeeController extends Controller
                       'created_by' =>Auth::user()->id,
                       'updated_by' =>Auth::user()->id,
                   );
+
+                  $employee_history_data[] =array(
+                    'staff_code' =>$row[0],
+                    'first_name' =>$row[1],
+                    'last_name' =>$row[2],
+                    'position' =>$row[3],
+                    'department_code' =>$row[4],
+                    'level' =>$row[5],
+                    'joining_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['7'])->format('Y-m-d'),
+                  //'joining_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[7]),
+                    // 'ending_date' =>date('Y-m-d H:m:s', strtotime($row[9])),
+                    'ending_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') != "00/00/0000" ?  \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') : '00/00/0000' ,
+                    'work_place' =>$row[10],
+                    'basic_salary' =>$row[12],
+                    'gross_salary' =>$row[13],
+                    'pf_amount' =>$row[16],
+                );
           }
       }
 
-        // dd($insert_data);
+        // dd($employee_history_data);
         // exit;
 
-      if (!empty($insert_data)) {
+      if (!empty($insert_data && $employee_history_data)) {
           DB::table('employees')->insert($insert_data);
+
+          DB::table('employee_history')->insert($employee_history_data);
+
           return back()->with('success','Employees batch import successfully');
       }
     }
@@ -233,6 +254,22 @@ class EmployeeController extends Controller
        $data['created_by'] = Auth::user()->id;
        $data['updated_by'] =  Auth::user()->id;
 
+
+        $employee_history = new EmployeeHistory;
+        $employee_history->staff_code = $request->staff_code;
+        $employee_history->first_name = $request->first_name;
+        $employee_history->last_name = $request->last_name;
+        $employee_history->position = $request->position;
+        $employee_history->department_code = $request->department_code;
+        $employee_history->level = $request->level;
+        $employee_history->work_place = $request->work_place;
+        $employee_history->basic_salary = $request->basic_salary;
+        $employee_history->gross_salary = $request->gross_salary;
+        $employee_history->pf_amount = $request->pf_amount;
+        $employee_history->joining_date = $request->joining_date;
+        $employee_history->ending_date = $request->ending_date;
+        $employee_history->save();
+
        $provident_fund = DB::table('employees')->insert($data);
        return back()->with('success', 'Employees Added Successfully.');
     }
@@ -241,6 +278,8 @@ class EmployeeController extends Controller
     {
 
       $data['employees'] = DB::table('employees')->where('staff_code', $staff_code)->first();
+
+      $data['employee_histories'] = DB::table('employee_history')->where('staff_code', $staff_code)->get();
 
       // dd($employees);
       // exit;
@@ -319,6 +358,24 @@ class EmployeeController extends Controller
 
       DB::table('employees')->where('staff_code',$staff_code)->update($data);
       return json_encode("success");
+
+      $employee_history = new EmployeeHistory;
+      $employee_history->staff_code = $request->staff_code;
+      $employee_history->first_name = $request->first_name;
+      $employee_history->last_name = $request->last_name;
+      $employee_history->position = $request->position;
+      $employee_history->department_code = $request->department_code;
+      $employee_history->level = $request->level;
+      $employee_history->work_place = addslashes($request->work_place);
+      $employee_history->basic_salary = $request->basic_salary;
+      $employee_history->gross_salary = $request->gross_salary;
+      $employee_history->pf_amount = $request->pf_amount;
+      $employee_history->joining_date = $request->joining_date;
+      $employee_history->ending_date = $request->ending_date;
+      // dd($employee_history);
+      // exit;
+      $employee_history->save();
+
       //return back()->with('success', 'Employee Updated Successfully.');
     }
 

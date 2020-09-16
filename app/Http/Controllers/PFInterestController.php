@@ -100,10 +100,12 @@ class PFInterestController extends Controller
       // $result = Excel::import(new Pf_interestsImport, $upload);
       $result = Excel::toArray(new Pf_interestsImport, $upload);
 
+      $all_employees_staff_code = DB::select('SELECT staff_code FROM employees');
+
     foreach ($result as $key => $value) {
       foreach ($value as $row) {
 
-        try {
+        // try {
             $insert_data[] =array(
                 'interest_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]),
                 'interest_source' =>$row[2],
@@ -111,20 +113,23 @@ class PFInterestController extends Controller
                 'own' =>$row[3],
                 'organization' =>$row[4],
                 );
-           }
-        catch (\Exception $e) {
-            return redirect()->back()->with('error','Somthing went wrong!');
-        }
+          //  }
+        // catch (\Exception $e) {
+        //     return redirect()->back()->with('error','Somthing went wrong!');
+        // }
       }
    }
     // dd($insert_data);
     // exit;
-
-
-      if (!empty($insert_data)) {
-          DB::table('interests')->insert($insert_data);
-          return back()->with('success','PF Interest batch import successfully');
-      }
+        if ($all_employees_staff_code == $insert_data['staff_code']) {
+          if (!empty($insert_data)) {
+            DB::table('interests')->insert($insert_data);
+            return back()->with('success','PF Interest batch import successfully');
+        }
+        }
+        else{
+          return back()->with('error','All employee staff code and pf deposit staff code not match');
+        }
      }
     }
 

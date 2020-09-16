@@ -34,11 +34,10 @@ class ProvidentFundController extends Controller
     public function save_provident_fund(Request $request)
     {
        $this->validate($request,[
-
-              'deposit_date'      =>'required',
-              'staff_code'      =>'required',
-              'own_pf'          =>'required',
-              'organization_pf' =>'required'
+        'deposit_date'      =>'required',
+        'staff_code'      =>'required',
+        'own_pf'          =>'required',
+        'organization_pf' =>'required'
        ]);
 
     $data = array();
@@ -188,6 +187,8 @@ class ProvidentFundController extends Controller
         if($ext == "xlsx" || $ext == "csv") {
         // $result = Excel::import(new ProvidentsImport, $upload);
         $result = Excel::toArray(new ProvidentsImport, $upload);
+
+        $all_employees_staff_code = DB::select('SELECT staff_code FROM employees');
       foreach ($result as $key => $value) {
         foreach ($value as $row) {
 
@@ -204,11 +205,16 @@ class ProvidentFundController extends Controller
 
     //  dd($insert_data);
     //  exit;
-
-        if (!empty($insert_data)) {
+        if ($all_employees_staff_code == $insert_data['staff_code']) {
+          if (!empty($insert_data)) {
             DB::table('pf_deposit')->insert($insert_data);
         }
           return back()->with('success','Provident batch import successfully');
+        }
+        else{
+          return back()->with('error','All employee staff code and pf deposit staff code not match');
+        }
+
       }
 
     }
