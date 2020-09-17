@@ -121,6 +121,7 @@
               <li class="nav-item"><a class="nav-link active" href="#pfaccount" data-toggle="tab">PF Account Details</a></li>
               <li class="nav-item"><a class="nav-link" href="#loandetails" data-toggle="tab">Loan Account Details</a></li>
               <li class="nav-item"><a class="nav-link" href="#generalinformation" data-toggle="tab">General Information</a></li>
+              <li class="nav-item"><a class="nav-link" href="#employeehistory" data-toggle="tab">Employee History</a></li>
             </ul>
           </div><!-- /.card-header -->
           <div class="card-body">
@@ -464,6 +465,56 @@
                   </div>
                 </form>
               </div>
+
+      <div class="tab-pane" id="employeehistory">
+       <div class="card card-outline card-success">
+           <div class="card-header">
+             <h3 class="card-title">Employee History</h3>
+             {{-- <button type="submit" id="loan-against-pf-download" class="btn btn-success float-right" onclick="exportToExcel('loan-against-pf','loan-against-pf')" >Download Excel</button> --}}
+           </div>
+           <!-- /.card-header arif-->
+
+           <div class="card-body table-responsive p-0" style="height: 200px;">
+             <table id="loan-against-pf" class="table table-striped table-head-fixed text-nowrap">
+               <thead>
+                 <tr>
+                   <th class="bg-success">SL NO</th>
+                   <th class="bg-success">Staff Code</th>
+                   <th class="bg-success">Name</th>
+                   <th class="bg-success">Position</th>
+                   <th class="bg-success"> Department Code </th>
+                   <th class="bg-success"> Level </th>
+                   <th class="bg-success"> Work Place </th>
+                   <th class="bg-success">Gross Salary</th>
+                   <th class="bg-success">Basic Salary </th>
+                   <th class="bg-success"> PF Amount</th>
+                   <th class="bg-success"> Joining Date </th>
+                   <th class="bg-success"> Ending Date </th>
+                 </tr>
+               </thead>
+               <tbody>
+            @foreach ($employee_histories as $employee_history)
+             <tr>
+               <td>01</td>
+              <td>{{ sprintf("%04d", $employee_history->staff_code)}}</td>
+               <td>{{$employee_history->first_name}} {{$employee_history->last_name}}</td>
+               <td>{{$employee_history->position}}</td>
+               <td>{{$employee_history->department_code}}</td>
+               <td>{{$employee_history->level}}</td>
+               <td>{{$employee_history->work_place}}</td>
+               <td>{{$employee_history->basic_salary}}</td>
+               <td>{{$employee_history->gross_salary}}</td>
+               <td>{{$employee_history->pf_amount}}</td>
+               <td>{{$employee_history->joining_date}}</td>
+               <td>{{$employee_history->ending_date}}</td>
+             </tr>
+             @endforeach
+               </tbody>
+             </table>
+           </div>
+           <!-- /.card-body -->
+         </div>
+   </div>
               <!-- /.tab-pane -->
             </div>
             <!-- /.tab-content -->

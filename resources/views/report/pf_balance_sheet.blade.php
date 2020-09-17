@@ -12,7 +12,7 @@
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                  <li class="breadcrumb-item active">Staff Balance Sheet Report</li>
+                  <li class="breadcrumb-item active">Staff Balance Sharing Report</li>
                 </ol>
               </div>
             </div>
