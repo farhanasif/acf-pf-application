@@ -43,6 +43,7 @@ class ReportController extends Controller
         $date_info['from_date'] = date('d M Y', strtotime($from_date));
         $date_info['to_date'] = date('d M Y', strtotime($to_date));
         // echo $to_date;exit();
+        if($staff_code != 0) {
         $info = DB::select("SELECT employees.*, SUM(pf_deposit.own_pf) AS total_own_pf,
                                SUM(pf_deposit.organization_pf) AS total_organaization_pf,
                                interests.own AS total_own_interest,
@@ -52,6 +53,23 @@ class ReportController extends Controller
                                left JOIN pf_deposit ON pf_deposit.staff_code=employees.staff_code
                                INNER JOIN interests ON interests.staff_code = pf_deposit.staff_code
                                WHERE employees.staff_code=".$staff_code." AND deposit_date >= '".$from_date."' AND deposit_date <= '".$to_date."'");
+      }else {
+        $employee_code = DB::table('employees')->select('staff_code')->get();
+        $info = [];
+        //foreach ($employee_code as $key => $value) {
+          $info = DB::select("SELECT employees.*, sum(pf_deposit.own_pf) AS total_own_pf,
+                               sum(pf_deposit.organization_pf) AS total_organaization_pf,
+                               interests.own AS total_own_interest,
+                               interests.organization AS total_organization_interest,
+                               (sum(pf_deposit.own_pf) + sum(pf_deposit.organization_pf) + interests.own + interests.organization) AS total_amount
+                               FROM employees
+                               left JOIN pf_deposit ON pf_deposit.staff_code=employees.staff_code
+                               INNER JOIN interests ON interests.staff_code = pf_deposit.staff_code
+                               WHERE deposit_date >= '".$from_date."' AND deposit_date <= '".$to_date."' group by employees.staff_code");
+       // }
+
+      }
+      // dd($info);
         // print_r($info);exit();
         return view('report.print_pf_balance_sheet',["info"=>$info, "date_info"=>$date_info]);
     }
@@ -128,16 +146,17 @@ class ReportController extends Controller
     public function printStaffSettlement(Request $request)
     {
         $staff_code = $request->staff;
+
         $userInfo = DB::select("SELECT employees.*, SUM(pf_deposit.own_pf) AS employee_contribution, SUM(pf_deposit.organization_pf) AS employer_contribution, interests.own AS interest_percent
           FROM employees
-          left JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
+          INNER JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
           left JOIN interests ON interests.staff_code = pf_deposit.staff_code
           WHERE employees.staff_code = ".$staff_code);
 
         $loan_data = DB::select("SELECT employees.*, SUM(pf_deposit.own_pf) AS employee_contribution, SUM(pf_deposit.organization_pf) AS employer_contribution, interests.own AS interest_percent,
           loans.loan_amount, loans.monthly_installment, loans.monthly_interest, loans.interest, loans.issue_date
           FROM employees
-          left JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
+          INNER JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
           left JOIN interests ON interests.staff_code = pf_deposit.staff_code
           left JOIN loans ON loans.staff_code = interests.staff_code
           WHERE employees.staff_code = ".$staff_code);
@@ -149,20 +168,9 @@ class ReportController extends Controller
                  SUM((CASE WHEN (loan_installment.payment_type = 'paid') THEN 1 ELSE 0 END)) AS num_of_paid_installment,
                  SUM((CASE WHEN (loan_installment.payment_type = 'Due') THEN 1 ELSE 0 END)) AS num_of_due_installment
                  FROM loan_installment
-                 left JOIN loans ON loans.staff_code = loan_installment.staff_code
+                 INNER JOIN loans ON loans.staff_code = loan_installment.staff_code
                  WHERE loan_installment.staff_code = ".$staff_code);
-
-        $total_pf_deposits = DB::select("SELECT pf_deposit.*, COUNT(deposit_date) AS total_provident_fund
-                                FROM pf_deposit
-                                WHERE staff_code = ".$staff_code);
-        
-        $total_pf_interests = DB::select("SELECT interests.*, COUNT(interest_date) AS total_provident_fund_interest
-                                      FROM interests
-                                      WHERE staff_code = ".$staff_code);
-                            
-        // dd( $data['total_pf_interests']);
-
-        return view('report.print_staff_settlement',['total_pf_interests'=>$total_pf_interests,'total_pf_deposits'=>$total_pf_deposits,'data'=>$loan_data,'loan_details'=>$loan_details,'userInfo'=>$userInfo]);
+      return view('report.print_staff_settlement',['data'=>$loan_data,'loan_details'=>$loan_details,'userInfo'=>$userInfo]);
     }
 
     public function generateEmployeeHistory(Request $request)
@@ -176,13 +184,13 @@ class ReportController extends Controller
         $staff_code = $request->staff;
         $userInfo = DB::select("SELECT employees.*, SUM(pf_deposit.own_pf) AS employee_contribution, SUM(pf_deposit.organization_pf) AS employer_contribution, interests.own AS interest_percent
           FROM employees
-          left JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
+          INNER JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
           left JOIN interests ON interests.staff_code = pf_deposit.staff_code
           WHERE employees.staff_code = ".$staff_code);
         $data = DB::select("SELECT employees.*, SUM(pf_deposit.own_pf) AS employee_contribution, SUM(pf_deposit.organization_pf) AS employer_contribution, interests.own AS interest_percent,
           loans.loan_amount, loans.monthly_installment, loans.monthly_interest, loans.interest, loans.issue_date
           FROM employees
-          left JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
+          INNER JOIN pf_deposit ON pf_deposit.staff_code = employees.staff_code
           left JOIN interests ON interests.staff_code = pf_deposit.staff_code
           left JOIN loans ON loans.staff_code = interests.staff_code
           WHERE employees.staff_code = ".$staff_code);
@@ -194,7 +202,7 @@ class ReportController extends Controller
                  SUM((CASE WHEN (loan_installment.payment_type = 'paid') THEN 1 ELSE 0 END)) AS num_of_paid_installment,
                  SUM((CASE WHEN (loan_installment.payment_type = 'Due') THEN 1 ELSE 0 END)) AS num_of_due_installment
                  FROM loan_installment
-                 left JOIN loans ON loans.staff_code = loan_installment.staff_code
+                 INNER JOIN loans ON loans.staff_code = loan_installment.staff_code
                  WHERE loan_installment.staff_code = ".$staff_code);
 
         return view('report.print_employee_history',['data'=>$data,'loan_details'=>$loan_details,'userInfo'=>$userInfo]);

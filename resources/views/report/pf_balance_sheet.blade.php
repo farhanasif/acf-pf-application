@@ -12,7 +12,7 @@
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                  <li class="breadcrumb-item active">Staff Balance Sharing Report</li>
+                  <li class="breadcrumb-item active">Staff Balance Sheet Report</li>
                 </ol>
               </div>
             </div>
@@ -37,6 +37,7 @@
                         <label> Staff Code</label>
                           <select name="staff" id="staff" class="form-control select2bs4">
                              <option value="">--select--</option>
+                             <option value="0">All</option>
                               @foreach ($employee_code as $empolyee)
                                 <option value="{{ $empolyee->staff_code }}">{{ sprintf('%04d', $empolyee->staff_code) }} &nbsp;&nbsp; {{ $empolyee->first_name }} {{ $empolyee->last_name }}</option>
                               @endforeach
