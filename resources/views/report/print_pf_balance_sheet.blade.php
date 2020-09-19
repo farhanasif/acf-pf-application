@@ -11,6 +11,7 @@
   </head>
   <body>
     <button class="print-button">Print Page</button>
+    @foreach($info as $val)
     <div class="lik-uftcl-ptf-main-body">
       <div class="lik-uftcl-ptf-print-body">
         <form>
@@ -28,6 +29,7 @@
             <div class="left-header">
               <p style="line-height: 3.5; font-size: 18px;"><b>Date : <?php echo date('d-M-Y'); ?></b></p>
             </div>
+            
             <div class="lik-uftcl-pdf-body" style="border: 1px solid gray;width: 795px!important;">
               <div class="left-header" style="width: 45%;">
                 <p style="font-size: 16px;margin: 5px;"><b>Employer</b></p>
@@ -41,7 +43,7 @@
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>Staff Code</b></p>
               </div>
               <div class="right-header" style="border-left: 1px solid gray;">
-                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>{{ sprintf('%04d', $info[0]->staff_code) }}</b></p>
+                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>{{ sprintf('%04d', $val->staff_code) }}</b></p>
               </div>
             </div>
             <div class="lik-uftcl-pdf-body" style="border: 1px solid gray;width: 795px!important;">
@@ -49,7 +51,7 @@
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>First Name</b></p>
               </div>
               <div class="right-header" style="border-left: 1px solid gray;">
-                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>{{$info[0]->first_name}}</b></p>
+                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>{{$val->first_name}}</b></p>
               </div>
             </div>
             <div class="lik-uftcl-pdf-body" style="border: 1px solid gray;width: 795px!important;">
@@ -57,7 +59,7 @@
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>Last Name</b></p>
               </div>
               <div class="right-header" style="border-left: 1px solid gray;">
-                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>{{$info[0]->last_name}}</b></p>
+                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>{{$val->last_name}}</b></p>
               </div>
             </div>
             <div class="lik-uftcl-pdf-body" style="border: 1px solid gray;width: 795px!important;">
@@ -65,7 +67,7 @@
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>Designation</b></p>
               </div>
               <div class="right-header" style="border-left: 1px solid gray;">
-                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>{{$info[0]->position }}</b></p>
+                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>{{$val->position }}</b></p>
               </div>
             </div>
             <div class="lik-uftcl-pdf-body" style="border: 1px solid gray;width: 795px!important;">
@@ -73,7 +75,7 @@
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>Workplace</b></p>
               </div>
               <div class="right-header" style="border-left: 1px solid gray;">
-                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>{{$info[0]->base}}</b></p>
+                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>{{$val->base}}</b></p>
               </div>
             </div>
             <div class="lik-uftcl-pdf-body" style="border: 1px solid gray;width: 795px!important;margin-top: 20px;">
@@ -81,7 +83,7 @@
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>Employees Contribution</b></p>
               </div>
               <div class="right-header" style="border-left: 1px solid gray;">
-                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($info[0]->total_own_pf,2) }}</b></p>
+                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($val->total_own_pf,2) }}</b></p>
               </div>
             </div>
             <div class="lik-uftcl-pdf-body" style="border: 1px solid gray;width: 795px!important;">
@@ -89,7 +91,7 @@
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>Employer's Contribution</b></p>
               </div>
               <div class="right-header" style="border-left: 1px solid gray;">
-                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($info[0]->total_organaization_pf,2) }}</b></p>
+                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($val->total_organaization_pf,2) }}</b></p>
               </div>
             </div>
             <div class="lik-uftcl-pdf-body" style="border: 1px solid gray;width: 795px!important;">
@@ -97,7 +99,7 @@
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>Employees Contribution Interest</b></p>
               </div>
               <div class="right-header" style="border-left: 1px solid gray;">
-                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($info[0]->total_own_interest,2) }}</b></p>
+                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($val->total_own_interest,2) }}</b></p>
               </div>
             </div>
             <div class="lik-uftcl-pdf-body" style="border: 1px solid gray;width: 795px!important;">
@@ -105,7 +107,7 @@
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>Employer's Contribution Interest</b></p>
               </div>
               <div class="right-header" style="border-left: 1px solid gray;">
-                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($info[0]->total_organization_interest,2) }}</b></p>
+                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($val->total_organization_interest,2) }}</b></p>
               </div>
             </div>
 
@@ -114,11 +116,11 @@
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>Total Amount:</b></p>
               </div>
               <div class="right-header" style="border-left: 1px solid gray;">
-                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($info[0]->total_amount,2) }}</b></p>
+                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($val->total_amount,2) }}</b></p>
               </div>
             </div>
-
-            <div class="lik-uftcl-pdf-body" style="width: 795px!important;margin-top: 160px;">
+          
+            <div class="lik-uftcl-pdf-body" style="width: 795px!important;margin-top: 130px;">
               <div class="left-header" style="width: 45%;">
                 <p style="font-size: 18px;margin: 5px;text-decoration: overline;"><b>Signature Employee</b></p>
               </div>
@@ -143,6 +145,7 @@
         </div>
       </form>
     </div>
+    @endforeach
   </div>
   <script src="{{ asset('js/jquery.min.js') }}"></script>
   <script>
