@@ -279,9 +279,11 @@ class EmployeeController extends Controller
 
       $data['employees'] = DB::table('employees')->where('staff_code', $staff_code)->first();
 
+      // $data['employee_histories'] = DB::table('employee_history')->orderBy('created_at', 'DESC')->where('staff_code', $staff_code)->first();
       $data['employee_histories'] = DB::table('employee_history')->where('staff_code', $staff_code)->get();
 
-      // dd($employees);
+
+      // dd($data['employee_histories']);
       // exit;
 
       $data['loan_account_details'] = DB::select(
@@ -369,6 +371,7 @@ class EmployeeController extends Controller
       $data1['pf_amount'] = $request->pf_amount;
       $data1['joining_date'] = $request->joining_date;
       $data1['ending_date'] = $request->ending_date;
+      $data1['created_at'] = date('Y-m-d H:i:s');
 
       DB::table('employees')->where('staff_code',$staff_code)->update($data);
 

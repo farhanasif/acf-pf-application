@@ -1,3 +1,4 @@
+
 @extends('master')
 @section('customcss')
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -493,20 +494,21 @@
                  </tr>
                </thead>
                <tbody>
-            @foreach ($employee_histories as $employee_history)
+                 
+            @foreach ($employee_histories as $employee)
              <tr>
                <td>01</td>
-              <td>{{ sprintf("%04d", $employee_history->staff_code)}}</td>
-               <td>{{$employee_history->first_name}} {{$employee_history->last_name}}</td>
-               <td>{{$employee_history->position}}</td>
-               <td>{{$employee_history->department_code}}</td>
-               <td>{{$employee_history->level}}</td>
-               <td>{{$employee_history->work_place}}</td>
-               <td>{{$employee_history->basic_salary}}</td>
-               <td>{{$employee_history->gross_salary}}</td>
-               <td>{{$employee_history->pf_amount}}</td>
-               <td>{{$employee_history->joining_date}}</td>
-               <td>{{$employee_history->ending_date}}</td>
+              <td>{{ sprintf("%04d", $employee->staff_code)}}</td>
+               <td>{{$employee->first_name}} {{$employee->last_name}}</td>
+               <td>{{$employee->position}}</td>
+               <td>{{$employee->department_code}}</td>
+               <td>{{$employee->level}}</td>
+               <td>{{$employee->work_place}}</td>
+               <td>{{$employee->basic_salary}}</td>
+               <td>{{$employee->gross_salary}}</td>
+               <td>{{$employee->pf_amount}}</td>
+               <td>{{$employee->joining_date}}</td>
+               <td>{{$employee->ending_date}}</td>
              </tr>
              @endforeach
                </tbody>
