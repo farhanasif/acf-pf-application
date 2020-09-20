@@ -627,7 +627,7 @@
         if(staff_code == '' || first_name == '' || last_name == '' || position == ''
           || department_code == '' || category == '' ||  level == ''
           ||  base == '' ||  work_place == '' ||  sub_location == '' || basic_salary == ''
-          || gross_salary == '' || pf_amount == '' || joining_date == '')
+          || gross_salary == '' || pf_amount == '' || joining_date == '' || ending_date == '')
           {
             // Toast.fire({
             //   type: 'error',
