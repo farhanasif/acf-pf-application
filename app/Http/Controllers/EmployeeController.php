@@ -132,8 +132,8 @@ class EmployeeController extends Controller
         if($ext == "xlsx" || $ext == "csv") {
         $result = Excel::toArray(new EmployeesImport, $upload);
 
-        foreach ($result as  $key => $value) {
-          foreach ($value as $row) {
+        // foreach ($result as  $key => $value) {
+          foreach ($result[0] as $row) {
                     $insert_data[] =array(
                       'staff_code' =>$row[0],
                       'trimmed' =>$row[0],
@@ -143,10 +143,12 @@ class EmployeeController extends Controller
                       'department_code' =>$row[4],
                       'category' =>$row[4],
                       'level' =>$row[5],
-                      'joining_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['7'])->format('Y-m-d'),
-                    //'joining_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[7]),
+                      // 'joining_date' =>date('Y-m-d H:m:s', strtotime($row[7])),
+                      // 'joining_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['7'])->format('Y-m-d'),
+                      'joining_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(intval($row[7]))->format('Y-m-d'),
+                      'ending_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(intval($row[9]))->format('Y-m-d'),
                       // 'ending_date' =>date('Y-m-d H:m:s', strtotime($row[9])),
-                      'ending_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') != "00/00/0000" ?  \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') : '00/00/0000' ,
+                      // 'ending_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') != "00/00/0000" ?  \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') : '00/00/0000' ,
                       'base' =>$row[10],
                       'work_place' =>$row[10],
                       'sub_location' =>$row[10],
@@ -166,17 +168,19 @@ class EmployeeController extends Controller
                     'position' =>$row[3],
                     'department_code' =>$row[4],
                     'level' =>$row[5],
-                    'joining_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['7'])->format('Y-m-d'),
-                  //'joining_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[7]),
+                    // 'joining_date' =>date('Y-m-d H:m:s', strtotime($row[7])),
+                    // 'joining_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['7'])->format('Y-m-d'),
+                  'joining_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(intval($row[7]))->format('Y-m-d'),
+                  'ending_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(intval($row[9]))->format('Y-m-d'),
                     // 'ending_date' =>date('Y-m-d H:m:s', strtotime($row[9])),
-                    'ending_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') != "00/00/0000" ?  \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') : '00/00/0000' ,
+                    // 'ending_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') != "00/00/0000" ?  \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') : '00/00/0000' ,
                     'work_place' =>$row[10],
                     'basic_salary' =>$row[12],
                     'gross_salary' =>$row[13],
                     'pf_amount' =>$row[16],
                 );
           }
-      }
+      // }
 
         // dd($employee_history_data);
         // exit;

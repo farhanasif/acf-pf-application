@@ -475,7 +475,7 @@
            </div>
            <!-- /.card-header arif-->
 
-           <div class="card-body table-responsive p-0" style="height: 250px;">
+           <div class="card-body table-responsive p-0" style="height: 350px;">
              <table id="loan-against-pf" class="table table-striped table-head-fixed text-nowrap">
                <thead>
                  <tr>
@@ -508,7 +508,7 @@
                <td>{{$employee->gross_salary}}</td>
                <td>{{$employee->pf_amount}}</td>
                <td>{{$employee->joining_date}}</td>
-               <td>{{$employee->ending_date}}</td>
+               <td>{{$employee->ending_date != '1970-01-01' ? $employee->ending_date  : ''}}</td>
              </tr>
              @endforeach
                </tbody>
@@ -614,7 +614,7 @@
        var position = $('#position').val();
        var department_code = $('#department_code').val();
        var category = $('#category').val();
-       var label = $('#label').val();
+       var level = $('#level').val();
        var base = $('#base').val();
        var work_place = $('#work_place').val();
        var sub_location = $('#sub_location').val();
@@ -625,9 +625,9 @@
        var ending_date = $('#ending_date').val();
        var status = $('#status').val();
         if(staff_code == '' || first_name == '' || last_name == '' || position == ''
-          || department_code == '' || category == '' ||  label == ''
+          || department_code == '' || category == '' ||  level == ''
           ||  base == '' ||  work_place == '' ||  sub_location == '' || basic_salary == ''
-          || gross_salary == '' || pf_amount == '' || joining_date == '' || ending_date == '')
+          || gross_salary == '' || pf_amount == '' || joining_date == '')
           {
             // Toast.fire({
             //   type: 'error',
@@ -649,7 +649,7 @@
                       position: position,
                       department_code: department_code,
                       category: category,
-                      label: last_name,
+                      level: level,
                       base: base,
                       work_place: work_place,
                       sub_location: sub_location,
