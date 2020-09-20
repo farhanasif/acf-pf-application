@@ -194,9 +194,9 @@ class ProvidentFundController extends Controller
           $employee_code[] = $employee_staff_code->staff_code;
         }
 
-        foreach ($result[0] as $row) {
+        foreach ($result[0] as $key=> $row) {
 
-                $insert_data[] =array(
+                $insert_data[$key] =array(
                 'staff_code' =>(int)$row[0],
                 // 'deposit_date' =>\Carbon\Carbon::createFromFormat('m/d/Y', $row['1']),
                 'deposit_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]),
@@ -209,6 +209,7 @@ class ProvidentFundController extends Controller
               unset($insert_data[$key]);
             }
         }
+
           if (!empty($insert_data)) {
             DB::table('pf_deposit')->insert($insert_data);
             return back()->with('success','Provident batch import successfully');
