@@ -51,7 +51,7 @@ class LoanController extends Controller
     	       $loan->staff_code = $request->staff_code;
     	       $loan->monthly_installment = $request->monthly_installment;
     	       $loan->loan_amount = $request->loan_amount;
-    	       $loan->total_months =  12;
+    	       $loan->total_months = $request->total_months; //total months 
     	       $loan->monthly_interest = $request->monthly_interest;
     	       $loan->interest  = $request->interest;
     	       $loan->description  = $request->purpose;
@@ -60,7 +60,7 @@ class LoanController extends Controller
 
                // $loan_id = DB::select("select id from loans where staff_code='".$request->staff_code."' ORDER BY created_at DESC limit 1");
 
-    	       for($i = 1; $i <= 12; $i++){
+    	       for($i = 1; $i <= total_months; $i++){
        		       $loanInstallment = new LoanInstallment;
     		       $loanInstallment->staff_code = $request->staff_code;
     		       $loanInstallment->payment_type =  "Due";

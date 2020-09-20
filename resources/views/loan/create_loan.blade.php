@@ -137,8 +137,26 @@
   
        <div class="form-group row">
         <label for="bank_account" class="col-form-label col-md-2 col-sm-3 label-align">Bank Account Number</label>
-          <div class="col-md10 col-sm-10 ">
+          <div class="col-md-4 col-sm-4 ">
              <input type="text" class="form-control" name="bank_account" placeholder="Bank Account Number" id="bank_account">
+          </div>
+          <label for="installment_times" class="col-form-label col-md-2 col-sm-3 label-align">Installment Times</label>
+          <div class="col-md-4 col-sm-4 ">
+            <select name="total_months" id="" class="form-control select2bs4">
+              <option value="">--select--</option>
+              <option value="1">01</option>
+              <option value="2">02</option>
+              <option value="3">03</option>
+              <option value="4">04</option>
+              <option value="5">05</option>
+              <option value="6">06</option>
+              <option value="7">07</option>
+              <option value="8">08</option>
+              <option value="9">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
           </div>
      </div>
    <div class="form-group row">

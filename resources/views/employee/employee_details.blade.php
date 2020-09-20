@@ -475,7 +475,7 @@
            </div>
            <!-- /.card-header arif-->
 
-           <div class="card-body table-responsive p-0" style="height: 200px;">
+           <div class="card-body table-responsive p-0" style="height: 250px;">
              <table id="loan-against-pf" class="table table-striped table-head-fixed text-nowrap">
                <thead>
                  <tr>
@@ -497,7 +497,7 @@
                  
             @foreach ($employee_histories as $employee)
              <tr>
-               <td>01</td>
+               <td>{{ $loop->iteration }}</td>
               <td>{{ sprintf("%04d", $employee->staff_code)}}</td>
                <td>{{$employee->first_name}} {{$employee->last_name}}</td>
                <td>{{$employee->position}}</td>
