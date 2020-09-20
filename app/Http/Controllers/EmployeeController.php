@@ -356,25 +356,24 @@ class EmployeeController extends Controller
       $data['created_by'] = Auth::user()->id;
       $data['updated_by'] =  Auth::user()->id;
 
-      DB::table('employees')->where('staff_code',$staff_code)->update($data);
-      return json_encode("success");
+      $data1 = array();
+      $data1['staff_code'] = $request->staff_code;
+      $data1['first_name'] = $request->first_name;
+      $data1['last_name'] = $request->last_name;
+      $data1['position'] = $request->position;
+      $data1['department_code'] = $request->department_code;
+      $data1['level'] = $request->level;
+      $data1['work_place'] = addslashes($request->work_place);
+      $data1['basic_salary'] = $request->basic_salary;
+      $data1['gross_salary'] = $request->gross_salary;
+      $data1['pf_amount'] = $request->pf_amount;
+      $data1['joining_date'] = $request->joining_date;
+      $data1['ending_date'] = $request->ending_date;
 
-      $employee_history = new EmployeeHistory;
-      $employee_history->staff_code = $request->staff_code;
-      $employee_history->first_name = $request->first_name;
-      $employee_history->last_name = $request->last_name;
-      $employee_history->position = $request->position;
-      $employee_history->department_code = $request->department_code;
-      $employee_history->level = $request->level;
-      $employee_history->work_place = addslashes($request->work_place);
-      $employee_history->basic_salary = $request->basic_salary;
-      $employee_history->gross_salary = $request->gross_salary;
-      $employee_history->pf_amount = $request->pf_amount;
-      $employee_history->joining_date = $request->joining_date;
-      $employee_history->ending_date = $request->ending_date;
-      // dd($employee_history);
-      // exit;
-      $employee_history->save();
+      DB::table('employees')->where('staff_code',$staff_code)->update($data);
+
+      DB::table('employee_history')->insert($data1);
+      return json_encode("success");
 
       //return back()->with('success', 'Employee Updated Successfully.');
     }
