@@ -50,8 +50,8 @@
               <td> {{$interest_source->name}} </td>
               <td> {{$interest_source->description}} </td>
               <td>
-                <a href="{{route('edit-interest-source',$interest_source->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                <a href="{{route('delete-interest-source',$interest_source->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                <a href="{{route('edit-interest-source',$interest_source->id)}}" class="btn btn-info btn-xs"><i class="fas fa-edit"></i></a>
+                <a href="{{route('delete-interest-source',$interest_source->id)}}" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></a>
               </td>
             </tr>    
         @endforeach

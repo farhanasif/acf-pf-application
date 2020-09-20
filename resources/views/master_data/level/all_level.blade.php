@@ -50,8 +50,8 @@
             <td>{{$level->level_name}}</td>
             <td>{{$level->level_description}}</td>
             <td>
-                <a href="{{route('edit-level',$level->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                <a href="{{route('delete-level',$level->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                <a href="{{route('edit-level',$level->id)}}" class="btn btn-info btn-xs"><i class="fas fa-edit"></i></a>
+                <a href="{{route('delete-level',$level->id)}}" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></a>
             </td>
           </tr>
         @endforeach

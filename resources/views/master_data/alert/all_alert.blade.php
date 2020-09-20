@@ -51,8 +51,10 @@
           <td>{{$alert->name}}</td>
           <td>{{$alert->duration}}</td>
           <td>
-              <a href="{{route('edit-alert',$alert->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-              <a href="{{route('delete-alert',$alert->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt "></i></a>
+              <div style="display: block; width:150px">
+                <a href="{{route('edit-alert',$alert->id)}}" class="btn btn-info btn-xs"><i class="fas fa-edit"></i></a>
+              <a href="{{route('delete-alert',$alert->id)}}" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt "></i></a>
+              </div>
           </td>
         </tr>
           @endforeach

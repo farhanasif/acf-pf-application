@@ -51,8 +51,8 @@
             <td>{{$duration->name}}</td>
             <td>{{$duration->duration}}</td>
             <td>
-              <a href="{{route('edit-duration',$duration->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-              <a href="{{route('delete-duration',$duration->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+              <a href="{{route('edit-duration',$duration->id)}}" class="btn btn-info btn-xs"><i class="fas fa-edit"></i></a>
+              <a href="{{route('delete-duration',$duration->id)}}" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></a>
             </td>
           </tr>
           @endforeach

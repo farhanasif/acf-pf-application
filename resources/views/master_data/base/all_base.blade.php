@@ -49,9 +49,11 @@
             <td>{{ $i++}}</td>
             <td>{{$base->base_name}}</td>
             <td>{{$base->base_description}}</td>
-            <td class="row">
-              <a href="{{route('edit-base',$base->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-              <a href="{{route('delete-base',$base->id)}}" class="btn btn-danger ml-2"><i class="fas fa-trash-alt"></i></a>
+            <td>
+              <div style="display: block; width:150px">
+              <a href="{{route('edit-base',$base->id)}}" class="btn btn-info btn-xs"><i class="fas fa-edit"></i></a>
+              <a href="{{route('delete-base',$base->id)}}" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></a>
+            </div>
             </td>
           </tr>
         @endforeach

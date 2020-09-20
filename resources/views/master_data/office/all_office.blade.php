@@ -52,8 +52,8 @@
             <td>{{$office->duration}}</td>
             <td>{{$office->office_code}}</td>
             <td>
-                <a href="{{route('edit-office',$office->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                <a href="{{route('delete-office',$office->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                <a href="{{route('edit-office',$office->id)}}" class="btn btn-info btn-xs"><i class="fas fa-edit"></i></a>
+                <a href="{{route('delete-office',$office->id)}}" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></a>
             </td>
           </tr>
          @endforeach

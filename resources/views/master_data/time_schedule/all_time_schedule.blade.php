@@ -50,8 +50,8 @@
             <td>{{$time_schedule->start_date}}</td>
             <td>{{$time_schedule->ending_date}}</td>
             <td>
-              <a href="{{route('edit-time-schedule',$time_schedule->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-              <a href="{{route('delete-time-schedule',$time_schedule->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+              <a href="{{route('edit-time-schedule',$time_schedule->id)}}" class="btn btn-info btn-xs"><i class="fas fa-edit"></i></a>
+              <a href="{{route('delete-time-schedule',$time_schedule->id)}}" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></a>
             </td>
           </tr>
           @endforeach
