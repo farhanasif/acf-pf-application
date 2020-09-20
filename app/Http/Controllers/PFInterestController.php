@@ -101,32 +101,34 @@ class PFInterestController extends Controller
       $result = Excel::toArray(new Pf_interestsImport, $upload);
 
       $all_employees_staff_code = DB::select('SELECT staff_code FROM employees');
-      //dd($all_employees_staff_code);
+      $employee_code = [];
+      foreach($all_employees_staff_code as $employee_staff_code){
+        $employee_code[] = $employee_staff_code->staff_code;
+      }
 
-    foreach ($result as $key => $value) {
-      foreach ($value as $row) {
-            $insert_data[] =array(
+    // foreach ($result as $key => $value) {
+      foreach ($result[0] as $key => $row) {
+            $insert_data[$key] =array(
                 'interest_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]),
                 'interest_source' =>$row[2],
-                'staff_code' =>$row[0],
+                'staff_code' =>(int)$row[0],
                 'own' =>$row[3],
                 'organization' =>$row[4],
                 );
+
+                if (!in_array($insert_data[$key]['staff_code'], $employee_code) ) {
+                  unset($insert_data[$key]);
+                }
       }
-   }
-    // dd($insert_data);
-    // exit;
-        if (in_array($all_employees_staff_code, $insert_data[3])) {
-          echo 'ok';
+      // dd($insert_data);
+
+  //  }
           if (!empty($insert_data)) {
-            dd($insert_data);
-            // DB::table('interests')->insert($insert_data);
+            DB::table('interests')->insert($insert_data);
             return back()->with('success','PF Interest batch import successfully');
         }
-        }
         else{
-          //echo 'ok';
-          return back()->with('error','All employee staff code and pf deposit staff code not match');
+          return back()->with('error','PF Interest batch empty');
         }
      }
     }

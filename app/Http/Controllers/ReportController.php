@@ -133,6 +133,7 @@ class ReportController extends Controller
                 }
               })
               ->get();
+              // dd($data);
         return json_encode($data);
     }
 

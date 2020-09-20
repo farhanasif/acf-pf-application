@@ -23,7 +23,8 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item {{ request()->is('admin-home') ? 'active' :''}}">
-          <a href="{{url('/admin-home')}}" class="nav-link">
+          {{-- <a href="{{url('/admin-home')}}" class="nav-link"> --}}
+            <a href="{{ url('/admin-home') }}" class="nav-link {{ request()->is('admin-home') ? 'active' :''}}">
               <i class="nav-icon fas fa-tachometer-alt text-blue"></i>
               <p>
                 Dashboard
@@ -32,7 +33,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{route('all-employee')}}" class="nav-link">
+              <a href="{{ route('all-employee') }}" class="nav-link {{ request()->is('all-employee') ? 'active' :''}}">
               <i class="nav-icon fas fa-users text-green"></i>
               <p>
                 All Employees
@@ -50,8 +51,8 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('all-provident-fund')}}" class="nav-link">
+              <li class="nav-item {{ request()->is('provident-fund/*') ? ' menu-open' :''}}">
+                <a href="{{route('all-provident-fund')}}" class="nav-link {{ request()->is('provident-fund/*') ? 'active' :''}}">
                   <i class="far fa-circle nav-icon text-blue"></i>
                   <p>PF Deposit</p>
                 </a>
@@ -325,7 +326,7 @@
           </li>
 
           <li class="nav-item ">
-            <a href="{{route('all-user')}}" class="nav-link">
+              <a href="{{ route('all-user') }}" class="nav-link {{ request()->is('all-user') ? 'active' :''}}">
                 <i class="nav-icon fas fa-users text-warning"></i>
                 <p>
                   System Accounts
@@ -334,7 +335,7 @@
             </li>
 
             <li class="nav-item ">
-                <a href="{{route('user-management')}}" class="nav-link">
+                <a href="{{ route('user-management') }}" class="nav-link {{ request()->is('user-management') ? 'active' :''}}">
                     <i class="nav-icon fas fa-users text-warning"></i>
                     <p>
                       User Management
