@@ -264,7 +264,7 @@
              <li class="nav-item">
                 <a href="{{ url('/loan-installment-report') }}" class="nav-link">
                   <i class="far fa-circle nav-icon text-danger"></i>
-                  <p>Loan Statement Report</p>
+                  <p>Loan Settlement Report</p>
                 </a>
               </li>
             </ul>
