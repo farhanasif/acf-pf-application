@@ -171,8 +171,17 @@ class ReportController extends Controller
                  FROM loan_installment
                  INNER JOIN loans ON loans.staff_code = loan_installment.staff_code
                  WHERE loan_installment.staff_code = ".$staff_code);
-      return view('report.print_staff_settlement',['data'=>$loan_data,'loan_details'=>$loan_details,'userInfo'=>$userInfo]);
-    }
+
+        $total_pf_deposits = DB::select("SELECT pf_deposit.*, COUNT(deposit_date) AS total_provident_fund
+                FROM pf_deposit
+                WHERE staff_code = ".$staff_code);
+
+        $total_pf_interests = DB::select("SELECT interests.*, COUNT(interest_date) AS total_provident_fund_interest
+                FROM interests
+                WHERE staff_code = ".$staff_code);
+
+      return view('report.print_staff_settlement',['total_pf_interests'=>$total_pf_interests,'total_pf_deposits'=>$total_pf_deposits,'data'=>$loan_data,'loan_details'=>$loan_details,'userInfo'=>$userInfo]);
+}
 
     public function generateEmployeeHistory(Request $request)
     {
@@ -206,7 +215,15 @@ class ReportController extends Controller
                  INNER JOIN loans ON loans.staff_code = loan_installment.staff_code
                  WHERE loan_installment.staff_code = ".$staff_code);
 
-        return view('report.print_employee_history',['data'=>$data,'loan_details'=>$loan_details,'userInfo'=>$userInfo]);
+        $total_pf_deposits = DB::select("SELECT pf_deposit.*, COUNT(deposit_date) AS total_provident_fund
+                FROM pf_deposit
+                WHERE staff_code = ".$staff_code);
+
+        $total_pf_interests = DB::select("SELECT interests.*, COUNT(interest_date) AS total_provident_fund_interest
+                FROM interests
+                WHERE staff_code = ".$staff_code);
+
+        return view('report.print_employee_history',['total_pf_deposits'=>$total_pf_deposits,'total_pf_interests'=>$total_pf_interests,'data'=>$data,'loan_details'=>$loan_details,'userInfo'=>$userInfo]);
     }
 
     public function incomeExpenditureReport()
