@@ -60,12 +60,12 @@ class LoanController extends Controller
 
                // $loan_id = DB::select("select id from loans where staff_code='".$request->staff_code."' ORDER BY created_at DESC limit 1");
 
-    	       for($i = 1; $i <= total_months; $i++){
+    	       for($i = 1; $i <= $request->total_months; $i++){
        		       $loanInstallment = new LoanInstallment;
     		       $loanInstallment->staff_code = $request->staff_code;
     		       $loanInstallment->payment_type =  "Due";
     		       $loanInstallment->loan_id = $loan->id;
-    		       $loanInstallment->payment = number_format(($request->monthly_installment + $request->monthly_interest),4);
+                   $loanInstallment->payment = number_format(($request->monthly_installment + $request->monthly_interest),4);
     	       	   $loanInstallment->pay_date  = date ("Y-m-d", strtotime("+".$i." month", strtotime($request->date)));
     	       	   $loanInstallment->save();
     	       	   // echo json_encode($loanInstallment);
@@ -75,7 +75,7 @@ class LoanController extends Controller
     	       $transaction->account_head_id = $request->account_head;
     	       $transaction->description = $request->description;
     	       $transaction->amount = $request->loan_amount*-1;
-             $transaction->transaction_date = date('Y-m-d H:i:s', strtotime($request->date));
+               $transaction->transaction_date = date('Y-m-d H:i:s', strtotime($request->date));
     	       $transaction->save();
 
 
@@ -103,7 +103,8 @@ class LoanController extends Controller
               FROM loans
               INNER JOIN loan_installment ON loan_installment.loan_id = loans.id
               INNER JOIN employees ON employees.staff_code = loans.staff_code GROUP BY loans.id");
-    	// print_r($data);exit();
+        // print_r($data);exit();
+        // dd($data );
     	return view('loan.all_loans', compact('data'));
     }
 

@@ -495,8 +495,8 @@
                </thead>
                <tbody>
                  
-            @foreach ($employee_histories as $employee)
-             <tr>
+            @foreach ($employee_histories as $key =>$employee)
+             <tr @if($key == 0) style="background: orange;" @endif>
                <td>{{ $loop->iteration }}</td>
               <td>{{ sprintf("%04d", $employee->staff_code)}}</td>
                <td>{{$employee->first_name}} {{$employee->last_name}}</td>
@@ -508,7 +508,7 @@
                <td>{{$employee->gross_salary}}</td>
                <td>{{$employee->pf_amount}}</td>
                <td>{{$employee->joining_date}}</td>
-               <td>{{$employee->ending_date != '1970-01-01' ? $employee->ending_date  : ''}}</td>
+               <td>{{$employee->ending_date}}</td>
              </tr>
              @endforeach
                </tbody>

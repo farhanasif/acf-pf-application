@@ -134,6 +134,8 @@ class EmployeeController extends Controller
 
         // foreach ($result as  $key => $value) {
           foreach ($result[0] as $row) {
+            $leave_date = $row[9] ? \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(intval($row[9]))->format('Y-m-d') : null;
+
                     $insert_data[] =array(
                       'staff_code' =>$row[0],
                       'trimmed' =>$row[0],
@@ -146,7 +148,7 @@ class EmployeeController extends Controller
                       // 'joining_date' =>date('Y-m-d H:m:s', strtotime($row[7])),
                       // 'joining_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['7'])->format('Y-m-d'),
                       'joining_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(intval($row[7]))->format('Y-m-d'),
-                      'ending_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(intval($row[9]))->format('Y-m-d'),
+                      'ending_date' =>$leave_date,
                       // 'ending_date' =>date('Y-m-d H:m:s', strtotime($row[9])),
                       // 'ending_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') != "00/00/0000" ?  \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') : '00/00/0000' ,
                       'base' =>$row[10],
@@ -156,7 +158,7 @@ class EmployeeController extends Controller
                       'gross_salary' =>$row[13],
                       'pf_amount' =>$row[16],
                       // 'pf_percentage' =>$NULL,
-                      'status' =>1,
+                      'status' => $leave_date ? 0 : 1,
                       'created_by' =>Auth::user()->id,
                       'updated_by' =>Auth::user()->id,
                   );
@@ -171,7 +173,7 @@ class EmployeeController extends Controller
                     // 'joining_date' =>date('Y-m-d H:m:s', strtotime($row[7])),
                     // 'joining_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['7'])->format('Y-m-d'),
                   'joining_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(intval($row[7]))->format('Y-m-d'),
-                  'ending_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(intval($row[9]))->format('Y-m-d'),
+                  'ending_date' =>$leave_date,
                     // 'ending_date' =>date('Y-m-d H:m:s', strtotime($row[9])),
                     // 'ending_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') != "00/00/0000" ?  \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') : '00/00/0000' ,
                     'work_place' =>$row[10],
@@ -182,7 +184,7 @@ class EmployeeController extends Controller
           }
       // }
 
-        // dd($employee_history_data);
+        // dd($insert_data);
         // exit;
 
       if (!empty($insert_data && $employee_history_data)) {
@@ -283,8 +285,10 @@ class EmployeeController extends Controller
 
       $data['employees'] = DB::table('employees')->where('staff_code', $staff_code)->first();
 
+      // dd($data['employees']);
+
       // $data['employee_histories'] = DB::table('employee_history')->orderBy('created_at', 'DESC')->where('staff_code', $staff_code)->first();
-      $data['employee_histories'] = DB::table('employee_history')->where('staff_code', $staff_code)->get();
+      $data['employee_histories'] = DB::table('employee_history')->orderBy('id', 'DESC')->where('staff_code', $staff_code)->get();
 
 
       // dd($data['employee_histories']);
@@ -375,7 +379,6 @@ class EmployeeController extends Controller
       $data1['pf_amount'] = $request->pf_amount;
       $data1['joining_date'] = $request->joining_date;
       $data1['ending_date'] = $request->ending_date;
-      $data1['created_at'] = date('Y-m-d H:i:s');
 
       DB::table('employees')->where('staff_code',$staff_code)->update($data);
 

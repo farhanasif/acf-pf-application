@@ -210,18 +210,12 @@
             <tr>
               <td>{{ $i++ }}</td>
 
-          @if ($employee->ending_date != '1970-01-01')
+          @if ($employee->ending_date != null)
               <td class="bg-danger text-bold fixed-column">
                 <a href="{{route('employee-details',$employee->staff_code)}}">
                   {{ sprintf("%04d", $employee->staff_code)}}
                 </a>
               </td>
-          {{-- @elseif(empty($employee->ending_date) )
-          <td class="bg-success text-bold fixed-column">
-            <a href="{{route('employee-details',$employee->staff_code)}}">
-              {{sprintf("%04d", $employee->staff_code)}}
-            </a>
-          </td> --}}
           @else 
               <td class="bg-success text-bold fixed-column">
                 <a href="{{route('employee-details',$employee->staff_code)}}">
@@ -245,7 +239,7 @@
             <td>{{$employee->gross_salary}}</td>
             <td>{{$employee->pf_amount}}</td>
             <td>{{$employee->joining_date}}</td>
-            <td>{{$employee->ending_date == '1970-01-01' ? '' : $employee->ending_date}}</td>
+            <td>{{$employee->ending_date}}</td>
           </tr>
           @endforeach
          </tbody>
