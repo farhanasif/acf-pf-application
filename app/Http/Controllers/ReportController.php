@@ -31,7 +31,13 @@ class ReportController extends Controller
     public function generatePFBalanceSheet(Request $request)
     {
     	$employee_code = DB::table('employees')->get();
-    	return view('report.pf_balance_sheet',["employee_code"=>$employee_code]);
+      $info['level'] = Level::get();
+      $info['position'] = Position::get();
+      $info['category'] = Category::get();
+      $info['base'] = Base::get();
+      $info['work_place'] = Work_place::get();
+      $info['department'] = Department::get();
+    	return view('report.pf_balance_sheet',["employee_code"=>$employee_code, "info"=>$info]);
     }
 
     public function printPFBalanceSheet(Request $request)
@@ -39,33 +45,132 @@ class ReportController extends Controller
         $staff_code = $request->staff;
         $from_date = date('Y-m-d H:m:s', strtotime($request->from_date_for_balanace));
         $to_date = date('Y-m-d H:m:s', strtotime($request->to_date_for_balance));
-
+        $position =$request->position;
+        $base = $request->base;
+        $category = $request->category;
+        $work_place = $request->work_place;
+        $level = $request->level;
+        $department_code = $request->department_code;
+        // dd($request->all());
         $date_info['from_date'] = date('d M Y', strtotime($from_date));
         $date_info['to_date'] = date('d M Y', strtotime($to_date));
+
         // echo $to_date;exit();
         if($staff_code != 0) {
-        $info = DB::select("SELECT employees.*, SUM(pf_deposit.own_pf) AS total_own_pf,
-                               SUM(pf_deposit.organization_pf) AS total_organaization_pf,
-                               interests.own AS total_own_interest,
-                               interests.organization AS total_organization_interest,
-                               (SUM(pf_deposit.own_pf)+SUM(pf_deposit.organization_pf)+ interests.own + interests.organization) AS total_amount
-                               FROM employees
-                               left JOIN pf_deposit ON pf_deposit.staff_code=employees.staff_code
-                               INNER JOIN interests ON interests.staff_code = pf_deposit.staff_code
-                               WHERE employees.staff_code=".$staff_code." AND deposit_date >= '".$from_date."' AND deposit_date <= '".$to_date."'");
+          $info = DB::table('employees as em')
+              ->select('em.*')
+              ->addselect('interests.own AS total_own_interest','interests.organization AS total_organization_interest')
+              ->addselect(DB::raw('SUM(pf_deposit.own_pf) AS total_own_pf'),DB::raw('SUM(pf_deposit.organization_pf) AS total_organaization_pf'),DB::raw('SUM(pf_deposit.organization_pf) + SUM(pf_deposit.own_pf) + interests.own + interests.organization AS total_amount'))
+              ->join('pf_deposit', 'pf_deposit.staff_code', '=', 'em.staff_code')
+              ->join('interests', 'interests.staff_code', '=', 'pf_deposit.staff_code')
+              ->where('pf_deposit.deposit_date','>=', $from_date)
+              ->where('pf_deposit.deposit_date','<=', $to_date)
+              ->where('em.ending_date','>=',$from_date)
+              ->where('em.staff_code',$staff_code)
+              ->where(function($q) use($position){
+                if ($position) {
+                  $q->where('em.position','=', $position);
+                }
+              })
+              ->where(function($q) use($base){
+                if ($base) {
+                  $q->where('em.base','=', $base);
+                }
+              })
+              ->where(function($q) use($category){
+                if ($category) {
+                  $q->where('em.category','=', $category);
+                }
+              })
+              ->where(function($q) use($work_place){
+                if ($work_place) {
+                  $q->where('em.work_place', $work_place);
+                }
+              })
+              ->where(function($q) use($level){
+                if ($level) {
+                  $q->where('em.level','=', $level);
+                }
+              })
+              ->where(function($q) use($department_code){
+                if ($department_code) {
+                  $q->where('em.department_code','=', $department_code);
+                }
+              })
+              ->GROUPBY('em.staff_code')
+              ->get();
+        // $info = DB::select("SELECT employees.*, SUM(pf_deposit.own_pf) AS total_own_pf,
+        //                        SUM(pf_deposit.organization_pf) AS total_organaization_pf,
+        //                        interests.own AS total_own_interest,
+        //                        interests.organization AS total_organization_interest,
+        //                        (SUM(pf_deposit.own_pf)+SUM(pf_deposit.organization_pf)+ interests.own + interests.organization) AS total_amount
+        //                        FROM employees
+        //                        left JOIN pf_deposit ON pf_deposit.staff_code=employees.staff_code
+        //                        INNER JOIN interests ON interests.staff_code = pf_deposit.staff_code
+        //                        WHERE employees.staff_code=".$staff_code." AND deposit_date >= '".$from_date."' AND deposit_date <= '".$to_date."'");
       }else {
         $employee_code = DB::table('employees')->select('staff_code')->get();
         $info = [];
         //foreach ($employee_code as $key => $value) {
-          $info = DB::select("SELECT employees.*, sum(pf_deposit.own_pf) AS total_own_pf,
-                               sum(pf_deposit.organization_pf) AS total_organaization_pf,
-                               interests.own AS total_own_interest,
-                               interests.organization AS total_organization_interest,
-                               (sum(pf_deposit.own_pf) + sum(pf_deposit.organization_pf) + interests.own + interests.organization) AS total_amount
-                               FROM employees
-                               left JOIN pf_deposit ON pf_deposit.staff_code=employees.staff_code
-                               INNER JOIN interests ON interests.staff_code = pf_deposit.staff_code
-                               WHERE deposit_date >= '".$from_date."' AND deposit_date <= '".$to_date."' group by employees.staff_code");
+          // $info = DB::select("SELECT employees.*, sum(pf_deposit.own_pf) AS total_own_pf,
+          //                      sum(pf_deposit.organization_pf) AS total_organaization_pf,
+          //                      interests.own AS total_own_interest,
+          //                      interests.organization AS total_organization_interest,
+          //                      (sum(pf_deposit.own_pf) + sum(pf_deposit.organization_pf) + interests.own + interests.organization) AS total_amount
+          //                      FROM employees
+          //                      left JOIN pf_deposit ON pf_deposit.staff_code=employees.staff_code
+          //                      INNER JOIN interests ON interests.staff_code = pf_deposit.staff_code
+          //                      WHERE deposit_date >= '".$from_date."' AND deposit_date <= '".$to_date."' group by employees.staff_code");
+
+
+
+        $info = DB::table('employees as em')
+              ->select('em.*')
+              ->addselect('interests.own AS total_own_interest','interests.organization AS total_organization_interest')
+              ->addselect(DB::raw('SUM(pf_deposit.own_pf) AS total_own_pf'),DB::raw('SUM(pf_deposit.organization_pf) AS total_organaization_pf'),DB::raw('SUM(pf_deposit.organization_pf) + SUM(pf_deposit.own_pf) + interests.own + interests.organization AS total_amount'))
+              ->join('pf_deposit', 'pf_deposit.staff_code', '=', 'em.staff_code')
+              ->join('interests', 'interests.staff_code', '=', 'pf_deposit.staff_code')
+              ->where('pf_deposit.deposit_date','>=', $from_date)
+              ->where('pf_deposit.deposit_date','<=', $to_date)
+              ->where('em.status',1)
+              ->where(function($q) use($from_date){
+                if ($from_date) {
+                  $q->where('em.ending_date','>=', $from_date);
+                }
+              })
+              ->where(function($q) use($position){
+                if ($position) {
+                  $q->where('em.position','=', $position);
+                }
+              })
+              ->where(function($q) use($base){
+                if ($base) {
+                  $q->where('em.base','=', $base);
+                }
+              })
+              ->where(function($q) use($category){
+                if ($category) {
+                  $q->where('em.category','=', $category);
+                }
+              })
+              ->where(function($q) use($work_place){
+                if ($work_place) {
+                  $q->where('em.work_place', $work_place);
+                }
+              })
+              ->where(function($q) use($level){
+                if ($level) {
+                  $q->where('em.level','=', $level);
+                }
+              })
+              ->where(function($q) use($department_code){
+                if ($department_code) {
+                  $q->where('em.department_code','=', $department_code);
+                }
+              })
+              ->GROUPBY('em.staff_code')
+              ->get();
+            // dd($data);
        // }
 
       }
@@ -73,7 +178,6 @@ class ReportController extends Controller
         // print_r($info);exit();
         return view('report.print_pf_balance_sheet',["info"=>$info, "date_info"=>$date_info]);
     }
-
     public function loanInstallmentReport()
     {
       $info = [];

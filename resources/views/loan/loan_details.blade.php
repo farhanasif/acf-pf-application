@@ -134,6 +134,9 @@
 
                 <?php
                   $remaning_amount -= $loan_account_details[0]->monthly_installment;
+
+                  $integer_loan_amount = (int) $item->payment;
+                  // dd($integer_loan_amount);
                 ?>
                 <tr>
                 <td>{{$i++}}</td>
