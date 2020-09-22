@@ -44,6 +44,7 @@ class LoanController extends Controller
     public function saveLoan(Request $request)
     {
       $loan_info = DB::table('loans')->where('staff_code',$request->staff_code)->get();
+      // print_r($loan_info);die();
       if(empty($loan_info)) {
     	   	try{
 
@@ -115,7 +116,7 @@ class LoanController extends Controller
                  FROM loans
                  INNER JOIN employees ON employees.staff_code = loans.staff_code
                  WHERE loans.staff_code ='".$staff_code."' LIMIT 1");
-     // print_r($loan_account_details[0]->first_name);exit();
+     // dd($loan_account_details);
 
       $total_and_maximum_pf = DB::select(
                   "SELECT SUM(total_pf) AS total_pf_amount, MAX(total_pf) AS maximum_total_pf , deposit_date
@@ -125,14 +126,20 @@ class LoanController extends Controller
                                      FROM loan_installment
                                      WHERE staff_code ='".$staff_code."' ORDER BY pay_date ASC");
       // print_r($loan_adjustments);die();
-
+      /********************************** fraction issue ************************************************/
+      $pay['int_payment'] = (int) $loan_adjustments[0]->payment;
+      $pay['fraction_payment'] = (($loan_account_details[0]->loan_amount + $loan_account_details[0]->interest) - $pay['int_payment']*12);
+      $pay['int_month_inst'] = (int) $loan_account_details[0]->monthly_installment;
+      $pay['frac_month_inst'] = ($loan_account_details[0]->loan_amount - $pay['int_month_inst']*12);
+      /*******************************************fraction issue*****************************************/
+      // dd($pay);
       $pf_deposits = DB::table('pf_deposit')
                       ->orderBy('deposit_date', 'desc')
                       ->where('staff_code', $staff_code)
                       ->get();
 
         return view('loan.loan_details',compact('accounts',
-         'loan_account_details','pf_deposits','total_and_maximum_pf','loan_adjustments'));
+         'loan_account_details','pf_deposits','total_and_maximum_pf','loan_adjustments','pay'));
     }
 
     public function saveLoanInstallment(Request $request)

@@ -130,15 +130,15 @@
               </thead>
               <tbody>
                 <?php $i=1;$remaning_amount = $total_loan;?>
-                @foreach ($loan_adjustments as $item)
+                @foreach ($loan_adjustments as $key => $item)
 
                 <?php 
-                  $remaning_amount -= $loan_account_details[0]->monthly_installment;
+                  $remaning_amount -= ($key != 11)? $pay['int_month_inst'] : $pay['int_month_inst'] + $pay['frac_month_inst']; 
                 ?>
                 <tr>
                 <td>{{$i++}}</td>
                   <td> {{ date('j F, Y', strtotime($item->pay_date,3)) }}  </td>
-                  <td><dt> {{$item->payment}}/=  </dt></td>
+                  <td><dt> @if($key != 11) {{ $pay['int_payment'] }} @else {{ $pay['int_payment'] + $pay['fraction_payment'] }} @endif /=  </dt></td>
 
                       @if ( strtoupper( $item->payment_type) == 'DUE')
                         <td class="text-danger"> {{strtoupper( $item->payment_type)}} </td>
