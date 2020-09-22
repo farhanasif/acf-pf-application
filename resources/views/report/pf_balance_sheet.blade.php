@@ -64,6 +64,88 @@
                     </div>
                     </div>
 
+                    <div class="row">
+                     <div class="col-md-4">
+                      <div class="form-group">
+                      <label>Position</label>
+                        <select class="custom-select select2bs4" id="position" name="position">
+                            <option value="">--select--</option>
+                            <?php foreach ($info['position'] as $pos) { ?>
+                                <option value="{{ $pos->position_name }}">{{ $pos->position_name}}</option>
+                             <?php } ?>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                    <!-- select -->
+                    <div class="form-group">
+                    <label>Department Code</label>
+                    <select class="custom-select select2bs4" id="department_code" name="department_code">
+                        <option value="">--select--</option>
+                        <?php foreach ($info['department'] as $depart) { ?>
+                            <option value="{{ $depart->department_code }}">{{ $depart->department_code}}</option>
+                         <?php } ?>
+
+                    </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                        <div class="form-group">
+                        <label>Base</label>
+                        <select class="custom-select select2bs4" id="base" name="base">
+                            <option value="">--select--</option>
+                            <?php foreach ($info['base'] as $bas) { ?>
+                                <option value="{{ $bas->base_name }}">{{ $bas->base_name}}</option>
+                             <?php } ?>
+                        </select>
+                        </div>
+                    </div>
+                    </div>
+
+                   <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                        <label>Category</label>
+                        <select class="custom-select select2bs4" id="category" name="category">
+                            <option value="">--select--</option>
+                            <?php foreach ($info['category'] as $cat) { ?>
+                                <option value="{{ $cat->category_name }}">{{ $cat->category_name}}</option>
+                             <?php } ?>
+                        </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <!-- select -->
+                        <div class="form-group">
+                        <label>Level</label>
+                        <select class="custom-select select2bs4" id="level" name="lebel">
+                            <option value="">--select--</option>
+                            <?php foreach ($info['level'] as $lav) { ?>
+                                <option value="{{ $lav->level_name }}">{{ $lav->level_name}}</option>
+                             <?php } ?>
+                        </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <!-- select -->
+                        <div class="form-group">
+                        <label>Work Place</label>
+                        <select class="custom-select select2bs4" id="work_place" name="work_place"> 
+                            <option value="">--select--</option>
+                            <?php foreach ($info['work_place'] as $work) { ?>
+                                <option value="{{ $work->work_place_name }}">{{ $work->work_place_name}}</option>
+                             <?php } ?>
+                        </select>
+                        </div>
+                    </div>
+
+                    </div>
+
                 </div>
                 <!-- /.card-body -->
                 <!-- /.card-body -->
