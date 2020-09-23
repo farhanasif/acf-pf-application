@@ -65,7 +65,6 @@ class ReportController extends Controller
               ->join('interests', 'interests.staff_code', '=', 'pf_deposit.staff_code')
               ->where('pf_deposit.deposit_date','>=', $from_date)
               ->where('pf_deposit.deposit_date','<=', $to_date)
-              ->where('em.ending_date','>=',$from_date)
               ->where('em.staff_code',$staff_code)
               ->where(function($q) use($position){
                 if ($position) {
@@ -122,8 +121,6 @@ class ReportController extends Controller
           //                      INNER JOIN interests ON interests.staff_code = pf_deposit.staff_code
           //                      WHERE deposit_date >= '".$from_date."' AND deposit_date <= '".$to_date."' group by employees.staff_code");
 
-
-
         $info = DB::table('employees as em')
               ->select('em.*')
               ->addselect('interests.own AS total_own_interest','interests.organization AS total_organization_interest')
@@ -132,10 +129,10 @@ class ReportController extends Controller
               ->join('interests', 'interests.staff_code', '=', 'pf_deposit.staff_code')
               ->where('pf_deposit.deposit_date','>=', $from_date)
               ->where('pf_deposit.deposit_date','<=', $to_date)
-              ->where('em.status',1)
               ->where(function($q) use($from_date){
                 if ($from_date) {
-                  $q->where('em.ending_date','>=', $from_date);
+                  $q->where('em.ending_date', '>=', $from_date)
+                     ->orWhere('em.status',1);
                 }
               })
               ->where(function($q) use($position){
