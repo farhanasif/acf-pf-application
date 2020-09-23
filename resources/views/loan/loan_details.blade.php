@@ -133,12 +133,12 @@
                 @foreach ($loan_adjustments as $key => $item)
 
                 <?php 
-                  $remaning_amount -= ($key != 11)? $pay['int_month_inst'] : $pay['int_month_inst'] + $pay['frac_month_inst']; 
+                  $remaning_amount -= ($key != $pay['total_months']-1)? $pay['int_month_inst'] : $pay['int_month_inst'] + $pay['frac_month_inst']; 
                 ?>
                 <tr>
                 <td>{{$i++}}</td>
                   <td> {{ date('j F, Y', strtotime($item->pay_date,3)) }}  </td>
-                  <td><dt> @if($key != 11) {{ $pay['int_payment'] }} @else {{ $pay['int_payment'] + $pay['fraction_payment'] }} @endif /=  </dt></td>
+                  <td><dt> @if($key != $pay['total_months']-1) {{ $pay['int_payment'] }} @else {{ $pay['int_payment'] + $pay['fraction_payment'] }} @endif /=  </dt></td>
 
                       @if ( strtoupper( $item->payment_type) == 'DUE')
                         <td class="text-danger"> {{strtoupper( $item->payment_type)}} </td>

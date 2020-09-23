@@ -127,12 +127,13 @@ class LoanController extends Controller
                                      WHERE staff_code ='".$staff_code."' ORDER BY pay_date ASC");
       // print_r($loan_adjustments);die();
 
-            /********************************** fraction issue ************************************************/
-            $pay['int_payment'] = (int) $loan_adjustments[0]->payment;
-            $pay['fraction_payment'] = (($loan_account_details[0]->loan_amount + $loan_account_details[0]->interest) - $pay['int_payment']*$request->total_months);
-            $pay['int_month_inst'] = (int) $loan_account_details[0]->monthly_installment;
-            $pay['frac_month_inst'] = ($loan_account_details[0]->loan_amount - $pay['int_month_inst']*$request->total_months);
-            /*******************************************fraction issue*****************************************/
+        /********************************** fraction issue ************************************************/
+        $pay['int_payment'] = (int) $loan_adjustments[0]->payment;
+        $pay['fraction_payment'] = (($loan_account_details[0]->loan_amount + $loan_account_details[0]->interest) - $pay['int_payment']*$loan_account_details[0]->total_months);
+        $pay['int_month_inst'] = (int) $loan_account_details[0]->monthly_installment;
+        $pay['frac_month_inst'] = ($loan_account_details[0]->loan_amount - $pay['int_month_inst']*$loan_account_details[0]->total_months);
+        $pay['total_months'] = $loan_account_details[0]->total_months;
+        /*******************************************fraction issue*****************************************/
       $pf_deposits = DB::table('pf_deposit')
                       ->orderBy('deposit_date', 'desc')
                       ->where('staff_code', $staff_code)
