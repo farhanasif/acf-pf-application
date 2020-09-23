@@ -53,8 +53,8 @@
             <td>{{$user_role->role_description}}</td>
             <td>{{$user_role->value}}</td>
             <td>
-              <a href="{{route('edit-user-role',$user_role->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-              <a href="{{route('delete-user-role',$user_role->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt "></i></a>
+              <a href="{{route('edit-user-role',$user_role->id)}}" class="btn btn-info btn-xs"><i class="fas fa-edit"></i></a>
+              <a href="{{route('delete-user-role',$user_role->id)}}" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt "></i></a>
             </td>
           </tr>
           @endforeach

@@ -52,8 +52,8 @@
             <td>{{$department->name}}</td>
             <td>{{$department->department_code}}</td>
             <td>
-                <a href="{{route('edit-department',$department->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                <a href="{{route('delete-department',$department->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                <a href="{{route('edit-department',$department->id)}}" class="btn btn-info btn-xs"><i class="fas fa-edit"></i></a>
+                <a href="{{route('delete-department',$department->id)}}" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></a>
             </td>
           </tr>
           @endforeach

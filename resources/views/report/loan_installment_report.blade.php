@@ -222,7 +222,10 @@
                 },
                 dataType: 'json',
                 success: function (data) {
-                    var trHTML = '';
+                    $('#loan_installment').empty();
+                    var trHTML = 
+                    '<thead><tr><th class="bg-success">SI</th><th class="bg-success">Staff Code</th><th class="bg-success">Name</th><th class="bg-success">Position</th><th class="bg-success">Department Code</th><th class="bg-success">Level</th><th class="bg-success">Base</th><th class="bg-success">Workplace</th><th class="bg-success">Amount</th><th class="bg-success">Date</th>';
+
                         $.each(data, function (i, item) {
                             trHTML += '<tr><td>' + (i+1)
                                     + '</td><td>' + item.staff_code
@@ -236,6 +239,7 @@
                                     + '</td><td>' + item.pay_date
                                     +'</td></tr>';
                         });
+                        trHTML += '</tr></thead>';
                     $('#loan_installment').append(trHTML);
                 }
             });

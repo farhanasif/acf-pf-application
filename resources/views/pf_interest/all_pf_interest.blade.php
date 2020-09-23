@@ -101,8 +101,8 @@
           <td>{{$all_pf_interest->own}}</td>
           <td>{{$all_pf_interest->organization}}</td>
           <td>
-              <a href="{{route('edit-pf-interest',$all_pf_interest->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-              <a href="{{route('delete-pf-interest',$all_pf_interest->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt "></i></a>
+              <a href="{{route('edit-pf-interest',$all_pf_interest->id)}}" class="btn btn-info btn-xs"><i class="fas fa-edit"></i></a>
+              <a href="{{route('delete-pf-interest',$all_pf_interest->id)}}" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt "></i></a>
           </td>
         </tr>
         @endforeach

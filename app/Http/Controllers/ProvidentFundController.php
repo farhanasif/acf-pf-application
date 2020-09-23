@@ -189,30 +189,33 @@ class ProvidentFundController extends Controller
         $result = Excel::toArray(new ProvidentsImport, $upload);
 
         $all_employees_staff_code = DB::select('SELECT staff_code FROM employees');
-      foreach ($result as $key => $value) {
-        foreach ($value as $row) {
+        $employee_code = [];
+        foreach($all_employees_staff_code as $employee_staff_code){
+          $employee_code[] = $employee_staff_code->staff_code;
+        }
 
-                $insert_data[] =array(
-                'staff_code' =>$row[0],
+        foreach ($result[0] as $key=> $row) {
+
+                $insert_data[$key] =array(
+                'staff_code' =>(int)$row[0],
                 // 'deposit_date' =>\Carbon\Carbon::createFromFormat('m/d/Y', $row['1']),
                 'deposit_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]),
                 'own_pf' =>$row[2],
                 'organization_pf' =>$row[3],
                 'total_pf' =>$row[4],
             );
-        }
-     }
 
-    //  dd($insert_data);
-    //  exit;
-        if ($all_employees_staff_code == $insert_data['staff_code']) {
+            if (!in_array($insert_data[$key]['staff_code'], $employee_code) ) {
+              unset($insert_data[$key]);
+            }
+        }
+
           if (!empty($insert_data)) {
             DB::table('pf_deposit')->insert($insert_data);
-        }
-          return back()->with('success','Provident batch import successfully');
+            return back()->with('success','Provident batch import successfully');
         }
         else{
-          return back()->with('error','All employee staff code and pf deposit staff code not match');
+          return back()->with('error','Provident batch empty');
         }
 
       }

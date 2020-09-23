@@ -137,8 +137,26 @@
   
        <div class="form-group row">
         <label for="bank_account" class="col-form-label col-md-2 col-sm-3 label-align">Bank Account Number</label>
-          <div class="col-md10 col-sm-10 ">
+          <div class="col-md-4 col-sm-4 ">
              <input type="text" class="form-control" name="bank_account" placeholder="Bank Account Number" id="bank_account">
+          </div>
+          <label for="installment_times" class="col-form-label col-md-2 col-sm-3 label-align">Installment Times</label>
+          <div class="col-md-4 col-sm-4 ">
+            <select name="total_months" id="total_months" class="form-control select2bs4">
+              <option value="">--select--</option>
+              <option value="1">01</option>
+              <option value="2">02</option>
+              <option value="3">03</option>
+              <option value="4">04</option>
+              <option value="5">05</option>
+              <option value="6">06</option>
+              <option value="7">07</option>
+              <option value="8">08</option>
+              <option value="9">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
           </div>
      </div>
    <div class="form-group row">
@@ -175,7 +193,7 @@
        <p>Monthly deduction(to be deducted from salary) of Taka in words : <strong><span id="wordNum"></span></strong></p>
     </div>
     <div class="col-md-6 col-sm-6 ">
-       <p>Installment Times : <strong>12</strong></p>
+       <p>Installment Times : <strong><span id="tmonths"></span></strong></p>
     </div>
     <div class="col-md-6 col-sm-6 ">
        <p>Contribution Balance with interest as on : <strong><span id="toContri"></span></strong></p>
@@ -203,7 +221,7 @@
       </div>
 @endsection
 @section('customjs')
-<script src="{{ asset('../js/numberTowords.js') }}"></script>
+<script src="{{ asset('js/numberTowords.js') }}"></script>
 <script>
 $(document).ready(function() {
   var mxlaonAllow = 0;
@@ -262,7 +280,9 @@ $(document).ready(function() {
   setInterval(function() {
     var loan_amount = $("#loan_amount").val();
     var staff_code = $("#staff").val();
-    // console.log(staff_code);
+    var total_months = $("#total_months").val();
+    
+    console.log(total_months);
     var token = "{{ csrf_token() }}";
     var url_data = "{{ url('/loan-from-data') }}";
       $.ajax({
@@ -292,6 +312,7 @@ $(document).ready(function() {
           document.getElementById("position").value = position;
           document.getElementById("base").value = base;
           document.getElementById("deposit_amount").value = total_pf;
+         
            
           mxlaonAllow = (total_pf*0.8).toFixed(4);
           total_dpf = total_pf;
@@ -306,9 +327,9 @@ $(document).ready(function() {
            }else {
             mxlaonAllow2 = mxlaonAllow;
            }
-        var monthly_installment = (mxlaonAllow2/12).toFixed(4);
+        var monthly_installment = (mxlaonAllow2/total_months).toFixed(4);
         var interest = (mxlaonAllow2*0.004).toFixed(4);
-        var monthly_interest = (interest/12).toFixed(4);
+        var monthly_interest = (interest/total_months).toFixed(4);
         var totCon = parseFloat(mxlaonAllow2) + parseFloat(interest);
         var monInst = (parseFloat(monthly_installment) + parseFloat(monthly_interest)).toFixed(4);
         // console.log(interest);
@@ -319,6 +340,8 @@ $(document).ready(function() {
         $('#toInte').html(interest + "Tk.");
         $('#monIns').html(monInst + "Tk.");
         $('#wordNum').html(withDecimal(monInst) + " Tk.");
+        $('#tmonths').html(total_months);
+
   }, 3000);
   $("#submitInfo").on("click", function(e) {
     e.preventDefault();
@@ -345,6 +368,7 @@ $(document).ready(function() {
     var bank_name = $("#bank_name").val();
     var branch_name = $("#branch_name").val();
     var district = $("#district").val();
+    var total_months = $("#total_months").val();
     // parseFloat(order_rate);
     var date = $("#date").val();
     var account_head = $("#account_head").val();
@@ -386,9 +410,10 @@ $(document).ready(function() {
       alert("Account Heaad field is reuired!");
       return;
     }
-    var monthly_installment = (loan_amount/12).toFixed(4);
+    var monthly_installment = (loan_amount/total_months).toFixed(4);
     var interest = (loan_amount*0.004).toFixed(4);
-    var monthly_interest = (interest/12).toFixed(4);
+    var monthly_interest = (interest/total_months).toFixed(4);
+    console.log("hi" + total_months);
     // var toyal_paymet = (monthly_installment+monthly_interest).toFixed(4);
     var token = "{{ csrf_token() }}";
     var url_data = "{{ url('/save-loan') }}";
@@ -410,7 +435,8 @@ $(document).ready(function() {
             monthly_interest: monthly_interest,
             monthly_installment: monthly_installment,
             interest: interest,
-            description: description
+            description: description,
+            total_months : total_months
         },
         success: function(data) {
           alert(data);

@@ -82,7 +82,7 @@
               <?php $total_loan = 0; foreach ($loan_account_details as $item) {
                    $total_loan += $item->loan_amount;
                 } ?>
-                <h5 class="description-header">
+                <h5 class="description-header"> 
                   <?php echo $total_loan.'Tk.'; ?>
                 </h5>
 
@@ -130,29 +130,29 @@
               </thead>
               <tbody>
                 <?php $i=1;$remaning_amount = $total_loan;?>
-                @foreach ($loan_adjustments as $item)
+                @foreach ($loan_adjustments as $key => $item)
 
-                <?php
-                  $remaning_amount -= $loan_account_details[0]->monthly_installment;
+                <?php 
+                  $remaning_amount -= ($key != $pay['total_months']-1)? $pay['int_month_inst'] : $pay['int_month_inst'] + $pay['frac_month_inst']; 
                 ?>
                 <tr>
                 <td>{{$i++}}</td>
                   <td> {{ date('j F, Y', strtotime($item->pay_date,3)) }}  </td>
-                  <td><dt> {{$item->payment}}/-  </dt></td>
+                  <td><dt> @if($key != $pay['total_months']-1) {{ $pay['int_payment'] }} @else {{ $pay['int_payment'] + $pay['fraction_payment'] }} @endif /=  </dt></td>
 
                       @if ( strtoupper( $item->payment_type) == 'DUE')
                         <td class="text-danger"> {{strtoupper( $item->payment_type)}} </td>
                       @elseif(strtoupper( $item->payment_type) == 'PAID')
                         <td class="text-success"> {{strtoupper($item->payment_type) }} </td>
-
+                        
                       @endif
-                  <td><?php print_r(ceil($remaning_amount)."/-"); ?></td>
+                  <td><?php print_r(ceil($remaning_amount)."/="); ?></td>
                   @if ( strtoupper( $item->payment_type) == 'DUE')
                    <td><button  id ="{{$item->id}}" data-id="{{$item->id}}" class="btn btn-warning" data-toggle="modal" data-target="#modal-loan-installment" onclick="showId(this);" style="font-weight: 600;">Adjust Loan Installment</button></td>
                   @elseif(strtoupper( $item->payment_type) == 'PAID')
                     <td><button class="btn btn-info" style="font-weight: 600;">Already Paid</button></td>
                   @endif
-
+             
                 </tr>
 
                 @endforeach
@@ -258,7 +258,7 @@ function showId(button) {
   document.getElementById("installment_id").value = id;
 }
 $(document).ready(function() {
-    $(function() {
+    $(function() { 
        $( "#adjustment_date" ).datepicker();
     });
   });

@@ -50,8 +50,8 @@
             <td>{{$work_place->work_place_name}}</td>
             <td>{{$work_place->work_place_description}}</td>
             <td>
-              <a href="{{route('edit-work-place',$work_place->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-              <a href="{{route('delete-work-place',$work_place->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+              <a href="{{route('edit-work-place',$work_place->id)}}" class="btn btn-info btn-xs"><i class="fas fa-edit"></i></a>
+              <a href="{{route('delete-work-place',$work_place->id)}}" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></a>
             </td>
           </tr>
         @endforeach

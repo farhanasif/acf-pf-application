@@ -100,7 +100,7 @@
             <td>{{$provident_fund->organization_pf}}</td>
             <td>{{$provident_fund->total_pf}}</td>
             <td>
-                <a href="{{route('edit-provident-fund',$provident_fund->id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                <a href="{{route('edit-provident-fund',$provident_fund->id)}}" class="btn btn-info btn-xs"><i class="fas fa-edit"></i></a>
             </td>
           </tr>
         @endforeach

@@ -1,3 +1,4 @@
+
 @extends('master')
 @section('customcss')
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -474,7 +475,7 @@
            </div>
            <!-- /.card-header arif-->
 
-           <div class="card-body table-responsive p-0" style="height: 200px;">
+           <div class="card-body table-responsive p-0" style="height: 350px;">
              <table id="loan-against-pf" class="table table-striped table-head-fixed text-nowrap">
                <thead>
                  <tr>
@@ -493,20 +494,21 @@
                  </tr>
                </thead>
                <tbody>
-            @foreach ($employee_histories as $employee_history)
-             <tr>
-               <td>01</td>
-              <td>{{ sprintf("%04d", $employee_history->staff_code)}}</td>
-               <td>{{$employee_history->first_name}} {{$employee_history->last_name}}</td>
-               <td>{{$employee_history->position}}</td>
-               <td>{{$employee_history->department_code}}</td>
-               <td>{{$employee_history->level}}</td>
-               <td>{{$employee_history->work_place}}</td>
-               <td>{{$employee_history->basic_salary}}</td>
-               <td>{{$employee_history->gross_salary}}</td>
-               <td>{{$employee_history->pf_amount}}</td>
-               <td>{{$employee_history->joining_date}}</td>
-               <td>{{$employee_history->ending_date}}</td>
+                 
+            @foreach ($employee_histories as $key =>$employee)
+             <tr @if($key == 0) style="background: orange;" @endif>
+               <td>{{ $loop->iteration }}</td>
+              <td>{{ sprintf("%04d", $employee->staff_code)}}</td>
+               <td>{{$employee->first_name}} {{$employee->last_name}}</td>
+               <td>{{$employee->position}}</td>
+               <td>{{$employee->department_code}}</td>
+               <td>{{$employee->level}}</td>
+               <td>{{$employee->work_place}}</td>
+               <td>{{$employee->basic_salary}}</td>
+               <td>{{$employee->gross_salary}}</td>
+               <td>{{$employee->pf_amount}}</td>
+               <td>{{$employee->joining_date}}</td>
+               <td>{{$employee->ending_date}}</td>
              </tr>
              @endforeach
                </tbody>
@@ -612,7 +614,7 @@
        var position = $('#position').val();
        var department_code = $('#department_code').val();
        var category = $('#category').val();
-       var label = $('#label').val();
+       var level = $('#level').val();
        var base = $('#base').val();
        var work_place = $('#work_place').val();
        var sub_location = $('#sub_location').val();
@@ -623,9 +625,9 @@
        var ending_date = $('#ending_date').val();
        var status = $('#status').val();
         if(staff_code == '' || first_name == '' || last_name == '' || position == ''
-          || department_code == '' || category == '' ||  label == ''
+          || department_code == '' || category == '' ||  level == ''
           ||  base == '' ||  work_place == '' ||  sub_location == '' || basic_salary == ''
-          || gross_salary == '' || pf_amount == '' || joining_date == '' || ending_date == '')
+          || gross_salary == '' || pf_amount == '' || joining_date == '')
           {
             // Toast.fire({
             //   type: 'error',
@@ -647,7 +649,7 @@
                       position: position,
                       department_code: department_code,
                       category: category,
-                      label: last_name,
+                      level: level,
                       base: base,
                       work_place: work_place,
                       sub_location: sub_location,

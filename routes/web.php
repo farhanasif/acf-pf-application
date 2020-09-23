@@ -596,7 +596,7 @@ Route::group(['middleware' => 'admin'], function () {
 			'uses'		=> 'ProvidentFundController@update_provident_fund',
 			'as'		=> 'update-provident-fund'
 		]);
-		Route::match(['get', 'post'],'/all-provident-fund', [
+		Route::match(['get', 'post'],'provident-fund/all-provident-fund', [
 			'uses'		=> 'ProvidentFundController@all_provident_fund',
 			'as'		=> 'all-provident-fund'
         ]);

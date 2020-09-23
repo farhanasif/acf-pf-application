@@ -135,20 +135,12 @@
             <table class="settlement-table" width="800" style="table-layout:fixed; margin-bottom: 10px;">
             <tbody>
               <tr><td>Provident fund Balance without interest</td>
-              <td>
-                @foreach ($total_pf_deposits as $total_pf_deposit)
-                {{$total_pf_deposit->total_provident_fund}}
-              @endforeach
-              </td>
+              <td>{{$total_pf_deposits[0]->total_provident_fund}}</td>
               <td>{{ $userInfo[0]->employee_contribution }}</td>
               <td>{{ $userInfo[0]->employer_contribution }}</td>
               <td>{{ $userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution }}</td></tr>
               <tr><td>Interest received after Audit</td>
-              <td>
-                @foreach ($total_pf_interests as $total_pf_interest)
-                  {{$total_pf_interest->total_provident_fund_interest}}
-                @endforeach
-              </td>
+              <td> {{$total_pf_interests[0]->total_provident_fund_interest}} </td>
               <td>{{ $userInfo[0]->employee_contribution * ($userInfo[0]->interest_percent/100) }}</td>
               <td>{{ $userInfo[0]->employer_contribution * ($userInfo[0]->interest_percent/100) }}</td>
               <td>{{ ($userInfo[0]->employee_contribution * ($userInfo[0]->interest_percent/100)) + ($userInfo[0]->employer_contribution * ($userInfo[0]->interest_percent/100)) }}</td></tr>
