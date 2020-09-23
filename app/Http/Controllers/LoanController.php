@@ -43,9 +43,12 @@ class LoanController extends Controller
 
     public function saveLoan(Request $request)
     {
+      // dd($request->all());
+
         $loan_info = DB::table('loans')->where('staff_code',$request->staff_code)->count();
         //dd($loan_info);
         if($loan_info < 1) {
+
     	   	try{
     	       $loan = new Loan;
     	       $loan->staff_code = $request->staff_code;
@@ -58,16 +61,20 @@ class LoanController extends Controller
     	       $loan->issue_date = date('Y-m-d', strtotime($request->date));
     	       $loan->save();
 
+
+
                // $loan_id = DB::select("select id from loans where staff_code='".$request->staff_code."' ORDER BY created_at DESC limit 1");
 
+
     	       for($i = 1; $i <= $request->total_months; $i++){
-       		       $loanInstallment = new LoanInstallment;
+       		     $loanInstallment = new LoanInstallment;
     		       $loanInstallment->staff_code = $request->staff_code;
     		       $loanInstallment->payment_type =  "Due";
     		       $loanInstallment->loan_id = $loan->id;
-                   $loanInstallment->payment = number_format(($request->monthly_installment + $request->monthly_interest),4);
-    	       	   $loanInstallment->pay_date  = date ("Y-m-d", strtotime("+".$i." month", strtotime($request->date)));
-    	       	   $loanInstallment->save();
+               $loanInstallment->payment = $request->monthly_installment + $request->monthly_interest;
+    	       	 $loanInstallment->pay_date  = date ("Y-m-d", strtotime("+".$i." month", strtotime($request->date)));
+
+    	       	 $loanInstallment->save();
     	       	   // echo json_encode($loanInstallment);
     	       }
 
@@ -75,7 +82,7 @@ class LoanController extends Controller
     	       $transaction->account_head_id = $request->account_head;
     	       $transaction->description = $request->description;
     	       $transaction->amount = $request->loan_amount*-1;
-               $transaction->transaction_date = date('Y-m-d H:i:s', strtotime($request->date));
+             $transaction->transaction_date = date('Y-m-d H:i:s', strtotime($request->date));
     	       $transaction->save();
 
 
@@ -133,6 +140,7 @@ class LoanController extends Controller
         $pay['int_month_inst'] = (int) $loan_account_details[0]->monthly_installment;
         $pay['frac_month_inst'] = ($loan_account_details[0]->loan_amount - $pay['int_month_inst']*$loan_account_details[0]->total_months);
         $pay['total_months'] = $loan_account_details[0]->total_months;
+        // dd($pay);
         /*******************************************fraction issue*****************************************/
       $pf_deposits = DB::table('pf_deposit')
                       ->orderBy('deposit_date', 'desc')

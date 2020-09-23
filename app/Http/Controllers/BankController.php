@@ -37,7 +37,7 @@ class BankController extends Controller
         $end_date = date("Y-m-t", strtotime($from_date));
         $start_date = $from_date;
 
-        //dd($end_date);
+        // dd($end_date);
 
         // $query = "(select date_format(t.transaction_date,'%d %b %Y') as transaction_date, t.description, t.amount, t.voucher_no, t.cheque_no, ah.account_head
         // from transactions as t
@@ -59,14 +59,14 @@ class BankController extends Controller
         //  from transactions where effective_date between '".$start_date."' and '".$end_date."' and is_bank_book=0)";
 
 
-        $query = "(select -1 as id,'' as transaction_date,'End of Month Balance' as description,ifnull(amount,0) as amount,
+        $query = "(select -1 as id,'' as transaction_date,'End of Month Balance' as description,ifnull(amount,0) as amount, (case when (amount < 0) THEN 'Payment' ELSE 'Received' END) as type,
             '' as voucher_no, '' as cheque_no, '' as account_head
             from transactions
             where effective_date between '".$start_date."' and '".$end_date."'
             and description = 'End of Month Balance'
           and is_bank_book=0)
           union
-          (select t.id as id,date_format(t.transaction_date,'%d %b %Y') as transaction_date, t.description, t.amount, t.voucher_no, t.cheque_no, ah.account_head
+          (select t.id as id,date_format(t.transaction_date,'%d %b %Y') as transaction_date, t.description, t.amount, (case when (amount < 0) THEN 'Payment' ELSE 'Received' END) as type, t.voucher_no, t.cheque_no, ah.account_head
           from transactions as t
           inner join account_heads as ah
           on t.account_head_id = ah.id
@@ -75,6 +75,8 @@ class BankController extends Controller
         //dd($query);
 
         $results = DB::select($query);
+
+        // dd($results);
         //return count($results);
         return json_encode($results);
     }

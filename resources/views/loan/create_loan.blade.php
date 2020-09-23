@@ -78,7 +78,7 @@
          <div class="form-group row">
             <label for="ending_date" class="col-form-label col-md-2 col-sm-2 label-align ">Ending Date</label>
             <div class="col-md-4 col-sm-3 ">
-               <input type="text" class="form-control" name="ending_date" placeholder="Joining Date" id="ending_date">
+               <input type="text" class="form-control" name="ending_date" placeholder="Ending Date" id="ending_date">
             </div>
             <label for="base" class="col-form-label col-md-2 col-sm-3 label-align">Base</label>
               <div class="col-md-4 col-sm-3 ">
