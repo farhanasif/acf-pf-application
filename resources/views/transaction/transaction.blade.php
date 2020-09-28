@@ -533,7 +533,9 @@
                     '<th style="text-align: center;">Action</th>'+
                 '</tr>');
                 var total = 0;
+                var type = '';
                 $.each(data, function(index, element) {
+                   if(element.amount>0){ type = 'Received'} else{type = ''}
                     if(element.amount == undefined || element.amount == ''){}
                     else total += parseFloat(element.amount);
                     if(element.account_head == undefined || element.account_head == ''){
@@ -541,7 +543,7 @@
                       $("#bankbook tbody").append("<tr>"
                       +"<td style=\"text-align: center;\">"+element.transaction_date+"</td>"
                       +"<td style=\"text-align: center;\">"+element.voucher_no+"</td>"
-                      +"<td style=\"text-align: center;\">"+element.type+"</td>"
+                      +"<td style=\"text-align: center;\">"+element.voucher_type+"</td>"
                       +"<td style=\"text-align: center;\">"+element.description+"</td>"
                       +"<td style=\"text-align: center;\">"+element.cheque_no+"</td>"
                       +"<td class=\"table-danger\" style=\"text-align: right;\">"+numberWithCommas(element.amount)+"</td>"
@@ -553,7 +555,7 @@
                       $("#bankbook tbody").append("<tr>"
                       +"<td style=\"text-align: center;\">"+element.transaction_date+"</td>"
                       +"<td style=\"text-align: center;\">"+element.voucher_no+"</td>"
-                      +"<td style=\"text-align: center;\">"+element.type+"</td>"
+                      +"<td style=\"text-align: center;\">"+element.voucher_type+"</td>"
                       +"<td style=\"text-align: center;\">"+element.description+"</td>"
                       +"<td style=\"text-align: center;\">"+element.cheque_no+"</td>"
                       +"<td class=\"table-danger\" style=\"text-align: right;\">"+numberWithCommas(element.amount)+"</td>"

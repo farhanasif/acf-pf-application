@@ -98,15 +98,15 @@ class BankController extends Controller
         $query = "select -1 as id,'' as transaction_date,'Balance ".$last_month."' as description, (
             (select sum(total_pf) from pf_deposit where `deposit_date` <= '".$last_date."')
             + (select ifnull(sum(amount),0) from transactions where transaction_date <= '".$last_date."' and is_bank_book = 1)
-            ) as amount, '' as voucher_no, '' as cheque_no, '' as account_head
+            ) as amount, '' as voucher_no, '' as cheque_no, '' as account_head, '' as voucher_type
             union
-            select -1 as id,'' as transaction_date,'Employee Contribution ".$con_month."' as description, sum(own_pf) as amount, '' as voucher_no, '' as cheque_no, '' as account_head
+            select -1 as id,'' as transaction_date,'Employee Contribution ".$con_month."' as description, sum(own_pf) as amount, '' as voucher_no, '' as cheque_no, '' as account_head, (case when (sum(own_pf)>0) THEN 'Received' ELSE '' END) as voucher_type
             from pf_deposit where `deposit_date` between '".$start_date."' and '".$end_date."'
             union
-            select -1 as id,'' as transaction_date,'Employer Contribution ".$con_month."' as description, sum(organization_pf) as amount, '' as voucher_no, '' as cheque_no, '' as account_head
+            select -1 as id,'' as transaction_date,'Employer Contribution ".$con_month."' as description, sum(organization_pf) as amount, '' as voucher_no, '' as cheque_no, '' as account_head, (case when (sum(organization_pf)>0) THEN 'Received' ELSE '' END) as voucher_type
             from pf_deposit where `deposit_date` between '".$start_date."' and '".$end_date."'
             union
-            (select t.id as id,date_format(t.transaction_date,'%d %b %Y') as transaction_date, t.description, t.amount, t.voucher_no, t.cheque_no, ah.account_head
+            (select t.id as id,date_format(t.transaction_date,'%d %b %Y') as transaction_date, t.description, t.amount, t.voucher_no, t.cheque_no, ah.account_head, (case when (t.amount>0) THEN 'Received' ELSE '' END) as voucher_type
             from transactions as t
             inner join account_heads as ah
             on t.account_head_id = ah.id
