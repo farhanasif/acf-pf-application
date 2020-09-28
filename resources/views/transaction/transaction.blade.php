@@ -525,6 +525,7 @@
                 $("#bankbook thead").append('<tr>'+
                     '<th style="text-align: center;">Date</th>'+
                     '<th style="text-align: center;">Voucher No</th>'+
+                    '<th style="text-align: center;">Voucher Type</th>'+
                     '<th style="text-align: center;">Description</th>'+
                     '<th style="text-align: center;">Cheque No</th>'+
                     '<th style="text-align: center;">Amount</th>'+
@@ -540,6 +541,7 @@
                       $("#bankbook tbody").append("<tr>"
                       +"<td style=\"text-align: center;\">"+element.transaction_date+"</td>"
                       +"<td style=\"text-align: center;\">"+element.voucher_no+"</td>"
+                      +"<td style=\"text-align: center;\">"+element.type+"</td>"
                       +"<td style=\"text-align: center;\">"+element.description+"</td>"
                       +"<td style=\"text-align: center;\">"+element.cheque_no+"</td>"
                       +"<td class=\"table-danger\" style=\"text-align: right;\">"+numberWithCommas(element.amount)+"</td>"
@@ -551,6 +553,7 @@
                       $("#bankbook tbody").append("<tr>"
                       +"<td style=\"text-align: center;\">"+element.transaction_date+"</td>"
                       +"<td style=\"text-align: center;\">"+element.voucher_no+"</td>"
+                      +"<td style=\"text-align: center;\">"+element.type+"</td>"
                       +"<td style=\"text-align: center;\">"+element.description+"</td>"
                       +"<td style=\"text-align: center;\">"+element.cheque_no+"</td>"
                       +"<td class=\"table-danger\" style=\"text-align: right;\">"+numberWithCommas(element.amount)+"</td>"
@@ -561,6 +564,7 @@
                     
                 });
                 $("#bankbook tbody").append("<tr class=\"table-info\">"
+                      +"<td style=\"text-align: center;\"></td>"
                       +"<td style=\"text-align: center;\"></td>"
                       +"<td style=\"text-align: center;\"></td>"
                       +"<td style=\"text-align: center;font-weight: bold;\">Total</td>"
