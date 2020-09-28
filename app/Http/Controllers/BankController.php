@@ -66,7 +66,7 @@ class BankController extends Controller
             and description = 'End of Month Balance'
           and is_bank_book=0)
           union
-          (select t.id as id,date_format(t.transaction_date,'%d %b %Y') as transaction_date, t.description, t.amount, (case when (amount < 0) THEN 'Payment' ELSE '' END) as type, t.voucher_no, t.cheque_no, ah.account_head
+          (select t.id as id,date_format(t.transaction_date,'%d %b %Y') as transaction_date, t.description, t.amount, (case when (t.amount < 0) THEN 'Payment' ELSE '' END) as type, t.voucher_no, t.cheque_no, ah.account_head
           from transactions as t
           inner join account_heads as ah
           on t.account_head_id = ah.id
