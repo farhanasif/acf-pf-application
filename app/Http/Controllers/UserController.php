@@ -22,8 +22,16 @@ class UserController extends Controller
       $user = Auth::user();
       //return $user;
       if($user){
-        if($user->role == '0'){
+        if($user->role == 'stakeholder'){
           return redirect('admin-home');
+        }elseif ($user->role == 'master-admin'){
+            return redirect('admin-home');
+        }elseif ($user->role == 'sub-admin'){
+            return redirect('admin-home');
+        }elseif ($user->role == 'editor'){
+            return redirect('admin-home');
+        }elseif ($user->role == 'modaretor'){
+            return redirect('admin-home');
         }
         else{
           return view('auth.login');

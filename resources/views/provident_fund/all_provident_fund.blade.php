@@ -101,6 +101,7 @@
             <td>{{$provident_fund->total_pf}}</td>
             <td>
                 <a href="{{route('edit-provident-fund',$provident_fund->id)}}" class="btn btn-info btn-xs"><i class="fas fa-edit"></i></a>
+                <a href="#" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
             </td>
           </tr>
         @endforeach

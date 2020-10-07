@@ -2,9 +2,8 @@
     <!-- Brand Logo -->
   <a href="{{url('/admin-home')}}" class="brand-link">
       <img src="{{ asset('images/logo/acf-pf.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">PF APP</span>
+      <span class="brand-text font-weight-light">{{ Auth::user()->role }}</span>
     </a>
-
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
@@ -64,6 +63,13 @@
                   <p>PF Interest</p>
                 </a>
             </li>
+
+              <li class="nav-item">
+                <a href="{{url('all/approved/pf-deposite')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon text-blue"></i>
+                  <p>All Deposit Data</p>
+                </a>
+              </li>
 
             </ul>
           </li>
@@ -342,10 +348,47 @@
                     </p>
                 </a>
             </li>
+  @if(Auth::user()->role=='stakeholder')
+   <li class="nav-item has-treeview">
+     <a href="javascript:void(0)" class="nav-link">
+       <i class="nav-icon fa fa-book text-blue"></i>
+       <p>
+         System User
+         <i class="right fas fa-angle-left"></i>
+       </p>
+     </a>
+     <ul class="nav nav-treeview">
+       <li class="nav-item">
+         <a href="{{url('new/system/user')}}" class="nav-link">
+           <i class="far fa-circle nav-icon text-blue"></i>
+           <p>New User</p>
+         </a>
+       </li>
 
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
+       <li class="nav-item">
+         <a href="{{url('system/user/list')}}" class="nav-link">
+           <i class="far fa-circle nav-icon text-blue"></i>
+           <p>User List</p>
+         </a>
+       </li>
+
+     </ul>
+   </li>
+   @endif
+
+   @if(Auth::user()->role=='stakeholder')
+            <li class="nav-item ">
+         <a href="{{url('assign/permission')}}" class="nav-link">
+             <i class="nav-icon fas fa-users text-warning"></i>
+             <p>
+                 Assign Permission
+             </p>
+         </a>
+     </li>
+   @endif
+ </ul>
+</nav>
+<!-- /.sidebar-menu -->
+</div>
+<!-- /.sidebar -->
+</aside>

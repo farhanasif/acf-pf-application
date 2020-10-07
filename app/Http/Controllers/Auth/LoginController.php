@@ -50,7 +50,15 @@ class LoginController extends Controller
 
         // }
 
-        if(Auth::user()->role =='0'){
+        if(Auth::user()->role =='stakeholder'){
+            return redirect()->intended('/admin-home');
+        }elseif (Auth::user()->role =='master-admin'){
+            return redirect()->intended('/admin-home');
+        }elseif (Auth::user()->role =='sub-admin'){
+            return redirect()->intended('/admin-home');
+        }elseif (Auth::user()->role =='editor'){
+            return redirect()->intended('/admin-home');
+        }elseif (Auth::user()->role =='modaretor'){
             return redirect()->intended('/admin-home');
         }
         elseif (Auth::user()->role =='1') {

@@ -41,7 +41,7 @@
                                 <div class="col-md-8 ">
                                     <select class="form-control" name="staff_code">
                                         @foreach ($all_employees as $all_employee)
-                                            <option value="{{$all_employee->staff_code}}">{{ sprintf("%04d", $all_employee->staff_code)}}</option>
+                                            <option value="{{$all_employee->staff_code}}" @if($all_employee->staff_code == $provident_fund->staff_code) selected @endif>{{ sprintf("%04d", $all_employee->staff_code)}}</option>
                                         @endforeach
                                     </select>
                                     @if($errors->has('staff_code'))
@@ -80,7 +80,10 @@
 
                         </div>
                     </div>
-               </form>
+                  <input type="hidden" value="{{$provident_fund->organization_pf}}" name="old_organization_pf">
+                  <input type="hidden" value="{{$provident_fund->own_pf}}" name="old_own_pf">
+
+              </form>
                <!-- /.card -->
                 </div>
               </div>
