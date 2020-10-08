@@ -71,11 +71,10 @@
                   <p>All Deposit Data</p>
                 </a>
               </li>
-
+            @endif
             </ul>
           </li>
-          @endif
-
+          
           <li class="nav-item has-treeview">
             <a href="javascript:void(0)" class="nav-link">
               <i class=" nav-icon fas fa-chart-bar text-yellow"></i>
