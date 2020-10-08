@@ -322,6 +322,31 @@ Route::group(['middleware' => 'admin'], function () {
 			'as'		=> 'delete-duration'
 		]);
 
+		//Firoj
+		Route::group(['middleware'=>['role:stakeholder']],function() {
+			Route::get('/new/system/user', 'SystemUserController@create');
+			Route::post('/store/new/system/user', 'SystemUserController@store')
+				->name('store.system.user');
+			Route::get('/system/user/list', 'SystemUserController@index');
+			Route::get('/edit/system/user/{id}', 'SystemUserController@edit')
+				->name('edit.system.user');
+			//->middleware('permission:view');
+			Route::post('/update/system/user/{id}', 'SystemUserController@update')
+				->name('update.system.user');
+			//->middleware('permission:update');
+			Route::get('/delete/system/user/{id}', 'SystemUserController@destroy');
+			//->middleware('permission:delete');
+	
+			//Assign permission
+			Route::get('/assign/permission', 'PermissionController@assign');
+			Route::post('/assign/permission', 'PermissionController@assignPermission')
+				->name('assign.permission');
+			Route::post('/update/permission', 'PermissionController@updatePermission')
+				->name('update.permission');
+			Route::get('/delete/permission/{admin_id}', 'PermissionController@deletePermission');
+	
+		});
+
 		//master user role add edit update delete......
 		Route::get('/add-user-role', [
 			'uses'		=> 'MasterController@add_user_role',
@@ -599,7 +624,17 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::match(['get', 'post'],'provident-fund/all-provident-fund', [
 			'uses'		=> 'ProvidentFundController@all_provident_fund',
 			'as'		=> 'all-provident-fund'
-        ]);
+		]);
+
+		//All approved/inapproved deposte
+		Route::group(['middleware'=>['role:stakeholder']],function() {
+			Route::get('/all/approved/pf-deposite', 'ProvidentFundController@allApprovedPfDeposite');
+			Route::post('/activate/all/pf-deposite', 'ProvidentFundController@activateAll');
+			Route::post('/deactivate/all/pf-deposite', 'ProvidentFundController@deactivateAll');
+			Route::post('/delete/pf-deposite', 'ProvidentFundController@deleteAll');
+			Route::get('/delete/pf-deposite/{id}', 'ProvidentFundController@delete')
+				->name('delete.pf-deposite');
+		});
 
 		Route::get('pf-deposit/excel-export', [
 			'uses'		=> 'ProvidentFundController@export',
