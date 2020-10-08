@@ -332,7 +332,7 @@
             </ul>
           </li>
 
-          <li class="nav-item ">
+          {{-- <li class="nav-item ">
               <a href="{{ route('all-user') }}" class="nav-link {{ request()->is('all-user') ? 'active' :''}}">
                 <i class="nav-icon fas fa-users text-warning"></i>
                 <p>
@@ -348,7 +348,7 @@
                       User Management
                     </p>
                 </a>
-            </li>
+            </li> --}}
 
             @if(Auth::user()->role=='stakeholder')
             <li class="nav-item has-treeview">
