@@ -86,7 +86,9 @@
             <th class="bg-success">Own PF Deposit</th>
             <th class="bg-success">Organization PF Deposit</th>
             <th class="bg-success">Total PF Deposit</th>
+            @if(Auth::user()->role=='master-admin')
             <th class="bg-success">Action</th>
+            @endif
           </tr>
         </thead>
         <tbody>
@@ -99,9 +101,11 @@
             <td>{{$provident_fund->own_pf}}</td>
             <td>{{$provident_fund->organization_pf}}</td>
             <td>{{$provident_fund->total_pf}}</td>
+            @if(Auth::user()->role=='master-admin')
             <td>
                 <a href="{{route('edit-provident-fund',$provident_fund->id)}}" class="btn btn-info btn-xs"><i class="fas fa-edit"></i></a>
             </td>
+            @endif
           </tr>
         @endforeach
         </tbody>

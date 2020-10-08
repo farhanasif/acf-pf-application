@@ -36,6 +36,17 @@
 
                     <div class="row">
                         <div class="col-md-10 offset-1">
+
+                      <div class="form-group row">
+                            <label for="deposit_date" class="col-form-label col-md-3 label-align">Deposit Date</label>
+                               <div class="col-md-8">
+                                  <input type="text" class="form-control" id="deposit_date" name="deposit_date" value="{{$provident_fund->deposit_date}}" placeholder="Deposite Date">
+                                  @if($errors->has('deposit_date'))
+                                      <strong class="text-danger">{{ $errors->first('deposit_date') }}</strong>
+                                  @endif
+                              </div>
+                      </div>
+
                             <div class="form-group row">
                                 <label for="staff_code" class="col-form-label col-md-3 label-align">Staff Code</label>
                                 <div class="col-md-8 ">
@@ -87,4 +98,21 @@
         </div>
         <div class="col"></div>
     </div>
+@endsection
+
+
+@section('customjs')
+    <script>
+
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+    $( "#deposit_date" ).datepicker({
+          dateFormat: "YYYY-MM-DD HH:mm:ss",
+          orientation: "bottom left"
+     });
+
+
+    </script>
 @endsection

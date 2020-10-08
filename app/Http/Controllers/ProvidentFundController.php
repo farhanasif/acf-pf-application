@@ -131,6 +131,7 @@ class ProvidentFundController extends Controller
 
     try {
         $data = new ProvidentFundChange();
+        $data->deposit_date = $request->deposit_date;
         $data->staff_code = $request->staff_code;
         $data->old_own_pf = $request->old_own_pf;
         $data->old_organization_pf = $request->old_organization_pf;

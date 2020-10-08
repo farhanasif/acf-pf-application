@@ -54,12 +54,12 @@
                         <th style="width: 5px;" class="bg-success">NO</th>
 {{--                        <th style="width: 10px;" class="bg-success">Deposit Date</th>--}}
                         <th style="width: 5px;" class="bg-success">Staff Code</th>
-                        <th style="width: 5px;" class="bg-success">Old Own PF Deposit</th>
-                        <th style="width: 5px;" class="bg-success">Old Org PF Deposit</th>
-                        <th style="width: 5px;" class="bg-success">Change Own PF Deposit</th>
-                        <th style="width: 5px;" class="bg-success">Change Org PF Deposit</th>
-                        <th style="width: 5px;" class="bg-success">Old Total PF Deposit</th>
-                        <th style="width: 5px;" class="bg-success">Change Total PF Deposit</th>
+                        <th style="width: 5px;" class="bg-success">Old Own and Org PF</th>
+                        {{-- <th style="width: 5px;" class="bg-success">Old Org PF Deposit</th> --}}
+                        <th style="width: 5px;" class="bg-success">Change Own and Org PF</th>
+                        {{-- <th style="width: 5px;" class="bg-success">Change Org PF Deposit</th> --}}
+                        <th style="width: 5px;" class="bg-success">Old Total PF</th>
+                        <th style="width: 5px;" class="bg-success">Change Total PF</th>
                         <th style="width: 5px;" class="bg-success">Status</th>
                         <th style="width: 5px;" class="bg-success">Action</th>
                     </tr>
@@ -71,10 +71,10 @@
                             <td><input type="checkbox" name="deposite_ids[]" value="{{ $provident_fund->id }}"></td>
 {{--                            <td>{{$provident_fund->deposit_date}}</td>--}}
                             <td>{{ sprintf("%04d", $provident_fund->staff_code)}}</td>
-                            <td>{{$provident_fund->old_own_pf}}</td>
-                            <td>{{$provident_fund->old_organization_pf}}</td>
-                            <td> {{ $provident_fund->own_pf }}</td>
-                            <td> {{ $provident_fund->organisation_pf }} </td>
+                            <td>{{$provident_fund->old_own_pf}} | {{$provident_fund->old_organization_pf}}</td>
+                            {{-- <td>{{$provident_fund->old_organization_pf}}</td> --}}
+                            <td> {{ $provident_fund->own_pf }} | {{ $provident_fund->organisation_pf }} </td>
+                            {{-- <td> {{ $provident_fund->organisation_pf }} </td> --}}
                             <td>{{ $provident_fund->old_total_pf}}</td>
                             <td>{{ $provident_fund->total_pf }}</td>
 
