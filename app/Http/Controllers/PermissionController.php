@@ -16,7 +16,7 @@ class PermissionController extends Controller
             ->get();
 
         $permission=Permission::orderBy('name','ASC')->get();
-        //dd($permission);
+        // dd($permission);
         return view('permission.assign_permission')
             ->with('users',$user)
             ->with('permissions',$permission);
