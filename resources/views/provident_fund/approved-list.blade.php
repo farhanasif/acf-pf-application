@@ -51,17 +51,17 @@
                 <table id="all-pf-deposit" class="table table-bordered table-striped table-head-fixed text-nowrap">
                     <thead>
                     <tr>
-                        <th style="width: 5px;" class="bg-success">NO</th>
+                        <th  class="bg-success">NO</th>
 {{--                        <th style="width: 10px;" class="bg-success">Deposit Date</th>--}}
-                        <th style="width: 5px;" class="bg-success">Staff Code</th>
-                        <th style="width: 5px;" class="bg-success">Old Own PF Deposit</th>
-                        <th style="width: 5px;" class="bg-success">Old Org PF Deposit</th>
-                        <th style="width: 5px;" class="bg-success">Change Own PF Deposit</th>
-                        <th style="width: 5px;" class="bg-success">Change Org PF Deposit</th>
-                        <th style="width: 5px;" class="bg-success">Old Total PF Deposit</th>
-                        <th style="width: 5px;" class="bg-success">Change Total PF Deposit</th>
-                        <th style="width: 5px;" class="bg-success">Status</th>
-                        <th style="width: 5px;" class="bg-success">Action</th>
+                        <th class="bg-success">Staff Code</th>
+                        <th  class="bg-success">Old Own PF Deposit</th>
+                        <th  class="bg-success">Old Org PF Deposit</th>
+                        <th  class="bg-success">Change Own PF Deposit</th>
+                        <th  class="bg-success">Change Org PF Deposit</th>
+                        <th class="bg-success">Old Total PF Deposit</th>
+                        <th  class="bg-success">Change Total PF Deposit</th>
+                        <th  class="bg-success">Status</th>
+                        <th  class="bg-success">Action</th>
                     </tr>
                     </thead>
                     <tbody>
