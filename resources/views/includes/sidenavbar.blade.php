@@ -2,7 +2,7 @@
     <!-- Brand Logo -->
   <a href="{{url('/admin-home')}}" class="brand-link">
       <img src="{{ asset('images/logo/acf-pf.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">PF APP</span>
+      <span class="brand-text font-weight-light">{{ Auth::user()->role }}</span>
     </a>
 
     <!-- Sidebar -->
