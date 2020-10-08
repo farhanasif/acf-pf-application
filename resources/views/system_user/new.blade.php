@@ -63,7 +63,13 @@
                     <div class="col-12 col-sm-6">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Staff Code</label>
-                            <input type="number" class="form-control" name="staff_code" id="staff_code" placeholder="Enter Staff Code">
+                            {{-- <input type="number" class="form-control" name="staff_code" id="staff_code" placeholder="Enter Staff Code"> --}}
+                                <select id="my-select" name="staff_code" id="staff_code" class="form-control select2bs4">
+                               <option value="">--Select Staff Code--</option>
+                                @foreach ($staff_codes as $staff_code)
+                                 <option value="{{ $staff_code->staff_code }}">{{ sprintf("%04d", $staff_code->staff_code)}}</option>
+                                @endforeach
+                                </select>
                             @if($errors->has('staff_code'))
                                 <strong class="text-danger">{{ $errors->first('staff_code') }}</strong>
                             @endif
@@ -211,4 +217,15 @@
         </section>
     </div>
 @endsection
+
+@section('customjs')
+    <script>
+
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+    </script>
+@endsection
+
 

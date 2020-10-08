@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use DB;
 
 class SystemUserController extends Controller
 {
@@ -15,7 +16,8 @@ class SystemUserController extends Controller
 //    }
 
     public function create(){
-        return view('system_user.new');
+        $staff_codes = DB::table('employees')->get();
+        return view('system_user.new',compact('staff_codes'));
     }
 
     public function store(Request $request){
