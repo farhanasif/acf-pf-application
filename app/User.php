@@ -21,6 +21,10 @@ class User extends Authenticatable
    protected $fillable = [
         'name', 'staff_code', 'email', 'role', 'rights_body', 'mobile', 'designation','address', 'department','description', 'password','verified','user_type','email_token','user_type','remember_token',
     ];
+
+    public function permissions(){
+        return $this->belongsToMany(Permission::class,'user_permission','user_id','permission_id');
+    }
     /**
      * The attributes that should be hidden for arrays.
      *
