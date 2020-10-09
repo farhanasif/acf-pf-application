@@ -294,13 +294,16 @@
         var differenceVal = 0;
         var grcontotal = 0;
         var gbbtotal = 0;
+
         const Toast = Swal.mixin({
               toast: true,
               position: 'top-end',
               showConfirmButton: false,
               timer: 5000
         });
+
         $(function () {
+
             $("#bankrecon thead").empty();
             $("#bankrecon tbody").empty();
             $("#bankbook thead").empty();
@@ -331,13 +334,16 @@
               var amount = $('#amount').val();
               var type = $('#transaction_type').val();
               var bank_transaction_type = $('#bank_transaction_type').val();
+
               if(description == '' || transactionDate == '' || effectiveDate == '' || amount == '' || amount == '0' || account_head == '0'){
                 Toast.fire({
                   type: 'error',
                   title: ' Please enter all fields to save the transaction'
                 });
               }
+
               else{
+
                 //save the transaction
                 $.ajax({
                   type: 'GET',
@@ -355,8 +361,10 @@
                   },
                   dataType: 'text',
                   success: function (data) {
+
                     generate_book();
                     $('#modal-default').modal('hide');
+
                     Toast.fire({
                       type: 'success',
                       title: ' Transaction successfully saved in Bank Book.'
@@ -364,7 +372,9 @@
                   }
                 });
               }
+
             });
+
             $('#saveEndOfMonth').click(function() {
                 amount = $('#amountEndOfMonth').val();
                 from_date = $('#from_date').val();
@@ -375,6 +385,7 @@
                   });
                   return;
                 }
+
                 if(amount == '' || amount == undefined){
                   Toast.fire({
                     type: 'error',
@@ -382,6 +393,7 @@
                   });
                   return;
                 }
+
                 //save the transaction
                 $.ajax({
                   type: 'GET',
@@ -393,9 +405,11 @@
                   dataType: 'text',
                   success: function (data) {
                     console.log(data);
+
                     if(data == 'success'){
                         generate_book();
                         $('#modal-endofmonth').modal('hide');
+
                         Toast.fire({
                           type: 'success',
                           title: ' Transaction successfully saved in Bank Book.'
@@ -407,9 +421,13 @@
                           title: data
                         });
                       }
+
                   }
                 });
+
+
             });
+
             $('#chkDiff').click(function() {
               from_date = $('#from_date').val();
                 if(from_date == '' || from_date == undefined){
@@ -419,6 +437,7 @@
                   });
                   return;
               }
+
               if(grcontotal > 0 && gbbtotal > 0){
                 if(grcontotal > gbbtotal){
                   differenceVal = parseFloat(grcontotal) - parseFloat(gbbtotal);
@@ -431,6 +450,7 @@
               }
               console.log('done');
             });
+
             $('#closeTransaction').click(function() {
               generate_book();
               $('#modal-default').modal('hide');
@@ -445,8 +465,11 @@
             });
             $('#download').click(function() {
               //$('#spinner').removeClass('spinner');
+
             })
         });
+
+
         function generate_book(){
           from_date = $('#from_date').val();
           //$('#spinner').addClass('spinner');
@@ -469,6 +492,7 @@
               dataType: 'json',
               success: function (data) {
                 console.log(data);
+
                 $("#bankrecon thead").empty();
                 $("#bankrecon tbody").empty();
                 $("#bankrecon thead").append('<tr>'+
@@ -503,11 +527,13 @@
                       +"<td style=\"text-align: right;font-weight: bold;\">"+numberWithCommas(rcontotal)+"</td>"
                       +"<td style=\"text-align: center;\"></td>"
                       +"</tr>");
+
                 grcontotal = rcontotal;
               }
             });
             //--------------GENERATE BANK RECONCILIATION--------------//
             
+
             //--------------GENERATE BANK BOOK--------------//
             $.ajax({
               type: 'GET',
@@ -536,8 +562,10 @@
                 var type = '';
                 $.each(data, function(index, element) {
                    if(element.amount>0){ type = 'Received'} else{type = ''}
+
                     if(element.amount == undefined || element.amount == ''){}
                     else total += parseFloat(element.amount);
+
                     if(element.account_head == undefined || element.account_head == ''){
                       //provide no add option to reconciliation
                       $("#bankbook tbody").append("<tr>"
@@ -564,6 +592,7 @@
                       +"</tr>");
                     }
                     
+
                 });
                 $("#bankbook tbody").append("<tr class=\"table-info\">"
                       +"<td style=\"text-align: center;\"></td>"
@@ -581,6 +610,7 @@
             //--------------GENERATE BANK BOOK--------------//
           }
         }
+
         function addToReconciliation(id){
           console.log(id);
           from_date = $('#from_date').val();
@@ -591,6 +621,7 @@
             });
             return;
           }
+
           //add to reconciliation
           $.ajax({
             type: 'GET',
@@ -602,8 +633,10 @@
             dataType: 'text',
             success: function (data) {
               console.log(data);
+
               if(data == 'success'){
                   generate_book();
+
                   Toast.fire({
                     type: 'success',
                     title: ' Transaction successfully added in Bank Reconciliation.'
@@ -617,7 +650,9 @@
                 }
             }
           });
+
         }
+
         function numberWithCommas(number) {
           if(number == 0 || number == undefined){
             return '0.00';
