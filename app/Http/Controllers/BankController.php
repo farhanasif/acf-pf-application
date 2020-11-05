@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Transaction;
+use App\Contribution;
 use App\AccountHead;
 use Illuminate\Http\Request;
 use App\Imports\UsersImport;
@@ -93,17 +94,38 @@ class BankController extends Controller
         $end_date = date("Y-m-t", strtotime($from_date));
         $start_date = $from_date;
 
-        //dd($end_date);
+        $get_employee_query = "select voucher_no,date_format(transaction_date,'%d %b %Y') as transaction_date  from contributions where description = 'Employee Contribution ".$con_month."' order by id desc limit 1";
+        $get_employer_query = "select voucher_no,date_format(transaction_date,'%d %b %Y') as transaction_date from contributions where description = 'Employer Contribution ".$con_month."' order by id desc limit 1";
 
-        $query = "select -1 as id,'' as transaction_date,'Balance ".$last_month."' as description, (
+        $res_employee = DB::select($get_employee_query);
+        $res_employer = DB::select($get_employer_query);
+
+        $employee_voucher_no = '';
+        $employer_voucher_no = '';
+        $employee_transaction_date = '';
+        $employer_transaction_date = '';
+
+        if($res_employee){
+            $employee_voucher_no = $res_employee[0]->voucher_no;
+            $employee_transaction_date = $res_employee[0]->transaction_date;
+        }
+
+        if($res_employer){
+            $employer_voucher_no = $res_employer[0]->voucher_no;
+            $employer_transaction_date = $res_employer[0]->transaction_date;
+        }
+
+        //dd($end_date);
+        //$td = '2020';
+        $query = "select -1 as id, '' as transaction_date,'Balance ".$last_month."' as description, (
             (select sum(total_pf) from pf_deposit where `deposit_date` <= '".$last_date."')
             + (select ifnull(sum(amount),0) from transactions where transaction_date <= '".$last_date."' and is_bank_book = 1)
             ) as amount, '' as voucher_no, '' as cheque_no, '' as account_head, '' as voucher_type
             union
-            select -1 as id,'' as transaction_date,'Employee Contribution ".$con_month."' as description, sum(own_pf) as amount, '' as voucher_no, '' as cheque_no, '' as account_head, (case when (sum(own_pf)>0) THEN 'Received' ELSE 'Payment' END) as voucher_type
+            select -1 as id,'".$employee_transaction_date."' as transaction_date,'Employee Contribution ".$con_month."' as description, sum(own_pf) as amount, '".$employee_voucher_no."' as voucher_no, '' as cheque_no, '' as account_head, (case when (sum(own_pf)>0) THEN 'Received' ELSE 'Payment' END) as voucher_type
             from pf_deposit where `deposit_date` between '".$start_date."' and '".$end_date."'
             union
-            select -1 as id,'' as transaction_date,'Employer Contribution ".$con_month."' as description, sum(organization_pf) as amount, '' as voucher_no, '' as cheque_no, '' as account_head, (case when (sum(organization_pf)>0) THEN 'Received' ELSE 'Payment' END) as voucher_type
+            select -1 as id,'".$employer_transaction_date."' as transaction_date,'Employer Contribution ".$con_month."' as description, sum(organization_pf) as amount, '".$employer_voucher_no."' as voucher_no, '' as cheque_no, '' as account_head, (case when (sum(organization_pf)>0) THEN 'Received' ELSE 'Payment' END) as voucher_type
             from pf_deposit where `deposit_date` between '".$start_date."' and '".$end_date."'
             union
             (select t.id as id,date_format(t.transaction_date,'%d %b %Y') as transaction_date, t.description, t.amount, t.voucher_no, t.cheque_no, ah.account_head, (case when (t.amount>0) THEN 'Received' ELSE 'Payment' END) as voucher_type
@@ -274,6 +296,31 @@ class BankController extends Controller
         }
         else{
             return 'This entry is not valid for this month';
+        }
+    }
+
+    public function update_contribution(){
+        $transactionDate = $_GET['transactionDate'];
+        $index = $_GET['index'];
+        $description = $_GET['description'];
+        $amount = $_GET['amount'];
+        $voucher_no = $_GET['voucher_no'];
+
+        //echo $transactionDate; exit();
+        $transactionDate = $transactionDate.' 00:01:00';
+
+        $contribution = new Contribution;
+        $contribution->description = $description;
+        $contribution->amount = $amount;
+        $contribution->transaction_date = $transactionDate;
+        $contribution->voucher_no = $voucher_no;
+        $contribution->is_bank_book = 0;
+
+        if($contribution->save()){
+            return 'success';
+        }
+        else{
+            return 'error';
         }
     }
 }

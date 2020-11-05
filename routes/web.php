@@ -759,6 +759,7 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('/save-monthly-bank-book', 'BankController@save_monthly_bank_book');
 		Route::get('/save-end-of-month', 'BankController@save_end_of_month');
 		Route::get('/add_to_reconciliation', 'BankController@add_to_reconciliation');
+		Route::get('/update_contribution', 'BankController@update_contribution');
 		//-------------------RECONCILIATION ROUTES-------------------//
 
 
