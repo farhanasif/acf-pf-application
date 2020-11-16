@@ -36,6 +36,7 @@ class BankController extends Controller
 
         $con_month = date('M,Y',strtotime(date($from_date)));
         $end_date = date("Y-m-t", strtotime($from_date));
+        $end_date = $end_date.' 23:59:59';
         $start_date = $from_date;
 
         // dd($end_date);
@@ -92,7 +93,9 @@ class BankController extends Controller
 
         $con_month = date('M,Y',strtotime(date($from_date)));
         $end_date = date("Y-m-t", strtotime($from_date));
+        $end_date = $end_date.' 23:59:59';
         $start_date = $from_date;
+        //echo $end_date; exit();
 
         $get_employee_query = "select voucher_no,date_format(transaction_date,'%d %b %Y') as transaction_date  from contributions where description = 'Employee Contribution ".$con_month."' order by id desc limit 1";
         $get_employer_query = "select voucher_no,date_format(transaction_date,'%d %b %Y') as transaction_date from contributions where description = 'Employer Contribution ".$con_month."' order by id desc limit 1";
