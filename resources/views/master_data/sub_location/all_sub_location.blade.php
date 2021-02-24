@@ -27,10 +27,9 @@
           <button type="submit" id="all-sub-location-download" class="btn btn-success">Download Excel</button>
             <a href="{{route('add-sub-location')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add Sub Location</a>
         </div>
-
-    @include('message')
-
     </div>
+
+        @include('message')
     <!-- /.card-header -->
     <div class="card-body">
       <table id="all-sub-location" class="table table-bordered table-striped">
@@ -120,8 +119,8 @@
     $('#all-sub-location').DataTable({
           "info": true,
           "autoWidth": false,
-          scrollX:'50vh', 
-          scrollY:'50vh',
+          // scrollX:'50vh', 
+          // scrollY:'50vh',
     });
   });
 

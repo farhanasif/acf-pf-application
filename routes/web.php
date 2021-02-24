@@ -52,6 +52,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Mater Data Department Category .............
 Route::group(['middleware' => 'admin'], function () {
+	
+        Route::any('sonali_irc_form','AdminController@sonaliIndex');
+		Route::any('getSonaliBankApiToken','AdminController@getSonaliBankApiToken');
 //category add edit update delete......
 		Route::get('/category/add-category', [
 			'uses'		=> 'MasterController@add_category',
@@ -626,6 +629,11 @@ Route::group(['middleware' => 'admin'], function () {
 			'as'		=> 'all-provident-fund'
 		]);
 
+		Route::get('/delete-provident-fund/{id}', [
+			'uses'		=> 'ProvidentFundController@delete_provident_fund',
+			'as'		=> 'delete-provident-fund'
+		]);
+
 		//All approved/inapproved deposte
 		Route::group(['middleware'=>['role:stakeholder']],function() {
 			Route::get('/all/approved/pf-deposite', 'ProvidentFundController@allApprovedPfDeposite');
@@ -759,6 +767,8 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('/save-monthly-bank-book', 'BankController@save_monthly_bank_book');
 		Route::get('/save-end-of-month', 'BankController@save_end_of_month');
 		Route::get('/add_to_reconciliation', 'BankController@add_to_reconciliation');
+		Route::get('/update_contribution', 'BankController@update_contribution');
+		Route::post('/transaction-excel-upload', 'BankController@transactionExcelUpload');
 		//-------------------RECONCILIATION ROUTES-------------------//
 
 
@@ -779,6 +789,17 @@ Route::group(['middleware' => 'admin'], function () {
 		// --------CHANGE PROFILE ROUTE---------------------
 
 
+	// --------START STAFF SETTLEMENT ACTIVE INACTIVE ROUTE (RIPON)---------------------
+		Route::post('/expire-date-update-staff-settlement', [
+			'uses'		=> 'SettlementController@expireStaffSettlementUpdate',
+			'as'		=> 'expireStaffSettlementUpdate'
+		]);
+
+		Route::get('/check-expire-date-staff-settlement', [
+			'uses'		=> 'SettlementController@checkExpireStaffSettlement',
+			'as'		=> 'check.expire.staff.settlement'
+		]);
+	// --------End STAFF SETTLEMENT ACTIVE INACTIVE ROUTE--------------------
 
 
 		Route::get('/clear-cache', function() {
@@ -838,7 +859,7 @@ Route::group(['middleware' => 'admin'], function () {
             'as'		=> 'generate-staff-settlement'
         ]);
 
-        Route::any('/print-staff-settlement', [
+        Route::any('/print-staff-settlement/{staff_code}', [
             'uses'		=> 'ReportController@printStaffSettlement',
             'as'		=> 'print-staff-settlement'
         ]);
@@ -909,4 +930,6 @@ Route::group(['middleware' => 'admin'], function () {
         // user management route
         Route::get('user-management','UserManagementController@index')->name('user-management');
         Route::post('store-user-management','UserManagementController@store_user_management')->name('store-user-management');
+
+
 });

@@ -27,10 +27,8 @@
           <button type="submit" id="all-work-place-download" class="btn btn-success">Download Excel</button>
             <a href="{{route('add-work-place')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add Work Place</a>
         </div>
-
-        @include('message')
-
     </div>
+            @include('message')
     <!-- /.card-header -->
     <div class="card-body">
       <table id="all-work-place" class="table table-bordered table-striped">
@@ -119,8 +117,8 @@
     $('#all-work-place').DataTable({
           "info": true,
           "autoWidth": false,
-          scrollX:'50vh', 
-          scrollY:'50vh',
+          // scrollX:'50vh', 
+          // scrollY:'50vh',
     });
   });
 

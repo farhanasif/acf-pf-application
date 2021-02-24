@@ -84,7 +84,7 @@
                             <div class="form-group row">
                               <label for="email" class="col-form-label col-md-3 label-align"></label>
                               <div class="col-md-8">
-                                <button  type="submit" class="btn btn-success ">Submit</button>
+                                <button  type="submit" class="btn btn-success ">Update</button>
                                 <a href="{{route('all-provident-fund')}}" class="btn btn-info ml-2">Back</a>
                               </div>
                             </div>

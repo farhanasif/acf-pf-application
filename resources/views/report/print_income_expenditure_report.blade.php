@@ -63,7 +63,7 @@
                     <tr><td style="text-align: right;"> <b>Total Taka:</b></td>
                     <td></td>
                     <td style="text-align: right;"><b><?php echo number_format($total_income_form,2); ?></b></td>
-                    <td style="text-align: right;"><b><?php echo number_format($total_income_to,0); ?></b></td>
+                    <td style="text-align: right;"><b><?php echo number_format($total_income_to,2); ?></b></td>
                   </tr>
                   <tr><td style="height: 16px;"><b></b></td>
                   <td style="height: 16px;"></td>
@@ -104,8 +104,8 @@
                 <td style="height: 16px;"><b></b></td></tr>
                 <tr><td style="text-align: right;"> <b>Total Taka:</b></td>
                 <td></td>
-                <td style="text-align: right;"><b><?php echo number_format($total_income_form - $total_expen_form, 2); ?></b></td>
-                <td style="text-align: right;"><b><?php echo number_format($total_income_to - $total_expen_to, 2); ?></b></td>
+                <td style="text-align: right;"><b><?php echo number_format($total_income_form , 2); ?></b></td>
+                <td style="text-align: right;"><b><?php echo number_format($total_income_to , 2); ?></b></td>
               </tr>
               <tr><td style="height: 16px;"><b></b></td>
               <td style="height: 16px;"></td>
@@ -118,55 +118,54 @@
                 <td></td></tr>
                 <tr><td>Employees Contribution</td>
                 <td></td>
-                <td style="text-align: right;">{{ $interest[0]->own_form }}</td>
-                <td style="text-align: right;">{{ $interest[0]->own_to }}</td></tr>
+                <td style="text-align: right;">{{ number_format(($interest[0]->formAmount/2) - $total_expen_form/2, 2) }}</td>
+                <td style="text-align: right;">{{ number_format(($interest[0]->toAmount/2) - $total_expen_to/2, 2) }}</td></tr>
                 <tr><td>Employers Contribution</td>
                 <td>11.01</td>
-                <td style="text-align: right;">{{ $interest[0]->organization_form }}</td>
-                <td style="text-align: right;">{{ $interest[0]->organization_to }}</td></tr>
+                <td style="text-align: right;">{{ number_format(($interest[0]->formAmount/2) - $total_expen_form/2, 2) }}</td>
+                <td style="text-align: right;">{{ number_format(($interest[0]->toAmount/2) - $total_expen_to/2, 2) }}</td></tr>
                 <tr><td style="height: 16px;"><b></b></td>
                 <td style="height: 16px;"></td>
                 <td style="height: 16px;"></td>
                 <td style="height: 16px;"><b></b></td></tr>
                 <tr style=""><td style="text-align: right;"> <b>Total Taka:</b></td>
                 <td></td>
-                <td style="text-align: right;"><b><?php echo number_format($total_income_form - $total_expen_form, 2); ?></b></td>
-                <td style="text-align: right;"><?php echo number_format($total_income_to - $total_expen_to, 2); ?></td>
+                <td style="text-align: right;"><b><?php echo number_format($interest[0]->formAmount - $total_expen_form, 2); ?></b></td>
+                <td style="text-align: right;"><b><?php echo number_format($interest[0]->toAmount - $total_expen_to, 2); ?></b></td>
               </tr>
 
             </tbody>
           </table>
           <div style="">
-            <p style="margin-top: 4px;margin-left: 5px;margin-bottom: 3px;">1.00 Figures hav been rounded off to the nearest taka.</p>
+            <p style="margin-top: 4px;margin-left: 5px;margin-bottom: 3px;">1.00 Figures have been rounded off to the nearest taka.</p>
             <p style="margin-top: 2px;margin-left: 5px;margin-bottom: 3px;">2.00 Annexed notes form part of the accounts.</p>
           </div>
           <div class="lik-uftcl-pdf-body" style="width: 788px!important;margin-top: 60px;margin-bottom: 0px;">
             <div class="right-header" style="width: 35%;float: right!important;">
               <div style="width: 90%;float: left;">
-                <p style="font-size: 16px;margin: 5px;"><b>(Chairman of CPF Trust)</b></p>
+                <p style="font-size: 16px;margin: 5px;"><b>(Approved By)</b></p>
               </div>
             </div>
             <div class="left-header" style="width: 60%;float: right!important;">
               <div style="width: 46%;float: left;">
-                <p style="font-size: 16px;margin: 5px;"><b>(Member of CPF Trust)</b></p>
+                <p style="font-size: 16px;margin: 5px;"><b>(Prepared By)</b></p>
               </div>
               <div style="width: 46%;float: right;">
-                <p style="font-size: 16px;margin: 5px;"><b>(Secretary of CPF Trust)</b></p>
+                <p style="font-size: 16px;margin: 5px;"><b>(Checked By)</b></p>
               </div>
             </div>
           </div>
-
           <div class="lik-uftcl-pdf-body" style="width: 788px!important;margin-top: 60px;margin-bottom: 15px;">
             <div class="right-header" style="width: 35%;float: right!important;">
               <div style="width: 90%;float: left;">
-                <p style="font-size: 16px;margin: 5px;"><b>(Toha Khan Zaman & Co.)</b> <br/> <span style="margin-right: 15px;">Chartered Accountants</span></p>
+                <p style="font-size: 16px;margin: 5px;"><b>-------------------------------------</b> <br/> <span style="margin-right: 15px;">Chartered Accountants</span></p>
               </div>
             </div>
             <div class="left-header" style="width: 60%;float: right!important;">
-               <p style="font-size: 15px;">Signed in terms of our separate report of even date annexed.</p>
-               <br>
-               <p style="font-size: 15px;">Dated, Dhaka</p>
-               <p style="font-size: 15px;">17 June 2020</p>
+              <p style="font-size: 15px;">Signed in terms of our separate report of even date annexed.</p>
+              <br>
+              <p style="font-size: 15px;">Dated, Dhaka</p>
+              <p style="font-size: 15px;"><?php echo date('d-M-Y'); ?></p>
             </div>
           </div>
         </div>

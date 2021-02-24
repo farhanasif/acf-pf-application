@@ -131,69 +131,103 @@ class EmployeeController extends Controller
 
         if($ext == "xlsx" || $ext == "csv") {
         $result = Excel::toArray(new EmployeesImport, $upload);
+          // $new = array(); 
+          // $employees_staff_code = DB::select('SELECT staff_code FROM employees');
+          // $employees_history_staff_code = DB::select('SELECT staff_code FROM employee_history');
 
-        // foreach ($result as  $key => $value) {
-          foreach ($result[0] as $row) {
-            $leave_date = $row[9] ? \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(intval($row[9]))->format('Y-m-d') : null;
+          for($i =0; $i<count($result[0]) ;$i++){
 
-                    $insert_data[] =array(
-                      'staff_code' =>$row[0],
-                      'trimmed' =>$row[0],
-                      'first_name' =>$row[1],
-                      'last_name' =>$row[2],
-                      'position' =>$row[3],
-                      'department_code' =>$row[4],
-                      'category' =>$row[4],
-                      'level' =>$row[5],
-                      // 'joining_date' =>date('Y-m-d H:m:s', strtotime($row[7])),
-                      // 'joining_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['7'])->format('Y-m-d'),
-                      'joining_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(intval($row[7]))->format('Y-m-d'),
-                      'ending_date' =>$leave_date,
-                      // 'ending_date' =>date('Y-m-d H:m:s', strtotime($row[9])),
-                      // 'ending_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') != "00/00/0000" ?  \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') : '00/00/0000' ,
-                      'base' =>$row[10],
-                      'work_place' =>$row[10],
-                      'sub_location' =>$row[10],
-                      'basic_salary' =>$row[12],
-                      'gross_salary' =>$row[13],
-                      'pf_amount' =>$row[16],
-                      // 'pf_percentage' =>$NULL,
-                      'status' => $leave_date ? 0 : 1,
-                      'created_by' =>Auth::user()->id,
-                      'updated_by' =>Auth::user()->id,
-                  );
+                  if ($result[0][$i] && $result[0][$i][0] != null) {
 
-                  $employee_history_data[] =array(
-                    'staff_code' =>$row[0],
-                    'first_name' =>$row[1],
-                    'last_name' =>$row[2],
-                    'position' =>$row[3],
-                    'department_code' =>$row[4],
-                    'level' =>$row[5],
-                    // 'joining_date' =>date('Y-m-d H:m:s', strtotime($row[7])),
-                    // 'joining_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['7'])->format('Y-m-d'),
-                  'joining_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(intval($row[7]))->format('Y-m-d'),
-                  'ending_date' =>$leave_date,
-                    // 'ending_date' =>date('Y-m-d H:m:s', strtotime($row[9])),
-                    // 'ending_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') != "00/00/0000" ?  \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['9'])->format('Y-m-d') : '00/00/0000' ,
-                    'work_place' =>$row[10],
-                    'basic_salary' =>$row[12],
-                    'gross_salary' =>$row[13],
-                    'pf_amount' =>$row[16],
-                );
-          }
-      // }
+                      $employees_staff_code = DB::table('employees')->where('staff_code',$result[0][$i][0])->first();
+                      $employees_history_staff_code = DB::table('employee_history')->where('staff_code',$result[0][$i][0])->first();
 
-        // dd($insert_data);
-        // exit;
+                      $leave_date = $result[0][$i][9] ? \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(intval($result[0][$i][9]))->format('Y-m-d') : null;
 
-      if (!empty($insert_data && $employee_history_data)) {
-          DB::table('employees')->insert($insert_data);
+                      if($result[0][$i][17] == 1){
+                        Employee::where('staff_code' ,$result[0][$i][0])->update([
+                          
+                          'trimmed' =>$result[0][$i][0],
+                          'first_name' =>$result[0][$i][1],
+                          'last_name' =>$result[0][$i][2],
+                          'position' =>$result[0][$i][3],
+                          'department_code' =>$result[0][$i][4],
+                          'category' =>$result[0][$i][4],
+                          'level' =>$result[0][$i][5],
+                          'joining_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(intval($result[0][$i][7]))->format('Y-m-d'),
+                          'ending_date' =>$leave_date,
+                          'base' =>$result[0][$i][10],
+                          'work_place' =>$result[0][$i][10],
+                          'sub_location' =>$result[0][$i][10],
+                          'basic_salary' =>$result[0][$i][12],
+                          'gross_salary' =>$result[0][$i][13],
+                          'pf_amount' =>$result[0][$i][16],
+                          'status' => $leave_date ? 0 : 1,
+                          'created_by' =>Auth::user()->id,
+                          'updated_by' =>Auth::user()->id,
+                        ]);
 
-          DB::table('employee_history')->insert($employee_history_data);
+                        EmployeeHistory::create([
+                          'staff_code' =>$result[0][$i][0],
+                          'first_name' =>$result[0][$i][1],
+                          'last_name' =>$result[0][$i][2],
+                          'position' =>$result[0][$i][3],
+                          'department_code' =>$result[0][$i][4],
+                          'level' =>$result[0][$i][5],
+                          'joining_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(intval($result[0][$i][7]))->format('Y-m-d'),
+                          'ending_date' =>$leave_date,
+                          'work_place' =>$result[0][$i][10],
+                          'basic_salary' =>$result[0][$i][12],
+                          'gross_salary' =>$result[0][$i][13],
+                          'pf_amount' =>$result[0][$i][16],
+                        ]);
+                      }
 
-          return back()->with('success','Employees batch import successfully');
-      }
+                      if(!$employees_staff_code){
+                          Employee::create([
+                            'staff_code' =>$result[0][$i][0],
+                            'trimmed' =>$result[0][$i][0],
+                            'first_name' =>$result[0][$i][1],
+                            'last_name' =>$result[0][$i][2],
+                            'position' =>$result[0][$i][3],
+                            'department_code' =>$result[0][$i][4],
+                            'category' =>$result[0][$i][4],
+                            'level' =>$result[0][$i][5],
+                            'joining_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(intval($result[0][$i][7]))->format('Y-m-d'),
+                            'ending_date' =>$leave_date,
+                            'base' =>$result[0][$i][10],
+                            'work_place' =>$result[0][$i][10],
+                            'sub_location' =>$result[0][$i][10],
+                            'basic_salary' =>$result[0][$i][12],
+                            'gross_salary' =>$result[0][$i][13],
+                            'pf_amount' =>$result[0][$i][16],
+                            'status' => $leave_date ? 0 : 1,
+                            'created_by' =>Auth::user()->id,
+                            'updated_by' =>Auth::user()->id,
+                          ]);
+                      }
+
+                      if (!$employees_history_staff_code) {
+                        EmployeeHistory::create([
+                          'staff_code' =>$result[0][$i][0],
+                          'first_name' =>$result[0][$i][1],
+                          'last_name' =>$result[0][$i][2],
+                          'position' =>$result[0][$i][3],
+                          'department_code' =>$result[0][$i][4],
+                          'level' =>$result[0][$i][5],
+                          'joining_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(intval($result[0][$i][7]))->format('Y-m-d'),
+                          'ending_date' =>$leave_date,
+                          'work_place' =>$result[0][$i][10],
+                          'basic_salary' =>$result[0][$i][12],
+                          'gross_salary' =>$result[0][$i][13],
+                          'pf_amount' =>$result[0][$i][16],
+                        ]);
+                      }
+                  }                 
+                }
+
+        return back()->with('success','Employees batch imported successfully');
+
     }
 }
 
@@ -285,7 +319,25 @@ class EmployeeController extends Controller
 
       $data['employees'] = DB::table('employees')->where('staff_code', $staff_code)->first();
 
-      // dd($data['employees']);
+      $settle_date = DB::table('pf_settlement')->where('staff_code', $staff_code)->first();
+
+      if(!empty($settle_date)){
+        $settlement_date_update = date('Y-m-d', strtotime($settle_date->settlement_date));
+
+        $data['total_interest_after_settlement'] = DB::select("SELECT * FROM interests WHERE staff_code ='".$staff_code."' AND interest_date > '".$settle_date->settlement_date."' ");
+  
+      }else{
+        $data['total_interest_after_settlement'] = 0;
+      }
+      $data['settlement_amount'] = DB::select("select ifnull(settlement_amount,0) as settlement_amount from pf_settlement where staff_code =".$staff_code);
+
+      if(!empty($data['settlement_amount'])){
+        $data['settlement_amount'] = DB::select("select ifnull(settlement_amount,0) as settlement_amount from pf_settlement where staff_code =".$staff_code);
+      }else{
+        $data['settlement_amount'] = 0;
+      }
+
+      // dd($data['settlement_amount']);
 
       // $data['employee_histories'] = DB::table('employee_history')->orderBy('created_at', 'DESC')->where('staff_code', $staff_code)->first();
       $data['employee_histories'] = DB::table('employee_history')->orderBy('id', 'DESC')->where('staff_code', $staff_code)->get();
@@ -304,11 +356,30 @@ class EmployeeController extends Controller
               INNER JOIN employees ON employees.staff_code = loans.staff_code
               WHERE loans.staff_code ='".$staff_code."'");
 
-       $data['interests_and_pf_deposit'] = DB::select("SELECT SUM(pf_deposit.total_pf) AS total_pf_amount, MAX(pf_deposit.total_pf) AS maximum_total_pf, pf_deposit.deposit_date,
-            interests.id AS interests_id, interests.own, interests.organization, interests.interest_date, interests.interest_source
-            FROM pf_deposit
-            LEFT JOIN interests ON interests.staff_code = pf_deposit.staff_code
-            WHERE pf_deposit.staff_code='".$staff_code."' ORDER BY deposit_date DESC");
+      //  $data['interests_and_pf_deposit'] = DB::select("SELECT SUM(pf_deposit.total_pf) AS total_pf_amount, MAX(pf_deposit.total_pf) AS maximum_total_pf, pf_deposit.deposit_date,
+      //                                       interests.id AS interests_id, interests.own, interests.organization, interests.interest_date, interests.interest_source
+      //                                       FROM pf_deposit
+      //                                       LEFT JOIN interests ON interests.staff_code = pf_deposit.staff_code
+      //                                       WHERE pf_deposit.staff_code='".$staff_code."' ORDER BY deposit_date DESC");
+
+$data['total_and_max_pf_deposit'] = DB::select("SELECT SUM(total_pf) AS total_pf_amount, MAX(total_pf) AS maximum_pf, deposit_date 
+                  FROM pf_deposit
+                  WHERE staff_code='".$staff_code."' ");
+
+                  // dd($data['interests_and_pf_deposit']);
+
+
+
+      $data['all_interest'] = DB::select("SELECT * 
+                                    FROM interests
+                                    WHERE staff_code ='".$staff_code."' ORDER BY interest_date DESC");
+
+                                    // foreach($data['all_interest'] as $interest){
+                                    //  $sum =  $interest->own + $interest->organization;
+                                    //  dd($sum);
+                                    // }
+
+            // dd($data['all_interest']);
 
        $data['loan_adjustments'] = DB::select("SELECT  payment, pay_date, payment_type
                                    FROM loan_installment
@@ -391,7 +462,7 @@ class EmployeeController extends Controller
     public function delete_employee($id)
     {
       DB::table('employees')->where('id',$id)->delete();
-      return redirect()->back();
+      return redirect()->back()->with('success','Employee information deleted successfully!');
     }
 
 

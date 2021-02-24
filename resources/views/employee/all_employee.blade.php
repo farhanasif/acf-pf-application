@@ -46,10 +46,9 @@
           <a href="{{url('download_excel/employee/employee.xlsx')}}" class="btn btn-success">Download Sample Excel</a>
           <a href="{{route('add-employee')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add Employee</a>
         </div>
-
-        @include('message')
-
     </div>
+
+      @include('message')
 
     <div class="card-header card-secondary">
       <div class="card-header">
@@ -201,7 +200,7 @@
             <th class="bg-success"> Provident Amount </th>
             <th class="bg-success"> Joining Date </th>
             <th class="bg-success"> Ending Date </th>
-            {{-- <th>Action</th> --}}
+            <th class="bg-success">Action</th>
           </tr>
           </thead>
           <tbody>
@@ -239,7 +238,10 @@
             <td>{{$employee->gross_salary}}</td>
             <td>{{$employee->pf_amount}}</td>
             <td>{{$employee->joining_date}}</td>
-            <td>{{$employee->ending_date}}</td>
+            <td>{{$employee->ending_date == null ? '' : $employee->ending_date }}</td>
+            <td>
+              <a href="{{ route('delete-employee',$employee->id) }}" class="btn btn-danger btn-xs"> <i class="fas fa-trash-alt"></i> </a>
+            </td>
           </tr>
           @endforeach
          </tbody>

@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'rolecheck' => \App\Http\Middleware\roleCheck::class,
         'role' => \App\Http\Middleware\RoleMiddleware::class,
         'permission'=> \App\Http\Middleware\UserPermissionMiddleware::class,
+        'cors'=> \App\Http\Middleware\Cors::class,
 
     ];
 

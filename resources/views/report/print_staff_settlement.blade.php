@@ -135,46 +135,48 @@
             <table class="settlement-table" width="800" style="table-layout:fixed; margin-bottom: 10px;">
             <tbody>
               <tr><td>Provident fund Balance without interest</td>
-              <td>{{$total_pf_deposits[0]->total_provident_fund}}</td>
-              <td>{{ $userInfo[0]->employee_contribution }}</td>
-              <td>{{ $userInfo[0]->employer_contribution }}</td>
-              <td>{{ $userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution }}</td></tr>
+              <td>{{ $total_pf_deposits[0]->total_provident_fund}}</td>
+              <td>{{ number_format($userInfo[0]->employee_contribution,2) }}</td>
+              <td>{{ number_format($userInfo[0]->employer_contribution,2) }}</td>
+              <td>{{ number_format($userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution,2) }}</td></tr>
+
               <tr><td>Interest received after Audit</td>
-              <td> {{$total_pf_interests[0]->total_provident_fund_interest}} </td>
-              <td>{{ $userInfo[0]->employee_contribution * ($userInfo[0]->interest_percent/100) }}</td>
-              <td>{{ $userInfo[0]->employer_contribution * ($userInfo[0]->interest_percent/100) }}</td>
-              <td>{{ ($userInfo[0]->employee_contribution * ($userInfo[0]->interest_percent/100)) + ($userInfo[0]->employer_contribution * ($userInfo[0]->interest_percent/100)) }}</td></tr>
+              <td>{{ $total_pf_interests[0]->total_provident_fund_interest}}</td>
+              <td>{{ number_format($to_interest[0]->own_interest,2) }}</td>
+              <td>{{ number_format($to_interest[0]->org_interest,2) }}</td>
+              <td>{{ number_format($to_interest[0]->org_interest + $to_interest[0]->own_interest,2) }}</td>
+
               <tr><td><b>Provident fund Balance with interest</b></td>
               <td></td>
               <td></td>
               <td></td>
-              <td><b>{{ $userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution + ($userInfo[0]->employee_contribution * ($userInfo[0]->interest_percent/100)) + ($userInfo[0]->employer_contribution * ($userInfo[0]->interest_percent/100)) }}</b></td></tr>
+              <td><b>{{ number_format($userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution + $to_interest[0]->org_interest + $to_interest[0]->own_interest,2) }}</b></td></tr>
               <tr><td>Maximum Loan Amount 80%  Balance</td>
               <td></td>
               <td></td>
               <td></td>
-              <td>{{ number_format(($userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution + ($userInfo[0]->employee_contribution * ($userInfo[0]->interest_percent/100)) + ($userInfo[0]->employer_contribution * ($userInfo[0]->interest_percent/100))) * 0.8, 2) }}</td></tr>
+              <td>{{ number_format(($userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution + $to_interest[0]->org_interest + $to_interest[0]->own_interest) * 0.8, 2) }}</td></tr>
               <tr><td><b>Loan Date:</b></td>
               <td></td>
               <td></td>
               <td></td>
               <td></td></tr>
               <tr><td>Installment  without Interest Amount</td>
-              <td>{{ number_format($data[0]->monthly_installment, 2)}}</td>
               <td></td>
               <td></td>
-              <td></td></tr>
+              <td></td>
+              <td>{{ number_format($data[0]->monthly_installment, 2)}}</td></tr>
 
               <tr><td>Installment Interest Amount</td>
-              <td>{{ number_format($data[0]->monthly_interest, 2)}}</td>
+              
               <td></td>
               <td></td>
-              <td></td></tr>
+              <td></td><td>{{ number_format($data[0]->monthly_interest, 2)}}</td></tr>
               <tr><td>Installment  with Interest Amount</td>
-              <td>{{ number_format($data[0]->monthly_installment + $data[0]->monthly_interest, 2)}}</td>
               <td></td>
               <td></td>
-              <td></td></tr>
+              <td></td>
+              <td>{{ number_format($data[0]->monthly_installment + $data[0]->monthly_interest, 2)}}</td></tr>
 
               <tr><td>Loan Disbursement Amount</td>
               <td></td>
@@ -199,50 +201,47 @@
               <td>{{ $loan_details[0]->num_of_paid_installment }}</td>
               <td></td>
               <td></td>
-              <td>{{ $loan_details[0]->without_interest_paid_loan }}</td></tr>
+              <td>{{ number_format($loan_details[0]->without_interest_paid_loan,2) }}</td></tr>
 
               <tr><td>Due loan Installment without interest</td>
               <td>{{ $loan_details[0]->num_of_due_installment }}</td>
               <td></td>
               <td></td>
-              <td>{{ $loan_details[0]->without_interest_due_loan }}</td></tr>
+              <td>{{ number_format($loan_details[0]->without_interest_due_loan,2) }}</td></tr>
 
               <tr><td>Paid loan Installment with interest</td>
               <td>{{ $loan_details[0]->num_of_paid_installment }}</td>
               <td></td>
               <td></td>
-              <td>{{ $loan_details[0]->with_interest_paid_loan }}</td></tr>
+              <td>{{ number_format($loan_details[0]->with_interest_paid_loan,2) }}</td></tr>
 
               <tr><td>Due loan Installment with interest</td>
               <td>{{ $loan_details[0]->num_of_due_installment }}</td>
               <td></td>
               <td></td>
-              <td>{{ $loan_details[0]->with_interest_due_loan }}</td></tr>
+              <td>{{ number_format($loan_details[0]->with_interest_due_loan, 2) }}</td></tr>
 
               <tr><td><b>Total Balance:</b></td>
               <td></td>
               <td></td>
               <td></td>
-              <td><b>{{ ($userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution + ($userInfo[0]->employee_contribution * ($userInfo[0]->interest_percent/100)) + ($userInfo[0]->employer_contribution * ($userInfo[0]->interest_percent/100))) - $data[0]->loan_amount  }}</b></td></tr>
+              <td><b>{{ number_format($userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution + $to_interest[0]->org_interest + $to_interest[0]->own_interest - $data[0]->loan_amount, 2)  }}</b></td></tr>
             </tbody>
             </table>
             <div style="">
               <div style="width: 45%;border: 1px solid #000; border-radius: 10px;float: right;text-align: center;">
                 <p style="font-weight: 600;font-size: 16px;"><b><u>Net Balance</u></b></p>
-                <p style="font-size: 18px;font-weight: 700;"><b><u>{{ number_format((($userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution + ($userInfo[0]->employee_contribution * ($userInfo[0]->interest_percent/100)) + ($userInfo[0]->employer_contribution * ($userInfo[0]->interest_percent/100))) - $data[0]->loan_amount) + $loan_details[0]->without_interest_paid_loan, 2) }}</u></b></p>
+                <p style="font-size: 18px;font-weight: 700;"><b><u>BDT  {{ number_format((($userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution + $to_interest[0]->org_interest + $to_interest[0]->own_interest  ) - $data[0]->loan_amount) + $loan_details[0]->without_interest_paid_loan, 2) }}</u></b></p>
               </div>
               <div style="width: 45%;border: 1px solid #000; border-radius: 10px;float: left;text-align: center;">
                 <p style="font-weight: 600;font-size: 16px;"><b><u>Net to Pay</u></b></p>
                 <?php 
-                 $net_blance = ($userInfo[0]->employee_contribution 
-                
-                + $userInfo[0]->employer_contribution
-                + ($userInfo[0]->employee_contribution
-                * ($userInfo[0]->interest_percent/100)) 
-                + ($userInfo[0]->employer_contribution 
-                * ($userInfo[0]->interest_percent/100)) 
-                - $data[0]->loan_amount) 
-                + $loan_details[0]->without_interest_paid_loan;
+                 $net_blance = (($userInfo[0]->employee_contribution 
+                 + $userInfo[0]->employer_contribution 
+                 + $to_interest[0]->org_interest 
+                 + $to_interest[0]->own_interest  ) 
+                 - $data[0]->loan_amount) 
+                 + $loan_details[0]->without_interest_paid_loan;
 
                 // dd($net_blance);
                  ?>

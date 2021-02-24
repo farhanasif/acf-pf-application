@@ -321,17 +321,22 @@ class ProvidentFundController extends Controller
         // $result = Excel::import(new ProvidentsImport, $upload);
         $result = Excel::toArray(new ProvidentsImport, $upload);
 
-        $all_employees_staff_code = DB::select('SELECT staff_code FROM employees');
+        $all_employees_staff_code = DB::select('SELECT staff_code FROM employees WHERE is_settlement !=1');
         $employee_code = [];
         foreach($all_employees_staff_code as $employee_staff_code){
           $employee_code[] = $employee_staff_code->staff_code;
         }
 
         foreach ($result[0] as $key=> $row) {
+            
+            $deposit_date  =  \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]);
+            $deposit_date_array = DB::table('pf_deposit')->where('deposit_date',$deposit_date)->first();
 
+            if ($deposit_date_array) {
+                return back()->with('danger','Some deposit date already exist. please check and upload again! ');
+              }
                 $insert_data[$key] =array(
                 'staff_code' =>(int)$row[0],
-                // 'deposit_date' =>\Carbon\Carbon::createFromFormat('m/d/Y', $row['1']),
                 'deposit_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]),
                 'own_pf' =>$row[2],
                 'organization_pf' =>$row[3],
@@ -353,6 +358,15 @@ class ProvidentFundController extends Controller
 
       }
 
+    }
+
+    public function delete_provident_fund($id){
+        $provident_funds = Provident::find($id);
+        if ($provident_funds){
+            $provident_funds->delete();
+            return redirect()->back()->with('success','PF Deposit information deleted successfully!');
+        }
+         return redirect()->back()->with('danger','PF Deposit information not deleted');
     }
 
     public function export()

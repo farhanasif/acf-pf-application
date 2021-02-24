@@ -314,7 +314,7 @@ $(document).ready(function() {
           document.getElementById("deposit_amount").value = total_pf;
          
            
-          mxlaonAllow = (total_pf*0.8).toFixed(4);
+          mxlaonAllow = (total_pf*0.8).toFixed(2);
           total_dpf = total_pf;
           description = staff_code+' '+ first_name +' '+last_name+' Loan Application';
         }
@@ -327,11 +327,11 @@ $(document).ready(function() {
            }else {
             mxlaonAllow2 = mxlaonAllow;
            }
-        var monthly_installment = (mxlaonAllow2/total_months).toFixed(4);
-        var interest = (mxlaonAllow2*0.004).toFixed(4);
-        var monthly_interest = (interest/total_months).toFixed(4);
+        var monthly_installment = (mxlaonAllow2/total_months).toFixed(2);
+        var interest = (mxlaonAllow2*0.04).toFixed(2);
+        var monthly_interest = (interest/total_months).toFixed(2);
         var totCon = parseFloat(mxlaonAllow2) + parseFloat(interest);
-        var monInst = (parseFloat(monthly_installment) + parseFloat(monthly_interest)).toFixed(4);
+        var monInst = (parseFloat(monthly_installment) + parseFloat(monthly_interest)).toFixed(2);
         // console.log(interest);
         $('#mxloan').html(mxlaonAllow + "Tk.");
         
@@ -410,9 +410,9 @@ $(document).ready(function() {
       alert("Account Heaad field is reuired!");
       return;
     }
-    var monthly_installment = (loan_amount/total_months).toFixed(4);
-    var interest = (loan_amount*0.004).toFixed(4);
-    var monthly_interest = (interest/total_months).toFixed(4);
+    var monthly_installment = (loan_amount/total_months).toFixed(2);
+    var interest = (loan_amount*0.04).toFixed(2);
+    var monthly_interest = (interest/total_months).toFixed(2);
     console.log("hi" + total_months);
     // var toyal_paymet = (monthly_installment+monthly_interest).toFixed(4);
     var token = "{{ csrf_token() }}";

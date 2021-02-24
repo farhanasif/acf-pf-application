@@ -52,21 +52,28 @@
                     <td></td></tr>
                     <tr><td>Employees Contribution</td>
                 <td></td>
-                <td style="text-align: right;">{{ $contribution[0]->own_formAmount }}</td>
-                <td style="text-align: right;">{{ $contribution[0]->own_toAmount }}</td></tr>
+                <td style="text-align: right;">{{ number_format($contribution[0]->own_formAmount,2) }}</td>
+                <td style="text-align: right;">{{ $form_new_em_con }}</td></tr>
                 <tr><td>Employers Contribution</td>
                 <td></td>
-                <td style="text-align: right;">{{ $contribution[0]->organization_formAmount }}</td>
-                <td style="text-align: right;">{{ $contribution[0]->organization_toAmount }}</td></tr>
-                    <tr><td>Bank Interest (Saving Account)</td>
+                <td style="text-align: right;">{{ number_format($contribution[0]->organization_formAmount,2) }}</td>
+                <td style="text-align: right;">{{ $to_new_em_con }}</td></tr>
+                <?php $to_inv_fr = $to_inv_to = 0; ?>
+                 @foreach($investment as $inv)
+                 <?php $to_inv_fr += $inv->formAmount; $to_inv_to += $inv->toAmount;?>
+                   @if($inv->formAmount > 0 or $inv->toAmount > 0)
+                    <tr><td>{{ $inv->account_head}}</td>
                     <td></td>
-                    <td style="text-align: right;">{{ number_format($investment[0]->formAmount, 2) }}</td>
-                    <td style="text-align: right;">{{ number_format($investment[0]->toAmount, 2) }}</td></tr>
-
+                    <td style="text-align: right;">{{ number_format($inv->formAmount, 2) }}</td>
+                    <td style="text-align: right;">{{ number_format($inv->toAmount, 2) }}</td></tr>
+                    @endif
+                 @endforeach
+                 <?php $total_form_inv = $contribution[0]->own_formAmount + $contribution[0]->organization_formAmount + $to_inv_fr;
+                       $total_to_inv = $form_new_em_con + $to_new_em_con + $to_inv_to;?>
                     <tr><td style="text-align: right;"> <b>Total Taka:</b></td>
                     <td></td>
-                    <td style="text-align: right;"><b>{{ number_format($contribution[0]->own_formAmount + $contribution[0]->organization_formAmount + $investment[0]->formAmount , 2 )}}</b></td>
-                    <td style="text-align: right;"><b>{{ number_format($contribution[0]->own_toAmount + $contribution[0]->organization_toAmount + $investment[0]->toAmount , 2 )}}</b></td>
+                    <td style="text-align: right;"><b>{{ number_format($total_form_inv,2) }}</b></td>
+                    <td style="text-align: right;"><b>{{ number_format($total_to_inv,2) }}</b></td>
                   </tr>
                   <tr><td style="height: 16px;"><b></b></td>
                   <td style="height: 16px;"></td>
@@ -77,24 +84,29 @@
                     <td></td>
                     <td></td>
                     <td></td></tr>
-                    <tr><td>Investment (Sanchayapatra)</td>
-                    <td></td>
-                    <td style="text-align: right;">{{ $pay1[0]->formAmount }}</td>
-                    <td style="text-align: right;">{{ $pay1[0]->toAmount }}</td></tr>
-
+                    <?php $to_pay_fr = $to_pay_to = 0; ?>
+                    @foreach($pay1 as $pay)
+                      @if($pay->formAmount != 0 or $pay->toAmount != 0)
+                        @if($pay->account_head != "PF Settlement")
+                        <?php $to_pay_fr += $pay->formAmount; $to_pay_to += $pay->toAmount; ?>
+                        <tr><td>{{ $pay->account_head }}</td>
+                        <td></td>
+                        <td style="text-align: right;">{{ number_format($pay->formAmount < 0? $pay->formAmount*-1 : 0,2)}}</td>
+                        <td style="text-align: right;">{{ number_format($pay->toAmount < 0? $pay->toAmount*-1 : 0,2)}}</td></tr>
+                        @endif
+                      @endif
+                    @endforeach
                     <tr><td>Payments to Members</td>
                     <td></td>
-                    <td style="text-align: right;">{{ $pay3[0]->formAmount }}</td>
-                    <td style="text-align: right;">{{ $pay3[0]->formAmount }}</td></tr>
-
-                    <tr><td>Bank Charge</td>
-                    <td></td>
-                    <td style="text-align: right;">{{ $pay2[0]->formAmount }}</td>
-                    <td style="text-align: right;">{{ $pay2[0]->toAmount }}</td></tr>
+                    <td style="text-align: right;">{{ number_format($pay3[0]->formAmount < 0? $pay3[0]->formAmount*-1 : 0,2) }}</td>
+                    <td style="text-align: right;">{{ number_format($pay3[0]->toAmount < 0? $pay3[0]->toAmount*-1 : 0,2) }}</td></tr>
+                    <?php $total_form_pay = (($to_pay_fr  + $pay3[0]->formAmount) < 0? ($to_pay_fr  + $pay3[0]->formAmount)*-1 : 0);
+                       $total_to_pay = (($to_pay_to  +  $pay3[0]->toAmount) < 0? ($to_pay_to  +  $pay3[0]->toAmount)*-1 : 0);
+                    ?>
                     <tr><td style="text-align: right;"> <b>Total Payments:</b></td>
                     <td></td>
-                    <td style="text-align: right;"><b>{{ number_format($pay1[0]->formAmount + $pay2[0]->formAmount + $pay3[0]->formAmount,2) }}</b></td>
-                    <td style="text-align: right;"><b>{{ number_format($pay1[0]->toAmount + $pay2[0]->toAmount +  $pay3[0]->toAmount,2) }}</b></td>
+                    <td style="text-align: right;"><b>{{ number_format($total_form_pay,2) }}</b></td>
+                    <td style="text-align: right;"><b>{{ number_format($total_to_pay,2) }}</b></td>
                   </tr>
                   <tr><td style="height: 16px;"><b></b></td>
                   <td style="height: 16px;"></td>
@@ -106,8 +118,8 @@
                   <td></td></tr>
                   <tr><td>Cash At Bank</td>
                   <td></td>
-                  <td style="text-align: right;">{{ $closing_bal[0]->formAmount }}</td>
-                  <td style="text-align: right;">{{ $closing_bal[0]->toAmount }}</td>
+                  <td style="text-align: right;"><?php print_r(number_format($total_form_inv - $total_form_pay , 2)); ?> </td>
+                  <td style="text-align: right;"><?php print_r(number_format($total_to_inv - $total_to_pay, 2)); ?></td>
                 <tr></tr>
                 <tr><td style="height: 16px;"><b></b></td>
                 <td style="height: 16px;"></td>
@@ -115,42 +127,41 @@
                 <td style="height: 16px;"><b></b></td></tr>
                 <tr><td style="text-align: right;"> <b>Total Taka:</b></td>
                 <td></td>
-                <td style="text-align: right;"><b>{{ number_format($contribution[0]->own_formAmount + $contribution[0]->organization_formAmount + $investment[0]->formAmount + $pay1[0]->formAmount + $pay2[0]->formAmount + $pay3[0]->formAmount +  $closing_bal[0]->formAmount, 2 )}}</b></td>
-                <td style="text-align: right;"><b>{{ number_format($contribution[0]->own_toAmount + $contribution[0]->organization_toAmount + $investment[0]->toAmount + $pay1[0]->toAmount + $pay2[0]->toAmount + $pay3[0]->toAmount + $closing_bal[0]->toAmount , 2 )}}</b></td>
+                <td style="text-align: right;"><b>{{ number_format($total_form_inv,2) }}</b></td>
+                <td style="text-align: right;"><b>{{ number_format($total_to_inv,2) }}</b></td>
               </tr>
             </tbody>
           </table>
           <div style="">
-            <p style="margin-top: 4px;margin-left: 5px;margin-bottom: 3px;">1.00 Figures hav been rounded off to the nearest taka.</p>
+            <p style="margin-top: 4px;margin-left: 5px;margin-bottom: 3px;">1.00 Figures have been rounded off to the nearest taka.</p>
             <p style="margin-top: 2px;margin-left: 5px;margin-bottom: 3px;">2.00 Annexed notes form part of the accounts.</p>
           </div>
           <div class="lik-uftcl-pdf-body" style="width: 788px!important;margin-top: 60px;margin-bottom: 0px;">
             <div class="right-header" style="width: 35%;float: right!important;">
               <div style="width: 90%;float: left;">
-                <p style="font-size: 16px;margin: 5px;"><b>(Chairman of CPF Trust)</b></p>
+                <p style="font-size: 16px;margin: 5px;"><b>(Approved By)</b></p>
               </div>
             </div>
             <div class="left-header" style="width: 60%;float: right!important;">
               <div style="width: 46%;float: left;">
-                <p style="font-size: 16px;margin: 5px;"><b>(Member of CPF Trust)</b></p>
+                <p style="font-size: 16px;margin: 5px;"><b>(Prepared By)</b></p>
               </div>
               <div style="width: 46%;float: right;">
-                <p style="font-size: 16px;margin: 5px;"><b>(Secretary of CPF Trust)</b></p>
+                <p style="font-size: 16px;margin: 5px;"><b>(Checked By)</b></p>
               </div>
             </div>
           </div>
-
           <div class="lik-uftcl-pdf-body" style="width: 788px!important;margin-top: 60px;margin-bottom: 15px;">
             <div class="right-header" style="width: 35%;float: right!important;">
               <div style="width: 90%;float: left;">
-                <p style="font-size: 16px;margin: 5px;"><b>(Toha Khan Zaman & Co.)</b> <br/> <span style="margin-right: 15px;">Chartered Accountants</span></p>
+                <p style="font-size: 16px;margin: 5px;"><b>-------------------------------------</b> <br/> <span style="margin-right: 15px;">Chartered Accountants</span></p>
               </div>
             </div>
             <div class="left-header" style="width: 60%;float: right!important;">
-               <p style="font-size: 15px;">Signed in terms of our separate report of even date annexed.</p>
-               <br>
-               <p style="font-size: 15px;">Dated, Dhaka</p>
-               <p style="font-size: 15px;">17 June 2020</p>
+              <p style="font-size: 15px;">Signed in terms of our separate report of even date annexed.</p>
+              <br>
+              <p style="font-size: 15px;">Dated, Dhaka</p>
+              <p style="font-size: 15px;"><?php echo date('d-M-Y'); ?></p>
             </div>
           </div>
         </div>

@@ -83,7 +83,7 @@
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>Employees Contribution</b></p>
               </div>
               <div class="right-header" style="border-left: 1px solid gray;">
-                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($val->total_own_pf,2) }}</b></p>
+                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($val->total_own_pf/2,2) }}</b></p>
               </div>
             </div>
             <div class="lik-uftcl-pdf-body" style="border: 1px solid gray;width: 795px!important;">
@@ -91,7 +91,7 @@
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>Employer's Contribution</b></p>
               </div>
               <div class="right-header" style="border-left: 1px solid gray;">
-                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($val->total_organaization_pf,2) }}</b></p>
+                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($val->total_organaization_pf/2,2) }}</b></p>
               </div>
             </div>
             <div class="lik-uftcl-pdf-body" style="border: 1px solid gray;width: 795px!important;">
@@ -99,7 +99,7 @@
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>Employees Contribution Interest</b></p>
               </div>
               <div class="right-header" style="border-left: 1px solid gray;">
-                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($val->total_own_interest,2) }}</b></p>
+                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($interests_info[$val->staff_code]/2,2) }}</b></p>
               </div>
             </div>
             <div class="lik-uftcl-pdf-body" style="border: 1px solid gray;width: 795px!important;">
@@ -107,7 +107,7 @@
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>Employer's Contribution Interest</b></p>
               </div>
               <div class="right-header" style="border-left: 1px solid gray;">
-                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($val->total_organization_interest,2) }}</b></p>
+                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($interests_info[$val->staff_code]/2,2) }}</b></p>
               </div>
             </div>
 
@@ -116,7 +116,7 @@
                 <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;"><b>Total Amount:</b></p>
               </div>
               <div class="right-header" style="border-left: 1px solid gray;">
-                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($val->total_amount,2) }}</b></p>
+                <p style="font-size: 16px;margin: 5px;margin-top: 10px;margin-bottom:10px;text-align: left!important;"><b>BDT = {{ number_format($val->total_own_pf/2 + $val->total_organaization_pf/2 + $interests_info[$val->staff_code]/2 + $interests_info[$val->staff_code]/2, 2) }}</b></p>
               </div>
             </div>
           

@@ -1,8 +1,5 @@
 
 @extends('master')
-@section('customcss')
-
-@endsection
 @section('content')
 
 <section class="content-header">
@@ -33,10 +30,9 @@
           <a href="{{url('download_excel/pf_deposit/pf-deposit.xlsx')}}" class="btn btn-success">Download Sample Excel</a>
           <a href="{{route('add-provident-fund')}}" class="btn btn-success"><i class="fas fa-plus"></i> Add PF Deposit</a>
         </div>
-
-         @include('message')
-
     </div>
+
+        @include('message')
 
     <div class="card-header card-secondary">
       <div class="card-header">
@@ -86,9 +82,7 @@
             <th class="bg-success">Own PF Deposit</th>
             <th class="bg-success">Organization PF Deposit</th>
             <th class="bg-success">Total PF Deposit</th>
-            @if(Auth::user()->role=='master-admin')
             <th class="bg-success">Action</th>
-            @endif
           </tr>
         </thead>
         <tbody>
@@ -101,11 +95,12 @@
             <td>{{$provident_fund->own_pf}}</td>
             <td>{{$provident_fund->organization_pf}}</td>
             <td>{{$provident_fund->total_pf}}</td>
-            @if(Auth::user()->role=='master-admin')
             <td>
-                <a href="{{route('edit-provident-fund',$provident_fund->id)}}" class="btn btn-info btn-xs"><i class="fas fa-edit"></i></a>
+                <a href="{{route('edit-provident-fund',$provident_fund->id)}}" class="btn btn-info btn-xs"><i class="fas fa-edit"></i>
+                </a>
+                <a href="{{route('delete-provident-fund',$provident_fund->id)}}" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i>
+                </a>
             </td>
-            @endif
           </tr>
         @endforeach
         </tbody>
@@ -145,7 +140,7 @@
     @endsection
 
 @section('customjs')
-<script src="http://www.jqueryscript.net/demo/jQuery-Plugin-To-Convert-HTML-Table-To-CSV-tabletoCSV/jquery.tabletoCSV.js"></script>
+  <script src="http://www.jqueryscript.net/demo/jQuery-Plugin-To-Convert-HTML-Table-To-CSV-tabletoCSV/jquery.tabletoCSV.js"></script>
 
 <script>
 
@@ -155,61 +150,42 @@
     theme: 'bootstrap4',
   });
 
- // START ALL EMPLOYEE TABLE DATA DOWNLOAD CLICK FUNCTION
-  $( "#all-pf-deposit-download" ).click(function() {
-        $("#all-pf-deposit").tableToCSV();
-    });
-// END ALL EMPLOYEE TABLE DATA DOWNLOAD CLICK FUNCTION
 
-// START TABLE TO CSV CONVERT FUNCTION
-var tableToExcel = (function() {
-      var uri = 'data:application/vnd.ms-excel;base64,',
-          template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
-          base64 = function(s) {
-          return window.btoa(unescape(encodeURIComponent(s)))
-          },
-          format = function(s, c) {
-          return s.replace(/{(\w+)}/g, function(m, p) {
-              return c[p];
-          })
-          }
-      return function(table, name) {
-          if (!table.nodeType)
-          table = document.getElementById(table)
-          var ctx = {
-          worksheet: name || 'Worksheet',
-          table: table.innerHTML
-          }
-          var HeaderName = 'Download-ExcelFile';
-          var ua = window.navigator.userAgent;
-          var msieEdge = ua.indexOf("Edge");
-          var msie = ua.indexOf("MSIE ");
-          if (msieEdge > 0 || msie > 0) {
-          if (window.navigator.msSaveBlob) {
-              var dataContent = new Blob([base64(format(template, ctx))], {
-              type: "application/csv;charset=utf-8;"
-              });
-              var fileName = "excel.xls";
-              navigator.msSaveBlob(dataContent, fileName);
-          }
-          return;
-          }
-          window.open('data:application/vnd.ms-excel,' + encodeURIComponent(format(template, ctx)));
+  </script>
+
+  <script>
+  	      function exportToExcel(tableID, filename){
+        //  console.log(staff_code);
+      var downloadLink;
+      var dataType = 'application/vnd.ms-excel';
+      var header = "<h2 style='text-align:center;'>Name : Arif Khan</h2><h2 style='text-align:center;'>Staff Code: 1111</h2>";
+      var tableSelect = document.getElementById(tableID);
+      var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+      // console.log(header);
+      // Specify file name
+      filename = filename?filename+'.xls':'excel_data.xls';
+  
+      // Create download link element
+      downloadLink = document.createElement("a");
+  
+      document.body.appendChild(downloadLink);
+  
+      if(navigator.msSaveOrOpenBlob){
+          var blob = new Blob(['\ufeff', tableHTML], {
+              type: dataType
+          });
+          navigator.msSaveOrOpenBlob( blob, filename);
+      }else{
+          // Create a link to the file
+          downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+  
+          // Setting the file name
+          downloadLink.download = filename;
+  
+          //triggering the function
+          downloadLink.click();
       }
-  })()
-// END TABLE TO CSV CONVERT FUNCTION
-
-//$('#all-pf-deposit').DataTable({
-       // "info": true,
-       // "autoWidth": false,
-       // scrollX:'50vh',
-       // scrollY:'50vh',
-        //scrollCollapse: true,
-        //fixedColumns: {
-       // leftColumns: 2
-    //}
-    //});
-  });
+  }
 
   </script>
 @endsection

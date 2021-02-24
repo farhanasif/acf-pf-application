@@ -37,9 +37,11 @@
           <div class="col-sm-2 border-right">
             <div class="description-block">
               <h5 class="description-header">
-                @foreach ($interests_and_pf_deposit as $item)
+
+                    {{number_format($employees->is_settlement == 1 ? 0 : $total_and_max_pf_deposit[0]->maximum_pf )}} Tk / Month
+                {{-- @foreach ($interests_and_pf_deposit as $item)
                   {{number_format($item->maximum_total_pf)}} Tk / Month
-                @endforeach
+                @endforeach --}}
               </h5>
               <span class="description-text">Provident Fund Amount</span>
             </div>
@@ -49,10 +51,10 @@
           <div class="col-sm-3 border-right">
             <div class="description-block">
             <h5 class="description-header">
-              @foreach ($interests_and_pf_deposit as $item)
+              {{-- @foreach ($interests_and_pf_deposit as $item)
                  {{number_format($item->total_pf_amount)}} Tk
-              @endforeach
-
+              @endforeach --}}
+              {{number_format($employees->is_settlement == 1 ? 0 : $total_and_max_pf_deposit[0]->total_pf_amount )}} Tk / Month
             </h5>
               <span class="description-text">Total PF Amount (without interest)</span>
             </div>
@@ -62,11 +64,34 @@
           <div class="col-sm-3 border-right">
             <div class="description-block">
             <h5 class="description-header">
-                @if ($interests_and_pf_deposit)
-                @foreach ($interests_and_pf_deposit as $item)
-                {{ number_format($item->own + $item->organization+ $item->total_pf_amount) }} Tk
+
+                @if ($all_interest)
+
+                @php
+                    $total_sum = [];
+                    $i = 0;
+                @endphp
+                @foreach ($all_interest as $interest)
+                  @php
+                        $total_sum[$i ."=>"."own"] = $interest->own;
+                        $total_sum[$i."=>"."organization"] = $interest->organization;
+                        $i++;
+                  @endphp
                 @endforeach
 
+                @php
+                  $sum_array =   array_sum($total_sum);
+                  // print_r($total_sum);
+                  $test =  $sum_array + $total_and_max_pf_deposit[0]->total_pf_amount;
+                  // dd($settlement_amount[0]->settlement_amount);
+                  if (!empty($settlement_amount)) {
+                    echo (number_format(($test - $settlement_amount[0]->settlement_amount ? $settlement_amount[0]->settlement_amount : 0) ,2))." Tk" ;
+                  }else{
+                    echo (number_format(($test - 0) ,2))." Tk" ;
+                  }
+
+                  // exit();
+                @endphp
                 @else
                     0 Tk
                 @endif
@@ -81,7 +106,7 @@
             <div class="description-block">
               @foreach ($loan_account_details as $item)
                 <h5 class="description-header">
-                  {{$item->loan_amount ? number_format($item->loan_amount) : '0'}} Tk
+                  {{$item->loan_amount && $employees->is_settlement == 1  ? number_format($item->loan_amount) : '0'}} Tk
                 </h5>
               @endforeach
 
@@ -95,9 +120,11 @@
           <div class="col-sm-2">
             <div class="description-block">
               <h5 class="description-header">
-                @foreach ($interests_and_pf_deposit as $item)
+                {{number_format( $employees->is_settlement == 1 ? 0 : ($all_interest[0]->own + $all_interest[0]->organization+ $total_and_max_pf_deposit[0]->total_pf_amount) * 80/100)}} Tk
+
+                {{-- @foreach ($interests_and_pf_deposit as $item)
                   {{number_format( ($item->own + $item->organization+ $item->total_pf_amount) * 80/100)}} Tk
-                @endforeach
+                @endforeach --}}
               </h5>
               <span class="description-text">LOAN AMOUNT(MAXIMUM)</span>
             </div>
@@ -149,7 +176,7 @@
                             </tr>
                           </thead>
                           <tbody>
-
+                          @if($employees->is_settlement != 1)
                             <?php $i=1;?>
                             @foreach ($pf_deposits as $pf_deposit)
                             <tr>
@@ -161,7 +188,18 @@
                             </tr>
 
                             @endforeach
-
+                          @else
+                          <tr>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                          </tr>
+                          <tr>
+                            <td colspan="5"> <p style="text-align: center">This Employee Already Settlement</p> </td>
+                          </tr>
+                          @endif
                           </tbody>
                         </table>
                       </div>
@@ -176,7 +214,7 @@
 
                       </div>
 
-                      <?php if(!empty($interests_and_pf_deposit[0]->interests_id)) { ?>
+                      <?php if(!empty($all_interest[0]->id)) { ?>
                       <!-- /.card-header -->
                       <div class="card-body table-responsive p-0" style="height: 300px;">
                         <table id="pf-interest" class="table table-striped table-head-fixed text-nowrap">
@@ -191,8 +229,9 @@
                             </tr>
                           </thead>
                           <tbody>
+                            @if($employees->is_settlement != 1)
                             <?php $i=1;?>
-                            @foreach ($interests_and_pf_deposit as $item)
+                            @foreach ($all_interest as $item)
                             <tr>
                             <td>{{$i++}}</td>
                               <td>{{ date('j F, Y', strtotime($item->interest_date)) }}  </td>
@@ -202,8 +241,30 @@
                               <td> {{$item->own + $item->organization }} </td>
                             </tr>
                             @endforeach
-
-
+                            @elseif(!empty($total_interest_after_settlement))
+                              @foreach ($total_interest_after_settlement as $settlement_interest)
+                              <tr>
+                              <td>{{$loop->iteration}}</td>
+                                <td>{{ date('j F, Y', strtotime($settlement_interest->interest_date)) }}  </td>
+                                <td> {{$settlement_interest->interest_source}} </td>
+                                <td> {{$settlement_interest->own}} </td>
+                                <td> {{$settlement_interest->organization}} </td>
+                                <td> {{$settlement_interest->own + $settlement_interest->organization }} </td>
+                              </tr>
+                              @endforeach
+                              @else
+                              <tr>
+                                <td>1</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                </tr>
+                                <tr>
+                                  <td colspan="6"> <p style="text-align: center">This Employee Already Settlement</p> </td>
+                                </tr>
+                            @endif
                           </tbody>
                         </table>
                       </div>
@@ -452,8 +513,8 @@
                     <label for="ending_date" class="col-sm-2 col-form-label">Status</label>
                     <div class="col-sm-10">
                       <select name="status" id="status" class="form-control">
-                        <option <?php echo ($employees->status == 1) ? "selected" : ""; ?> value="1">Active</option>
-                        <option <?php echo ($employees->status == 0) ? "selected" : ""; ?> value="0">Deactive</option>
+                        <option <?php echo ($employees->is_settlement == 0) ? "selected" : ""; ?> value="1">Active</option>
+                        <option <?php echo ($employees->is_settlement == 1) ? "selected" : ""; ?> value="0">Deactive</option>
                       </select>
                     </div>
                   </div>

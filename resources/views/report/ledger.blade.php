@@ -216,20 +216,17 @@
             $(this).addClass('selected').siblings().removeClass("selected");
     });
     $(function () {
-
         var tableCont = document.querySelector('#table-cont');
         function scrollHandle (e){
             var scrollTop = this.scrollTop;
             this.querySelector('thead').style.transform = 'translateY(' + scrollTop + 'px)';
         }
-
         tableCont.addEventListener('scroll',scrollHandle);
-
         $("#example1 thead").empty();
         $("#example1 tbody").empty();
         $( "#generate" ).click(function() {
             $('#generate').attr('disabled', true);
-    	    $('#generate').addClass('loading-bar');
+            $('#generate').addClass('loading-bar');
             //------params-------------///
             from_date = $('#from_date').val();
             to_date = $('#to_date').val();
@@ -259,7 +256,7 @@
                 dataType: 'json',
                 success: function (data) {
                     $('#generate').attr('disabled', false);
-    	            $('#generate').removeClass('loading-bar');
+                    $('#generate').removeClass('loading-bar');
                     //console.log(data[1131]);
                     //table.destroy();
                     $("#example1 thead").empty();
@@ -277,11 +274,11 @@
                     for(i = 0; i < column_length; i++){
                         var head_name = columns[i];
                         head_name = head_name.replace("_"," ");
-                        if(i > 4) thead_total = thead_total+'<th style="text-align: center;">Total</th>';
-                        else thead_total = thead_total+'<th></th>';
-                        thead = thead+'<th style="text-align: center;">'+head_name+'</th>';
-                        if(i > 4) thead_total_value = thead_total_value+'<th style="text-align: center;">'+numberWithCommas(data[data_length][columns[i]])+'</th>';
-                        else thead_total_value = thead_total_value+'<th></th>';
+                        if(i > 4) thead_total = thead_total+'<td style="text-align: center; font-weight:bold">Total</td>';
+                        else thead_total = thead_total+'<td></td>';
+                        thead = thead+'<td style="text-align: center;font-weight:bold">'+head_name+'</td>';
+                        if(i > 4) thead_total_value = thead_total_value+'<td style="text-align: center;font-weight:bold">'+numberWithCommas(data[data_length][columns[i]])+'</td>';
+                        else thead_total_value = thead_total_value+'<td></td>';
                     }
                     $("#example1 thead").append('<tr class="table-primary">'+
                     thead_total+
@@ -320,51 +317,7 @@
                                 +tbody
                             +"</tr>");
                         }
-
                     });
-                    // $("#example1 thead").append('<tr>'+
-                    //     '<th>Third Part</th>'+
-                    //     '<th>First Name</th>'+
-                    //     '<th>Last Name</th>'+
-                    //     '<th>Category</th>'+
-                    //     '<th>Level</th>'+
-                    //     '<th>Entry Date</th>'+
-                    //     '<th>Contract<br />Start Date</th>'+
-                    //     '<th>End Date</th>'+
-                    //     '<th>Workplace</th>'+
-                    //     '<th>Month<br />of Payment</th>'+
-                    //     '<th>Basic Salary</th>'+
-                    //     '<th>Gross Salary</th>'+
-                    //     '<th>Employee</th>'+
-                    //     '<th>ACF</th>'+
-                    //     '<th>Total</th>'+
-                    // '</tr>');
-                    // $.each(data, function(index, element) {
-                    // $("#example1 tbody").append("<tr>"
-                    //         +"<td>"+element.staff_code+"</td>"
-                    //         +"<td>"+element.first_name+"</td>"
-                    //         +"<td>"+element.last_name+"</td>"
-                    //         +"<td>"+element.category+"</td>"
-                    //         +"<td>"+element.level+"</td>"
-                    //         +"<td>"+element.joining_date+"</td>"
-                    //         +"<td>"+element.joining_date+"</td>"
-                    //         +"<td>"+element.ending_date+"</td>"
-                    //         +"<td>"+element.work_place+"</td>"
-                    //         +"<td>"+element.PaymentMonth+"</td>"
-                    //         +"<td>"+element.basic_salary+"</td>"
-                    //         +"<td>"+element.gross_salary+"</td>"
-                    //         +"<td>"+element.own_pf+"</td>"
-                    //         +"<td>"+element.organization_pf+"</td>"
-                    //         +"<td>"+element.total_pf+"</td>"
-                    //         +"</tr>");
-                    // });
-                    // table = $('#example1').DataTable({
-                    //     "info": true,
-                    //     "autoWidth": false,
-                    //     scrollX:'50vh',
-                    //     scrollY:'50vh',
-                    //     scrollCollapse: true,
-                    // });
                 }
             });
             //alert( "Handler for .click() called. - "+from_date );
