@@ -120,7 +120,31 @@
           <div class="col-sm-2">
             <div class="description-block">
               <h5 class="description-header">
-                {{number_format( $employees->is_settlement == 1 ? 0 : ($all_interest[0]->own + $all_interest[0]->organization+ $total_and_max_pf_deposit[0]->total_pf_amount) * 80/100)}} Tk
+                @if (!empty($all_interest))
+
+                @else
+                   
+                @endif
+                @php
+                $total_sum_own_and_organization = [];
+                $i = 0;
+                @endphp
+
+                @foreach ($all_interest as $interest)
+                  @php
+                        $total_sum_own_and_organization[$i ."=>"."own"] = $interest->own;
+                        $total_sum_own_and_organization[$i."=>"."organization"] = $interest->organization;
+                        $i++;
+                  @endphp
+                @endforeach
+
+                @php
+                     $sum_array_own_and_organization =   array_sum($total_sum_own_and_organization);
+                  // print_r($total_sum);
+                    $loan_amount_maximum =  $sum_array_own_and_organization + $total_and_max_pf_deposit[0]->total_pf_amount;
+                @endphp
+
+                {{number_format( $employees->is_settlement == 1 ? 0 : $loan_amount_maximum * 80/100)}} Tk
 
                 {{-- @foreach ($interests_and_pf_deposit as $item)
                   {{number_format( ($item->own + $item->organization+ $item->total_pf_amount) * 80/100)}} Tk
@@ -528,56 +552,101 @@
                 </form>
               </div>
 
-      <div class="tab-pane" id="employeehistory">
-       <div class="card card-outline card-success">
-           <div class="card-header">
-             <h3 class="card-title">Employee History</h3>
-             {{-- <button type="submit" id="loan-against-pf-download" class="btn btn-success float-right" onclick="exportToExcel('loan-against-pf','loan-against-pf')" >Download Excel</button> --}}
-           </div>
-           <!-- /.card-header arif-->
+          <div class="tab-pane" id="employeehistory">
+            <div class="card card-outline card-success">
+              <div class="card-header">
+                <h3 class="card-title">Employee History</h3>
+                {{-- <button type="submit" id="loan-against-pf-download" class="btn btn-success float-right" onclick="exportToExcel('loan-against-pf','loan-against-pf')" >Download Excel</button> --}}
+              </div>
+              <!-- /.card-header arif-->
 
-           <div class="card-body table-responsive p-0" style="height: 350px;">
-             <table id="loan-against-pf" class="table table-striped table-head-fixed text-nowrap">
-               <thead>
-                 <tr>
-                   <th class="bg-success">SL NO</th>
-                   <th class="bg-success">Staff Code</th>
-                   <th class="bg-success">Name</th>
-                   <th class="bg-success">Position</th>
-                   <th class="bg-success"> Department Code </th>
-                   <th class="bg-success"> Level </th>
-                   <th class="bg-success"> Work Place </th>
-                   <th class="bg-success">Gross Salary</th>
-                   <th class="bg-success">Basic Salary </th>
-                   <th class="bg-success"> PF Amount</th>
-                   <th class="bg-success"> Joining Date </th>
-                   <th class="bg-success"> Ending Date </th>
-                 </tr>
-               </thead>
-               <tbody>
-                 
-            @foreach ($employee_histories as $key =>$employee)
-             <tr @if($key == 0) style="background: orange;" @endif>
-               <td>{{ $loop->iteration }}</td>
-              <td>{{ sprintf("%04d", $employee->staff_code)}}</td>
-               <td>{{$employee->first_name}} {{$employee->last_name}}</td>
-               <td>{{$employee->position}}</td>
-               <td>{{$employee->department_code}}</td>
-               <td>{{$employee->level}}</td>
-               <td>{{$employee->work_place}}</td>
-               <td>{{$employee->basic_salary}}</td>
-               <td>{{$employee->gross_salary}}</td>
-               <td>{{$employee->pf_amount}}</td>
-               <td>{{$employee->joining_date}}</td>
-               <td>{{$employee->ending_date}}</td>
-             </tr>
-             @endforeach
-               </tbody>
-             </table>
-           </div>
-           <!-- /.card-body -->
-         </div>
-   </div>
+              <div class="card-body table-responsive p-0" style="height: 350px;">
+                <table id="loan-against-pf" class="table table-striped table-head-fixed text-nowrap">
+                  <thead>
+                    <tr>
+                      <th class="bg-success">SL NO</th>
+                      <th class="bg-success">Staff Code</th>
+                      <th class="bg-success">Name</th>
+                      <th class="bg-success">Position</th>
+                      <th class="bg-success"> Department Code </th>
+                      <th class="bg-success"> Level </th>
+                      <th class="bg-success"> Work Place </th>
+                      <th class="bg-success">Gross Salary</th>
+                      <th class="bg-success">Basic Salary </th>
+                      <th class="bg-success"> PF Amount</th>
+                      <th class="bg-success"> Joining Date </th>
+                      <th class="bg-success"> Ending Date </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    
+                @foreach ($employee_histories as $key =>$employee)
+                <tr @if($key == 0) style="background: orange;" @endif>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ sprintf("%04d", $employee->staff_code)}}</td>
+                  <td>{{$employee->first_name}} {{$employee->last_name}}</td>
+                  <td>{{$employee->position}}</td>
+                  <td>{{$employee->department_code}}</td>
+                  <td>{{$employee->level}}</td>
+                  <td>{{$employee->work_place}}</td>
+                  <td>{{$employee->basic_salary}}</td>
+                  <td>{{$employee->gross_salary}}</td>
+                  <td>{{$employee->pf_amount}}</td>
+                  <td>{{$employee->joining_date}}</td>
+                  <td>{{$employee->ending_date}}</td>
+                </tr>
+                @endforeach
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+
+            <div class="card card-outline card-warning">
+              <div class="card-header">
+                <h3 class="card-title">Forfeiture Account</h3>
+                {{-- <button type="submit" id="loan-against-pf-download" class="btn btn-success float-right" onclick="exportToExcel('loan-against-pf','loan-against-pf')" >Download Excel</button> --}}
+              </div>
+              <!-- /.card-header arif-->
+
+              <div class="card-body table-responsive p-0" style="height: 350px;">
+                <table id="loan-against-pf" class="table table-striped table-head-fixed text-nowrap">
+                  <thead>
+                    @if($forfeiture_accounts_details != null)
+                    <tr>
+                      <th class="bg-success">SL NO</th>
+                      <th class="bg-success">Staff Code</th>
+                      <th class="bg-success">Forfeiture Account Own Amount</th>
+                      <th class="bg-success">Forfeiture Account Organization Amount</th>
+                      <th class="bg-success"> Forfeiture Account Source </th>
+                      <th class="bg-success"> Forfeiture Account Date </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                   
+                        @foreach ($forfeiture_accounts_details as $forfeiture_account)
+                          <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ sprintf("%04d", $forfeiture_account->staff_code)}}</td>
+                            <td>{{$forfeiture_account->own}}</td>
+                            <td>{{$forfeiture_account->organization}}</td>
+                            <td>{{$forfeiture_account->fa_source}}</td>
+                            <td>{{ date('j F, Y', strtotime($forfeiture_account->fa_date,3))}}</td>
+                          </tr>
+                        @endforeach
+                    @else
+                    <tr>
+                      <br><br>
+                      <p class="bg-danger text-center">No Data Found.</p>
+
+                    </tr>
+                    @endif      
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>
               <!-- /.tab-pane -->
             </div>
             <!-- /.tab-content -->
@@ -793,3 +862,4 @@
 }
   </script>
  @endsection
+

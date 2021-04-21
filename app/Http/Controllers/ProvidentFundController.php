@@ -321,32 +321,54 @@ class ProvidentFundController extends Controller
         // $result = Excel::import(new ProvidentsImport, $upload);
         $result = Excel::toArray(new ProvidentsImport, $upload);
 
-        $all_employees_staff_code = DB::select('SELECT staff_code FROM employees WHERE is_settlement !=1');
-        $employee_code = [];
-        foreach($all_employees_staff_code as $employee_staff_code){
-          $employee_code[] = $employee_staff_code->staff_code;
-        }
+        // $all_employees_staff_code = DB::select('SELECT staff_code FROM employees WHERE is_settlement !=1');
+        
+        // $employee_code = [];
+        // foreach($all_employees_staff_code as $employee_staff_code){
+        //   $employee_code[] = $employee_staff_code->staff_code;
+        // }
 
-        foreach ($result[0] as $key=> $row) {
+        // foreach ($result[0] as $key=> $row) {
             
-            $deposit_date  =  \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]);
-            $deposit_date_array = DB::table('pf_deposit')->where('deposit_date',$deposit_date)->first();
+        //     $deposit_date  =  \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]);
+        //     $deposit_date_array = DB::table('pf_deposit')->where('deposit_date',$deposit_date)->first();
 
-            if ($deposit_date_array) {
-                return back()->with('danger','Some deposit date already exist. please check and upload again! ');
-              }
-                $insert_data[$key] =array(
-                'staff_code' =>(int)$row[0],
-                'deposit_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]),
-                'own_pf' =>$row[2],
-                'organization_pf' =>$row[3],
-                'total_pf' =>$row[4],
-            );
+        //     if ($deposit_date_array) {
+        //         return back()->with('danger','Some deposit date already exist. please check and upload again! ');
+        //       }
+        //         $insert_data[$key] =array(
+        //         'staff_code' =>(int)$row[0],
+        //         'deposit_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]),
+        //         'own_pf' =>$row[2],
+        //         'organization_pf' =>$row[3],
+        //         'total_pf' =>$row[4],
+        //     );
 
-            if (!in_array($insert_data[$key]['staff_code'], $employee_code) ) {
-              unset($insert_data[$key]);
+        //     // if (!in_array($insert_data[$key]['staff_code'], $employee_code) ) {
+        //     //   unset($insert_data[$key]);
+        //     // }
+        // }
+
+        for($i =0; $i<count($result[0]) ;$i++){
+            if ($result[0][$i] && $result[0][$i][0] != null) {
+                $deposit_date  =  \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($result[0][$i][1])->format('Y-m-d');
+                $deposit_date_array = DB::table('pf_deposit')->where('deposit_date',$deposit_date)->first();
+
+                if ($deposit_date_array) {
+                    return back()->with('danger','Some deposit date already exist. please check and upload again! ');
+                }
+
+                $insert_data[$i] =array(
+                    'staff_code' =>(int)$result[0][$i][0],
+                    'deposit_date' =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($result[0][$i][1])->format('Y-m-d'),
+                    'own_pf' =>$result[0][$i][2],
+                    'organization_pf' =>$result[0][$i][3],
+                    'total_pf' =>$result[0][$i][4],
+                );
+
             }
         }
+
 
           if (!empty($insert_data)) {
             DB::table('pf_deposit')->insert($insert_data);

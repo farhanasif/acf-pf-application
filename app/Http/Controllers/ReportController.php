@@ -333,6 +333,10 @@ class ReportController extends Controller
         $staff_code = $request->staff;
         $data1['settlement_amount'] = DB::select("select ifnull(settlement_amount,0) as settlement_amount from pf_settlement where staff_code =".$staff_code);
 
+        $data1['forfeiture_accounts_amount'] = DB::select("SELECT SUM(own) AS total_own, SUM(organization) AS total_organization
+                                        FROM forfeiture_accounts
+                                        WHERE staff_code = ".$staff_code);
+
         // dd($data1['settlement_amount']);
 
         // if($settlement){

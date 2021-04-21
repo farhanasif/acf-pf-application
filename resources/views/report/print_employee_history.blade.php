@@ -216,6 +216,12 @@
 
                 @php
                    $settle_amount = !empty($settlement_amount[0]->settlement_amount) ? $settlement_amount[0]->settlement_amount : 0;
+
+                  $forfeiture_accounts_amount_own = !empty($forfeiture_accounts_amount[0]->total_own) ? $forfeiture_accounts_amount[0]->total_own : 0;
+                   $forfeiture_accounts_amount_organization = !empty($forfeiture_accounts_amount[0]->total_organization) ? $forfeiture_accounts_amount[0]->total_organization : 0;
+
+                  $total_fa_o_org = $forfeiture_accounts_amount_own + $forfeiture_accounts_amount_organization;
+
                 @endphp
 
               <tr>
@@ -226,17 +232,25 @@
                 <td> <strong> - {{ number_format($settle_amount, 2) }}</strong> </td>
               </tr>
 
+              <tr>
+                <td> <strong>Total Forfeiture Amount</strong> </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td> <strong> - {{ number_format($total_fa_o_org, 2) }}</strong> </td>
+              </tr>
+
               <tr><td><b>Total Balance:</b></td>
               <td></td>
               <td></td>
               <td></td>
-              <td><b>{{ number_format(($userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution + $to_interest[0]->org_interest + $to_interest[0]->own_interest) - $settle_amount, 2)  }}</b></td></tr>
+              <td><b>{{ number_format(($userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution + $to_interest[0]->org_interest + $to_interest[0]->own_interest) - $settle_amount - $total_fa_o_org, 2)  }}</b></td></tr>
             </tbody>
             </table>
             <div style="">
               <div style="width: 45%;border: 1px solid #000; border-radius: 10px;float: right;text-align: center;">
                 <p style="font-weight: 600;font-size: 16px;"><b><u>Net Balance</u></b></p>
-                <p style="font-size: 18px;font-weight: 700;"><b><u>BDT  {{ number_format(((($userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution + $to_interest[0]->org_interest + $to_interest[0]->own_interest  ) - $data[0]->loan_amount) + $loan_details[0]->without_interest_paid_loan) - $settle_amount, 2) }}</u></b></p>
+                <p style="font-size: 18px;font-weight: 700;"><b><u>BDT  {{ number_format(((($userInfo[0]->employee_contribution + $userInfo[0]->employer_contribution + $to_interest[0]->org_interest + $to_interest[0]->own_interest  ) - $data[0]->loan_amount) + $loan_details[0]->without_interest_paid_loan) - $settle_amount - $total_fa_o_org, 2) }}</u></b></p>
               </div>
 <!--               <div style="width: 45%;border: 1px solid #000; border-radius: 10px;float: left;text-align: center;">
                 <p style="font-weight: 600;font-size: 16px;"><b><u>Net to Pay</u></b></p>

@@ -62,7 +62,12 @@ class EmployeeController extends Controller
           $staff_code = $request->staff_code;
           $name = $request->name;
 
-          if($category == '-1' && $position == '-1' && $base == '-1' && $level == '-1' && $work_place == '-1' && $department_code == '-1' && $staff_code == '-1' && $name == '-1'){
+          $employee_status = $request->employee_status;
+          $employee_status_expire_date_check = explode(",",$employee_status);
+
+          // dd($employee_status);
+
+          if($category == '-1' && $position == '-1' && $base == '-1' && $level == '-1' && $work_place == '-1' && $department_code == '-1' && $staff_code == '-1' && $name == '-1' && $employee_status == '-1'){
           }
           else{
               $query = $query. " where 1=1 ";
@@ -99,13 +104,56 @@ class EmployeeController extends Controller
                   $query = $query . " AND department_code = '".$department_code."'";
               }
 
+              if($employee_status != '-1'){
+                 
+                 if ($employee_status === 'active') {
+                  $query = $query . " AND is_settlement IS NULL";
+                   
+                 }elseif ($employee_status === 'inactive') {
+                   $query = $query . " AND is_settlement IS NOT NULL";
+                 }
+                 elseif ($employee_status_expire_date_check[1] == 'ca') {
+                   $query = $query . " AND ending_date IS NULL OR ending_date >= '".$employee_status_expire_date_check[0]."'";
+                 }elseif ($employee_status_expire_date_check[1] == 'ce') {
+                   $query = $query . " AND ending_date < '".$employee_status_expire_date_check[0]."'";
+                 }
+              }
+
+              //START EMPLOYEES STATUS CHECK
+              // if($employee_status != '-1' AND $employee_status === 'active'){
+              //    $query = $query . " AND is_settlement IS NULL";
+              // }
+
+              // if($employee_status != '-1' AND $employee_status === 'inactive'){
+              //    $query = $query . " AND is_settlement IS NOT NULL";
+              // }
+
+              // if($employee_status != '-1' AND $employee_status_expire_date_check[1] == 'ca'){
+
+              //    $query = $query . " AND ending_date IS NULL OR ending_date >= '".$employee_status_expire_date_check[0]."'";
+              // }
+
+              // if($employee_status != '-1' AND $employee_status_expire_date_check[1] == 'ce'){
+
+              //    $query = $query . " AND ending_date < '".$employee_status_expire_date_check[0]."'";
+              // }
+
+        
+              //END EMPLOYEES STATUS CHECK
+
           }
+
+          // dd($query);
           $data['employees'] = DB::select($query);
+
+          // dd($data['employees']);
+
           return view('employee.all_employee',$data);
       }
       else{
 
           $data['employees'] = DB::select($query);
+          // dd("ok");
           return view('employee.all_employee',$data);
       }
     }
@@ -318,6 +366,9 @@ class EmployeeController extends Controller
     {
 
       $data['employees'] = DB::table('employees')->where('staff_code', $staff_code)->first();
+
+      $data['forfeiture_accounts_details'] = DB::select("SELECT * FROM forfeiture_accounts WHERE staff_code = ".$staff_code);
+
 
       $settle_date = DB::table('pf_settlement')->where('staff_code', $staff_code)->first();
 

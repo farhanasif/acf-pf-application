@@ -64,6 +64,14 @@
                   <p>PF Interest</p>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a href="{{route('forfeiture_accounts.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon text-blue"></i>
+                  <p>Forfeiture Account</p>
+                </a>
+              </li>
+              
           @if(Auth::user()->role=='stakeholder')
               <li class="nav-item">
                 <a href="{{url('all/approved/pf-deposite')}}" class="nav-link">

@@ -135,8 +135,8 @@
                 <td style="height: 16px;text-align: right;"><b>{{ number_format($to_surface_expendature, 2) }}</b></td></tr>
                 <tr><td style="text-align: right;"> <b>Total Taka:</b></td>
                 <td></td>
-                <td style="text-align: right;"><b>{{ number_format($closing_bal+ ($cur_lia->formAmount < 0? $cur_lia->formAmount*-1 : $cur_lia->formAmount),2)  }}</b></td>
-                <td style="text-align: right;"><b>{{ number_format($opening_bal+ ($cur_lia->toAmount < 0 ? $cur_lia->toAmount*-1 :$cur_lia->toAmount),2) }}</b></td>
+               	<td style="text-align: right;"><b>{{ number_format($closing_bal+ ($lib_form < 0? $lib_form*-1 : $lib_form),2)  }}</b></td>
+                <td style="text-align: right;"><b>{{ number_format($opening_bal+ ($lib_to < 0 ? $lib_to*-1 : $lib_to),2) }}</b></td>
               </tr>
             </tbody>
           </table>

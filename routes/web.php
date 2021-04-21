@@ -513,6 +513,22 @@ Route::group(['middleware' => 'admin'], function () {
 			'as'		=> 'delete-interest-source'
 		]);
 
+
+		/*
+		|--------------------------------------------------------------------------
+		| Forfeiture Accounts all Routes
+		|--------------------------------------------------------------------------
+		*/
+		Route::get('/create-forfeiture_accounts', ['uses'=> 'ForfeitureAccountController@create', 'as'=> 'create.forfeiture_accounts']);
+		Route::post('/store-forfeiture_accounts', ['uses'=> 'ForfeitureAccountController@store','as'=> 'store.forfeiture_accounts']);
+		Route::match(['get', 'post'],'/forfeiture_accounts/index', ['uses'=> 'ForfeitureAccountController@index','as'=> 'forfeiture_accounts.index']);
+		Route::post('/store_forfeiture_accounts_batch_upload', ['uses'=> 'ForfeitureAccountController@store_forfeiture_accounts_batch_upload','as'=> 'store_forfeiture_accounts_batch_upload']);
+		Route::get('/edit-forfeiture_accounts/{id}', ['uses'=> 'ForfeitureAccountController@edit','as'=> 'edit.forfeiture_accounts']);
+		Route::post('/update-forfeiture_accounts/{id}', ['uses'=> 'ForfeitureAccountController@update','as'=> 'update.forfeiture_accounts']);
+		Route::get('/delete-forfeiture_accounts/{id}', ['uses'=> 'ForfeitureAccountController@delete','as'=> 'delete.forfeiture_accounts']);
+        Route::get('forfeiture_accounts/excel-export', ['uses'=> 'ForfeitureAccountController@forfeiture_accounts_export','as'=> 'forfeiture_accounts.export']);
+
+
 		// user add delete edit update
 		Route::get('/add-user', [
 			'uses'		=> 'UserController@show_add_user',

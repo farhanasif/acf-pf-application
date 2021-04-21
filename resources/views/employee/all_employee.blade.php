@@ -170,6 +170,30 @@
                     </select>
                     </div>
                 </div>
+
+                <div class="col-md-3 col-sm-6">
+
+                  <?php
+
+                    $mytime = Carbon\Carbon::now();
+                    $date_info = date('Y-m-d', strtotime($mytime));
+
+                  ?>
+
+                    <div class="form-group">
+                    <label>Employees Status</label>
+                    <select class="custom-select select2bs4" id="employee_status" name="employee_status">
+
+                        <option value="-1">--select--</option>
+                        <option value="active"> Active Employees</option>
+                        <option value="inactive"> Inactive Employees</option>
+                        <option value="{{$date_info}},ca"> Contract Active</option>
+                        <option value="{{$date_info}},ce"> Contract End</option>
+        
+                    </select>
+                    </div>
+                </div>
+
             </div>
 
             <div class="mb-5">

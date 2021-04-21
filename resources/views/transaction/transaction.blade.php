@@ -321,7 +321,7 @@
                             <!-- text input -->
                             <div class="form-group">
                                 <label>Amount</label>
-                                <input type="number" pattern="^[1-9]\d*$" class="form-control" id="amountEndOfMonth"
+                                <input type="number" pattern="[0-9]+([\.,][0-9]+)?" class="form-control" id="amountEndOfMonth"
                                     placeholder="000">
                             </div>
                         </div>
