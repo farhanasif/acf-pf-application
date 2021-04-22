@@ -184,7 +184,7 @@
                     <label>Employees Status</label>
                     <select class="custom-select select2bs4" id="employee_status" name="employee_status">
 
-                        <option value="-1">--select status--</option>
+                        <option value="-1">--select--</option>
                         <option value="active"> Active Employees</option>
                         <option value="inactive"> Inactive Employees</option>
                         <option value="{{$date_info}},ca"> Contract Active</option>
