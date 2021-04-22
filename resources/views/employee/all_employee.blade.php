@@ -184,12 +184,12 @@
                     <label>Employees Status</label>
                     <select class="custom-select select2bs4" id="employee_status" name="employee_status">
 
-                        <option value="-1">--select--</option>
+                        <option value="-1">--select status--</option>
                         <option value="active"> Active Employees</option>
                         <option value="inactive"> Inactive Employees</option>
                         <option value="{{$date_info}},ca"> Contract Active</option>
                         <option value="{{$date_info}},ce"> Contract End</option>
-        
+
                     </select>
                     </div>
                 </div>
@@ -239,7 +239,7 @@
                   {{ sprintf("%04d", $employee->staff_code)}}
                 </a>
               </td>
-          @else 
+          @else
               <td class="bg-success text-bold fixed-column">
                 <a href="{{route('employee-details',$employee->staff_code)}}">
                   {{sprintf("%04d", $employee->staff_code)}}
@@ -343,12 +343,12 @@
       // console.log(header);
       // Specify file name
       filename = filename?filename+'.xls':'excel_data.xls';
-  
+
       // Create download link element
       downloadLink = document.createElement("a");
-  
+
       document.body.appendChild(downloadLink);
-  
+
       if(navigator.msSaveOrOpenBlob){
           var blob = new Blob(['\ufeff', tableHTML], {
               type: dataType
@@ -357,10 +357,10 @@
       }else{
           // Create a link to the file
           downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-  
+
           // Setting the file name
           downloadLink.download = filename;
-  
+
           //triggering the function
           downloadLink.click();
       }
